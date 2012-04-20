@@ -1,6 +1,7 @@
 
 module Main where 
-import System (getArgs)
+import System.Environment
+import Text.ParserCombinators.Parsec hiding (spaces)
 
 -- import CoffeePHP
 
