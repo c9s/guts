@@ -7,5 +7,6 @@ Build-Type:          Simple
 Cabal-Version:       >=1.2
 Executable coffeephp
   Main-is:           Main.hs
+  hs-source-dirs:     src
   Build-Depends:     
     base >= 3 && < 5, parsec > 0
