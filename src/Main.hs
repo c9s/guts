@@ -1,6 +1,11 @@
 
-module Main
-    where import CoffeePHP
+module Main where 
+import System (getArgs)
+
+-- import CoffeePHP
 
 main :: IO ()
-main = CoffeeMain
+main = do
+    args <- getArgs
+    putStrLn "Test"
+-- main = coffeeMain

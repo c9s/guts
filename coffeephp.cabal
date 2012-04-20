@@ -1,0 +1,11 @@
+Name: coffeephp
+Version: 0.1
+Description: The Coffeephp
+License: GPL
+Author:  Yo-An Lin
+Build-Type:          Simple
+Cabal-Version:       >=1.2
+Executable coffeephp
+  Main-is:           Main.hs
+  Build-Depends:     
+    base >= 3 && < 5, parsec > 0
