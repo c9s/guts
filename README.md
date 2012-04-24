@@ -35,7 +35,36 @@ array_map(function($e) { return $e * $e; },$array);
 </tr>
 </table>
 
-Reference
-=========
-- http://phpjs.org/
-- https://github.com/kvz/phpjs
+Hacking
+-------
+
+The current recommended way to build CoffeePHP is via cabal-install with the
+Haskell Platform.  The steps are:
+
+0. Download and install the Haskell Platform:
+
+    http://hackage.haskell.org/platform/
+
+Alternately, one can also install only the GHC compiler, and manually set up
+the following packages (in this order):
+
+    http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Cabal
+    http://hackage.haskell.org/cgi-bin/hackage-scripts/package/HTTP
+    http://hackage.haskell.org/cgi-bin/hackage-scripts/package/zlib
+    http://hackage.haskell.org/cgi-bin/hackage-scripts/package/cabal-install
+
+The instructions contained in the README file of Cabal contain more detailed
+setup instructions, which should work for all the packages above.
+
+(But then again, please consider simply installing the Haskell Platform. :-))
+
+1. Install dependencies
+
+    cabal update
+    cabal install
+
+2. Hack Hack
+
+3. Build
+
+    make 

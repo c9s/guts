@@ -6,3 +6,8 @@ Embedding the PHP Interpreter:
 
 Extending and Embedding PHP [Paperback]
 - http://www.amazon.com/Extending-Embedding-PHP-Sara-Golemon/dp/067232704X
+
+
+PHPJS
+- http://phpjs.org/
+- https://github.com/kvz/phpjs
