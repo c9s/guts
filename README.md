@@ -15,7 +15,7 @@ number = 42;
 opposite = true;
 number = -42 if opposite
 
-array = [ 1..10 ];
+array = 1..10;
 array.map(  (e) -> e * e );
 
 </pre></td>
