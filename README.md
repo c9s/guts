@@ -20,7 +20,10 @@ singers = {Jagger: "Rock", Elvis: "Roll"}
 array = 1..10;
 array.map(  (e) -> e * e );
 
-obj.method( );
+
+# Objects
+
+obj.method key: value, key2: value
 
 </pre></td>
 
@@ -39,6 +42,8 @@ $singers = array(
 
 $array = range(1,10);
 array_map(function($e) { return $e * $e; },$array);
+
+$obj-&gt;method(array( "key" =&gt; value, "key2" =&gt; value ));
 
 </pre></td>
 </tr>
