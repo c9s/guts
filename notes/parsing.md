@@ -1,6 +1,14 @@
 Parsing
 =======
 
+Grammar
+-------
+
+- http://coffeescript.org/documentation/docs/grammar.html
+
+Parsing in Haskell
+------------------
+
     http://www.haskell.org/haskellwiki/Parsec
     http://book.realworldhaskell.org/read/using-parsec.html
     http://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/Parsing
