@@ -9,24 +9,33 @@ JavaScript.
 
 <table>
 <tr>
-<td><pre>
+<td valign="top"><pre>
 
 number = 42;
 opposite = true;
 number = -42 if opposite
 
+singers = {Jagger: "Rock", Elvis: "Roll"}
+
 array = 1..10;
 array.map(  (e) -> e * e );
 
+obj.method( );
+
 </pre></td>
 
-<td><pre>
+<td valign="top"><pre>
 
 $number = 42;
 $opposite = true;
 if( $opposite ) {
     $number = -42;
 }
+
+$singers = array(
+    "Jagger" => "Rock", 
+    "Elvis" => "Roll"
+);
 
 $array = range(1,10);
 array_map(function($e) { return $e * $e; },$array);
