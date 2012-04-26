@@ -1,5 +1,7 @@
 SOURCES=$(shell find src -name *.hs)
 
+coffeephp: dist/build/coffeephp/coffeephp
+	cp -v $< $@
 
 dist/build/coffeephp/coffeephp: dist/setup-config $(SOURCES)
 	cabal build
@@ -7,8 +9,6 @@ dist/build/coffeephp/coffeephp: dist/setup-config $(SOURCES)
 dist/setup-config:
 	cabal configure
 
-coffeephp: dist/build/coffeephp/coffeephp
-	cp $< $@
 
 clean:
 	rm -rf dist coffeephp Setup
