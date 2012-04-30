@@ -17,15 +17,13 @@ number = -42 if opposite
 
 singers = {Jagger: "Rock", Elvis: "Roll"}
 
-array = 1..10;
-array.map(  (e) -> e * e );
+array = 1..10
+array2 = array.map (e) -> e * e
 
 hash = { key: 1, foo: "bar" }
 
 if hash.foo?
     echo hash.foo
-
-# Objects
 
 obj.method key: value, key2: value
 
@@ -45,7 +43,7 @@ $singers = array(
 );
 
 $array = range(1,10);
-array_map(function($e) { return $e * $e; },$array);
+$array2 = array_map(function($e) { return $e * $e; },$array);
 
 $obj-&gt;method(array( "key" =&gt; value, "key2" =&gt; value ));
 
