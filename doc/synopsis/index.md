@@ -2,13 +2,13 @@
 
 phpwiki format link
 
-- S01 - Overview
-- S02 - Bits and Pieces
-- S03 - Regular Expression
-- S04 - Control
-- S05 - Functions
-- S06 - Class
-- S07 - Namespace
+- [[S01]] - Overview
+- [[S02]] - Bits and Pieces
+- [[S03]] - Regular Expression
+- [[S04]] - Control
+- [[S05]] - Functions
+- [[S06]] - Class
+- [[S07]] - Namespace
 
 ## Variable Definition
 
