@@ -3,7 +3,7 @@
 phpwiki format link
 
 - [[S01]] - Overview
-- [[S02]] - Bits and Pieces
+- [[S02]] - Bits and Pieces (Variables and Data Structures)
 - [[S03]] - Regular Expression
 - [[S04]] - Control
 - [[S05]] - Functions
