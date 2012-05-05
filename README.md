@@ -5,7 +5,23 @@ CoffeePHP is a little language that compiles into PHP.
 CoffeePHP aims to be *like* CoffeeScript, you can compile CoffeePHP into PHP or
 JavaScript.
 
-**currently alpha stage**
+**Currently Alpha Stage**
+
+
+## Synopsis
+
+    class Man is Person does SomeInterface
+        has name
+        has private address
+        has private phone
+
+        new: ->
+
+        move: (x,y) ->
+
+    man = new Man
+
+## Transformation
 
 <table>
 <tr>
