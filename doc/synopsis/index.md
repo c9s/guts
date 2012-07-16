@@ -4,12 +4,13 @@ phpwiki format link
 
 - S01 - Overview
 - [[S02]] - Bits and Pieces (Variables and Data Structures)
-- S03 - Regular Expression
-- S04 - Control
-- S05 - Functions
+- Regular Expression
+- Control
+- Functions
+- [[S05]] - Closure
 - [[S06]] - Class
 - [[S07]] - Macro and Constant
-- S07 - Namespace
+- Namespace
 
 ## Variable Definition
 
