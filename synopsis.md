@@ -2,6 +2,22 @@ Synopsis
 =========
 
 
+## Overview
+
+```
+var foo = 1
+bar = 1
+
+multiply = (value) ->
+    return value * 2
+```
+
+```php
+$foo = 1;
+$bar = 1;
+```
+
+
 ## Variable
 
 ```
@@ -63,6 +79,10 @@ a =
 ```
 if a > 3 and b < 2
     a = 0
+else if a == 0
+    a = 1
+else
+    a = 2
 ```
 
 which is compiled to:
@@ -70,6 +90,8 @@ which is compiled to:
 ```php
 if ( $a > 3 ) {
     $a = 3;
+} else if ( $a == 0 ) {
+    $a = 1;
 }
 ```
 
@@ -80,7 +102,7 @@ class Wheel
     @params = []
     @name = "foo"
 
-    def __constructor(@params):
+    def __constructor(name, @params)
         # logics here
 
 ```

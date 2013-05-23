@@ -1,21 +1,30 @@
 {
-  "name":         "coffeephp",
-  "description":  "Unfancy JavaScript to PHP",
-  "keywords":     ["javascript", "language", "coffeescript" , "coffeephp", "php", "compiler"],
-  "author":       "Yo-An Lin",
-  "version":      "0.0.1",
-  "licenses":     [{
-    "type":       "MIT"
-  }],
-  "engines":      {
-    "node":       ">=0.4.0"
-  }
-  "repository":   {
+  "name": "coffeephp",
+  "description": "Unfancy JavaScript to PHP",
+  "keywords": [
+    "javascript",
+    "language",
+    "coffeescript",
+    "coffeephp",
+    "php",
+    "compiler"
+  ],
+  "author": "Yo-An Lin",
+  "version": "0.0.1",
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "repository": {
     "type": "git",
     "url": "git://github.com/c9s/coffeephp.git"
   },
   "devDependencies": {
-    "uglify-js":  ">=1.0.0",
-    "jison":      ">=0.2.0"
+    "uglify-js": ">=1.0.0",
+    "jison": "~0.4.4"
   }
 }
