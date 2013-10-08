@@ -2,7 +2,7 @@
 
 package main
 
-import "fmt"
+import _ "fmt"
 
 var regs = make([]int, 26)
 var base int
@@ -30,20 +30,24 @@ var base int
 
 %%
 
+start : top_statement_list	{ }
 
-list	: /* empty */
-	| list stat '\n'
-	;
+top_statement_list:
+		top_statement_list  { } top_statement { }
+	|	/* empty */
+;
 
-stat	:    expr
-		{
-			fmt.Printf( "%d\n", $1 );
-		}
-	|    LETTER '=' expr
-		{
-			regs[$1]  =  $3
-		}
-	;
+top_statement:
+    statement	{ }
+;
+
+statement:
+    unticked_statement { }
+;
+
+unticked_statement:
+	expr ';'				{ }
+;
 
 expr	:    '(' expr ')'
 		{ $$  =  $2 }
