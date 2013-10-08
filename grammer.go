@@ -5,16 +5,13 @@ package main
 import __yyfmt__ "fmt"
 //line grammer.y:3
 		
-import (
-	"fmt"
-	"unicode"
-)
+import "fmt"
 
 var regs = make([]int, 26)
 var base int
 
 
-//line grammer.y:17
+//line grammer.y:14
 type CoffeeSymType struct{
 	yys int
 	val int
@@ -42,38 +39,8 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line grammer.y:86
+//line grammer.y:84
       /*  start  of  programs  */
-
-type CoffeeLex struct {
-	s string
-	pos int
-}
-
-
-func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
-	var c rune = ' '
-	for c == ' ' {
-		if l.pos == len(l.s) {
-			return 0
-		}
-		c = rune(l.s[l.pos])
-		l.pos += 1
-	}
-
-	if unicode.IsDigit(c) {
-		lval.val = int(c - '0')
-		return DIGIT
-	} else if unicode.IsLower(c) {
-		lval.val = int(c - 'a')
-		return LETTER
-	}
-	return int(c)
-}
-
-func (l *CoffeeLex) Error(s string) {
-	fmt.Printf("syntax error: %s\n", s)
-}
 
 
 //line yacctab:1
@@ -385,49 +352,49 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 3:
-		//line grammer.y:41
+		//line grammer.y:39
 		{
 				fmt.Printf( "%d\n", CoffeeS[Coffeept-0].val );
 			}
 	case 4:
-		//line grammer.y:45
+		//line grammer.y:43
 		{
 				regs[CoffeeS[Coffeept-2].val]  =  CoffeeS[Coffeept-0].val
 			}
 	case 5:
-		//line grammer.y:51
+		//line grammer.y:49
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
 	case 6:
-		//line grammer.y:53
+		//line grammer.y:51
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val + CoffeeS[Coffeept-0].val }
 	case 7:
-		//line grammer.y:55
+		//line grammer.y:53
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val - CoffeeS[Coffeept-0].val }
 	case 8:
-		//line grammer.y:57
+		//line grammer.y:55
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val * CoffeeS[Coffeept-0].val }
 	case 9:
-		//line grammer.y:59
+		//line grammer.y:57
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val / CoffeeS[Coffeept-0].val }
 	case 10:
-		//line grammer.y:61
+		//line grammer.y:59
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val % CoffeeS[Coffeept-0].val }
 	case 11:
-		//line grammer.y:63
+		//line grammer.y:61
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val & CoffeeS[Coffeept-0].val }
 	case 12:
-		//line grammer.y:65
+		//line grammer.y:63
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val | CoffeeS[Coffeept-0].val }
 	case 13:
-		//line grammer.y:67
+		//line grammer.y:65
 		{ CoffeeVAL.val  = -CoffeeS[Coffeept-0].val  }
 	case 14:
-		//line grammer.y:69
+		//line grammer.y:67
 		{ CoffeeVAL.val  = regs[CoffeeS[Coffeept-0].val] }
 	case 15:
 		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 16:
-		//line grammer.y:74
+		//line grammer.y:72
 		{
 				CoffeeVAL.val = CoffeeS[Coffeept-0].val;
 				if CoffeeS[Coffeept-0].val==0 {
@@ -437,7 +404,7 @@ Coffeedefault:
 				}
 			}
 	case 17:
-		//line grammer.y:83
+		//line grammer.y:81
 		{ CoffeeVAL.val = base * CoffeeS[Coffeept-1].val + CoffeeS[Coffeept-0].val }
 	}
 	goto Coffeestack /* stack new state and value */
