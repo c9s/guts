@@ -3,9 +3,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"unicode"
 )
 
@@ -117,26 +115,3 @@ func (l *CoffeeLex) Error(s string) {
 	fmt.Printf("syntax error: %s\n", s)
 }
 
-func main() {
-	fi := bufio.NewReader(os.NewFile(0, "stdin"))
-
-	for {
-		var eqn string
-		var ok bool
-
-		fmt.Printf("equation: ")
-		if eqn, ok = readline(fi); ok {
-			CoffeeParse(&CoffeeLex{s: eqn})
-		} else {
-			break
-		}
-	}
-}
-
-func readline(fi *bufio.Reader) (string, bool) {
-	s, err := fi.ReadString('\n')
-	if err != nil {
-		return "", false
-	}
-	return s, true
-}
