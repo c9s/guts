@@ -28,6 +28,8 @@ var base int
 %left '*'  '/'  '%'
 %left UMINUS      /*  supplies  precedence  for  unary  minus  */
 
+%start start
+
 %%
 
 start : top_statement_list	{ }

@@ -39,7 +39,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line grammer.y:88
+//line grammer.y:90
       /*  start  of  programs  */
 
 
@@ -357,57 +357,57 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 1:
-		//line grammer.y:33
+		//line grammer.y:35
 		{ }
 	case 2:
-		//line grammer.y:36
+		//line grammer.y:38
 		{ }
 	case 3:
-		//line grammer.y:36
+		//line grammer.y:38
 		{ }
 	case 5:
-		//line grammer.y:41
+		//line grammer.y:43
 		{ }
 	case 6:
-		//line grammer.y:45
+		//line grammer.y:47
 		{ }
 	case 7:
-		//line grammer.y:49
+		//line grammer.y:51
 		{ }
 	case 8:
-		//line grammer.y:53
+		//line grammer.y:55
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
 	case 9:
-		//line grammer.y:55
+		//line grammer.y:57
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val + CoffeeS[Coffeept-0].val }
 	case 10:
-		//line grammer.y:57
+		//line grammer.y:59
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val - CoffeeS[Coffeept-0].val }
 	case 11:
-		//line grammer.y:59
+		//line grammer.y:61
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val * CoffeeS[Coffeept-0].val }
 	case 12:
-		//line grammer.y:61
+		//line grammer.y:63
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val / CoffeeS[Coffeept-0].val }
 	case 13:
-		//line grammer.y:63
+		//line grammer.y:65
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val % CoffeeS[Coffeept-0].val }
 	case 14:
-		//line grammer.y:65
+		//line grammer.y:67
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val & CoffeeS[Coffeept-0].val }
 	case 15:
-		//line grammer.y:67
+		//line grammer.y:69
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val | CoffeeS[Coffeept-0].val }
 	case 16:
-		//line grammer.y:69
+		//line grammer.y:71
 		{ CoffeeVAL.val  = -CoffeeS[Coffeept-0].val  }
 	case 17:
-		//line grammer.y:71
+		//line grammer.y:73
 		{ CoffeeVAL.val  = regs[CoffeeS[Coffeept-0].val] }
 	case 18:
 		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 19:
-		//line grammer.y:76
+		//line grammer.y:78
 		{
 				CoffeeVAL.val = CoffeeS[Coffeept-0].val;
 				if CoffeeS[Coffeept-0].val==0 {
@@ -417,7 +417,7 @@ Coffeedefault:
 				}
 			}
 	case 20:
-		//line grammer.y:85
+		//line grammer.y:87
 		{ CoffeeVAL.val = base * CoffeeS[Coffeept-1].val + CoffeeS[Coffeept-0].val }
 	}
 	goto Coffeestack /* stack new state and value */
