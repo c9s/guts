@@ -65,5 +65,11 @@ $list = range(1,10);
 We compile array with `array()` for the backward compatibility, but it would be nice to have 
 an option to configure the generated code version for PHP.
 
+Reduction Operators
+-------------------
 
+The idea of reduction operator is borrowd from <http://en.wikibooks.org/wiki/Perl_6_Programming/Meta_Operators>
+
+	nums = [1..5];
+	sum = [+] nums     # 1 + 2 + 3 + 4 + 5
 
