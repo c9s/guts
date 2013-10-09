@@ -67,7 +67,7 @@ And here is the way to access the member variable:
         public @username = "username"
         private @password = "password"
 
-        openDoor :: (password) -> ..
+        openDoor :: (password) ->
             if @password == password
                 # do something
 
