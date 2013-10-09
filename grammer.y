@@ -14,6 +14,8 @@ var base int
 %union{
     tpe TokenType
 	val string
+    line int
+    pos  int
 }
 
 // any non-terminal which returns a value needs a type, which is
