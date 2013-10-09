@@ -119,10 +119,10 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 
 	if unicode.IsDigit(c) {
 		lval.val = int(c - '0')
-		return DIGIT
+		return T_DIGIT
 	} else if unicode.IsLower(c) {
 		lval.val = int(c - 'a')
-		return LETTER
+		return T_LETTER
 	}
 	return int(c)
 }

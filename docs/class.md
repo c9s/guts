@@ -20,9 +20,9 @@ class Person {
 
 Inheritance
 -------------
-You can simply write `is` keyword to define an inheritance:
+You can simply write `isa` keyword to define an inheritance:
 
-    class Person is Object do ArrayIterator
+    class Person isa Object do ArrayIterator
         getName :: () -> "name"
 
 The above code compiles to:
@@ -40,7 +40,7 @@ Implements Interface
 --------------------
 We use simpler keyword to define interface implementation:
 
-    class LockableDoor is Object does DoorInterface
+    class LockableDoor isa Object does DoorInterface
         openDoor :: () -> ..
 
 Which compiles to
@@ -64,12 +64,12 @@ Class Members
 -------------
 To define class members:
 
-    class LockableDoor is Object does DoorInterface
+    class LockableDoor isa Object does DoorInterface
         @password = "password"
 
 And here is the way to access the member variable:
 
-    class LockableDoor is Object does DoorInterface
+    class LockableDoor isa Object does DoorInterface
         @password = "password"
 
         public @username = "username"

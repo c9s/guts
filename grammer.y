@@ -20,16 +20,50 @@ var base int
 %type <val> expr number
 
 // same for terminals
-%token <val> DIGIT LETTER DOT IF ELSE ELSEIF IDENTIFIER EOF
-%token <val> FOREACH
+%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER EOF
 
-%left '&&' 'and'
-%left '||' 'or'
+%token T_NEW
+%token T_CLONE
+
+%token T_IF
+
+%left T_ELSEIF
+%token T_ELSEIF
+
+%left T_ELSE 
+%token T_ELSE
+
+%token T_FOR
+
+// T_SAY is basically an alias of T_ECHO
+%token T_SAY
+%token T_ECHO
+%token T_FOREACH
+%token T_TRY
+%token T_CATCH
+%token T_CLASS
+%token T_ISA  "isa (T_ISA)"
+%token T_DOES "does (T_DOES)"
+
+// obj.method
+%token T_OBJECT_OPERATOR
+
+%left 'and'
+%left 'or'
+
 %left '|'
-%left '&'
 %left '^'
+%left '&'
+
 %left '+'  '-'
 %left '*'  '/'  '%'
+%right '!'
+
+%left T_BOOLEAN_OR
+%token T_BOOLEAN_OR
+%left T_BOOLEAN_AND 
+%token T_BOOLEAN_AND
+
 %left UMINUS      /*  supplies  precedence  for  unary  minus  */
 
 %start start
@@ -57,8 +91,8 @@ unticked_statement:
 ;
 
 assign_statement:
-      identity '=' expr {  }
-    | identity '=' function_call {  }
+      identity '=' expr ';' {  }
+    | identity '=' function_call ';' {  }
 ;
 
 expr	:    '(' expr ')'
@@ -79,17 +113,17 @@ expr	:    '(' expr ')'
 		{ $$  =  $1 | $3 }
 	|    '-'  expr        %prec  UMINUS
 		{ $$  = -$2  }
-	|    LETTER
+	|    T_LETTER
 		{ $$  = regs[$1] }
 	|    number
 	;
 
 
-identity: LETTER
-        | LETTER DIGIT
+identity: T_LETTER
+        | T_LETTER T_DIGIT
         ;
 
-number	:    DIGIT
+number	:    T_DIGIT
 		{
 			$$ = $1;
 			if $1==0 {
@@ -98,7 +132,7 @@ number	:    DIGIT
 				base = 10
 			}
 		}
-	|    number DIGIT
+	|    number T_DIGIT
 		{ $$ = base * $1 + $2 }
 	;
 
