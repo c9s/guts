@@ -11,3 +11,5 @@ parser:
 install:
 	cp -v coffeephp /usr/bin/cphp
 
+test:
+	go test -v
