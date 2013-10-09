@@ -23,7 +23,7 @@ var base int
 %type <val> expr number
 
 // same for terminals
-%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER EOF
+%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF
 
 %token T_NEW
 %token T_CLONE

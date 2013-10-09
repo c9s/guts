@@ -12,22 +12,29 @@ func TestLexer(t *testing.T) {
 		input: input,
 		start: 0,
 		pos:   0,
-		items: make(chan LexItem),
+		items: make(chan *CoffeeSymType, 100),
 	}
 	go lexer.run()
 
-	for item <- lexer.items; item.tpe != eof; {
+	var item *CoffeeSymType
+	for {
+		item = <-lexer.items
 		t.Log(item)
+		if item.typ == T_EOF {
+			break
+		}
 	}
+	lexer.close()
 
-	var lval CoffeeSymType
-	for lexer.Lex(&lval) != eof {
-		t.Log(lval)
-	}
+	/*
+		var lval CoffeeSymType
+		for lexer.Lex(&lval) != eof {
+			t.Log(lval)
+		}
 
-	for r := lexer.next(); r != eof; r = lexer.next() {
-		t.Log(r)
-		_ = r
-	}
-	_ = lexer
+		for r := lexer.next(); r != eof; r = lexer.next() {
+			t.Log(r)
+			_ = r
+		}
+	*/
 }

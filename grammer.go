@@ -24,7 +24,7 @@ const T_DIGIT = 57346
 const T_LETTER = 57347
 const T_DOT = 57348
 const T_IDENTIFIER = 57349
-const EOF = 57350
+const T_EOF = 57350
 const T_NEW = 57351
 const T_CLONE = 57352
 const T_IF = 57353
@@ -58,7 +58,7 @@ var CoffeeToknames = []string{
 	"T_LETTER",
 	"T_DOT",
 	"T_IDENTIFIER",
-	"EOF",
+	"T_EOF",
 	"T_NEW",
 	"T_CLONE",
 	"T_IF",

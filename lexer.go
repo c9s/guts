@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -18,16 +19,17 @@ type CoffeeLex struct {
 
 	// XXX
 	width int
-	items chan CoffeeSymType
+	items chan *CoffeeSymType
 }
 
 type TokenType int
 
 const eof = -1
+const lexError = -99
 
 func (self *CoffeeSymType) String() string {
 	switch self.typ {
-	case eof:
+	case T_EOF:
 		return "EOF"
 	}
 	return fmt.Sprintf("%q", self.val)
@@ -54,7 +56,7 @@ func lexText(l *CoffeeLex) stateFn {
 */
 
 func (l *CoffeeLex) emit(t TokenType) {
-	l.items <- CoffeeSymType{
+	l.items <- &CoffeeSymType{
 		typ: t,
 		val: l.input[l.start:l.pos],
 	}
@@ -63,10 +65,10 @@ func (l *CoffeeLex) emit(t TokenType) {
 
 // peek returns but does not consume
 // the next rune in the input.
-func (l *CoffeeLex) peek() rune {
-	rune := l.next()
+func (l *CoffeeLex) peek() (r rune) {
+	r = l.next()
 	l.backup()
-	return rune
+	return r
 }
 
 // ignore skips over the pending input before this point.
@@ -103,8 +105,18 @@ func (l *CoffeeLex) next() (r rune) {
 
 func (l *CoffeeLex) run() {
 	for l.state = lexStart; l.state != nil; {
-		l.state = l.state(l)
+		fn := l.state(l)
+		if fn != nil {
+			l.state = fn
+		} else {
+			break
+		}
 	}
+	l.emit(T_EOF)
+}
+
+func (l *CoffeeLex) close() {
+	log.Println("closing channel")
 	close(l.items)
 }
 
