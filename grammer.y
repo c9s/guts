@@ -20,7 +20,8 @@ var base int
 %type <val> expr number
 
 // same for terminals
-%token <val> DIGIT LETTER
+%token <val> DIGIT LETTER DOT IF ELSE ELSEIF IDENTIFIER EOF
+%token <val> FOREACH
 
 %left '&&' 'and'
 %left '||' 'or'

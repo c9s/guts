@@ -22,17 +22,6 @@ type TokenType int
 
 const eof = -1
 
-const (
-	TokenDot = iota
-	TokenEOF
-	TokenIf
-	TokenElse
-	TokenElseIf
-	TokenDigit
-	TokenIdentifier
-	TokenForeach
-)
-
 type LexItem struct {
 	Val string
 	Typ TokenType
@@ -40,7 +29,7 @@ type LexItem struct {
 
 func (self *LexItem) String() string {
 	switch self.Typ {
-	case TokenEOF:
+	case eof:
 		return "EOF"
 	}
 	return fmt.Sprintf("%q", self.Val)
@@ -117,7 +106,7 @@ func (l *CoffeeLex) next() (r rune) {
 	return r
 }
 
-// returns a token
+// set token in lval, return the token type id
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var c rune = ' '
 	for c == ' ' {
