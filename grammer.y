@@ -25,6 +25,8 @@ var base int
 // same for terminals
 %token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF T_FLOATING T_NUMBER
 
+%token T_ONELINE_COMMENT T_COMMENT
+
 %token T_NEWLINE
 %token T_ASSIGN
 

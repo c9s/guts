@@ -34,3 +34,16 @@ Simply run make to produce the parser:
     make
 
 
+
+Lexer
+------
+
+	x T_IDENTIFIER
+	x T_FLOATING
+	x T_NUMBER
+	x T_NEWLINE
+	x T_EOF
+	x T_ONELINE_COMMENT
+	x T_COMMENT
+
+

@@ -75,6 +75,16 @@ func (l *CoffeeLex) peek() (r rune) {
 	return r
 }
 
+func (l *CoffeeLex) peekMore(p int) (r rune) {
+	var w = 0
+	for i := p; i > 0; i-- {
+		r = l.next()
+		w += l.width
+	}
+	l.pos -= w
+	return r
+}
+
 // ignore skips over the pending input before this point.
 func (l *CoffeeLex) ignore() {
 	l.start = l.pos
@@ -125,7 +135,7 @@ func (l *CoffeeLex) close() {
 }
 
 func lexStartLine(l *CoffeeLex) stateFn {
-	var c rune = l.next()
+	var c rune = l.peek()
 	if c == ' ' || c == '\t' {
 		return lexIndentSpaces
 	}
@@ -134,29 +144,71 @@ func lexStartLine(l *CoffeeLex) stateFn {
 }
 
 func lexStart(l *CoffeeLex) stateFn {
-	var c rune = l.next()
+	var c rune = l.peek()
 	if unicode.IsDigit(c) {
 		return lexNumber
 	} else if c == ' ' || c == '\t' {
 		// return lexSpaces
 		return lexIgnoreSpaces
 	} else if c == '\n' || c == '\r' {
+		l.next()
 		l.emit(T_NEWLINE)
 		l.lastSpace = l.space
 		l.space = 0
 		return lexStartLine
-	} else if c == '=' && l.peek() != '=' {
+	} else if c == '=' && l.peekMore(2) != '=' {
+		l.next()
 		l.emit(T_ASSIGN)
 		return lexStart
+	} else if c == '/' && l.peekMore(2) == '/' {
+		return lexOnelineComment
+	} else if c == '/' && l.peekMore(2) == '*' {
+		return lexComment
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
+	} else if c == eof {
+		l.emit(T_EOF)
+		return nil
 	}
 	return nil
 }
 
-func lexIdentifier(l *CoffeeLex) stateFn {
-	for c := l.next(); unicode.IsLetter(c) || unicode.IsDigit(c); {
+func lexComment(l *CoffeeLex) stateFn {
+	var c rune
+	for {
+		c = l.next()
+		if c == eof {
+			break
+		}
+		if c == '*' && l.peek() == '/' {
+			break
+		}
+	}
+	l.next()
+	l.emit(T_COMMENT)
+	return lexStart
+}
 
+func lexOnelineComment(l *CoffeeLex) stateFn {
+	var c rune
+	for {
+		c = l.next()
+		if c == '\n' || c == eof {
+			break
+		}
+	}
+	l.backup()
+	l.emit(T_ONELINE_COMMENT)
+	return lexStartLine
+}
+
+func lexIdentifier(l *CoffeeLex) stateFn {
+	for {
+		c := l.next()
+		if unicode.IsLetter(c) || unicode.IsDigit(c) {
+		} else {
+			break
+		}
 	}
 	l.backup()
 	l.emit(T_IDENTIFIER)
@@ -167,7 +219,7 @@ func lexIgnoreSpaces(l *CoffeeLex) stateFn {
 	var c rune
 	for {
 		c = l.next()
-		if c != ' ' {
+		if c != ' ' || c == eof {
 			break
 		}
 	}
@@ -177,16 +229,14 @@ func lexIgnoreSpaces(l *CoffeeLex) stateFn {
 }
 
 func lexIndentSpaces(l *CoffeeLex) stateFn {
-	l.space = 1
-	con := true
-	for c := l.next(); con; {
-		switch c {
-		case ' ':
+	l.space = 0
+	for {
+		c := l.next()
+		if c == ' ' {
 			l.space++
-		case '\t':
+		} else if c == '\t' {
 			l.space += 4
-		default:
-			con = false
+		} else {
 			break
 		}
 	}

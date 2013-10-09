@@ -2,11 +2,7 @@ package main
 
 import "testing"
 
-func TestLexer(t *testing.T) {
-	input := `
-	a = 102
-	b = 3.1415926
-	`
+func testLexInput(t *testing.T, input string) {
 	lexer := CoffeeLex{
 		input: input,
 		start: 0,
@@ -24,16 +20,26 @@ func TestLexer(t *testing.T) {
 		}
 	}
 	lexer.close()
+}
 
-	/*
-		var lval CoffeeSymType
-		for lexer.Lex(&lval) != eof {
-			t.Log(lval)
-		}
+func TestLexerComment(t *testing.T) {
+	input := `
+	// oneline comment
+	`
+	testLexInput(t, input)
 
-		for r := lexer.next(); r != eof; r = lexer.next() {
-			t.Log(r)
-			_ = r
-		}
-	*/
+	input = `
+	/* comment */
+	`
+	testLexInput(t, input)
+}
+
+func TestLexerAssign(t *testing.T) {
+	input := `
+	a = 102
+	b = 3.1415926
+	foo = 200
+	bar = 478.123
+	`
+	testLexInput(t, input)
 }
