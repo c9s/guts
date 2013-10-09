@@ -8,6 +8,7 @@ import (
 type CoffeeLex struct {
 	// the line
 	input string
+	start int
 	pos   int
 	items chan LexItem
 }
@@ -38,9 +39,14 @@ func (self *LexItem) String() string {
 	return fmt.Sprintf("%q", self.Val)
 }
 
+/*
 func (l *CoffeeLex) run() {
-
+	for state := l.Lex(); state != nil {
+		state = state(l)
+	}
+	close(l.items)
 }
+*/
 
 // returns a token
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
