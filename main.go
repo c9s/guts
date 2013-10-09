@@ -13,7 +13,7 @@ func main() {
 
 		fmt.Printf("equation: ")
 		if eqn, ok = readline(fi); ok {
-			lexer := CoffeeLexToken{
+			lexer := CoffeeLex{
 				input: eqn,
 				items: make(chan LexItem),
 			}

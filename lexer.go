@@ -5,7 +5,7 @@ import (
 	"unicode"
 )
 
-type CoffeeLexToken struct {
+type CoffeeLex struct {
 	// the line
 	input string
 	pos   int
@@ -38,8 +38,12 @@ func (self *LexItem) String() string {
 	return fmt.Sprintf("%q", self.Val)
 }
 
+func (l *CoffeeLex) run() {
+
+}
+
 // returns a token
-func (l *CoffeeLexToken) Lex(lval *CoffeeSymType) int {
+func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var c rune = ' '
 	for c == ' ' {
 		if l.pos == len(l.input) {
@@ -59,6 +63,6 @@ func (l *CoffeeLexToken) Lex(lval *CoffeeSymType) int {
 	return int(c)
 }
 
-func (l *CoffeeLexToken) Error(s string) {
+func (l *CoffeeLex) Error(s string) {
 	fmt.Printf("syntax error: %s\n", s)
 }
