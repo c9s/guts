@@ -39,26 +39,6 @@ func (self *CoffeeSymType) String() string {
 	return fmt.Sprintf("[%d] %q", self.typ, self.val)
 }
 
-/*
-func lexText(l *CoffeeLex) stateFn {
-    for {
-        if strings.HasPrefix(l.input[l.pos:], leftMeta) {
-            if l.pos > l.start {
-                l.emit(itemText)
-            }
-            return lexLeftMeta    // Next state.
-        }
-        if l.next() == eof { break }
-    }
-    // Correctly reached EOF.
-    if l.pos > l.start {
-        l.emit(itemText)
-    }
-    l.emit(itemEOF)  // Useful to make EOF a token.
-    return nil       // Stop the run loop.
-}
-*/
-
 func (l *CoffeeLex) emit(t TokenType) {
 	l.items <- &CoffeeSymType{
 		typ: t,
@@ -130,7 +110,6 @@ func (l *CoffeeLex) run() {
 }
 
 func (l *CoffeeLex) close() {
-	log.Println("closing channel")
 	close(l.items)
 }
 
@@ -232,10 +211,8 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 	l.space = 0
 	for {
 		c := l.next()
-		if c == ' ' {
+		if c == ' ' || c == '\t' {
 			l.space++
-		} else if c == '\t' {
-			l.space += 4
 		} else {
 			break
 		}
