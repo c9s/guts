@@ -22,8 +22,11 @@ var base int
 // same for terminals
 %token <val> DIGIT LETTER
 
+%left '&&' 'and'
+%left '||' 'or'
 %left '|'
 %left '&'
+%left '^'
 %left '+'  '-'
 %left '*'  '/'  '%'
 %left UMINUS      /*  supplies  precedence  for  unary  minus  */
@@ -44,11 +47,17 @@ top_statement:
 ;
 
 statement:
-    unticked_statement { }
+     unticked_statement { }
+   | assign_statement { }
 ;
 
 unticked_statement:
 	expr ';'				{ }
+;
+
+assign_statement:
+      identity '=' expr {  }
+    | identity '=' function_call {  }
 ;
 
 expr	:    '(' expr ')'
@@ -74,6 +83,11 @@ expr	:    '(' expr ')'
 	|    number
 	;
 
+
+identity: LETTER
+        | LETTER DIGIT
+        ;
+
 number	:    DIGIT
 		{
 			$$ = $1;
@@ -87,5 +101,12 @@ number	:    DIGIT
 		{ $$ = base * $1 + $2 }
 	;
 
-%%      /*  start  of  programs  */
+function_call_parameter_list:
+    '(' ')'	{ }
+;
 
+function_call:
+    identity function_call_parameter_list { }
+;
+
+%%      /*  start  of  programs  */

@@ -6,10 +6,12 @@ import (
 )
 
 type CoffeeLex struct {
+	// the line
 	s   string
 	pos int
 }
 
+// returns a token
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var c rune = ' '
 	for c == ' ' {
