@@ -36,35 +36,6 @@ $floatVariable = 1.23;
 $str = "string";
 ```
 
-## Array
-
-indexed array:
-
-```
-a = [ "foo", "bar", "jack" ]
-```
-
-which is compiled to:
-
-```php
-$a = array( "foo", "bar", "jack" );
-```
-
-associative array:
-
-```
-a = [ foo: bar, key: value ]
-```
-
-which is compiled to:
-
-```php
-$a = array( 
-    "foo": $bar,
-    "key": $value,
-);
-```
-
 associative array with yaml format definitions:
 
 ```
