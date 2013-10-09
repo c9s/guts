@@ -52,6 +52,14 @@ class LockableDoor extends Object implements DoorInterface {
 }
 ```
 
+Defining Interface
+------------------
+
+    interface DoorInterface
+        open :: ()
+        close :: ()
+
+
 Class Members
 -------------
 To define class members:
