@@ -21,8 +21,10 @@ Which is shorter than writing:
 CoffeePHP aims to provide a simple optimizer to do optimizations like "dead
 code elimination".. or so on.
 
-For more details, please check the `docs` for the language synopsis.
+So if you have framework with development/production, this dead code elimination 
+could improve the overhead of mode checking for your production site.
 
+For more details, please check the `docs` for the language synopsis.
 
 
 Build
