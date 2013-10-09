@@ -21,7 +21,8 @@ class Person {
 Method Scope
 ------------
 
-Methods are default to public scope, to define private method, please use underscore as the prefix.
+Methods are default to public scope, to define private method, please use
+underscore as the prefix.
 
 Static methods are defined by a tilde `~`
 
@@ -42,4 +43,20 @@ Or you can declare scope keyword explicitly:
         # static method
         public static getInstance :: () -> ....
 
+
+Magic Methods
+--------------
+
+Just like what you did in PHP 
+
+    class Person
+        __get :: (key) ->
+        __call ::  (methodName, args) ->
+
+
+Calling Object Method
+---------------------
+
+    obj = new Person
+    name = obj.getName()
 
