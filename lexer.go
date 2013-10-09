@@ -17,6 +17,10 @@ type CoffeeLex struct {
 	pos   int
 	state stateFn
 
+	// current space prefix length (used to calculate indentation level)
+	space     int
+	lastSpace int
+
 	// XXX
 	width int
 	items chan *CoffeeSymType
@@ -120,28 +124,96 @@ func (l *CoffeeLex) close() {
 	close(l.items)
 }
 
+func lexStartLine(l *CoffeeLex) stateFn {
+	var c rune = l.next()
+	if c == ' ' || c == '\t' {
+		return lexIndentSpaces
+	}
+	// default start state.
+	return lexStart
+}
+
 func lexStart(l *CoffeeLex) stateFn {
 	var c rune = l.next()
 	if unicode.IsDigit(c) {
-		return lexDigits
-	}
-	if c == ' ' {
-		fmt.Println("run lexSpaces")
+		return lexNumber
+	} else if c == ' ' || c == '\t' {
 		return lexSpaces
+	} else if c == '\n' || c == '\r' {
+		l.emit(T_NEWLINE)
+		l.lastSpace = l.space
+		l.space = 0
+		return lexStartLine
+	} else if c == '=' && l.peek() != '=' {
+		l.emit(T_ASSIGN)
+		return lexStart
+	} else if unicode.IsLetter(c) {
+		return lexIdentifier
 	}
 	return nil
 }
 
+func lexIdentifier(l *CoffeeLex) stateFn {
+	for c := l.next(); unicode.IsLetter(c) || unicode.IsDigit(c); {
+
+	}
+	l.backup()
+	l.emit(T_IDENTIFIER)
+	return lexStart
+}
+
+func lexIndentSpaces(l *CoffeeLex) stateFn {
+	l.space = 1
+	con := true
+	for c := l.next(); con; {
+		switch c {
+		case ' ':
+			l.space++
+		case '\t':
+			l.space += 4
+		default:
+			con = false
+			break
+		}
+	}
+	l.emit(T_SPACE)
+	return lexStart
+}
+
 func lexSpaces(l *CoffeeLex) stateFn {
-	for c := l.next(); c == ' '; {
+	for c := l.next(); c == ' ' || c == '\t'; {
 	}
 	l.backup()
 	l.emit(T_SPACE)
 	return lexStart
 }
 
-func lexDigits(l *CoffeeLex) stateFn {
-	return nil
+func lexFloating(l *CoffeeLex) stateFn {
+	for {
+		c := l.next()
+		if !unicode.IsDigit(c) {
+			break
+		}
+	}
+	l.backup()
+	l.emit(T_FLOATING)
+	return lexStart
+}
+
+func lexNumber(l *CoffeeLex) stateFn {
+	var c rune
+	for c = l.next(); true; c = l.next() {
+		if unicode.IsDigit(c) {
+			continue
+		} else if c == '.' && unicode.IsDigit(l.peek()) {
+			return lexFloating
+		} else {
+			break
+		}
+	}
+	l.backup()
+	l.emit(T_NUMBER)
+	return lexStart
 }
 
 // set token in lval, return the token type id

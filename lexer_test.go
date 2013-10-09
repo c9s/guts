@@ -4,9 +4,8 @@ import "testing"
 
 func TestLexer(t *testing.T) {
 	input := `
-	a = 1
-	b = 2
-	foo23 = 3
+	a = 102
+	b = 3.1415926
 	`
 	lexer := CoffeeLex{
 		input: input,

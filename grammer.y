@@ -23,7 +23,10 @@ var base int
 %type <val> expr number
 
 // same for terminals
-%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF
+%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF T_FLOATING T_NUMBER
+
+%token T_NEWLINE
+%token T_ASSIGN
 
 %token T_NEW
 %token T_CLONE
@@ -181,7 +184,7 @@ number	: T_DIGIT
 			}
             */
 		}
-	|    number T_DIGIT
+	|   number T_DIGIT
 		{ 
             // $$ = base * $1 + $2 
         }
