@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -139,10 +138,16 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(T_ASSIGN)
 		return lexStart
-	} else if l.match("//") {
+	} else if l.consumeIfMatch("//") {
 		return lexOnelineComment
-	} else if l.match("/*") {
+	} else if l.consumeIfMatch("/*") {
 		return lexComment
+	} else if l.consumeIfMatch("if ") {
+		l.emit(T_IF)
+		return lexStart
+	} else if l.consumeIfMatch("if else ") {
+		l.emit(T_ELSEIF)
+		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {
@@ -258,6 +263,21 @@ func lexNumber(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
+func (l *CoffeeLex) consumeIfMatch(str string) bool {
+	var c rune
+	var width = 0
+	for _, sc := range str {
+		c = l.next()
+		width += l.width
+		if sc != c {
+			// rollback
+			l.pos -= width
+			return false
+		}
+	}
+	return true
+}
+
 /*
 lookahead match method
 */
@@ -272,6 +292,7 @@ func (l *CoffeeLex) match(str string) bool {
 			return false
 		}
 	}
+	l.pos -= width
 	return true
 }
 
