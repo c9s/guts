@@ -12,7 +12,8 @@ var base int
 // fields inside this union end up as the fields in a structure known
 // as ${PREFIX}SymType, of which a reference is passed to the lexer.
 %union{
-	val int
+    tpe TokenType
+	val string
 }
 
 // any non-terminal which returns a value needs a type, which is
@@ -37,6 +38,7 @@ var base int
 
 // T_SAY is basically an alias of T_ECHO
 %token T_SAY
+%token T_SPACE
 %token T_ECHO
 %token T_FOREACH
 %token T_TRY
@@ -55,7 +57,7 @@ var base int
 %token T_CONTINUE   "continue (T_CONTINUE)"
 
 %token T_THROW      "throw (T_THROW)"
-%token T_NS_SEPARATOR    "\\ (T_NS_SEPARATOR)"
+// %token T_NS_SEPARATOR    "\\ (T_NS_SEPARATOR)"
 %token T_NAMESPACE       "namespace (T_NAMESPACE)"
 
 
@@ -120,23 +122,41 @@ function_body: top_statement_list;
 expr	:    '(' expr ')'
 		{ $$  =  $2 }
 	|    expr '+' expr
-		{ $$  =  $1 + $3 }
+		{ 
+            // $$  =  $1 + $3 
+        }
 	|    expr '-' expr
-		{ $$  =  $1 - $3 }
+		{ 
+            // $$  =  $1 - $3 
+        }
 	|    expr '*' expr
-		{ $$  =  $1 * $3 }
+		{ 
+            // $$  =  $1 * $3 
+        }
 	|    expr '/' expr
-		{ $$  =  $1 / $3 }
+		{ 
+            // $$  =  $1 / $3 
+        }
 	|    expr '%' expr
-		{ $$  =  $1 % $3 }
+		{ 
+            // $$  =  $1 % $3 
+        }
 	|    expr '&' expr
-		{ $$  =  $1 & $3 }
+		{ 
+            // $$  =  $1 & $3 
+        }
 	|    expr '|' expr
-		{ $$  =  $1 | $3 }
+		{ 
+            // $$  =  $1 | $3 
+        }
 	|    '-'  expr        %prec  UMINUS
-		{ $$  = -$2  }
+		{ 
+            // $$  = -$2  
+        }
 	|    T_LETTER
-		{ $$  = regs[$1] }
+		{ 
+            // $$  = regs[$1] 
+        }
 	|    number
 	;
 
@@ -145,17 +165,24 @@ identity: T_LETTER
         | T_LETTER T_DIGIT
         ;
 
-number	:    T_DIGIT
+
+
+// here we define the base to calculate the real number from the digit token.
+number	: T_DIGIT
 		{
 			$$ = $1;
+            /*
 			if $1==0 {
 				base = 8
 			} else {
 				base = 10
 			}
+            */
 		}
 	|    number T_DIGIT
-		{ $$ = base * $1 + $2 }
+		{ 
+            // $$ = base * $1 + $2 
+        }
 	;
 
 function_call_parameter_list:

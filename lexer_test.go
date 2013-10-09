@@ -14,6 +14,14 @@ func TestLexer(t *testing.T) {
 		pos:   0,
 		items: make(chan LexItem),
 	}
+	go lexer.run()
+
+	var lval CoffeeSymType
+
+	for lexer.Lex(&lval) != eof {
+		t.Log(lval)
+	}
+
 	for r := lexer.next(); r != eof; r = lexer.next() {
 		t.Log(r)
 		_ = r

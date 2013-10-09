@@ -26,16 +26,16 @@ type TokenType int
 const eof = -1
 
 type LexItem struct {
-	Val string
-	Typ TokenType
+	typ TokenType
+	val string
 }
 
 func (self *LexItem) String() string {
-	switch self.Typ {
+	switch self.typ {
 	case eof:
 		return "EOF"
 	}
-	return fmt.Sprintf("%q", self.Val)
+	return fmt.Sprintf("%q", self.val)
 }
 
 /*
@@ -56,11 +56,12 @@ func lexText(l *CoffeeLex) stateFn {
     l.emit(itemEOF)  // Useful to make EOF a token.
     return nil       // Stop the run loop.
 }
-func (l *CoffeeLex) emit(t TokenType) {
-    l.items <- item{t, l.input[l.start:l.pos]}
-    l.start = l.pos
-}
 */
+
+func (l *CoffeeLex) emit(t TokenType) {
+	l.items <- LexItem{t, l.input[l.start:l.pos]}
+	l.start = l.pos
+}
 
 // peek returns but does not consume
 // the next rune in the input.
@@ -97,8 +98,7 @@ func (l *CoffeeLex) next() (r rune) {
 		l.width = 0
 		return eof
 	}
-	r, l.width =
-		utf8.DecodeRuneInString(l.input[l.pos:])
+	r, l.width = utf8.DecodeRuneInString(l.input[l.pos:])
 	l.pos += l.width
 	return r
 }
@@ -111,25 +111,39 @@ func (l *CoffeeLex) run() {
 }
 
 func lexStart(l *CoffeeLex) stateFn {
+	var c rune = l.next()
+	if unicode.IsDigit(c) {
+		return lexDigits
+	}
+	if c == ' ' {
+		fmt.Println("run lexSpaces")
+		return lexSpaces
+	}
+	return nil
+}
+
+func lexSpaces(l *CoffeeLex) stateFn {
+	for c := l.next(); c == ' '; {
+	}
+	l.backup()
+	l.emit(T_SPACE)
+	return lexStart
+}
+
+func lexDigits(l *CoffeeLex) stateFn {
 	return nil
 }
 
 // set token in lval, return the token type id
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
-	var c rune = ' '
-	for c == ' ' {
-		if l.pos == len(l.input) {
-			return 0
-		}
-		c = rune(l.input[l.pos])
-		l.pos += 1
-	}
-
+	var c rune = l.next()
 	if unicode.IsDigit(c) {
-		lval.val = int(c - '0')
+		lval.val = string(c)
+		lval.tpe = T_DIGIT
 		return T_DIGIT
 	} else if unicode.IsLower(c) {
-		lval.val = int(c - 'a')
+		lval.val = string(c)
+		lval.tpe = T_LETTER
 		return T_LETTER
 	}
 	return int(c)
