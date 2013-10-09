@@ -28,6 +28,20 @@ The above code compiles to:
         return $x * $y
     }
 
+Calling Functions
+------------------
+You can call functions like this:
+
+    r = rand(0.1)
+    call_user_func(obj, "method")
+
+parenthesis of function call is optional:
+
+    r = rand 0.1
+    call_user_func obj, "method"
+
+
+
 
 Type Constraint
 ---------------

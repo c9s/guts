@@ -107,7 +107,7 @@ Just like what you did in PHP
     class Person
         __get :: (key) ->
         __set :: (key, val) ->
-        __call ::  (methodName, args) ->
+        __call :: (methodName, args) ->
 
 
 Calling Object Method
