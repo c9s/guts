@@ -41,12 +41,13 @@ var base int
 %token T_FOREACH
 %token T_TRY
 %token T_CATCH
-%token T_CLASS
+%token T_CLASS "class (T_CLASS)"
 %token T_IS   "is (T_IS)"
 %token T_DOES "does (T_DOES)"
+%token T_FUNCTION_PROTOTYPE ":: (T_FUNCTION_PROTOTYPE)"
 
 // obj.method
-%token T_OBJECT_OPERATOR
+%token T_OBJECT_OPERATOR ". (T_OBJECT_OPERATOR)"
 
 %left 'and'
 %left 'or'
@@ -94,6 +95,14 @@ assign_statement:
       identity '=' expr ';' {  }
     | identity '=' function_call ';' {  }
 ;
+
+function_parameter_list: '(' ')' ;
+
+function:
+      identity T_FUNCTION_PROTOTYPE function_parameter_list '->' function_body
+;
+
+function_body: top_statement_list;
 
 expr	:    '(' expr ')'
 		{ $$  =  $2 }

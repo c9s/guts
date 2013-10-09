@@ -7,11 +7,14 @@ import (
 	"unicode/utf8"
 )
 
+type stateFn func(*CoffeeLex) stateFn
+
 type CoffeeLex struct {
 	// the line
 	input string
 	start int
 	pos   int
+	state stateFn
 
 	// XXX
 	width int
@@ -57,12 +60,6 @@ func (l *CoffeeLex) emit(t TokenType) {
     l.items <- item{t, l.input[l.start:l.pos]}
     l.start = l.pos
 }
-func (l *CoffeeLex) run() {
-	for state := l.lexText; state != nil {
-		state = state(l)
-	}
-	close(l.items)
-}
 */
 
 // peek returns but does not consume
@@ -104,6 +101,17 @@ func (l *CoffeeLex) next() (r rune) {
 		utf8.DecodeRuneInString(l.input[l.pos:])
 	l.pos += l.width
 	return r
+}
+
+func (l *CoffeeLex) run() {
+	for l.state = lexStart; l.state != nil; {
+		l.state = l.state(l)
+	}
+	close(l.items)
+}
+
+func lexStart(l *CoffeeLex) stateFn {
+	return nil
 }
 
 // set token in lval, return the token type id

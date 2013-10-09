@@ -36,10 +36,11 @@ const T_CATCH = 57361
 const T_CLASS = 57362
 const T_IS = 57363
 const T_DOES = 57364
-const T_OBJECT_OPERATOR = 57365
-const T_BOOLEAN_OR = 57366
-const T_BOOLEAN_AND = 57367
-const UMINUS = 57368
+const T_FUNCTION_PROTOTYPE = 57365
+const T_OBJECT_OPERATOR = 57366
+const T_BOOLEAN_OR = 57367
+const T_BOOLEAN_AND = 57368
+const UMINUS = 57369
 
 var CoffeeToknames = []string{
 	"T_DIGIT",
@@ -59,11 +60,15 @@ var CoffeeToknames = []string{
 	"T_TRY",
 	"T_CATCH",
 	"T_CLASS",
+	" class (T_CLASS)",
 	"T_IS",
 	" is (T_IS)",
 	"T_DOES",
 	" does (T_DOES)",
+	"T_FUNCTION_PROTOTYPE",
+	" :: (T_FUNCTION_PROTOTYPE)",
 	"T_OBJECT_OPERATOR",
+	" . (T_OBJECT_OPERATOR)",
 	" and",
 	" or",
 	" |",
@@ -85,7 +90,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line grammer.y:147
+//line grammer.y:156
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -97,12 +102,12 @@ var CoffeeExca = []int{
 	1, 1,
 	-2, 2,
 	-1, 12,
-	41, 22,
-	42, 22,
-	-2, 20,
+	45, 25,
+	46, 25,
+	-2, 23,
 }
 
-const CoffeeNprod = 28
+const CoffeeNprod = 31
 const CoffeePrivate = 57344
 
 var CoffeeTokenNames []string
@@ -114,75 +119,77 @@ var CoffeeAct = []int{
 
 	22, 44, 21, 16, 17, 18, 19, 20, 14, 12,
 	14, 25, 43, 41, 22, 39, 21, 16, 17, 18,
-	19, 20, 23, 9, 28, 22, 40, 21, 16, 17,
-	18, 19, 20, 18, 19, 20, 11, 15, 11, 21,
-	16, 17, 18, 19, 20, 8, 10, 38, 10, 16,
-	17, 18, 19, 20, 27, 42, 24, 26, 37, 7,
-	6, 5, 29, 30, 31, 32, 33, 34, 35, 36,
-	4, 3, 2, 1, 13,
+	19, 20, 23, 28, 27, 22, 40, 21, 16, 17,
+	18, 19, 20, 18, 19, 20, 42, 15, 9, 37,
+	11, 7, 11, 21, 16, 17, 18, 19, 20, 8,
+	10, 6, 10, 16, 17, 18, 19, 20, 5, 4,
+	24, 26, 38, 3, 2, 1, 29, 30, 31, 32,
+	33, 34, 35, 36, 13,
 }
 var CoffeePact = []int{
 
-	-1000, -1000, -1000, 4, -1000, -1000, -1000, -1000, -3, -19,
-	6, 6, 50, 20, -1000, -1000, 6, 6, 6, 6,
-	6, 6, 6, 4, -28, -1000, -1000, -1000, -1000, 0,
-	0, -1000, -1000, -1000, 18, 9, -14, -27, -30, -1000,
-	-1000, -1000, -1000, -42, -1000,
+	-1000, -1000, -1000, 4, -1000, -1000, -1000, -1000, -7, -23,
+	6, 6, 20, 19, -1000, -1000, 6, 6, 6, 6,
+	6, 6, 6, 4, -32, -1000, -1000, -1000, -1000, -4,
+	-4, -1000, -1000, -1000, 18, 9, -18, -31, -34, -1000,
+	-1000, -1000, -1000, -46, -1000,
 }
 var CoffeePgo = []int{
 
-	0, 45, 74, 73, 72, 71, 70, 61, 60, 59,
-	23, 58, 55,
+	0, 49, 74, 65, 64, 63, 59, 58, 51, 41,
+	38, 39, 39, 39, 39, 36,
 }
 var CoffeeR1 = []int{
 
 	0, 3, 5, 4, 4, 6, 7, 7, 8, 9,
-	9, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 10, 10, 2, 2, 12, 11,
+	9, 12, 13, 14, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 10, 10, 2, 2, 15,
+	11,
 }
 var CoffeeR2 = []int{
 
 	0, 1, 0, 3, 0, 1, 1, 1, 2, 4,
-	4, 3, 3, 3, 3, 3, 3, 3, 3, 2,
-	1, 1, 1, 2, 1, 2, 2, 2,
+	4, 2, 5, 1, 3, 3, 3, 3, 3, 3,
+	3, 3, 2, 1, 1, 1, 2, 1, 2, 2,
+	2,
 }
 var CoffeeChk = []int{
 
 	-1000, -3, -4, -5, -6, -7, -8, -9, -1, -10,
-	42, 32, 5, -2, 4, 40, 31, 32, 33, 34,
-	35, 30, 28, 41, -1, 5, -1, 4, 4, -1,
-	-1, -1, -1, -1, -1, -1, -1, -11, -10, 43,
-	40, 40, -12, 42, 43,
+	46, 36, 5, -2, 4, 44, 35, 36, 37, 38,
+	39, 34, 32, 45, -1, 5, -1, 4, 4, -1,
+	-1, -1, -1, -1, -1, -1, -1, -11, -10, 47,
+	44, 44, -15, 46, 47,
 }
 var CoffeeDef = []int{
 
 	4, -2, -2, 0, 3, 5, 6, 7, 0, 0,
-	0, 0, -2, 21, 24, 8, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 20, 19, 23, 25, 12,
-	13, 14, 15, 16, 17, 18, 0, 0, 0, 11,
-	9, 10, 27, 0, 26,
+	0, 0, -2, 24, 27, 8, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 23, 22, 26, 28, 15,
+	16, 17, 18, 19, 20, 21, 0, 0, 0, 14,
+	9, 10, 30, 0, 29,
 }
 var CoffeeTok1 = []int{
 
 	1, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 36, 3, 3, 3, 35, 30, 3,
-	42, 43, 33, 31, 3, 32, 3, 34, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 3, 3, 40,
-	3, 41, 3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 3, 40, 3, 3, 3, 39, 34, 3,
+	46, 47, 37, 35, 3, 48, 29, 38, 3, 3,
+	3, 3, 3, 3, 3, 3, 3, 3, 27, 44,
+	3, 45, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 3, 29, 3, 3, 26, 3, 3,
-	24, 3, 3, 3, 3, 22, 3, 3, 3, 3,
-	3, 27, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 3, 28,
+	3, 3, 3, 3, 33, 3, 3, 30, 3, 21,
+	25, 3, 3, 3, 3, 23, 3, 3, 3, 3,
+	3, 31, 3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 3, 3, 32,
 }
 var CoffeeTok2 = []int{
 
 	2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-	12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-	23, 25, 37, 38, 39,
+	12, 13, 14, 15, 16, 17, 18, 19, 20, 22,
+	24, 26, 28, 41, 42, 43,
 }
 var CoffeeTok3 = []int{
 	0,
@@ -414,66 +421,66 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 1:
-		//line grammer.y:73
+		//line grammer.y:74
 		{ }
 	case 2:
-		//line grammer.y:76
+		//line grammer.y:77
 		{ }
 	case 3:
-		//line grammer.y:76
+		//line grammer.y:77
 		{ }
 	case 5:
-		//line grammer.y:81
+		//line grammer.y:82
 		{ }
 	case 6:
-		//line grammer.y:85
-		{ }
-	case 7:
 		//line grammer.y:86
 		{ }
+	case 7:
+		//line grammer.y:87
+		{ }
 	case 8:
-		//line grammer.y:90
+		//line grammer.y:91
 		{ }
 	case 9:
-		//line grammer.y:94
-		{  }
-	case 10:
 		//line grammer.y:95
 		{  }
-	case 11:
-		//line grammer.y:99
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
-	case 12:
-		//line grammer.y:101
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val + CoffeeS[Coffeept-0].val }
-	case 13:
-		//line grammer.y:103
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val - CoffeeS[Coffeept-0].val }
+	case 10:
+		//line grammer.y:96
+		{  }
 	case 14:
-		//line grammer.y:105
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val * CoffeeS[Coffeept-0].val }
+		//line grammer.y:108
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
 	case 15:
-		//line grammer.y:107
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val / CoffeeS[Coffeept-0].val }
+		//line grammer.y:110
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val + CoffeeS[Coffeept-0].val }
 	case 16:
-		//line grammer.y:109
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val % CoffeeS[Coffeept-0].val }
+		//line grammer.y:112
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val - CoffeeS[Coffeept-0].val }
 	case 17:
-		//line grammer.y:111
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val & CoffeeS[Coffeept-0].val }
+		//line grammer.y:114
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val * CoffeeS[Coffeept-0].val }
 	case 18:
-		//line grammer.y:113
-		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val | CoffeeS[Coffeept-0].val }
+		//line grammer.y:116
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val / CoffeeS[Coffeept-0].val }
 	case 19:
-		//line grammer.y:115
-		{ CoffeeVAL.val  = -CoffeeS[Coffeept-0].val  }
+		//line grammer.y:118
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val % CoffeeS[Coffeept-0].val }
 	case 20:
-		//line grammer.y:117
-		{ CoffeeVAL.val  = regs[CoffeeS[Coffeept-0].val] }
+		//line grammer.y:120
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val & CoffeeS[Coffeept-0].val }
 	case 21:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+		//line grammer.y:122
+		{ CoffeeVAL.val  =  CoffeeS[Coffeept-2].val | CoffeeS[Coffeept-0].val }
+	case 22:
+		//line grammer.y:124
+		{ CoffeeVAL.val  = -CoffeeS[Coffeept-0].val  }
+	case 23:
+		//line grammer.y:126
+		{ CoffeeVAL.val  = regs[CoffeeS[Coffeept-0].val] }
 	case 24:
-		//line grammer.y:127
+		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+	case 27:
+		//line grammer.y:136
 		{
 				CoffeeVAL.val = CoffeeS[Coffeept-0].val;
 				if CoffeeS[Coffeept-0].val==0 {
@@ -482,14 +489,14 @@ Coffeedefault:
 					base = 10
 				}
 			}
-	case 25:
-		//line grammer.y:136
+	case 28:
+		//line grammer.y:145
 		{ CoffeeVAL.val = base * CoffeeS[Coffeept-1].val + CoffeeS[Coffeept-0].val }
-	case 26:
-		//line grammer.y:140
+	case 29:
+		//line grammer.y:149
 		{ }
-	case 27:
-		//line grammer.y:144
+	case 30:
+		//line grammer.y:153
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */
