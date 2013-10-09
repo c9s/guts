@@ -160,9 +160,9 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(T_ASSIGN)
 		return lexStart
-	} else if c == '/' && l.peekMore(2) == '/' {
+	} else if l.match("//") {
 		return lexOnelineComment
-	} else if c == '/' && l.peekMore(2) == '*' {
+	} else if l.match("/*") {
 		return lexComment
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
@@ -287,10 +287,10 @@ lookahead match method
 func (l *CoffeeLex) match(str string) bool {
 	var c rune
 	var width = 0
-	for sc := range str {
+	for _, sc := range str {
 		c = l.next()
 		width += l.width
-		if rune(sc) != c {
+		if sc != c {
 			l.pos -= width
 			return false
 		}
