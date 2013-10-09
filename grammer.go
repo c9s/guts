@@ -34,7 +34,7 @@ const T_FOREACH = 57359
 const T_TRY = 57360
 const T_CATCH = 57361
 const T_CLASS = 57362
-const T_ISA = 57363
+const T_IS = 57363
 const T_DOES = 57364
 const T_OBJECT_OPERATOR = 57365
 const T_BOOLEAN_OR = 57366
@@ -59,8 +59,8 @@ var CoffeeToknames = []string{
 	"T_TRY",
 	"T_CATCH",
 	"T_CLASS",
-	"T_ISA",
-	" isa (T_ISA)",
+	"T_IS",
+	" is (T_IS)",
 	"T_DOES",
 	" does (T_DOES)",
 	"T_OBJECT_OPERATOR",

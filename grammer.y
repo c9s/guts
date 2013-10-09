@@ -42,7 +42,7 @@ var base int
 %token T_TRY
 %token T_CATCH
 %token T_CLASS
-%token T_ISA  "isa (T_ISA)"
+%token T_IS   "is (T_IS)"
 %token T_DOES "does (T_DOES)"
 
 // obj.method
