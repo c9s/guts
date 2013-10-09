@@ -36,7 +36,7 @@ func (self *CoffeeSymType) String() string {
 	case T_EOF:
 		return "EOF"
 	}
-	return fmt.Sprintf("%q", self.val)
+	return fmt.Sprintf("[%d] %q", self.typ, self.val)
 }
 
 /*
@@ -138,7 +138,8 @@ func lexStart(l *CoffeeLex) stateFn {
 	if unicode.IsDigit(c) {
 		return lexNumber
 	} else if c == ' ' || c == '\t' {
-		return lexSpaces
+		// return lexSpaces
+		return lexIgnoreSpaces
 	} else if c == '\n' || c == '\r' {
 		l.emit(T_NEWLINE)
 		l.lastSpace = l.space
@@ -162,6 +163,19 @@ func lexIdentifier(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
+func lexIgnoreSpaces(l *CoffeeLex) stateFn {
+	var c rune
+	for {
+		c = l.next()
+		if c != ' ' {
+			break
+		}
+	}
+	l.backup()
+	l.ignore()
+	return lexStart
+}
+
 func lexIndentSpaces(l *CoffeeLex) stateFn {
 	l.space = 1
 	con := true
@@ -176,6 +190,7 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 			break
 		}
 	}
+	l.backup()
 	l.emit(T_SPACE)
 	return lexStart
 }
