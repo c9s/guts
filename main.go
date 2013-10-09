@@ -13,7 +13,7 @@ func main() {
 
 		fmt.Printf("equation: ")
 		if eqn, ok = readline(fi); ok {
-			CoffeeParse(&CoffeeLex{s: eqn})
+			CoffeeParse(&CoffeeLexToken{s: eqn})
 		} else {
 			break
 		}

@@ -5,14 +5,40 @@ import (
 	"unicode"
 )
 
-type CoffeeLex struct {
+type CoffeeLexToken struct {
 	// the line
 	s   string
 	pos int
 }
 
+type TokenType int
+
+const (
+	TokenDot = iota
+	TokenEOF
+	TokenIf
+	TokenElse
+	TokenElseIf
+	TokenDigit
+	TokenIdentifier
+	TokenForeach
+)
+
+type LexItem struct {
+	Val string
+	Typ TokenType
+}
+
+func (self *LexItem) String() string {
+	switch self.Typ {
+	case TokenEOF:
+		return "EOF"
+	}
+	return fmt.Sprintf("%q", self.Val)
+}
+
 // returns a token
-func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
+func (l *CoffeeLexToken) Lex(lval *CoffeeSymType) int {
 	var c rune = ' '
 	for c == ' ' {
 		if l.pos == len(l.s) {
@@ -32,6 +58,6 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	return int(c)
 }
 
-func (l *CoffeeLex) Error(s string) {
+func (l *CoffeeLexToken) Error(s string) {
 	fmt.Printf("syntax error: %s\n", s)
 }
