@@ -281,6 +281,23 @@ func lexNumber(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
+/*
+lookahead match method
+*/
+func (l *CoffeeLex) match(str string) bool {
+	var c rune
+	var width = 0
+	for sc := range str {
+		c = l.next()
+		width += l.width
+		if rune(sc) != c {
+			l.pos -= width
+			return false
+		}
+	}
+	return true
+}
+
 // set token in lval, return the token type id
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var c rune = l.next()
