@@ -16,8 +16,11 @@ func TestLexer(t *testing.T) {
 	}
 	go lexer.run()
 
-	var lval CoffeeSymType
+	for item <- lexer.items; item.tpe != eof; {
+		t.Log(item)
+	}
 
+	var lval CoffeeSymType
 	for lexer.Lex(&lval) != eof {
 		t.Log(lval)
 	}

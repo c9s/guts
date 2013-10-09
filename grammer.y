@@ -12,7 +12,7 @@ var base int
 // fields inside this union end up as the fields in a structure known
 // as ${PREFIX}SymType, of which a reference is passed to the lexer.
 %union{
-    tpe TokenType
+    typ TokenType
 	val string
     line int
     pos  int

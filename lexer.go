@@ -18,19 +18,14 @@ type CoffeeLex struct {
 
 	// XXX
 	width int
-	items chan LexItem
+	items chan CoffeeSymType
 }
 
 type TokenType int
 
 const eof = -1
 
-type LexItem struct {
-	typ TokenType
-	val string
-}
-
-func (self *LexItem) String() string {
+func (self *CoffeeSymType) String() string {
 	switch self.typ {
 	case eof:
 		return "EOF"
@@ -59,7 +54,10 @@ func lexText(l *CoffeeLex) stateFn {
 */
 
 func (l *CoffeeLex) emit(t TokenType) {
-	l.items <- LexItem{t, l.input[l.start:l.pos]}
+	l.items <- CoffeeSymType{
+		typ: t,
+		val: l.input[l.start:l.pos],
+	}
 	l.start = l.pos
 }
 
@@ -139,11 +137,11 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var c rune = l.next()
 	if unicode.IsDigit(c) {
 		lval.val = string(c)
-		lval.tpe = T_DIGIT
+		lval.typ = T_DIGIT
 		return T_DIGIT
 	} else if unicode.IsLower(c) {
 		lval.val = string(c)
-		lval.tpe = T_LETTER
+		lval.typ = T_LETTER
 		return T_LETTER
 	}
 	return int(c)
