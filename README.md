@@ -1,12 +1,13 @@
 CoffeePHP
 ==================
 
-CoffeePHP is a language that let you compile less code into PHP and makes your life easier.
+CoffeePHP is a language makes your life easier,
+it let you write less code to compile a workable PHP code.
 
 CoffeePHP compiler is written in Go, Go is faster 10 times than PHP, so the compilation
-will be fast enough , and of course you can compile sources concurrently.
+will be fast enough, and of course you can compile sources concurrently.
 
-CoffeePHP takes the good stuffs from Haskell, Go and CoffeeScript, so you could write
+CoffeePHP takes the good stuffs from Haskell, Go and CoffeeScript, so you can write
 shorter code to generate the expected PHP code. e.g. To define a function, we use:
 
     getName :: -> "John"
