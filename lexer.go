@@ -7,8 +7,9 @@ import (
 
 type CoffeeLexToken struct {
 	// the line
-	s   string
-	pos int
+	input string
+	pos   int
+	items chan LexItem
 }
 
 type TokenType int
@@ -41,10 +42,10 @@ func (self *LexItem) String() string {
 func (l *CoffeeLexToken) Lex(lval *CoffeeSymType) int {
 	var c rune = ' '
 	for c == ' ' {
-		if l.pos == len(l.s) {
+		if l.pos == len(l.input) {
 			return 0
 		}
-		c = rune(l.s[l.pos])
+		c = rune(l.input[l.pos])
 		l.pos += 1
 	}
 
