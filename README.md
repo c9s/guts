@@ -31,6 +31,9 @@ Build
 ---------
 Simply run make to produce the parser:
 
+    git clone http://github.com/c9s/coffeephp
+    cd coffeephp
+    source goenv
     make
 
 
