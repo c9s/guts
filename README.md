@@ -65,6 +65,22 @@ class Person {
 ```
 
 
+Implementation
+---------------
+CoffeePHP uses Go yacc parser generator to produce a LALR(1) parser. 
+The Lexer uses concurrency strategy to parse tokens, so that the parser
+can receive the tokens from lexer through the channel.
+
+CodeGen is expected to be a separated tree structure traverser, then code
+generation which is not implemented inside the node structure like the
+coffee-script codegen. So the code generator can be PHP code generator, LLVM
+bit-code generator or JavaScript generator.
+
+Basic optimization is on the roadmap. Optimizer uses tree-pattern matching
+strategy to traverse the IR structure. 2 basic optimizations are in the plan --
+constant folding and dead code elimination.
+
+
 Lexer
 ------
 
