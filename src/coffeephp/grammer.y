@@ -2,7 +2,7 @@
 package coffeephp
 
 import _ "fmt"
-import "strconv"
+import "coffeephp/ast"
 
 var regs = make([]int, 26)
 var base int
@@ -13,7 +13,7 @@ var base int
 // as ${PREFIX}SymType, of which a reference is passed to the lexer.
 %union{
     typ TokenType
-    val interface{}
+    val ast.Node
     line int
     pos  int
 }
@@ -178,7 +178,6 @@ identity: T_LETTER
 
 // here we define the base to calculate the real number from the digit token.
 number  : T_NUMBER {
-        var err error
         /*
         if $1 == '0' {
             base = 8
@@ -186,10 +185,7 @@ number  : T_NUMBER {
             base = 10
         }
         */
-        $$, err = strconv.ParseInt($1.(string), base, 64)
-        if err != nil {
-            panic(err)
-        }
+		$$ = ast.CreateNumberNode($1.(string))
     };
 
 function_call_parameter_list:

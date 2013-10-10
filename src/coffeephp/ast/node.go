@@ -1,28 +1,44 @@
 package ast
 
-type Node struct {
+import "strconv"
+
+type Node interface {
+}
+
+type NumberNode struct {
+	Val int64
 }
 
 type ExprNode struct {
-	Node
 }
 
 type StatementNode struct {
-	Node
 }
 
 type IfNode struct {
-	Node
 }
 
 type ElseIfNode struct {
-	Node
 }
 
 type ElseNode struct {
-	Node
 }
 
-func createExprNode() {
+func CreateExprNode() {
 
+}
+
+func CreateNumberNode(token string) Node {
+	var err error
+	var base int = 10
+	if token[0] == '0' {
+		base = 8
+	}
+	val, err := strconv.ParseInt(token, base, 64)
+	if err != nil {
+		panic(err)
+	}
+	n := NumberNode{}
+	n.Val = val
+	return n
 }

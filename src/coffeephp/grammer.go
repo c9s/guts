@@ -5,7 +5,7 @@ import __yyfmt__ "fmt"
 //line src/coffeephp/grammer.y:2
 		
 import _ "fmt"
-import "strconv"
+import "coffeephp/ast"
 
 var regs = make([]int, 26)
 var base int
@@ -15,7 +15,7 @@ var base int
 type CoffeeSymType struct{
 	yys int
     typ TokenType
-    val interface{}
+    val ast.Node
     line int
     pos  int
 }
@@ -131,7 +131,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line src/coffeephp/grammer.y:202
+//line src/coffeephp/grammer.y:198
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -543,7 +543,6 @@ Coffeedefault:
 	case 27:
 		//line src/coffeephp/grammer.y:180
 		{
-	        var err error
 	        /*
         if $1 == '0' {
             base = 8
@@ -551,16 +550,13 @@ Coffeedefault:
             base = 10
         }
         */
-        CoffeeVAL.val, err = strconv.ParseInt(CoffeeS[Coffeept-0].val.(string), base, 64)
-	        if err != nil {
-	            panic(err)
-	        }
+		CoffeeVAL.val = ast.CreateNumberNode(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 28:
-		//line src/coffeephp/grammer.y:195
+		//line src/coffeephp/grammer.y:191
 		{ }
 	case 29:
-		//line src/coffeephp/grammer.y:199
+		//line src/coffeephp/grammer.y:195
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */
