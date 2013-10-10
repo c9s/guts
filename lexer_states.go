@@ -1,8 +1,8 @@
 package main
 
 import (
+	_ "fmt"
 	"unicode"
-	"unicode/utf8"
 )
 
 func lexStartLine(l *CoffeeLex) stateFn {
@@ -32,6 +32,8 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(T_ASSIGN)
 		return lexStart
+	} else if c == '"' || c == '\'' {
+		return lexString
 	} else if l.consumeIfMatch("//") {
 		return lexOnelineComment
 	} else if l.consumeIfMatch("/*") {
@@ -51,8 +53,38 @@ func lexStart(l *CoffeeLex) stateFn {
 	} else if c == eof {
 		l.emit(T_EOF)
 		return nil
+	} else {
+		panic("unknown token.")
 	}
 	return nil
+}
+
+// Lex double quote string
+func lexString(l *CoffeeLex) stateFn {
+	var q rune = l.next() // the quote char
+
+	l.ignore()
+
+	var c rune
+	for {
+		c = l.next()
+		if c == eof {
+			panic("unexpected end of string.")
+			break
+		}
+		// un-escaped string quote
+		if c == q {
+			if l.last() != '\\' {
+				break
+			}
+		}
+	}
+	l.backup()
+	l.emit(T_STRING)
+	l.next()
+	l.ignore() // ignore the quote rune
+	return lexStart
+
 }
 
 func lexComment(l *CoffeeLex) stateFn {
@@ -66,6 +98,7 @@ func lexComment(l *CoffeeLex) stateFn {
 			break
 		}
 	}
+	// consume the "/" char
 	l.next()
 	l.emit(T_COMMENT)
 	return lexStart

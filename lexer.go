@@ -39,6 +39,13 @@ func (self *CoffeeSymType) String() string {
 	return fmt.Sprintf("[%d] %q", self.typ, self.val)
 }
 
+func (l *CoffeeLex) error(msg string) {
+	fmt.Println("Syntax Error", msg)
+	fmt.Println("Line", l.line)
+	fmt.Println("Pos", l.pos)
+	fmt.Println("Input", l.input)
+}
+
 func (l *CoffeeLex) emit(t TokenType) {
 	l.items <- &CoffeeSymType{
 		typ:  t,
@@ -74,6 +81,8 @@ func (l *CoffeeLex) ignore() {
 
 // accept consumes the next rune
 // if it's from the valid set.
+// e.g.,
+//    l.accept("1234567890")
 func (l *CoffeeLex) accept(valid string) bool {
 	if strings.IndexRune(valid, l.next()) >= 0 {
 		return true
@@ -96,6 +105,13 @@ func (l *CoffeeLex) next() (r rune) {
 	}
 	r, l.width = utf8.DecodeRuneInString(l.input[l.pos:])
 	l.pos += l.width
+	return r
+}
+
+// get the last rune in the input
+func (l *CoffeeLex) last() (r rune) {
+	_, w := utf8.DecodeRuneInString(l.input[l.pos-l.width:])
+	r, _ = utf8.DecodeRuneInString(l.input[l.pos-l.width-w:])
 	return r
 }
 
