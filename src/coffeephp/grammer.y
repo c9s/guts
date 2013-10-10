@@ -56,7 +56,7 @@ var base int
 %token T_IS
 %token T_DOES
 %token T_FUNCTION_PROTOTYPE
-
+%token T_RANGE_OPERATOR
 %token T_BRACKET_OPEN T_BRACKET_CLOSE
 
 %token T_STRING

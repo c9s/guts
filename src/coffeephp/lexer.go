@@ -20,6 +20,8 @@ type CoffeeLex struct {
 	space     int
 	lastSpace int
 
+	lastTokenType int
+
 	// XXX
 	width int
 	items chan *CoffeeSymType
@@ -46,6 +48,7 @@ func (l *CoffeeLex) error(msg string) {
 }
 
 func (l *CoffeeLex) emit(t TokenType) {
+	l.lastTokenType = t
 	l.items <- &CoffeeSymType{
 		typ:  t,
 		val:  l.input[l.start:l.pos],
