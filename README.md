@@ -38,17 +38,19 @@ Simply run make to produce the parser:
 Lexer
 ------
 
-	x T_IDENTIFIER
-	x T_FLOATING
-	x T_NUMBER
-	x T_NEWLINE
-	x T_EOF
-	x T_ONELINE_COMMENT
-	x T_COMMENT
-	x T_IF
-	x T_ELSEIF
-	- T_CLASS
-	- T_FOR
-	- T_FOREACH
+    | Token Type          | Remark
+--- | ------------------- | -------------
+ x  | `T_IDENTIFIER     ` | 
+ x  | `T_FLOATING       ` |
+ x  | `T_NUMBER         ` |
+ x  | `T_NEWLINE        ` |
+ x  | `T_EOF            ` |
+ x  | `T_ONELINE_COMMENT` |
+ x  | `T_COMMENT        ` |
+ x  | `T_IF             ` |
+ x  | `T_ELSEIF         ` |
+ x  | `T_CLASS          ` |
+ x  | `T_FOR            ` |
+ x  | `T_FOREACH        ` |
 
 
