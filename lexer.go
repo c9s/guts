@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"unicode"
 	"unicode/utf8"
 )
 
@@ -174,17 +173,12 @@ func (l *CoffeeLex) match(str string) bool {
 
 // set token in lval, return the token type id
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
-	var c rune = l.next()
-	if unicode.IsDigit(c) {
-		lval.val = string(c)
-		lval.typ = T_DIGIT
-		return T_DIGIT
-	} else if unicode.IsLower(c) {
-		lval.val = string(c)
-		lval.typ = T_LETTER
-		return T_LETTER
+	var item *CoffeeSymType
+	item = <-l.items
+	if item != nil {
+		*lval = *item
 	}
-	return int(c)
+	return int(item.typ)
 }
 
 func (l *CoffeeLex) Error(s string) {

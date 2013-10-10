@@ -3,6 +3,7 @@
 package main
 
 import _ "fmt"
+import "strconv"
 
 var regs = make([]int, 26)
 var base int
@@ -13,7 +14,7 @@ var base int
 // as ${PREFIX}SymType, of which a reference is passed to the lexer.
 %union{
     typ TokenType
-	val string
+    val interface{}
     line int
     pos  int
 }
@@ -95,15 +96,15 @@ var base int
 
 %%
 
-start : top_statement_list	{ }
+start : top_statement_list  { }
 
 top_statement_list:
-		top_statement_list  { } top_statement { }
-	|	/* empty */
+        top_statement_list  { } top_statement { }
+    |   /* empty */
 ;
 
 top_statement:
-    statement	{ }
+    statement   { }
 ;
 
 statement:
@@ -112,7 +113,7 @@ statement:
 ;
 
 unticked_statement:
-	expr ';'				{ }
+    expr ';'                { }
 ;
 
 assign_statement:
@@ -128,46 +129,46 @@ function:
 
 function_body: top_statement_list;
 
-expr	:    '(' expr ')'
-		{ $$  =  $2 }
-	|    expr '+' expr
-		{ 
+expr    :    '(' expr ')'
+        { $$  =  $2 }
+    |    expr '+' expr
+        { 
             // $$  =  $1 + $3 
         }
-	|    expr '-' expr
-		{ 
+    |    expr '-' expr
+        { 
             // $$  =  $1 - $3 
         }
-	|    expr '*' expr
-		{ 
+    |    expr '*' expr
+        { 
             // $$  =  $1 * $3 
         }
-	|    expr '/' expr
-		{ 
+    |    expr '/' expr
+        { 
             // $$  =  $1 / $3 
         }
-	|    expr '%' expr
-		{ 
+    |    expr '%' expr
+        { 
             // $$  =  $1 % $3 
         }
-	|    expr '&' expr
-		{ 
+    |    expr '&' expr
+        { 
             // $$  =  $1 & $3 
         }
-	|    expr '|' expr
-		{ 
+    |    expr '|' expr
+        { 
             // $$  =  $1 | $3 
         }
-	|    '-'  expr        %prec  UMINUS
-		{ 
+    |    '-'  expr        %prec  UMINUS
+        { 
             // $$  = -$2  
         }
-	|    T_LETTER
-		{ 
+    |    T_LETTER
+        { 
             // $$  = regs[$1] 
         }
-	|    number
-	;
+    |    number
+    ;
 
 
 identity: T_LETTER
@@ -177,25 +178,23 @@ identity: T_LETTER
 
 
 // here we define the base to calculate the real number from the digit token.
-number	: T_DIGIT
-		{
-			$$ = $1;
-            /*
-			if $1==0 {
-				base = 8
-			} else {
-				base = 10
-			}
-            */
-		}
-	|   number T_DIGIT
-		{ 
-            // $$ = base * $1 + $2 
+number  : T_NUMBER {
+        var err error
+        /*
+        if $1 == '0' {
+            base = 8
+        } else {
+            base = 10
         }
-	;
+        */
+        $$, err = strconv.ParseInt($1.(string), base, 64)
+        if err != nil {
+            panic(err)
+        }
+    };
 
 function_call_parameter_list:
-    '(' ')'	{ }
+    '(' ')' { }
 ;
 
 function_call:
