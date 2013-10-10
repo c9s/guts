@@ -1,1 +1,3 @@
+#!/bin/bash
 export GOPATH=$(pwd):$GOPATH
+echo "Using GOPATH: $GOPATH"

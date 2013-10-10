@@ -1,6 +1,5 @@
-
 all: parser
-	go build -x
+	source goenv && go build -x
 
 parser:
 	for y in *.y ; \
