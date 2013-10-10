@@ -34,6 +34,12 @@ Simply run make to produce the parser:
     make
 
 
+Current State
+-------------
+Not ready for production. we're still in alpha stage. but we'd like to recevie
+comments, patches and feature requests.
+
+
 
 Lexer
 ------
