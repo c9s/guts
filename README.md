@@ -68,8 +68,12 @@ class Person {
 Implementation
 ---------------
 CoffeePHP uses Go yacc parser generator to produce a LALR(1) parser. 
-The Lexer uses concurrency strategy to parse tokens, so that the parser
-can receive the tokens from lexer through the channel.
+
+To add new syntax, please checkout the grammar.y file, which is located in
+`src/coffeephp/grammer.y`
+
+The lexer uses concurrency strategy to parse tokens, so the parser
+can receive the tokens from lexer through the channel concurrently.
 
 CodeGen is expected to be a separated tree structure traverser, then code
 generation which is not implemented inside the node structure like the
