@@ -1,14 +1,14 @@
 all: parser
-	source goenv && go build -x
+	go build coffeephp
 
 parser:
-	for y in *.y ; \
+	for y in src/coffeephp/*.y ; \
 	do \
 		go tool yacc -o $${y%.y}.go -p Coffee $$y ; \
 	done
 
 install:
-	cp -v coffeephp /usr/bin/cphp
+	cp -v bin/coffeephp /usr/bin/cphp
 
 test:
-	go test -v
+	go test coffeephp -v
