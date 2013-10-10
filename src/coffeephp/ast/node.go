@@ -9,6 +9,10 @@ type NumberNode struct {
 	Val int64
 }
 
+type FloatingNumberNode struct {
+	Val float64
+}
+
 type ExprNode struct {
 }
 
@@ -26,6 +30,17 @@ type ElseNode struct {
 
 func CreateExprNode() {
 
+}
+
+func CreateFloatingNumberNode(token string) Node {
+	var err error
+	val, err := strconv.ParseFloat(token, 64)
+	if err != nil {
+		panic(err)
+	}
+	n := FloatingNumberNode{}
+	n.Val = val
+	return n
 }
 
 func CreateNumberNode(token string) Node {
