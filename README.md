@@ -27,6 +27,16 @@ could improve the overhead of mode checking for your production site.
 For more details, please check the `docs` for the language synopsis.
 
 
+CoffeePHP aims to be
+---------------------
+
+* simple to learn.
+* simple to use.
+* fast compilation.
+* shorter code.
+* phpdoc friendly.
+
+
 Build
 ---------
 Simply run make to produce the parser:
