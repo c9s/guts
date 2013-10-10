@@ -152,6 +152,10 @@ func lexStart(l *CoffeeLex) stateFn {
 		return lexStart
 	} else if l.emitIfMatch("class ", T_CLASS) {
 		return lexStart
+	} else if l.emitIfMatch("for ", T_FOR) {
+		return lexStart
+	} else if l.emitIfMatch("foreach ", T_FOREACH) {
+		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {
