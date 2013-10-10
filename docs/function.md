@@ -68,3 +68,7 @@ You can define type constraint to the function declaration:
 
 This makes your function consistent, but we can't do type constraint for runtime.
 
+
+Reference
+---------
+<http://en.wikibooks.org/wiki/Perl_6_Programming/Subroutines>
