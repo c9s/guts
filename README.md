@@ -51,6 +51,7 @@ Lexer
  x  | `T_ELSEIF         ` |
  x  | `T_CLASS          ` |
  x  | `T_FOR            ` |
- x  | `T_FOREACH        ` |
+ x  | `T_FOREACH        ` | 
+ x  | `T_STRING         ` |  "String", and 'string'
 
 
