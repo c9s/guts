@@ -1,4 +1,4 @@
-package coffeephp
+package ast
 
 type Node struct {
 }

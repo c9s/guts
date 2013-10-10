@@ -1,9 +1,8 @@
 
 //line src/coffeephp/grammer.y:2
-
-package main
+package coffeephp
 import __yyfmt__ "fmt"
-//line src/coffeephp/grammer.y:3
+//line src/coffeephp/grammer.y:2
 		
 import _ "fmt"
 import "strconv"
@@ -12,7 +11,7 @@ var regs = make([]int, 26)
 var base int
 
 
-//line src/coffeephp/grammer.y:15
+//line src/coffeephp/grammer.y:14
 type CoffeeSymType struct{
 	yys int
     typ TokenType
@@ -132,7 +131,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line src/coffeephp/grammer.y:203
+//line src/coffeephp/grammer.y:202
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -465,84 +464,84 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 1:
-		//line src/coffeephp/grammer.y:99
+		//line src/coffeephp/grammer.y:98
 		{ }
 	case 2:
-		//line src/coffeephp/grammer.y:102
+		//line src/coffeephp/grammer.y:101
 		{ }
 	case 3:
-		//line src/coffeephp/grammer.y:102
+		//line src/coffeephp/grammer.y:101
 		{ }
 	case 5:
-		//line src/coffeephp/grammer.y:107
+		//line src/coffeephp/grammer.y:106
 		{ }
 	case 6:
-		//line src/coffeephp/grammer.y:111
+		//line src/coffeephp/grammer.y:110
 		{ }
 	case 7:
-		//line src/coffeephp/grammer.y:112
+		//line src/coffeephp/grammer.y:111
 		{ }
 	case 8:
-		//line src/coffeephp/grammer.y:116
+		//line src/coffeephp/grammer.y:115
 		{ }
 	case 9:
-		//line src/coffeephp/grammer.y:120
+		//line src/coffeephp/grammer.y:119
 		{  }
 	case 10:
-		//line src/coffeephp/grammer.y:121
+		//line src/coffeephp/grammer.y:120
 		{  }
 	case 14:
-		//line src/coffeephp/grammer.y:133
+		//line src/coffeephp/grammer.y:132
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
 	case 15:
-		//line src/coffeephp/grammer.y:135
+		//line src/coffeephp/grammer.y:134
 		{ 
 	            // $$  =  $1 + $3 
         }
 	case 16:
-		//line src/coffeephp/grammer.y:139
+		//line src/coffeephp/grammer.y:138
 		{ 
 	            // $$  =  $1 - $3 
         }
 	case 17:
-		//line src/coffeephp/grammer.y:143
+		//line src/coffeephp/grammer.y:142
 		{ 
 	            // $$  =  $1 * $3 
         }
 	case 18:
-		//line src/coffeephp/grammer.y:147
+		//line src/coffeephp/grammer.y:146
 		{ 
 	            // $$  =  $1 / $3 
         }
 	case 19:
-		//line src/coffeephp/grammer.y:151
+		//line src/coffeephp/grammer.y:150
 		{ 
 	            // $$  =  $1 % $3 
         }
 	case 20:
-		//line src/coffeephp/grammer.y:155
+		//line src/coffeephp/grammer.y:154
 		{ 
 	            // $$  =  $1 & $3 
         }
 	case 21:
-		//line src/coffeephp/grammer.y:159
+		//line src/coffeephp/grammer.y:158
 		{ 
 	            // $$  =  $1 | $3 
         }
 	case 22:
-		//line src/coffeephp/grammer.y:163
+		//line src/coffeephp/grammer.y:162
 		{ 
 	            // $$  = -$2  
         }
 	case 23:
-		//line src/coffeephp/grammer.y:167
+		//line src/coffeephp/grammer.y:166
 		{ 
 	            // $$  = regs[$1] 
         }
 	case 24:
 		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 27:
-		//line src/coffeephp/grammer.y:181
+		//line src/coffeephp/grammer.y:180
 		{
 	        var err error
 	        /*
@@ -558,10 +557,10 @@ Coffeedefault:
 	        }
 	    }
 	case 28:
-		//line src/coffeephp/grammer.y:196
+		//line src/coffeephp/grammer.y:195
 		{ }
 	case 29:
-		//line src/coffeephp/grammer.y:200
+		//line src/coffeephp/grammer.y:199
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */
