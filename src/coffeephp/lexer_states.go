@@ -67,7 +67,7 @@ func lexStart(l *CoffeeLex) stateFn {
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {
-		l.emit(T_EOF)
+		// l.emit(T_EOF)
 		return nil
 	} else {
 		panic("unknown token.")
@@ -170,7 +170,8 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 		}
 	}
 	l.backup()
-	l.emit(T_SPACE)
+	l.ignore()
+	// l.emit(T_SPACE)
 	return lexStart
 }
 

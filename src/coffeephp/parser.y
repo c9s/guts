@@ -3,7 +3,7 @@ package coffeephp
 
 // vim:et:sw=4:ai:si:ts=4:sts=4:
 
-import _ "fmt"
+import "fmt"
 import "coffeephp/ast"
 
 var regs = make([]int, 26)
@@ -22,13 +22,14 @@ var base int
 
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
-%type <val> expr number statement
+%type <val> expr statement
 %type <val> unticked_statement
 
 // same for terminals
-%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF T_FLOATING T_NUMBER T_STRING
+%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
 
 %token T_ONELINE_COMMENT T_COMMENT
+%token T_EOF
 
 %token T_NEWLINE
 %token T_ASSIGN
@@ -98,32 +99,45 @@ var base int
 
 %%
 
-start : top_statement_list  { }
+start : top_statement_list  {
+        fmt.Println("top_statement_list")
+      }
 ;
 
 top_statement_list:
-        top_statement_list { } 
-        top_statement { }
+        top_statement_list {
+            fmt.Println("top_statement_list -> top_statement_list")
+        } 
+        top_statement {
+            fmt.Println("top_statement_list -> top_statement")
+        }
     |   /* empty */
 ;
 
 top_statement:
-    statement   { }
+    statement {
+        fmt.Println("statement")
+    }
 ;
 
 statement:
-     unticked_statement { }
-   | assignment_statement { }
+      unticked_statement {
+        fmt.Println("unticked_statement")
+      }
+    | assignment_statement {
+        fmt.Println("assignment_statement")
+      }
 ;
 
-unticked_statement: expr ';' {
+unticked_statement: expr {
     $$ = ast.CreateExprStatementNode($1)
 }
 ;
 
 assignment_statement:
-      T_IDENTIFIER '=' expr ';' {  }
-    | T_IDENTIFIER '=' function_call ';' {  }
+    T_IDENTIFIER T_ASSIGN expr { 
+        fmt.Println("assignment_statement")
+    }
 ;
 
 function_parameter_list: '(' ')' ;
@@ -134,8 +148,10 @@ function:
 
 function_body: top_statement_list;
 
-expr    :    
-    '(' expr ')' { $$  =  $2 }
+expr    :
+      '(' expr ')' {
+            fmt.Println("wrap expr")
+        }
     | expr '+' expr
         { 
             $$ = ast.CreateExprNode('+', $1, $3)
@@ -172,14 +188,13 @@ expr    :
         { 
             // $$  = regs[$1] 
         }
-    | number
-    ;
-
-
-// here we define the base to calculate the real number from the digit token.
-number  : T_NUMBER {
+    | T_NUMBER {
         $$ = ast.CreateNumberNode($1.(string))
-    };
+    }
+    | T_FLOATING {
+        $$ = ast.CreateFloatingNumberNode($1.(string))
+    }
+    ;
 
 function_call_parameter_list:
     '(' ')' { }

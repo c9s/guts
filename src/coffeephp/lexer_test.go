@@ -15,6 +15,9 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 	var item *CoffeeSymType
 	for {
 		item = <-lexer.items
+		if item == nil {
+			break
+		}
 		t.Log(item)
 		if item.typ == typ {
 			found++

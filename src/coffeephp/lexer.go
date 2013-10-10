@@ -126,7 +126,7 @@ func (l *CoffeeLex) run() {
 			break
 		}
 	}
-	l.emit(T_EOF)
+	l.items <- nil
 }
 
 func (l *CoffeeLex) close() {
@@ -178,8 +178,11 @@ func (l *CoffeeLex) match(str string) bool {
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var item *CoffeeSymType
 	item = <-l.items
-	*lval = *item
-	return int(item.typ)
+	if item != nil {
+		*lval = *item
+		return int(item.typ)
+	}
+	return 0
 }
 
 func (l *CoffeeLex) Error(s string) {

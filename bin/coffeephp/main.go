@@ -4,6 +4,7 @@ import "coffeephp"
 import _ "flag"
 
 func main() {
+	// XXX: Provide ParseFile function from coffeephp package.
 	lexer := coffeephp.CoffeeLex{
 		// XXX: take the input from file.
 		input: "",
