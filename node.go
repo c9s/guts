@@ -22,3 +22,7 @@ type ElseIfNode struct {
 type ElseNode struct {
 	Node
 }
+
+func createExprNode() {
+
+}
