@@ -52,24 +52,24 @@ var base int
 %token T_FOREACH
 %token T_TRY
 %token T_CATCH
-%token T_CLASS "class (T_CLASS)"
-%token T_IS   "is (T_IS)"
-%token T_DOES "does (T_DOES)"
-%token T_FUNCTION_PROTOTYPE ":: (T_FUNCTION_PROTOTYPE)"
+%token T_CLASS
+%token T_IS
+%token T_DOES
+%token T_FUNCTION_PROTOTYPE
 
 %token T_BRACKET_OPEN T_BRACKET_CLOSE
 
 %token T_STRING
 
-%token T_CONST      "const (T_CONST)"
-%token T_RETURN     "return (T_RETURN)"
+%token T_CONST
+%token T_RETURN
 
-%token T_BREAK      "break (T_BREAK)"
-%token T_CONTINUE   "continue (T_CONTINUE)"
+%token T_BREAK
+%token T_CONTINUE
 
-%token T_THROW      "throw (T_THROW)"
-// %token T_NS_SEPARATOR    "\\ (T_NS_SEPARATOR)"
-%token T_NAMESPACE       "namespace (T_NAMESPACE)"
+%token T_THROW
+%token T_NS_SEPARATOR
+%token T_NAMESPACE
 
 
 // obj.method
