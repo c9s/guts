@@ -118,14 +118,14 @@ unticked_statement:
 ;
 
 assign_statement:
-      identity '=' expr ';' {  }
-    | identity '=' function_call ';' {  }
+      T_IDENTIFIER '=' expr ';' {  }
+    | T_IDENTIFIER '=' function_call ';' {  }
 ;
 
 function_parameter_list: '(' ')' ;
 
 function:
-      identity T_FUNCTION_PROTOTYPE function_parameter_list '->' function_body
+      T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list '->' function_body
 ;
 
 function_body: top_statement_list;
@@ -172,10 +172,6 @@ expr    :    '(' expr ')'
     ;
 
 
-identity: T_LETTER
-        | T_LETTER T_DIGIT
-        ;
-
 
 
 // here we define the base to calculate the real number from the digit token.
@@ -188,7 +184,7 @@ function_call_parameter_list:
 ;
 
 function_call:
-    identity function_call_parameter_list { }
+    T_IDENTIFIER function_call_parameter_list { }
 ;
 
 %%      /*  start  of  programs  */
