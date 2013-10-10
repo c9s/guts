@@ -12,8 +12,11 @@ install:
 build:
 	go build coffeephp
 
+executable:
+	go build bin/coffeephp/main.go
+
 test:
 	go test coffeephp -v
 
 clean:
-	rm -rfv bin/coffeephp pkg/darwin_amd64/
+	rm -rfv pkg/darwin_amd64/
