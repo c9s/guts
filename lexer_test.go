@@ -49,12 +49,18 @@ func TestLexerComment(t *testing.T) {
 	expectLexInput(t, input, T_COMMENT, 1)
 }
 
+func TestLexerAssignFloating(t *testing.T) {
+	input := `
+	b = 3.1415926
+	bar = 478.123
+	`
+	expectLexInput(t, input, T_FLOATING, 2)
+}
+
 func TestLexerAssign(t *testing.T) {
 	input := `
 	a = 102
-	b = 3.1415926
 	foo = 200
-	bar = 478.123
 	`
-	expectLexInput(t, input, T_IDENTIFIER, 4)
+	expectLexInput(t, input, T_IDENTIFIER, 2)
 }
