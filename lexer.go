@@ -12,6 +12,7 @@ type stateFn func(*CoffeeLex) stateFn
 type CoffeeLex struct {
 	// the line
 	input string
+	line  int
 	start int
 	pos   int
 	state stateFn
@@ -40,8 +41,10 @@ func (self *CoffeeSymType) String() string {
 
 func (l *CoffeeLex) emit(t TokenType) {
 	l.items <- &CoffeeSymType{
-		typ: t,
-		val: l.input[l.start:l.pos],
+		typ:  t,
+		val:  l.input[l.start:l.pos],
+		pos:  l.start,
+		line: l.line,
 	}
 	l.start = l.pos
 }
@@ -129,6 +132,7 @@ func lexStart(l *CoffeeLex) stateFn {
 		// return lexSpaces
 		return lexIgnoreSpaces
 	} else if c == '\n' || c == '\r' {
+		l.line++
 		l.next()
 		l.emit(T_NEWLINE)
 		l.lastSpace = l.space
