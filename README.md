@@ -53,5 +53,6 @@ Lexer
  x  | `T_FOR            ` |
  x  | `T_FOREACH        ` | 
  x  | `T_STRING         ` |  "String", and 'string'
+ x  | `T_ECHO           ` |  echo "output"
 
 
