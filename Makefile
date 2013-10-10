@@ -12,3 +12,6 @@ install:
 
 test:
 	go test coffeephp -v
+
+clean:
+	rm -rfv bin/coffeephp pkg/darwin_amd64/
