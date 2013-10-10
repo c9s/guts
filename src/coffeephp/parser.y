@@ -31,7 +31,10 @@ var base int
 %token T_ONELINE_COMMENT T_COMMENT
 %token T_EOF
 
+%token T_PLUS
+
 %token T_NEWLINE
+
 %token T_ASSIGN
 
 %token T_NEW
@@ -115,8 +118,11 @@ top_statement_list:
 ;
 
 top_statement:
-    statement {
+      statement {
         fmt.Println("statement")
+    }
+    | statement T_NEWLINE {
+        fmt.Println("statement T_NEWLINE")
     }
 ;
 
