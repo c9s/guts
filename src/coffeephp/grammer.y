@@ -22,7 +22,8 @@ var base int
 
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
-%type <val> expr number
+%type <val> expr number statement
+%type <val> statement unticked_statement
 
 // same for terminals
 %token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF T_FLOATING T_NUMBER T_STRING
@@ -110,14 +111,15 @@ top_statement:
 
 statement:
      unticked_statement { }
-   | assign_statement { }
+   | assignment_statement { }
 ;
 
-unticked_statement:
-    expr ';'                { }
+unticked_statement: expr ';' {
+    $$ = ast.CreateExprStatementNode($1)
+}
 ;
 
-assign_statement:
+assignment_statement:
       T_IDENTIFIER '=' expr ';' {  }
     | T_IDENTIFIER '=' function_call ';' {  }
 ;
@@ -130,48 +132,46 @@ function:
 
 function_body: top_statement_list;
 
-expr    :    '(' expr ')'
-        { $$  =  $2 }
-    |    expr '+' expr
+expr    :    
+    '(' expr ')' { $$  =  $2 }
+    | expr '+' expr
         { 
             $$ = ast.CreateExprNode('+', $1, $3)
         }
-    |    expr '-' expr
+    | expr '-' expr
         { 
             $$ = ast.CreateExprNode('-', $1, $3)
         }
-    |    expr '*' expr
+    | expr '*' expr
         { 
             $$ = ast.CreateExprNode('*', $1, $3)
         }
-    |    expr '/' expr
+    | expr '/' expr
         { 
             $$ = ast.CreateExprNode('/', $1, $3)
         }
-    |    expr '%' expr
+    | expr '%' expr
         { 
             $$ = ast.CreateExprNode('%', $1, $3)
         }
-    |    expr '&' expr
+    | expr '&' expr
         { 
             $$ = ast.CreateExprNode('&', $1, $3)
         }
-    |    expr '|' expr
+    | expr '|' expr
         { 
             $$ = ast.CreateExprNode('|', $1, $3)
         }
-    |   '-' expr  %prec UMINUS
+    | '-' expr  %prec UMINUS
         { 
             // $$  = -$2  
         }
-    |    T_LETTER
+    | T_IDENTIFIER
         { 
             // $$  = regs[$1] 
         }
-    |    number
+    | number
     ;
-
-
 
 
 // here we define the base to calculate the real number from the digit token.

@@ -146,37 +146,35 @@ const CoffeePrivate = 57344
 var CoffeeTokenNames []string
 var CoffeeStates []string
 
-const CoffeeLast = 98
+const CoffeeLast = 78
 
 var CoffeeAct = []int{
 
-	22, 41, 21, 16, 17, 18, 19, 20, 12, 40,
-	35, 23, 39, 14, 22, 36, 21, 16, 17, 18,
-	19, 20, 38, 34, 7, 22, 37, 21, 16, 17,
-	18, 19, 20, 12, 12, 9, 6, 15, 14, 14,
-	21, 16, 17, 18, 19, 20, 16, 17, 18, 19,
-	20, 5, 4, 11, 3, 18, 19, 20, 2, 1,
-	13, 0, 0, 10, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 8, 0, 0, 0, 0, 11, 11,
-	0, 0, 0, 0, 24, 25, 0, 0, 10, 10,
+	21, 41, 20, 15, 16, 17, 18, 19, 35, 24,
+	9, 13, 13, 13, 21, 36, 20, 15, 16, 17,
+	18, 19, 40, 22, 38, 21, 37, 20, 15, 16,
+	17, 18, 19, 17, 18, 19, 39, 14, 20, 15,
+	16, 17, 18, 19, 15, 16, 17, 18, 19, 34,
+	7, 11, 11, 11, 8, 4, 3, 2, 1, 6,
+	5, 10, 10, 10, 12, 23, 25, 0, 0, 0,
 	26, 27, 28, 29, 30, 31, 32, 33,
 }
 var CoffeePact = []int{
 
-	-1000, -1000, -1000, 28, -1000, -1000, -1000, -1000, -21, -48,
-	29, 29, -1000, -1000, -1000, -1000, 29, 29, 29, 29,
-	29, 29, 29, 3, -46, -1000, 4, 4, -1000, -1000,
-	-1000, -3, -8, -32, -36, -51, -1000, -1000, -1000, -1000,
+	-1000, -1000, -1000, 3, -1000, -1000, -1000, -1000, -21, -36,
+	2, 2, -1000, -1000, -1000, 2, 2, 2, 2, 2,
+	2, 2, 1, -46, -1000, -1000, -18, -18, -1000, -1000,
+	-1000, -5, -10, -32, -34, -38, -1000, -1000, -1000, -1000,
 	-60, -1000,
 }
 var CoffeePgo = []int{
 
-	0, 73, 60, 59, 58, 54, 52, 51, 36, 24,
-	23, 23, 23, 23, 12,
+	0, 54, 64, 60, 59, 58, 57, 56, 55, 50,
+	49, 49, 49, 49, 36,
 }
 var CoffeeR1 = []int{
 
-	0, 3, 5, 4, 4, 6, 7, 7, 8, 9,
+	0, 5, 7, 6, 6, 8, 3, 3, 4, 9,
 	9, 11, 12, 13, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 2, 14, 10,
 }
@@ -188,18 +186,18 @@ var CoffeeR2 = []int{
 }
 var CoffeeChk = []int{
 
-	-1000, -3, -4, -5, -6, -7, -8, -9, -1, 7,
-	60, 50, 5, -2, 10, 58, 49, 50, 51, 52,
-	53, 48, 46, 59, -1, -1, -1, -1, -1, -1,
+	-1000, -5, -6, -7, -8, -3, -4, -9, -1, 7,
+	60, 50, -2, 10, 58, 49, 50, 51, 52, 53,
+	48, 46, 59, -1, 7, -1, -1, -1, -1, -1,
 	-1, -1, -1, -1, -10, 7, 61, 58, 58, -14,
 	60, 61,
 }
 var CoffeeDef = []int{
 
-	4, -2, -2, 0, 3, 5, 6, 7, 0, 0,
-	0, 0, 23, 24, 25, 8, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 22, 15, 16, 17, 18,
-	19, 20, 21, 0, 0, 0, 14, 9, 10, 27,
+	4, -2, -2, 0, 3, 5, 6, 7, 0, 23,
+	0, 0, 24, 25, 8, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 23, 22, 15, 16, 17, 18,
+	19, 20, 21, 0, 0, 23, 14, 9, 10, 27,
 	0, 26,
 }
 var CoffeeTok1 = []int{
@@ -456,77 +454,79 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 1:
-		//line src/coffeephp/grammer.y:100
+		//line src/coffeephp/grammer.y:101
 		{ }
 	case 2:
-		//line src/coffeephp/grammer.y:103
+		//line src/coffeephp/grammer.y:104
 		{ }
 	case 3:
-		//line src/coffeephp/grammer.y:103
+		//line src/coffeephp/grammer.y:104
 		{ }
 	case 5:
-		//line src/coffeephp/grammer.y:108
+		//line src/coffeephp/grammer.y:109
 		{ }
 	case 6:
-		//line src/coffeephp/grammer.y:112
+		//line src/coffeephp/grammer.y:113
 		{ }
 	case 7:
-		//line src/coffeephp/grammer.y:113
+		//line src/coffeephp/grammer.y:114
 		{ }
 	case 8:
 		//line src/coffeephp/grammer.y:117
-		{ }
+		{
+	    CoffeeVAL.val = ast.CreateExprStatementNode(CoffeeS[Coffeept-1].val)
+	}
 	case 9:
-		//line src/coffeephp/grammer.y:121
+		//line src/coffeephp/grammer.y:123
 		{  }
 	case 10:
-		//line src/coffeephp/grammer.y:122
+		//line src/coffeephp/grammer.y:124
 		{  }
 	case 14:
-		//line src/coffeephp/grammer.y:134
+		//line src/coffeephp/grammer.y:136
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
 	case 15:
-		//line src/coffeephp/grammer.y:136
+		//line src/coffeephp/grammer.y:138
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 16:
-		//line src/coffeephp/grammer.y:140
+		//line src/coffeephp/grammer.y:142
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 17:
-		//line src/coffeephp/grammer.y:144
+		//line src/coffeephp/grammer.y:146
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 18:
-		//line src/coffeephp/grammer.y:148
+		//line src/coffeephp/grammer.y:150
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 19:
-		//line src/coffeephp/grammer.y:152
+		//line src/coffeephp/grammer.y:154
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 20:
-		//line src/coffeephp/grammer.y:156
+		//line src/coffeephp/grammer.y:158
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 21:
-		//line src/coffeephp/grammer.y:160
+		//line src/coffeephp/grammer.y:162
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 22:
-		//line src/coffeephp/grammer.y:164
+		//line src/coffeephp/grammer.y:166
 		{ 
 	            // $$  = -$2  
         }
 	case 23:
-		//line src/coffeephp/grammer.y:168
+		//line src/coffeephp/grammer.y:170
 		{ 
 	            // $$  = regs[$1] 
         }
