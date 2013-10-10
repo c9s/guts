@@ -1,6 +1,8 @@
 %{
 package coffeephp
 
+// vim:et:sw=4:ai:si:ts=4:sts=4:
+
 import _ "fmt"
 import "coffeephp/ast"
 
@@ -178,13 +180,6 @@ identity: T_LETTER
 
 // here we define the base to calculate the real number from the digit token.
 number  : T_NUMBER {
-        /*
-        if $1 == '0' {
-            base = 8
-        } else {
-            base = 10
-        }
-        */
 		$$ = ast.CreateNumberNode($1.(string))
     };
 
