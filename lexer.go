@@ -175,9 +175,7 @@ func (l *CoffeeLex) match(str string) bool {
 func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	var item *CoffeeSymType
 	item = <-l.items
-	if item != nil {
-		*lval = *item
-	}
+	*lval = *item
 	return int(item.typ)
 }
 
