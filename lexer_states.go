@@ -32,6 +32,14 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(T_ASSIGN)
 		return lexStart
+	} else if c == '[' {
+		l.next()
+		l.emit(T_BRACKET_OPEN)
+		return lexStart
+	} else if c == ']' {
+		l.next()
+		l.emit(T_BRACKET_CLOSE)
+		return lexStart
 	} else if c == '"' || c == '\'' {
 		return lexString
 	} else if l.consumeIfMatch("//") {

@@ -55,6 +55,8 @@ var base int
 %token T_DOES "does (T_DOES)"
 %token T_FUNCTION_PROTOTYPE ":: (T_FUNCTION_PROTOTYPE)"
 
+%token T_BRACKET_OPEN T_BRACKET_CLOSE
+
 %token T_STRING
 
 %token T_CONST      "const (T_CONST)"
