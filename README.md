@@ -36,13 +36,6 @@ Simply run make to produce the parser:
     source goenv
     make
 
-
-Current State
--------------
-Not ready for production. we're still in alpha stage. but we'd like to recevie
-comments, patches and feature requests.
-
-
 Synopsis
 ---------
 For more language details, please check the `docs` for the language synopsis.
@@ -64,6 +57,11 @@ class Person {
 }
 ```
 
+File Extension
+--------------------
+The file extension is named with "*.cphp", the compiler compiles your .cphp
+files into .php file.
+
 
 Implementation
 ---------------
@@ -84,6 +82,12 @@ bit-code generator or JavaScript generator.
 Basic optimization is on the roadmap. Optimizer uses tree-pattern matching
 strategy to traverse the IR structure. 2 basic optimizations are in the plan --
 constant folding and dead code elimination.
+
+
+Current State
+-------------
+Not ready for production. we're still in alpha stage. but we'd like to recevie
+comments, patches and feature requests.
 
 
 Lexer
