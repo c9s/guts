@@ -1,6 +1,5 @@
 %{
-
-package main
+package coffeephp
 
 import _ "fmt"
 import "strconv"
