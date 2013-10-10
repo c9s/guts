@@ -50,6 +50,10 @@ func lexStart(l *CoffeeLex) stateFn {
 		return lexStart
 	} else if l.emitIfMatch("echo ", T_ECHO) {
 		return lexStart
+	} else if l.emitIfMatch("does ", T_DOES) {
+		return lexStart
+	} else if l.emitIfMatch("is ", T_IS) {
+		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {

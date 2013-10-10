@@ -54,5 +54,6 @@ Lexer
  x  | `T_FOREACH        ` | 
  x  | `T_STRING         ` |  "String", and 'string'
  x  | `T_ECHO           ` |  echo "output"
+ x  | `T_DOES           ` |  class Gate does DoorInterface
 
 

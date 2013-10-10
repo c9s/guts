@@ -27,27 +27,27 @@ const T_IDENTIFIER = 57349
 const T_EOF = 57350
 const T_FLOATING = 57351
 const T_NUMBER = 57352
-const T_ONELINE_COMMENT = 57353
-const T_COMMENT = 57354
-const T_NEWLINE = 57355
-const T_ASSIGN = 57356
-const T_NEW = 57357
-const T_CLONE = 57358
-const T_IF = 57359
-const T_ELSEIF = 57360
-const T_ELSE = 57361
-const T_FOR = 57362
-const T_SAY = 57363
-const T_SPACE = 57364
-const T_ECHO = 57365
-const T_FOREACH = 57366
-const T_TRY = 57367
-const T_CATCH = 57368
-const T_CLASS = 57369
-const T_IS = 57370
-const T_DOES = 57371
-const T_FUNCTION_PROTOTYPE = 57372
-const T_STRING = 57373
+const T_STRING = 57353
+const T_ONELINE_COMMENT = 57354
+const T_COMMENT = 57355
+const T_NEWLINE = 57356
+const T_ASSIGN = 57357
+const T_NEW = 57358
+const T_CLONE = 57359
+const T_IF = 57360
+const T_ELSEIF = 57361
+const T_ELSE = 57362
+const T_FOR = 57363
+const T_SAY = 57364
+const T_SPACE = 57365
+const T_ECHO = 57366
+const T_FOREACH = 57367
+const T_TRY = 57368
+const T_CATCH = 57369
+const T_CLASS = 57370
+const T_IS = 57371
+const T_DOES = 57372
+const T_FUNCTION_PROTOTYPE = 57373
 const T_CONST = 57374
 const T_RETURN = 57375
 const T_BREAK = 57376
@@ -67,6 +67,7 @@ var CoffeeToknames = []string{
 	"T_EOF",
 	"T_FLOATING",
 	"T_NUMBER",
+	"T_STRING",
 	"T_ONELINE_COMMENT",
 	"T_COMMENT",
 	"T_NEWLINE",
@@ -91,7 +92,6 @@ var CoffeeToknames = []string{
 	" does (T_DOES)",
 	"T_FUNCTION_PROTOTYPE",
 	" :: (T_FUNCTION_PROTOTYPE)",
-	"T_STRING",
 	"T_CONST",
 	" const (T_CONST)",
 	"T_RETURN",
@@ -214,12 +214,12 @@ var CoffeeTok1 = []int{
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 60, 3, 3, 3, 59, 54, 3,
 	66, 67, 57, 55, 3, 68, 49, 58, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 3, 34, 64,
+	3, 3, 3, 3, 3, 3, 3, 3, 35, 64,
 	3, 65, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 53, 3, 3, 50, 41, 43,
-	32, 3, 3, 3, 3, 30, 3, 3, 3, 3,
+	33, 3, 3, 3, 3, 31, 3, 3, 3, 3,
 	47, 51, 3, 3, 39, 3, 45, 3, 3, 3,
 	3, 3, 3, 3, 52,
 }
@@ -227,7 +227,7 @@ var CoffeeTok2 = []int{
 
 	2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 	12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-	22, 23, 24, 25, 26, 27, 29, 31, 33, 35,
+	22, 23, 24, 25, 26, 27, 28, 30, 32, 34,
 	36, 38, 40, 42, 44, 46, 48, 61, 62, 63,
 }
 var CoffeeTok3 = []int{
