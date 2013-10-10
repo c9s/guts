@@ -1,5 +1,5 @@
 package main
 
 /*
-symble table structure
+symbol table structure
 */
