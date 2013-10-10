@@ -180,7 +180,7 @@ identity: T_LETTER
 
 // here we define the base to calculate the real number from the digit token.
 number  : T_NUMBER {
-		$$ = ast.CreateNumberNode($1.(string))
+        $$ = ast.CreateNumberNode($1.(string))
     };
 
 function_call_parameter_list:
