@@ -10,3 +10,7 @@ func CreateStatementNode() Node {
 func CreateExprStatementNode(node Node) Node {
 	return StatementNode{}
 }
+
+func CreateStatementNodeList() []StatementNode {
+	return []StatementNode{}
+}

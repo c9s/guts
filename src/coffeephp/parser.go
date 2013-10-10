@@ -1,8 +1,8 @@
 
-//line src/coffeephp/grammer.y:2
+//line src/coffeephp/parser.y:2
 package coffeephp
 import __yyfmt__ "fmt"
-//line src/coffeephp/grammer.y:2
+//line src/coffeephp/parser.y:2
 		
 // vim:et:sw=4:ai:si:ts=4:sts=4:
 
@@ -13,7 +13,7 @@ var regs = make([]int, 26)
 var base int
 
 
-//line src/coffeephp/grammer.y:16
+//line src/coffeephp/parser.y:16
 type CoffeeSymType struct{
 	yys int
     typ TokenType
@@ -127,7 +127,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line src/coffeephp/grammer.y:190
+//line src/coffeephp/parser.y:192
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -454,94 +454,94 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 1:
-		//line src/coffeephp/grammer.y:101
+		//line src/coffeephp/parser.y:101
 		{ }
 	case 2:
-		//line src/coffeephp/grammer.y:104
+		//line src/coffeephp/parser.y:105
 		{ }
 	case 3:
-		//line src/coffeephp/grammer.y:104
+		//line src/coffeephp/parser.y:106
 		{ }
 	case 5:
-		//line src/coffeephp/grammer.y:109
+		//line src/coffeephp/parser.y:111
 		{ }
 	case 6:
-		//line src/coffeephp/grammer.y:113
+		//line src/coffeephp/parser.y:115
 		{ }
 	case 7:
-		//line src/coffeephp/grammer.y:114
+		//line src/coffeephp/parser.y:116
 		{ }
 	case 8:
-		//line src/coffeephp/grammer.y:117
+		//line src/coffeephp/parser.y:119
 		{
 	    CoffeeVAL.val = ast.CreateExprStatementNode(CoffeeS[Coffeept-1].val)
 	}
 	case 9:
-		//line src/coffeephp/grammer.y:123
+		//line src/coffeephp/parser.y:125
 		{  }
 	case 10:
-		//line src/coffeephp/grammer.y:124
+		//line src/coffeephp/parser.y:126
 		{  }
 	case 14:
-		//line src/coffeephp/grammer.y:136
+		//line src/coffeephp/parser.y:138
 		{ CoffeeVAL.val  =  CoffeeS[Coffeept-1].val }
 	case 15:
-		//line src/coffeephp/grammer.y:138
+		//line src/coffeephp/parser.y:140
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 16:
-		//line src/coffeephp/grammer.y:142
+		//line src/coffeephp/parser.y:144
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 17:
-		//line src/coffeephp/grammer.y:146
+		//line src/coffeephp/parser.y:148
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 18:
-		//line src/coffeephp/grammer.y:150
+		//line src/coffeephp/parser.y:152
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 19:
-		//line src/coffeephp/grammer.y:154
+		//line src/coffeephp/parser.y:156
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 20:
-		//line src/coffeephp/grammer.y:158
+		//line src/coffeephp/parser.y:160
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 21:
-		//line src/coffeephp/grammer.y:162
+		//line src/coffeephp/parser.y:164
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 22:
-		//line src/coffeephp/grammer.y:166
+		//line src/coffeephp/parser.y:168
 		{ 
 	            // $$  = -$2  
         }
 	case 23:
-		//line src/coffeephp/grammer.y:170
+		//line src/coffeephp/parser.y:172
 		{ 
 	            // $$  = regs[$1] 
         }
 	case 24:
 		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 25:
-		//line src/coffeephp/grammer.y:178
+		//line src/coffeephp/parser.y:180
 		{
 	        CoffeeVAL.val = ast.CreateNumberNode(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 26:
-		//line src/coffeephp/grammer.y:183
+		//line src/coffeephp/parser.y:185
 		{ }
 	case 27:
-		//line src/coffeephp/grammer.y:187
+		//line src/coffeephp/parser.y:189
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */

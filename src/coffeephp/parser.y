@@ -23,7 +23,7 @@ var base int
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
 %type <val> expr number statement
-%type <val> statement unticked_statement
+%type <val> unticked_statement
 
 // same for terminals
 %token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_EOF T_FLOATING T_NUMBER T_STRING
@@ -99,9 +99,11 @@ var base int
 %%
 
 start : top_statement_list  { }
+;
 
 top_statement_list:
-        top_statement_list  { } top_statement { }
+        top_statement_list { } 
+        top_statement { }
     |   /* empty */
 ;
 
