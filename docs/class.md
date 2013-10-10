@@ -22,7 +22,7 @@ Inheritance
 -------------
 You can simply write `is` keyword to define an inheritance:
 
-    class Person is Object do ArrayIterator
+    class Person is Object does ArrayIterator
         getName :: () -> "name"
 
 The above code compiles to:
@@ -67,14 +67,10 @@ To define class members:
     class LockableDoor is Object does DoorInterface
         @password = "password"
 
-And here is the way to access the member variable:
+And this is the way to access the member variable:
 
     class LockableDoor is Object does DoorInterface
         @password = "password"
-
-        public @username = "username"
-        private @password = "password"
-
         openDoor :: (password) ->
             if @password == password
                 # do something
