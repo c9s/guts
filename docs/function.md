@@ -28,6 +28,18 @@ The above code compiles to:
         return $x * $y
     }
 
+Inline Function
+-------------------
+Inline function will be expanded in place to replace the real function call:
+
+    inline foo :: (x,y) -> x * y
+    z = foo(1,3)
+
+compiles to:
+
+    z = 1 * 3
+
+
 Calling Functions
 ------------------
 You can call functions like this:
