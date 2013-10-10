@@ -134,33 +134,33 @@ expr    :    '(' expr ')'
         { $$  =  $2 }
     |    expr '+' expr
         { 
-            // $$  =  $1 + $3 
+            $$ = ast.CreateExprNode('+', $1, $3)
         }
     |    expr '-' expr
         { 
-            // $$  =  $1 - $3 
+            $$ = ast.CreateExprNode('-', $1, $3)
         }
     |    expr '*' expr
         { 
-            // $$  =  $1 * $3 
+            $$ = ast.CreateExprNode('*', $1, $3)
         }
     |    expr '/' expr
         { 
-            // $$  =  $1 / $3 
+            $$ = ast.CreateExprNode('/', $1, $3)
         }
     |    expr '%' expr
         { 
-            // $$  =  $1 % $3 
+            $$ = ast.CreateExprNode('%', $1, $3)
         }
     |    expr '&' expr
         { 
-            // $$  =  $1 & $3 
+            $$ = ast.CreateExprNode('&', $1, $3)
         }
     |    expr '|' expr
         { 
-            // $$  =  $1 | $3 
+            $$ = ast.CreateExprNode('|', $1, $3)
         }
-    |    '-'  expr        %prec  UMINUS
+    |   '-' expr  %prec UMINUS
         { 
             // $$  = -$2  
         }

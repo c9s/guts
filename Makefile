@@ -1,5 +1,4 @@
-all: parser
-	go build coffeephp
+all: parser build test
 
 parser:
 	for y in src/coffeephp/*.y ; \
@@ -9,6 +8,9 @@ parser:
 
 install:
 	cp -v bin/coffeephp /usr/bin/cphp
+
+build:
+	go build coffeephp
 
 test:
 	go test coffeephp -v
