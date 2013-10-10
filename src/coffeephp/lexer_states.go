@@ -18,8 +18,7 @@ func lexStart(l *CoffeeLex) stateFn {
 	var c rune = l.peek()
 	if unicode.IsDigit(c) {
 		return lexNumber
-	} else if c == '+' || c == '-' || c == '|' || c == '&' {
-		l.next()
+	} else if l.accept("+-|&[]{}") {
 		l.emit(TokenType(c))
 		return lexStart
 	} else if c == ' ' || c == '\t' {

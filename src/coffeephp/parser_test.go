@@ -15,10 +15,9 @@ func TestParser(t *testing.T) {
 			items: make(chan *CoffeeSymType, 100),
 		}
 		go lexer.run()
-		ret := CoffeeParse(&lexer)
-		lexer.close()
-		if ret == 1 {
+		if CoffeeParse(&lexer) == 1 {
 			t.Fatal("syntax error")
 		}
+		lexer.close()
 	}
 }
