@@ -45,8 +45,9 @@ Lexer
 	x T_EOF
 	x T_ONELINE_COMMENT
 	x T_COMMENT
+	x T_IF
+	x T_ELSEIF
 	- T_CLASS
-	- T_IF
 	- T_FOR
 	- T_FOREACH
 

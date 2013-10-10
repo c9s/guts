@@ -146,11 +146,11 @@ func lexStart(l *CoffeeLex) stateFn {
 		return lexOnelineComment
 	} else if l.consumeIfMatch("/*") {
 		return lexComment
-	} else if l.consumeIfMatch("if ") {
-		l.emit(T_IF)
+	} else if l.emitIfMatch("if ", T_IF) {
 		return lexStart
-	} else if l.consumeIfMatch("if else ") {
-		l.emit(T_ELSEIF)
+	} else if l.emitIfMatch("if else ", T_ELSEIF) {
+		return lexStart
+	} else if l.emitIfMatch("class ", T_CLASS) {
 		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
@@ -265,6 +265,14 @@ func lexNumber(l *CoffeeLex) stateFn {
 	l.backup()
 	l.emit(T_NUMBER)
 	return lexStart
+}
+
+func (l *CoffeeLex) emitIfMatch(str string, typ TokenType) bool {
+	if l.consumeIfMatch(str) {
+		l.emit(typ)
+		return true
+	}
+	return false
 }
 
 func (l *CoffeeLex) consumeIfMatch(str string) bool {
