@@ -43,6 +43,27 @@ Not ready for production. we're still in alpha stage. but we'd like to recevie
 comments, patches and feature requests.
 
 
+Synopsis
+---------
+For more language details, please check the `docs` for the language synopsis.
+
+    class Person
+        say :: (name) -> "Hello #{name}, Good morning"
+        getPhone :: () -> "12345678"
+        
+The above code compiles to:
+
+```php
+class Person {
+    function say($name) {
+        return "Hello " . $name . ', Good morning';
+    }
+    function getPhone() {
+        return "12345678";
+    }
+}
+```
+
 
 Lexer
 ------
@@ -65,4 +86,14 @@ Lexer
  x  | `T_ECHO           ` |  echo "output"
  x  | `T_DOES           ` |  class Gate does DoorInterface
 
+Parser
+---------
+
+
+
+
+Author
+-------------
+
+Yo-An Lin (yoanlin93@gmail.com)
 
