@@ -40,6 +40,8 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(T_BRACKET_CLOSE)
 		return lexStart
+	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {
+		return lexStart
 	} else if c == '"' || c == '\'' {
 		return lexString
 	} else if l.consumeIfMatch("//") {

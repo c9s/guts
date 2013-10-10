@@ -20,7 +20,7 @@ type CoffeeLex struct {
 	space     int
 	lastSpace int
 
-	lastTokenType int
+	lastTokenType TokenType
 
 	// XXX
 	width int
