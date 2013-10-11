@@ -12,6 +12,8 @@ var lextests = []struct {
 	{"af = 102", T_NUMBER, 1},
 	{"af = 102", T_ASSIGN, 1},
 	{"af = 3.1415926", T_FLOATING, 1},
+	{"// oneline comment", T_ONELINE_COMMENT, 1},
+	{"/* comment */", T_COMMENT, 1},
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
@@ -50,18 +52,6 @@ func TestLexerString(t *testing.T) {
 
 	input = `a = "string content contains quote \""`
 	expectLexInput(t, input, T_STRING, 1)
-}
-
-func TestLexerComment(t *testing.T) {
-	input := `
-	// oneline comment
-	`
-	expectLexInput(t, input, T_ONELINE_COMMENT, 1)
-
-	input = `
-	/* comment */
-	`
-	expectLexInput(t, input, T_COMMENT, 1)
 }
 
 func TestLexerAssignFloating(t *testing.T) {
