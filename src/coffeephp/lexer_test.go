@@ -2,6 +2,18 @@ package coffeephp
 
 import "testing"
 
+var lextests = []struct {
+	input    string
+	expected TokenType
+	cnt      int
+}{
+	{"a = 102", T_IDENTIFIER, 1},
+	{"abc123 = 100", T_IDENTIFIER, 1},
+	{"af = 102", T_NUMBER, 1},
+	{"af = 102", T_ASSIGN, 1},
+	{"af = 3.1415926", T_FLOATING, 1},
+}
+
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 	lexer := CoffeeLex{
 		input: input,
@@ -87,9 +99,7 @@ func BenchmarkLexer(b *testing.B) {
 }
 
 func TestLexerAssign(t *testing.T) {
-	input := `
-	a = 102
-	foo = 200
-	`
-	expectLexInput(t, input, T_IDENTIFIER, 2)
+	for _, test := range lextests {
+		expectLexInput(t, test.input, test.expected, test.cnt)
+	}
 }
