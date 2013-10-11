@@ -14,6 +14,8 @@ var lextests = []struct {
 	{"af = 3.1415926", T_FLOATING, 1},
 	{"// oneline comment", T_ONELINE_COMMENT, 1},
 	{"/* comment */", T_COMMENT, 1},
+	{`a = "string content"`, T_STRING, 1},
+	{`a = "string content contains quote \""`, T_STRING, 1},
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
@@ -46,22 +48,6 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 	lexer.close()
 }
 
-func TestLexerString(t *testing.T) {
-	input := `a = "string content"`
-	expectLexInput(t, input, T_STRING, 1)
-
-	input = `a = "string content contains quote \""`
-	expectLexInput(t, input, T_STRING, 1)
-}
-
-func TestLexerAssignFloating(t *testing.T) {
-	input := `
-	b = 3.1415926
-	bar = 478.123
-	`
-	expectLexInput(t, input, T_FLOATING, 2)
-}
-
 func BenchmarkLexer(b *testing.B) {
 	input := `
 	a = 102
@@ -90,6 +76,7 @@ func BenchmarkLexer(b *testing.B) {
 
 func TestLexerAssign(t *testing.T) {
 	for _, test := range lextests {
+		t.Log("Testing lex from ", test.input)
 		expectLexInput(t, test.input, test.expected, test.cnt)
 	}
 }
