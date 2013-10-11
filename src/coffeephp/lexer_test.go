@@ -12,6 +12,7 @@ var lextests = []struct {
 	{"af = 102", T_NUMBER, 1},
 	{"af = 102", T_ASSIGN, 1},
 	{"af = 3.1415926", T_FLOATING, 1},
+	{"af = bk", T_IDENTIFIER, 2},
 	{"// oneline comment", T_ONELINE_COMMENT, 1},
 	{"/* comment */", T_COMMENT, 1},
 	{`a = "string content"`, T_STRING, 1},
