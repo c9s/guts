@@ -69,23 +69,23 @@ class Person {
 
 File Extension
 --------------------
-The file extension is named with "*.cphp", the compiler compiles your .cphp
+The file extension is named with "\*.cphp", the compiler compiles your .cphp
 files into .php file.
 
 
 Implementation
 ---------------
-CoffeePHP uses Go yacc parser generator to produce a LALR(1) parser. 
+CoffeePHP uses Go yacc parser generator to generate a LALR(1) parser. 
 
-To add new syntax, please checkout the grammar.y file, which is located in
-`src/coffeephp/grammer.y`
+To add new syntax, please checkout the parser.y file, which is located in
+`src/coffeephp/parser.y`
 
-The lexer uses concurrent strategy to parse tokens, the state machine is in
-another gorouting, the parser can receive the tokens from lexer through the
+The lexer uses concurrent strategy to parse tokens, the state machine runs in
+another goroutine, so the parser receives the tokens from lexer through the
 channel concurrently.
 
-CodeGen is expected to be a separated tree structure traverser, then code
-generation which is not implemented inside the node structure like the
+Codegen is expected to be a separated tree structure traverser, and 
+which is not implemented inside the ast node structure like the
 coffee-script codegen. So the code generator can be PHP code generator, LLVM
 bit-code generator or JavaScript generator.
 
@@ -124,6 +124,9 @@ Lexer
 Parser
 ---------
 
+    | Rule                
+--- | -------------------
+ x  | assignment statement
 
 
 
