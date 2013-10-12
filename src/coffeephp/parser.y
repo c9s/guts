@@ -31,6 +31,8 @@ var base int
 %token T_ONELINE_COMMENT T_COMMENT
 %token T_EOF
 
+%token T_INDENT_ENTER T_INDENT_EXIT
+
 %token T_PLUS
 
 %token T_NEWLINE

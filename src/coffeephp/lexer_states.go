@@ -173,7 +173,13 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 		}
 	}
 	l.backup()
-	l.ignore()
+	l.ignore() // simply ignore string,
+
+	if l.space > l.lastSpace {
+		l.emit(T_INDENT_ENTER)
+	} else if l.space < l.lastSpace {
+		l.emit(T_INDENT_EXIT)
+	}
 	// l.emit(T_SPACE)
 	return lexStart
 }
