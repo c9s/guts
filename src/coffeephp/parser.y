@@ -9,14 +9,14 @@ import "coffeephp/ast"
 var regs = make([]int, 26)
 var base int
 
-var Stmts []ast.Node
-var Namespaces []ast.Node
-
 const DEBUG = true
 
 func debug(msg string, vals ...interface{}) {
-    fmt.Print(msg, ": ")
-    fmt.Println(vals...)
+    fmt.Print(msg)
+    for _, val := range vals {
+        fmt.Printf(" %#v",val)
+    }
+    fmt.Println("\n")
 }
 
 %}
@@ -32,8 +32,8 @@ func debug(msg string, vals ...interface{}) {
 
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
+%type <val> unticked_statement assignment_statement top_statement top_statement_list start
 %type <val> expr statement variable
-%type <val> unticked_statement assignment_statement top_statement
 
 // same for terminals
 %token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -115,28 +115,35 @@ func debug(msg string, vals ...interface{}) {
 %%
 
 start : top_statement_list {
-        debug("end compilation")
+        debug("end compilation", $1)
+        $$ = $1
     }
 ;
 
 top_statement_list:
-        top_statement_list {
-            debug("top_statement_list")
+    top_statement_list top_statement { 
+        if stmts, ok := $1.(*ast.NodeList) ; ok {
+            stmts.Append($2)
+            $$ = $1
         }
-        top_statement {
-            debug("top_statement_list.top_statement")
-        }
-    |   /* empty */
+        debug("top_statement_list top_statement", $1, $2)
+    }
+    | top_statement {
+        debug("top_statement one", $1)
+        stmts := ast.CreateStatementNodeList()
+        stmts.Append($1)
+        $$ = stmts
+    }
 ;
 
 top_statement:
     statement {
-        debug("top_statement done", $1)
-        Stmts = append(Stmts, $1)
+        debug("statement", $1)
+        $$ = $1
     }
     | statement T_NEWLINE {
-        debug("top_statement.NEWLINE done", $1)
-        Stmts = append(Stmts, $1)
+        debug("statement.newline", $1)
+        $$ = $1
     }
 ;
 

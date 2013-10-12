@@ -11,8 +11,16 @@ func CreateExprStatementNode(node Node) Node {
 	return StatementNode{}
 }
 
-func CreateStatementNodeList() []StatementNode {
-	return []StatementNode{}
+type NodeList []Node
+
+func (self *NodeList) Append(node Node) {
+	old := *self
+	newList := append(old, node)
+	*self = newList
+}
+
+func CreateStatementNodeList() *NodeList {
+	return &NodeList{}
 }
 
 /*

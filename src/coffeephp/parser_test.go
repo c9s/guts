@@ -25,6 +25,6 @@ b = a`,
 			t.Fatal("syntax error")
 		}
 		lexer.close()
-		// t.Log(Stmts)
+		t.Logf("AST: %#v", parser.Val.val)
 	}
 }
