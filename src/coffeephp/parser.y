@@ -33,7 +33,7 @@ func debug(msg string, vals ...interface{}) {
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
 %type <val> unticked_statement assignment_statement top_statement top_statement_list start
-%type <val> expr statement variable
+%type <val> expr statement variable number floating_number
 
 // same for terminals
 %token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -122,7 +122,7 @@ start : top_statement_list {
 
 top_statement_list:
     top_statement_list top_statement { 
-        if stmts, ok := $1.(*ast.NodeList) ; ok {
+        if stmts, ok := $1.(*ast.StatementNodeList) ; ok {
             stmts.Append($2)
             $$ = $1
         }
@@ -175,7 +175,7 @@ function_body: top_statement_list;
 
 expr    :
       '(' expr ')' {
-            fmt.Println("wrap expr")
+            $$ = $2
         }
     | expr '+' expr
         { 
@@ -209,17 +209,18 @@ expr    :
         { 
             // $$  = -$2  
         }
-    | T_IDENTIFIER
-        { 
-            // $$  = regs[$1] 
-        }
-    | T_NUMBER {
-        $$ = ast.CreateNumberNode($1.(string))
-    }
-    | T_FLOATING {
+    | variable
+    | number
+    | floating_number
+    ;
+
+floating_number: T_FLOATING {
         $$ = ast.CreateFloatingNumberNode($1.(string))
     }
-    ;
+
+number: T_NUMBER {
+        $$ = ast.CreateNumberNode($1.(string))
+    }
 
 function_call_parameter_list:
     '(' ')' { }

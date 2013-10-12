@@ -1,13 +1,14 @@
 package coffeephp
 
 import "testing"
+import "coffeephp/codegen/phpcodegen"
 
 func TestParser(t *testing.T) {
 	inputs := []string{
 		`pi = 3.1415926`,
 		`pi = 3.1415926 + 4`,
 		`pi = 4455
-a = 123
+a = 1 + (2 * 3)
 b = a`,
 	}
 	for _, input := range inputs {
@@ -26,5 +27,7 @@ b = a`,
 		}
 		lexer.close()
 		t.Logf("AST: %#v", parser.Val.val)
+
+		t.Log(phpcodegen.Visit(parser.Val.val))
 	}
 }

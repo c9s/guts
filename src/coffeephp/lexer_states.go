@@ -1,7 +1,7 @@
 package coffeephp
 
 import (
-	_ "fmt"
+	"fmt"
 	"unicode"
 )
 
@@ -18,7 +18,7 @@ func lexStart(l *CoffeeLex) stateFn {
 	var c rune = l.peek()
 	if unicode.IsDigit(c) {
 		return lexNumber
-	} else if l.accept("+-|&[]{}") {
+	} else if l.accept("+-*|&[]{}()") {
 		l.emit(TokenType(c))
 		return lexStart
 	} else if c == ' ' || c == '\t' {
@@ -73,7 +73,8 @@ func lexStart(l *CoffeeLex) stateFn {
 		// l.emit(T_EOF)
 		return nil
 	} else {
-		panic("unknown token.")
+		panic(fmt.Errorf("unknown token %c\n", c))
+		return nil
 	}
 	return nil
 }

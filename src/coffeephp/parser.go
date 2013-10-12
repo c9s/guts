@@ -143,7 +143,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line src/coffeephp/parser.y:232
+//line src/coffeephp/parser.y:233
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -151,67 +151,64 @@ var CoffeeExca = []int{
 	-1, 1,
 	1, -1,
 	-2, 0,
-	-1, 11,
-	18, 10,
-	-2, 23,
 }
 
-const CoffeeNprod = 28
+const CoffeeNprod = 30
 const CoffeePrivate = 57344
 
 var CoffeeTokenNames []string
 var CoffeeStates []string
 
-const CoffeeLast = 78
+const CoffeeLast = 72
 
 var CoffeeAct = []int{
 
-	22, 23, 21, 16, 17, 18, 19, 20, 25, 13,
-	12, 15, 8, 35, 11, 13, 12, 22, 4, 21,
-	16, 17, 18, 19, 20, 21, 16, 17, 18, 19,
-	20, 16, 17, 18, 19, 20, 18, 19, 20, 3,
-	1, 2, 14, 6, 5, 0, 0, 0, 0, 0,
-	0, 0, 0, 7, 10, 0, 0, 0, 0, 0,
-	10, 0, 9, 24, 26, 0, 0, 0, 9, 0,
-	27, 28, 29, 30, 31, 32, 33, 34,
+	24, 25, 23, 18, 19, 20, 21, 22, 13, 15,
+	14, 17, 24, 37, 23, 18, 19, 20, 21, 22,
+	23, 18, 19, 20, 21, 22, 18, 19, 20, 21,
+	22, 20, 21, 22, 27, 8, 3, 8, 12, 16,
+	11, 4, 1, 2, 6, 7, 5, 0, 0, 0,
+	0, 0, 0, 0, 10, 26, 28, 0, 0, 0,
+	0, 0, 9, 0, 29, 30, 31, 32, 33, 34,
+	35, 36,
 }
 var CoffeePact = []int{
 
-	7, -1000, 7, -1000, -6, -1000, -1000, -32, -17, 1,
-	1, -1000, -1000, -1000, -1000, -1000, 1, 1, 1, 1,
-	1, 1, 1, 1, -49, -1000, -1000, -18, -18, -1000,
-	-1000, -1000, -21, -26, -32, -1000,
+	1, -1000, 1, -1000, -6, -1000, -1000, -37, -17, 1,
+	1, -1000, -1000, -1000, -1000, -1000, -1000, -1000, 1, 1,
+	1, 1, 1, 1, 1, 1, -49, -1000, -1000, -23,
+	-23, -1000, -1000, -1000, -26, -31, -37, -1000,
 }
 var CoffeePgo = []int{
 
-	0, 44, 43, 39, 41, 40, 53, 18, 12, 12,
-	12, 12, 12, 12,
+	0, 46, 44, 36, 43, 42, 45, 41, 34, 40,
+	38, 38, 38, 38, 38, 38,
 }
 var CoffeeR1 = []int{
 
 	0, 5, 4, 4, 3, 3, 7, 7, 1, 2,
-	8, 9, 10, 11, 6, 6, 6, 6, 6, 6,
-	6, 6, 6, 6, 6, 6, 12, 13,
+	8, 11, 12, 13, 6, 6, 6, 6, 6, 6,
+	6, 6, 6, 6, 6, 6, 10, 9, 14, 15,
 }
 var CoffeeR2 = []int{
 
 	0, 1, 2, 1, 1, 2, 1, 1, 1, 3,
 	1, 2, 5, 1, 3, 3, 3, 3, 3, 3,
-	3, 3, 2, 1, 1, 1, 2, 2,
+	3, 3, 2, 1, 1, 1, 1, 1, 2, 2,
 }
 var CoffeeChk = []int{
 
 	-1000, -5, -4, -3, -7, -1, -2, -6, -8, 61,
-	53, 7, 9, 8, -3, 17, 52, 53, 54, 55,
-	56, 51, 49, 18, -6, 7, -6, -6, -6, -6,
-	-6, -6, -6, -6, -6, 62,
+	53, -9, -10, 7, 9, 8, -3, 17, 52, 53,
+	54, 55, 56, 51, 49, 18, -6, -8, -6, -6,
+	-6, -6, -6, -6, -6, -6, -6, 62,
 }
 var CoffeeDef = []int{
 
-	0, -2, 1, 3, 4, 6, 7, 8, 0, 0,
-	0, -2, 24, 25, 2, 5, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 23, 22, 15, 16, 17,
-	18, 19, 20, 21, 9, 14,
+	0, -2, 1, 3, 4, 6, 7, 8, 23, 0,
+	0, 24, 25, 10, 27, 26, 2, 5, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 23, 22, 15,
+	16, 17, 18, 19, 20, 21, 9, 14,
 }
 var CoffeeTok1 = []int{
 
@@ -481,7 +478,7 @@ Coffeedefault:
 	case 2:
 		//line src/coffeephp/parser.y:124
 		{ 
-	        if stmts, ok := CoffeeS[Coffeept-1].val.(*ast.NodeList) ; ok {
+	        if stmts, ok := CoffeeS[Coffeept-1].val.(*ast.StatementNodeList) ; ok {
 	            stmts.Append(CoffeeS[Coffeept-0].val)
 	            CoffeeVAL.val = CoffeeS[Coffeept-1].val
 	        }
@@ -530,7 +527,7 @@ Coffeedefault:
 	case 14:
 		//line src/coffeephp/parser.y:177
 		{
-	            fmt.Println("wrap expr")
+	            CoffeeVAL.val = CoffeeS[Coffeept-1].val
 	        }
 	case 15:
 		//line src/coffeephp/parser.y:181
@@ -573,25 +570,26 @@ Coffeedefault:
 	            // $$  = -$2  
         }
 	case 23:
-		//line src/coffeephp/parser.y:213
-		{ 
-	            // $$  = regs[$1] 
-        }
+		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 24:
-		//line src/coffeephp/parser.y:216
-		{
-	        CoffeeVAL.val = ast.CreateNumberNode(CoffeeS[Coffeept-0].val.(string))
-	    }
+		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 25:
-		//line src/coffeephp/parser.y:219
+		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+	case 26:
+		//line src/coffeephp/parser.y:217
 		{
 	        CoffeeVAL.val = ast.CreateFloatingNumberNode(CoffeeS[Coffeept-0].val.(string))
 	    }
-	case 26:
-		//line src/coffeephp/parser.y:225
-		{ }
 	case 27:
-		//line src/coffeephp/parser.y:229
+		//line src/coffeephp/parser.y:221
+		{
+	        CoffeeVAL.val = ast.CreateNumberNode(CoffeeS[Coffeept-0].val.(string))
+	    }
+	case 28:
+		//line src/coffeephp/parser.y:226
+		{ }
+	case 29:
+		//line src/coffeephp/parser.y:230
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */
