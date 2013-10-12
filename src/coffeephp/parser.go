@@ -143,7 +143,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line src/coffeephp/parser.y:230
+//line src/coffeephp/parser.y:232
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -523,72 +523,75 @@ Coffeedefault:
 	        CoffeeVAL.val = ast.CreateAssignStatementNode(CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	    }
 	case 10:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+		//line src/coffeephp/parser.y:164
+		{ 
+	        CoffeeVAL.val = ast.CreateVariableNode(CoffeeS[Coffeept-0].val.(string))
+	    }
 	case 14:
-		//line src/coffeephp/parser.y:175
+		//line src/coffeephp/parser.y:177
 		{
 	            fmt.Println("wrap expr")
 	        }
 	case 15:
-		//line src/coffeephp/parser.y:179
+		//line src/coffeephp/parser.y:181
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 16:
-		//line src/coffeephp/parser.y:183
+		//line src/coffeephp/parser.y:185
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 17:
-		//line src/coffeephp/parser.y:187
+		//line src/coffeephp/parser.y:189
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 18:
-		//line src/coffeephp/parser.y:191
+		//line src/coffeephp/parser.y:193
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 19:
-		//line src/coffeephp/parser.y:195
+		//line src/coffeephp/parser.y:197
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 20:
-		//line src/coffeephp/parser.y:199
+		//line src/coffeephp/parser.y:201
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 21:
-		//line src/coffeephp/parser.y:203
+		//line src/coffeephp/parser.y:205
 		{ 
 	            CoffeeVAL.val = ast.CreateExprNode('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 22:
-		//line src/coffeephp/parser.y:207
+		//line src/coffeephp/parser.y:209
 		{ 
 	            // $$  = -$2  
         }
 	case 23:
-		//line src/coffeephp/parser.y:211
+		//line src/coffeephp/parser.y:213
 		{ 
 	            // $$  = regs[$1] 
         }
 	case 24:
-		//line src/coffeephp/parser.y:214
+		//line src/coffeephp/parser.y:216
 		{
 	        CoffeeVAL.val = ast.CreateNumberNode(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 25:
-		//line src/coffeephp/parser.y:217
+		//line src/coffeephp/parser.y:219
 		{
 	        CoffeeVAL.val = ast.CreateFloatingNumberNode(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 26:
-		//line src/coffeephp/parser.y:223
+		//line src/coffeephp/parser.y:225
 		{ }
 	case 27:
-		//line src/coffeephp/parser.y:227
+		//line src/coffeephp/parser.y:229
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */

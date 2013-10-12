@@ -22,18 +22,3 @@ func (self *NodeList) Append(node Node) {
 func CreateStatementNodeList() *NodeList {
 	return &NodeList{}
 }
-
-/*
-
-*/
-type AssignStatementNode struct {
-	Assign Node
-	Expr   Node
-}
-
-func CreateAssignStatementNode(assign Node, expr Node) Node {
-	return AssignStatementNode{
-		Assign: assign,
-		Expr:   expr,
-	}
-}

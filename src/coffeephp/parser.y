@@ -161,7 +161,9 @@ assignment_statement:
     }
 ;
 
-variable: T_IDENTIFIER
+variable: T_IDENTIFIER { 
+        $$ = ast.CreateVariableNode($1.(string))
+    }
 
 function_parameter_list: '(' ')' ;
 
