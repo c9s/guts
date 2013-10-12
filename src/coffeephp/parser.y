@@ -104,37 +104,24 @@ var base int
 
 %%
 
-start : top_statement_list  {
-        fmt.Println("top_statement_list")
-      }
+start : top_statement_list  { }
 ;
 
 top_statement_list:
-        top_statement_list {
-            fmt.Println("top_statement_list -> top_statement_list")
-        } 
-        top_statement {
-            fmt.Println("top_statement_list -> top_statement")
-        }
+        top_statement_list { } 
+        top_statement { }
     |   /* empty */
 ;
 
 top_statement:
-      statement {
-        fmt.Println("statement")
-    }
+      statement { }
     | statement T_NEWLINE {
-        fmt.Println("statement T_NEWLINE")
     }
 ;
 
 statement:
-      unticked_statement {
-        fmt.Println("unticked_statement")
-      }
-    | assignment_statement {
-        fmt.Println("assignment_statement")
-      }
+      unticked_statement { }
+    | assignment_statement { }
 ;
 
 unticked_statement: expr {
