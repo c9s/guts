@@ -19,7 +19,9 @@ b = a`,
 			items: make(chan *CoffeeSymType, 100),
 		}
 		go lexer.run()
-		if CoffeeParse(&lexer) == 1 {
+
+		parser := CoffeeParser{}
+		if parser.Parse(&lexer) == 1 {
 			t.Fatal("syntax error")
 		}
 		lexer.close()

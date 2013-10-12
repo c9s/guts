@@ -311,7 +311,11 @@ out:
 	return c
 }
 
-func CoffeeParse(Coffeelex CoffeeLexer) int {
+type CoffeeParser struct {
+	Val CoffeeSymType
+}
+
+func (self *CoffeeParser) Parse(Coffeelex CoffeeLexer) int {
 	var Coffeen int
 	var Coffeelval CoffeeSymType
 	var CoffeeVAL CoffeeSymType
@@ -452,6 +456,8 @@ Coffeedefault:
 
 	Coffeep -= CoffeeR2[Coffeen]
 	CoffeeVAL = CoffeeS[Coffeep+1]
+
+	self.Val = CoffeeVAL
 
 	/* consult goto table to find next state */
 	Coffeen = CoffeeR1[Coffeen]

@@ -1,9 +1,12 @@
 all: parser build test
 
+yacc:
+	go install yacc
+
 parser:
 	for y in src/coffeephp/*.y ; \
 	do \
-		go tool yacc -o $${y%.y}.go -p Coffee $$y ; \
+		bin/yacc -o $${y%.y}.go -p Coffee $$y ; \
 	done
 
 install:
