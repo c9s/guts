@@ -27,6 +27,9 @@ func Visit(n ast.Node) string {
 		return strconv.FormatFloat(floating.Val, 'e', -1, 64)
 	}
 	if expr, ok := n.(ast.ExprNode); ok {
+		if expr.Parenthesis {
+			return fmt.Sprintf("(%s %c %s)", Visit(expr.Left), expr.Op, Visit(expr.Right))
+		}
 		return fmt.Sprintf("%s %c %s", Visit(expr.Left), expr.Op, Visit(expr.Right))
 	}
 	if stmt, ok := n.(ast.AssignStatementNode); ok {

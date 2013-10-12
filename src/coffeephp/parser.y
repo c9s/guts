@@ -175,7 +175,13 @@ function_body: top_statement_list;
 
 expr    :
       '(' expr ')' {
-            $$ = $2
+            if node, ok := $2.(ast.ExprNode) ; ok {
+                node.Parenthesis = true
+                $$ = node
+            } else {
+                panic(" type casting to ast.ExprNode failed.")
+            }
+            // $$ = $2
         }
     | expr '+' expr
         { 

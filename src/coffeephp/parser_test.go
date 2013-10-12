@@ -8,7 +8,7 @@ func TestParser(t *testing.T) {
 		`pi = 3.1415926`,
 		`pi = 3.1415926 + 4`,
 		`pi = 4455
-a = 1 + (2 * 3)
+a = 4 * (2 + 3)
 b = a`,
 	}
 	for _, input := range inputs {
