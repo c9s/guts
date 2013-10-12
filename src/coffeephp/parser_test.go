@@ -6,8 +6,12 @@ func TestParser(t *testing.T) {
 	inputs := []string{
 		`pi = 3.1415926`,
 		`pi = 3.1415926 + 4`,
+		`pi = 4455
+a = 123
+b = a`,
 	}
 	for _, input := range inputs {
+		t.Log(input)
 		lexer := CoffeeLex{
 			input: input,
 			start: 0,
@@ -19,5 +23,6 @@ func TestParser(t *testing.T) {
 			t.Fatal("syntax error")
 		}
 		lexer.close()
+		// t.Log(Stmts)
 	}
 }

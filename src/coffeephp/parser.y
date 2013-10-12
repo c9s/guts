@@ -9,6 +9,16 @@ import "coffeephp/ast"
 var regs = make([]int, 26)
 var base int
 
+var Stmts []ast.Node
+var Namespaces []ast.Node
+
+const DEBUG = true
+
+func debug(msg string, vals ...interface{}) {
+    fmt.Print(msg, ": ")
+    fmt.Println(vals...)
+}
+
 %}
 
 // fields inside this union end up as the fields in a structure known
@@ -22,8 +32,8 @@ var base int
 
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
-%type <val> expr statement
-%type <val> unticked_statement
+%type <val> expr statement variable
+%type <val> unticked_statement assignment_statement top_statement
 
 // same for terminals
 %token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -104,36 +114,47 @@ var base int
 
 %%
 
-start : top_statement_list  { }
+start : top_statement_list {
+        debug("end compilation")
+    }
 ;
 
 top_statement_list:
-        top_statement_list { } 
-        top_statement { }
+        top_statement_list {
+            debug("top_statement_list")
+        }
+        top_statement {
+            debug("top_statement_list.top_statement")
+        }
     |   /* empty */
 ;
 
 top_statement:
-      statement { }
+    statement {
+        debug("top_statement done", $1)
+        Stmts = append(Stmts, $1)
+    }
     | statement T_NEWLINE {
+        debug("top_statement.NEWLINE done", $1)
+        Stmts = append(Stmts, $1)
     }
 ;
 
 statement:
-      unticked_statement { }
-    | assignment_statement { }
+      unticked_statement { $$ = $1 }
+    | assignment_statement { $$ = $1 }
 ;
 
-unticked_statement: expr {
-    $$ = ast.CreateExprStatementNode($1)
-}
-;
+unticked_statement: expr { $$ = ast.CreateExprStatementNode($1) } ;
 
 assignment_statement:
-    T_IDENTIFIER T_ASSIGN expr { 
-        fmt.Println("assignment_statement")
+    variable T_ASSIGN expr {
+        debug("assignment_statement", $1 , "=" , $3)
+        $$ = ast.CreateAssignStatementNode($1, $3)
     }
 ;
+
+variable: T_IDENTIFIER
 
 function_parameter_list: '(' ')' ;
 
