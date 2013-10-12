@@ -36,14 +36,12 @@ func debug(msg string, vals ...interface{}) {
 %type <val> expr statement variable number floating_number
 
 // same for terminals
-%token <val> T_DIGIT T_LETTER T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
+%token <val> T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
 
 %token T_ONELINE_COMMENT T_COMMENT
 %token T_EOF
 
 %token T_INDENT_ENTER T_INDENT_EXIT
-
-%token T_PLUS
 
 %token T_NEWLINE
 
@@ -74,7 +72,6 @@ func debug(msg string, vals ...interface{}) {
 %token T_DOES
 %token T_FUNCTION_PROTOTYPE
 %token T_RANGE_OPERATOR
-%token T_BRACKET_OPEN T_BRACKET_CLOSE
 
 %token T_STRING
 
@@ -88,27 +85,23 @@ func debug(msg string, vals ...interface{}) {
 %token T_NS_SEPARATOR
 %token T_NAMESPACE
 
-
 // obj.method
-%token T_OBJECT_OPERATOR ". (T_OBJECT_OPERATOR)"
-
-%left 'and'
-%left 'or'
+%token T_OBJECT_OPERATOR
 
 %left '|'
 %left '^'
 %left '&'
 
-%left '+'  '-'
+%left '+' '-'
 %left '*'  '/'  '%'
 %right '!'
+%left UMINUS      /*  supplies  precedence  for  unary  minus  */
 
 %left T_BOOLEAN_OR
 %token T_BOOLEAN_OR
 %left T_BOOLEAN_AND 
 %token T_BOOLEAN_AND
 
-%left UMINUS      /*  supplies  precedence  for  unary  minus  */
 
 %start start
 
@@ -168,7 +161,7 @@ variable: T_IDENTIFIER {
 function_parameter_list: '(' ')' ;
 
 function:
-      T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list '->' function_body
+      T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list function_body
 ;
 
 function_body: top_statement_list;
@@ -213,7 +206,7 @@ expr    :
         }
     | '-' expr  %prec UMINUS
         { 
-            // $$  = -$2  
+            $$ = ast.UnaryExprNode{'-', $2}
         }
     | variable
     | number

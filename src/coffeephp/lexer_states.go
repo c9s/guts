@@ -18,6 +18,10 @@ func lexStart(l *CoffeeLex) stateFn {
 	var c rune = l.peek()
 	if unicode.IsDigit(c) {
 		return lexNumber
+	} else if c == '-' {
+		l.next()
+		l.emit(TokenType(c))
+		return lexStart
 	} else if l.accept("+-*|&[]{}()") {
 		l.emit(TokenType(c))
 		return lexStart
@@ -34,14 +38,6 @@ func lexStart(l *CoffeeLex) stateFn {
 	} else if c == '=' && l.peekMore(2) != '=' {
 		l.next()
 		l.emit(T_ASSIGN)
-		return lexStart
-	} else if c == '[' {
-		l.next()
-		l.emit(T_BRACKET_OPEN)
-		return lexStart
-	} else if c == ']' {
-		l.next()
-		l.emit(T_BRACKET_CLOSE)
 		return lexStart
 	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {
 		return lexStart

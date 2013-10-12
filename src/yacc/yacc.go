@@ -2899,7 +2899,7 @@ func others() {
 		if j >= 0 && j < 256 {
 			if temp1[j] != 0 {
 				fmt.Print("yacc bug -- cannot have 2 different Ts with same value\n")
-				fmt.Printf("	%s and %s\n", tokset[i].name, tokset[temp1[j]].name)
+				fmt.Printf("	'%s' and '%s'\n", tokset[i].name, tokset[temp1[j]].name)
 				nerrors++
 			}
 			temp1[j] = i

@@ -10,6 +10,7 @@ func TestParser(t *testing.T) {
 		`pi = 4455
 a = 4 * (2 + 3)
 b = a`,
+		`x = 3 * -2`,
 	}
 	for _, input := range inputs {
 		t.Log(input)

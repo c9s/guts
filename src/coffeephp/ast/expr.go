@@ -1,5 +1,10 @@
 package ast
 
+type UnaryExprNode struct {
+	Op  byte
+	Val Node
+}
+
 type ExprNode struct {
 	Op          byte
 	Left        Node

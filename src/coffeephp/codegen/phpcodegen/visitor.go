@@ -7,9 +7,7 @@ import "fmt"
 type Visitor struct{}
 
 func Visit(n ast.Node) string {
-
-	fmt.Printf("visit %#v\n", n)
-
+	// fmt.Printf("visit %#v\n", n)
 	if stmts, ok := n.(*ast.StatementNodeList); ok {
 		var output string
 		for _, stmt := range *stmts {
@@ -25,6 +23,9 @@ func Visit(n ast.Node) string {
 	}
 	if floating, ok := n.(ast.FloatingNumberNode); ok {
 		return strconv.FormatFloat(floating.Val, 'e', -1, 64)
+	}
+	if expr, ok := n.(ast.UnaryExprNode); ok {
+		return fmt.Sprintf("%c%s", expr.Op, Visit(expr.Val))
 	}
 	if expr, ok := n.(ast.ExprNode); ok {
 		if expr.Parenthesis {
