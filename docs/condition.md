@@ -3,7 +3,7 @@ Condition
 
 
 If statement
-------------------
+------------
 ```
 if a > 3 and b < 2
     a = 0
@@ -16,9 +16,11 @@ else
 which is compiled to:
 
 ```php
-if ( $a > 3 ) {
-    $a = 3;
+if ( $a > 3 && $b < 2) {
+    $a = 0;
 } else if ( $a == 0 ) {
     $a = 1;
+} else {
+    $a = 2;
 }
 ```
