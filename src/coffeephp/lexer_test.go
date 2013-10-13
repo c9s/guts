@@ -1,8 +1,8 @@
 package coffeephp
 
-import "testing"
-
 /* vim:list: */
+
+import "testing"
 
 var lextests = []struct {
 	input    string

@@ -1,5 +1,7 @@
 package coffeephp
 
+/* vim:list: */
+
 import "testing"
 import "coffeephp/codegen/phpcodegen"
 
@@ -14,17 +16,13 @@ b = a`,
 		// XXX: need trailing line
 		`x = 3 * -2`,
 		`if a > 10
-	a = 10
-
+    a = 10
 `,
-		/*
-		   XXX: fix this later
-		   		`if a > 10
-		   	a = 10
-		   else
-		   	a = 0
-		   `,
-		*/
+		`if a > 10
+    a = 10
+else
+    a = 0
+`,
 	}
 	for _, input := range inputs {
 		t.Log(input)
