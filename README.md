@@ -131,6 +131,8 @@ Parser
  x  | if statement
  x  | if else statement
  x  | if elseif else statement
+ o  | list structure
+ o  | hash structure
  o  | foreach block
  o  | for block
  o  | dot range
@@ -138,6 +140,7 @@ Parser
  o  | class method
  o  | function call, method call as expr.
  o  | assignment from function call, method call
+
 
 
 Author
