@@ -59,6 +59,8 @@ func lexStart(l *CoffeeLex) stateFn {
 		return lexStart
 	} else if l.emitIfMatch("if else ", T_ELSEIF) {
 		return lexStart
+	} else if l.emitIfMatch("else ", T_ELSE) {
+		return lexStart
 	} else if l.emitIfMatch("class ", T_CLASS) {
 		return lexStart
 	} else if l.emitIfMatch("for ", T_FOR) {

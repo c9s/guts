@@ -38,6 +38,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> unticked_statement 
 %type <val> assignment_statement 
 %type <val> if_statement 
+%type <val> if_else_statement 
 %type <val> top_statement 
 %type <val> top_statement_list 
 %type <val> start
@@ -157,6 +158,7 @@ statement:
     | assignment_statement { $$ = $1 }
     | function_decl_statement { $$ = $1 }
     | if_statement { $$ = $1 }
+    | if_else_statement { $$ = $1 }
 ;
 
 unticked_statement: expr { $$ = ast.CreateExprStatement($1) } ;
@@ -172,6 +174,18 @@ assignment_statement:
 if_statement: 
     T_IF expr T_NEWLINE T_INDENT_ENTER top_statement_list T_INDENT_EXIT {
         $$ = ast.CreateIfStatement($2.(ast.Expr), $5.(*ast.StatementNodeList))
+    }
+
+if_else_statement:
+    T_IF expr T_NEWLINE 
+    T_INDENT_ENTER 
+        top_statement_list
+    T_INDENT_EXIT
+    T_ELSE T_NEWLINE
+    T_INDENT_ENTER
+        top_statement_list
+    T_INDENT_EXIT {
+        $$ = ast.CreateIfElseStatement($2.(ast.Expr), $5.(*ast.StatementNodeList), $10.(*ast.StatementNodeList))
     }
 
 function_parameter_list: '(' ')' ;

@@ -52,7 +52,20 @@ func (self *Visitor) Visit(n ast.Node) string {
 		self.indent++
 		out += self.Visit(stmt.Body)
 		self.indent--
-		out += self.IndentSpace() + "\n}"
+		out += self.IndentSpace() + "}"
+		return out
+	}
+	if stmt, ok := n.(ast.IfElseStatement); ok {
+		var out string = ""
+		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"
+		self.indent++
+		out += self.Visit(stmt.Body)
+		self.indent--
+		out += self.IndentSpace() + "} else {\n"
+		self.indent++
+		out += self.Visit(stmt.ElseBody)
+		self.indent--
+		out += "\n}"
 		return out
 	}
 	return ""

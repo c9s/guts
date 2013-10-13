@@ -1,7 +1,7 @@
 all: yacc parser build test
 
 yacc:
-	go install yacc
+	go install -x yacc
 
 parser:
 	for y in src/coffeephp/*.y ; \

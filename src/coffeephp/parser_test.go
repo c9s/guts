@@ -14,6 +14,11 @@ b = a`,
 		`if a > 10
 	a = 10
 `,
+		`if a > 10
+	a = 10
+else
+	a = 0
+`,
 	}
 	for _, input := range inputs {
 		t.Log(input)

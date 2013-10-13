@@ -21,6 +21,11 @@ var lextests = []struct {
 	{`if a > 3
     a = 10
 `, T_IF, 1},
+	{`if a > 3
+    a = 10
+else
+	a = 1
+`, T_ELSE, 1},
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
@@ -39,7 +44,6 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 		if item == nil {
 			break
 		}
-		t.Log(CoffeeTokname(int(item.typ)), item)
 		if item.typ == typ {
 			found++
 		}
@@ -48,7 +52,13 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 		}
 	}
 	if found != cnt {
-		t.Fatalf("Expecting token %s x %d", typ, cnt)
+		var c int = int(typ)
+		if c >= CoffeePrivate {
+			if c < CoffeePrivate+len(CoffeeTok2) {
+				c = CoffeeTok2[c-CoffeePrivate]
+			}
+		}
+		t.Fatalf("Expecting token %s x %d", CoffeeTokname(c), cnt)
 	}
 	lexer.close()
 }
@@ -79,7 +89,7 @@ func BenchmarkLexer(b *testing.B) {
 	}
 }
 
-func TestLexerAssign(t *testing.T) {
+func TestLexer(t *testing.T) {
 	for _, test := range lextests {
 		t.Log("Testing lex from ", test.input)
 		expectLexInput(t, test.input, test.expected, test.cnt)
