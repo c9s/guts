@@ -131,6 +131,13 @@ Parser
  x  | if statement
  x  | if else statement
  x  | if elseif else statement
+ o  | foreach block
+ o  | for block
+ o  | dot range
+ o  | class property
+ o  | class method
+ o  | function call, method call as expr.
+ o  | assignment from function call, method call
 
 
 Author
