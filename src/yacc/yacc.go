@@ -3228,7 +3228,7 @@ var yaccpar string // will be processed version of yaccpartext: s/$$/prefix/g
 var yaccpartext = `
 /*	parser for yacc output	*/
 
-var $$Debug = 10
+var $$Debug = 40
 
 type $$Lexer interface {
 	Lex(lval *$$SymType) int
@@ -3259,7 +3259,6 @@ func $$Statname(s int) string {
 func $$lex1(lex $$Lexer, lval *$$SymType) int {
 	c := 0
 	char := lex.Lex(lval)
-	fmt.Println("from Lex: %v", char)
 	if char <= 0 {
 		c = $$Tok1[0]
 		goto out
