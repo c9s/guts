@@ -135,7 +135,7 @@ top_statement_list:
     }
     | top_statement {
         debug("top_statement one", $1)
-        stmts := ast.CreateStatementNodeList()
+        stmts := ast.CreateStatementList()
         stmts.Append($1)
         $$ = stmts
     }
@@ -191,7 +191,7 @@ function_body: top_statement_list;
 
 
 variable: T_IDENTIFIER { 
-        $$ = ast.CreateVariableNode($1.(string))
+        $$ = ast.CreateVariable($1.(string))
     }
 
 expr:
@@ -250,11 +250,11 @@ expr:
     ;
 
 floating_number: T_FLOATING {
-        $$ = ast.CreateFloatingNumberNode($1.(string))
+        $$ = ast.CreateFloatingNumber($1.(string))
     }
 
 number: T_NUMBER {
-        $$ = ast.CreateNumberNode($1.(string))
+        $$ = ast.CreateNumber($1.(string))
     }
 
 function_call_parameter_list:

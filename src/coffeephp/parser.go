@@ -491,7 +491,7 @@ Coffeedefault:
 		//line src/coffeephp/parser.y:136
 		{
 	        debug("top_statement one", CoffeeS[Coffeept-0].val)
-	        stmts := ast.CreateStatementNodeList()
+	        stmts := ast.CreateStatementList()
 	        stmts.Append(CoffeeS[Coffeept-0].val)
 	        CoffeeVAL.val = stmts
 	    }
@@ -541,7 +541,7 @@ Coffeedefault:
 	case 16:
 		//line src/coffeephp/parser.y:193
 		{ 
-	        CoffeeVAL.val = ast.CreateVariableNode(CoffeeS[Coffeept-0].val.(string))
+	        CoffeeVAL.val = ast.CreateVariable(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 17:
 		//line src/coffeephp/parser.y:198
@@ -613,12 +613,12 @@ Coffeedefault:
 	case 31:
 		//line src/coffeephp/parser.y:252
 		{
-	        CoffeeVAL.val = ast.CreateFloatingNumberNode(CoffeeS[Coffeept-0].val.(string))
+	        CoffeeVAL.val = ast.CreateFloatingNumber(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 32:
 		//line src/coffeephp/parser.y:256
 		{
-	        CoffeeVAL.val = ast.CreateNumberNode(CoffeeS[Coffeept-0].val.(string))
+	        CoffeeVAL.val = ast.CreateNumber(CoffeeS[Coffeept-0].val.(string))
 	    }
 	case 33:
 		//line src/coffeephp/parser.y:261

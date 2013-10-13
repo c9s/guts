@@ -1,9 +1,9 @@
 package ast
 
-type VariableNode struct {
+type Variable struct {
 	Identifier string
 }
 
-func CreateVariableNode(identifier string) Node {
-	return VariableNode{Identifier: identifier}
+func CreateVariable(identifier string) Node {
+	return Variable{Identifier: identifier}
 }

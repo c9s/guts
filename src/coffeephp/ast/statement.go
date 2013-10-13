@@ -3,7 +3,7 @@ package ast
 type StatementNode struct {
 }
 
-func CreateStatementNode() Node {
+func CreateStatement() Node {
 	return StatementNode{}
 }
 

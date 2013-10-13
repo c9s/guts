@@ -8,6 +8,6 @@ func (self *StatementNodeList) Append(node Node) {
 	*self = newList
 }
 
-func CreateStatementNodeList() *StatementNodeList {
+func CreateStatementList() *StatementNodeList {
 	return &StatementNodeList{}
 }

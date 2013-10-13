@@ -25,13 +25,13 @@ func (self *Visitor) Visit(n ast.Node) string {
 		}
 		return output
 	}
-	if variable, ok := n.(ast.VariableNode); ok {
+	if variable, ok := n.(ast.Variable); ok {
 		return "$" + variable.Identifier
 	}
-	if number, ok := n.(ast.NumberNode); ok {
+	if number, ok := n.(ast.Number); ok {
 		return strconv.FormatInt(number.Val, 10)
 	}
-	if floating, ok := n.(ast.FloatingNumberNode); ok {
+	if floating, ok := n.(ast.FloatingNumber); ok {
 		return strconv.FormatFloat(floating.Val, 'e', -1, 64)
 	}
 	if expr, ok := n.(ast.UnaryExpr); ok {

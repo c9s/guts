@@ -2,11 +2,11 @@ package ast
 
 import "strconv"
 
-type NumberNode struct {
+type Number struct {
 	Val int64
 }
 
-func CreateNumberNode(token string) Node {
+func CreateNumber(token string) Node {
 	var err error
 	var base int = 10
 	if token[0] == '0' {
@@ -16,7 +16,7 @@ func CreateNumberNode(token string) Node {
 	if err != nil {
 		panic(err)
 	}
-	n := NumberNode{}
+	n := Number{}
 	n.Val = val
 	return n
 }
