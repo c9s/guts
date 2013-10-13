@@ -1,4 +1,4 @@
-all: parser build test
+all: yacc parser build test
 
 yacc:
 	go install yacc

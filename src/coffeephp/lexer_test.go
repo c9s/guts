@@ -18,6 +18,9 @@ var lextests = []struct {
 	{"/* comment */", T_COMMENT, 1},
 	{`a = "string content"`, T_STRING, 1},
 	{`a = "string content contains quote \""`, T_STRING, 1},
+	{`if a > 3
+    a = 10
+`, T_IF, 1},
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
@@ -36,7 +39,7 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 		if item == nil {
 			break
 		}
-		t.Log(item)
+		t.Log(CoffeeTokname(int(item.typ)), item)
 		if item.typ == typ {
 			found++
 		}

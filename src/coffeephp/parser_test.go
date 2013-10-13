@@ -11,6 +11,9 @@ func TestParser(t *testing.T) {
 a = 4 * (2 + 3)
 b = a`,
 		`x = 3 * -2`,
+		`if a > 10
+	a = 10
+`,
 	}
 	for _, input := range inputs {
 		t.Log(input)
@@ -28,7 +31,7 @@ b = a`,
 		}
 		lexer.close()
 		t.Logf("AST: %#v", parser.Val.val)
-
-		t.Log(phpcodegen.Visit(parser.Val.val))
+		visitor := phpcodegen.Visitor{}
+		t.Log(visitor.Visit(parser.Val.val))
 	}
 }

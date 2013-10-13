@@ -180,6 +180,7 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	item = <-l.items
 	if item != nil {
 		*lval = *item
+		// fmt.Printf("%s %s", CoffeeTokname(int(item.typ)), item.val)
 		return int(item.typ)
 	}
 	return 0

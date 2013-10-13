@@ -32,8 +32,15 @@ func debug(msg string, vals ...interface{}) {
 
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
-%type <val> unticked_statement assignment_statement top_statement top_statement_list start
-%type <val> expr statement variable number floating_number
+%type <val> expr variable number floating_number
+%type <val> statement
+%type <val> function_decl_statement
+%type <val> unticked_statement 
+%type <val> assignment_statement 
+%type <val> if_statement 
+%type <val> top_statement 
+%type <val> top_statement_list 
+%type <val> start
 
 // same for terminals
 %token <val> T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -70,7 +77,12 @@ func debug(msg string, vals ...interface{}) {
 %token T_CLASS
 %token T_IS
 %token T_DOES
-%token T_FUNCTION_PROTOTYPE
+
+// ::
+%token T_FUNCTION_PROTOTYPE 
+
+// ->
+%token T_FUNCTION_ARROW
 %token T_RANGE_OPERATOR
 
 %token T_STRING
@@ -143,6 +155,8 @@ top_statement:
 statement:
       unticked_statement { $$ = $1 }
     | assignment_statement { $$ = $1 }
+    | function_decl_statement { $$ = $1 }
+    | if_statement { $$ = $1 }
 ;
 
 unticked_statement: expr { $$ = ast.CreateExprStatement($1) } ;
@@ -155,19 +169,32 @@ assignment_statement:
     }
 ;
 
-variable: T_IDENTIFIER { 
-        $$ = ast.CreateVariableNode($1.(string))
+if_statement: 
+    T_IF expr T_NEWLINE T_INDENT_ENTER top_statement_list T_INDENT_EXIT {
+        $$ = ast.CreateIfStatement($2.(ast.Expr), $5.(*ast.StatementNodeList))
     }
 
 function_parameter_list: '(' ')' ;
 
-function:
-      T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list function_body
+function_decl_statement:
+    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_ARROW function_body { 
+        // $1 ($3) $4
+    }
 ;
 
 function_body: top_statement_list;
 
-expr    :
+
+
+
+
+
+
+variable: T_IDENTIFIER { 
+        $$ = ast.CreateVariableNode($1.(string))
+    }
+
+expr:
       '(' expr ')' {
             if node, ok := $2.(ast.Expr) ; ok {
                 node.Parenthesis = true
@@ -193,17 +220,25 @@ expr    :
         { 
             $$ = ast.CreateExpr('/', $1, $3)
         }
-    | expr '%' expr
+    | expr '%' expr 
         { 
             $$ = ast.CreateExpr('%', $1, $3)
         }
-    | expr '&' expr
-        { 
+    | expr '&' expr 
+        {
             $$ = ast.CreateExpr('&', $1, $3)
         }
-    | expr '|' expr
-        { 
+    | expr '|' expr 
+        {
             $$ = ast.CreateExpr('|', $1, $3)
+        }
+    | expr '>' expr 
+        {
+            $$ = ast.CreateExpr('>', $1, $3)
+        }
+    | expr '<' expr 
+        {
+            $$ = ast.CreateExpr('<', $1, $3)
         }
     | '-' expr  %prec UMINUS
         { 

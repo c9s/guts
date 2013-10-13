@@ -3228,7 +3228,7 @@ var yaccpar string // will be processed version of yaccpartext: s/$$/prefix/g
 var yaccpartext = `
 /*	parser for yacc output	*/
 
-var $$Debug = 0
+var $$Debug = 10
 
 type $$Lexer interface {
 	Lex(lval *$$SymType) int
@@ -3239,9 +3239,9 @@ const $$Flag = -1000
 
 func $$Tokname(c int) string {
 	// 4 is TOKSTART above
-	if c >= 4 && c-4 < len($$Toknames) {
-		if $$Toknames[c-4] != "" {
-			return $$Toknames[c-4]
+	if c >= 57346 && c-57346 < len($$Toknames) {
+		if $$Toknames[c-57346] != "" {
+			return $$Toknames[c-57346]
 		}
 	}
 	return __yyfmt__.Sprintf("tok-%v", c)

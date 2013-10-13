@@ -22,8 +22,9 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(TokenType(c))
 		return lexStart
-	} else if l.accept("+-*|&[]{}()") {
-		l.emit(TokenType(c))
+	} else if l.emitIfMatch("->", T_FUNCTION_ARROW) {
+		return lexStart
+	} else if l.emitIfMatch("::", T_FUNCTION_PROTOTYPE) {
 		return lexStart
 	} else if c == ' ' || c == '\t' {
 		// return lexSpaces
@@ -34,10 +35,17 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.emit(T_NEWLINE)
 		l.lastSpace = l.space
 		l.space = 0
+		c = l.peek()
+		if c == eof {
+			l.emit(T_INDENT_EXIT)
+		}
 		return lexStartLine
 	} else if c == '=' && l.peekMore(2) != '=' {
 		l.next()
 		l.emit(T_ASSIGN)
+		return lexStart
+	} else if l.accept("+-*|&[]{}()<>") {
+		l.emit(TokenType(c))
 		return lexStart
 	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {
 		return lexStart
@@ -161,8 +169,9 @@ func lexIgnoreSpaces(l *CoffeeLex) stateFn {
 
 func lexIndentSpaces(l *CoffeeLex) stateFn {
 	l.space = 0
+	var c rune
 	for {
-		c := l.next()
+		c = l.next()
 		if c == ' ' || c == '\t' {
 			l.space++
 		} else {
