@@ -128,7 +128,7 @@ Parser
     | Rule                
 --- | -------------------
  x  | assignment statement
-
+ x  | if statement
 
 
 Author
