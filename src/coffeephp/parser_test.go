@@ -23,6 +23,13 @@ b = a`,
 else
     a = 0
 `,
+		`if a > 10
+    a = 10
+    b = 20
+else
+    a = 0
+    b = 0
+`,
 	}
 	for _, input := range inputs {
 		t.Log(input)
