@@ -24,16 +24,16 @@ func Visit(n ast.Node) string {
 	if floating, ok := n.(ast.FloatingNumberNode); ok {
 		return strconv.FormatFloat(floating.Val, 'e', -1, 64)
 	}
-	if expr, ok := n.(ast.UnaryExprNode); ok {
+	if expr, ok := n.(ast.UnaryExpr); ok {
 		return fmt.Sprintf("%c%s", expr.Op, Visit(expr.Val))
 	}
-	if expr, ok := n.(ast.ExprNode); ok {
+	if expr, ok := n.(ast.Expr); ok {
 		if expr.Parenthesis {
 			return fmt.Sprintf("(%s %c %s)", Visit(expr.Left), expr.Op, Visit(expr.Right))
 		}
 		return fmt.Sprintf("%s %c %s", Visit(expr.Left), expr.Op, Visit(expr.Right))
 	}
-	if stmt, ok := n.(ast.AssignStatementNode); ok {
+	if stmt, ok := n.(ast.AssignStatement); ok {
 		return Visit(stmt.Variable) + " = " + Visit(stmt.Expr) + ";\n"
 	}
 	return ""

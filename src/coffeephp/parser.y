@@ -150,7 +150,7 @@ unticked_statement: expr { $$ = ast.CreateExprStatementNode($1) } ;
 assignment_statement:
     variable T_ASSIGN expr {
         debug("assignment_statement", $1 , "=" , $3)
-        $$ = ast.CreateAssignStatementNode($1, $3)
+        $$ = ast.CreateAssignStatement($1, $3)
     }
 ;
 
@@ -168,45 +168,45 @@ function_body: top_statement_list;
 
 expr    :
       '(' expr ')' {
-            if node, ok := $2.(ast.ExprNode) ; ok {
+            if node, ok := $2.(ast.Expr) ; ok {
                 node.Parenthesis = true
                 $$ = node
             } else {
-                panic(" type casting to ast.ExprNode failed.")
+                panic(" type casting to ast.Expr failed.")
             }
             // $$ = $2
         }
     | expr '+' expr
         { 
-            $$ = ast.CreateExprNode('+', $1, $3)
+            $$ = ast.CreateExpr('+', $1, $3)
         }
     | expr '-' expr
         { 
-            $$ = ast.CreateExprNode('-', $1, $3)
+            $$ = ast.CreateExpr('-', $1, $3)
         }
     | expr '*' expr
         { 
-            $$ = ast.CreateExprNode('*', $1, $3)
+            $$ = ast.CreateExpr('*', $1, $3)
         }
     | expr '/' expr
         { 
-            $$ = ast.CreateExprNode('/', $1, $3)
+            $$ = ast.CreateExpr('/', $1, $3)
         }
     | expr '%' expr
         { 
-            $$ = ast.CreateExprNode('%', $1, $3)
+            $$ = ast.CreateExpr('%', $1, $3)
         }
     | expr '&' expr
         { 
-            $$ = ast.CreateExprNode('&', $1, $3)
+            $$ = ast.CreateExpr('&', $1, $3)
         }
     | expr '|' expr
         { 
-            $$ = ast.CreateExprNode('|', $1, $3)
+            $$ = ast.CreateExpr('|', $1, $3)
         }
     | '-' expr  %prec UMINUS
         { 
-            $$ = ast.UnaryExprNode{'-', $2}
+            $$ = ast.UnaryExpr{'-', $2}
         }
     | variable
     | number

@@ -503,7 +503,7 @@ Coffeedefault:
 		//line src/coffeephp/parser.y:151
 		{
 	        debug("assignment_statement", CoffeeS[Coffeept-2].val , "=" , CoffeeS[Coffeept-0].val)
-	        CoffeeVAL.val = ast.CreateAssignStatementNode(CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	        CoffeeVAL.val = ast.CreateAssignStatement(CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	    }
 	case 10:
 		//line src/coffeephp/parser.y:157
@@ -513,53 +513,53 @@ Coffeedefault:
 	case 14:
 		//line src/coffeephp/parser.y:170
 		{
-	            if node, ok := CoffeeS[Coffeept-1].val.(ast.ExprNode) ; ok {
+	            if node, ok := CoffeeS[Coffeept-1].val.(ast.Expr) ; ok {
 	                node.Parenthesis = true
 	                CoffeeVAL.val = node
 	            } else {
-	                panic(" type casting to ast.ExprNode failed.")
+	                panic(" type casting to ast.Expr failed.")
 	            }
 	            // $$ = $2
         }
 	case 15:
 		//line src/coffeephp/parser.y:180
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 16:
 		//line src/coffeephp/parser.y:184
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 17:
 		//line src/coffeephp/parser.y:188
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 18:
 		//line src/coffeephp/parser.y:192
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 19:
 		//line src/coffeephp/parser.y:196
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 20:
 		//line src/coffeephp/parser.y:200
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 21:
 		//line src/coffeephp/parser.y:204
 		{ 
-	            CoffeeVAL.val = ast.CreateExprNode('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            CoffeeVAL.val = ast.CreateExpr('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
 	case 22:
 		//line src/coffeephp/parser.y:208
 		{ 
-	            CoffeeVAL.val = ast.UnaryExprNode{'-', CoffeeS[Coffeept-0].val}
+	            CoffeeVAL.val = ast.UnaryExpr{'-', CoffeeS[Coffeept-0].val}
 	        }
 	case 23:
 		CoffeeVAL.val = CoffeeS[Coffeept-0].val

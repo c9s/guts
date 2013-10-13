@@ -3,14 +3,14 @@ package ast
 /*
 
 */
-type AssignStatementNode struct {
+type AssignStatement struct {
 	Variable Node
 	Expr     Node
 	StatementNode
 }
 
-func CreateAssignStatementNode(variable Node, expr Node) Node {
-	return AssignStatementNode{
+func CreateAssignStatement(variable Node, expr Node) Node {
+	return AssignStatement{
 		Variable: variable,
 		Expr:     expr,
 	}

@@ -1,19 +1,19 @@
 package ast
 
-type UnaryExprNode struct {
+type UnaryExpr struct {
 	Op  byte
 	Val Node
 }
 
-type ExprNode struct {
+type Expr struct {
 	Op          byte
 	Left        Node
 	Right       Node
 	Parenthesis bool
 }
 
-func CreateExprNode(op byte, left, right Node) Node {
-	return ExprNode{
+func CreateExpr(op byte, left, right Node) Node {
+	return Expr{
 		Op:    op,
 		Left:  left,
 		Right: right,
