@@ -7,6 +7,6 @@ func CreateStatementNode() Node {
 	return StatementNode{}
 }
 
-func CreateExprStatementNode(node Node) Node {
+func CreateExprStatement(node Node) Node {
 	return StatementNode{}
 }

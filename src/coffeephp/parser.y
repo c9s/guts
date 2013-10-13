@@ -145,7 +145,8 @@ statement:
     | assignment_statement { $$ = $1 }
 ;
 
-unticked_statement: expr { $$ = ast.CreateExprStatementNode($1) } ;
+unticked_statement: expr { $$ = ast.CreateExprStatement($1) } ;
+
 
 assignment_statement:
     variable T_ASSIGN expr {

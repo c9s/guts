@@ -498,7 +498,7 @@ Coffeedefault:
 		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
 	case 8:
 		//line src/coffeephp/parser.y:148
-		{ CoffeeVAL.val = ast.CreateExprStatementNode(CoffeeS[Coffeept-0].val) }
+		{ CoffeeVAL.val = ast.CreateExprStatement(CoffeeS[Coffeept-0].val) }
 	case 9:
 		//line src/coffeephp/parser.y:151
 		{
