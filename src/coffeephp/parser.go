@@ -256,9 +256,9 @@ const CoffeeFlag = -1000
 
 func CoffeeTokname(c int) string {
 	// 4 is TOKSTART above
-	if c >= 57346 && c-57346 < len(CoffeeToknames) {
-		if CoffeeToknames[c-57346] != "" {
-			return CoffeeToknames[c-57346]
+	if c >= 4 && c-4 < len(CoffeeToknames) {
+		if CoffeeToknames[c-4] != "" {
+			return CoffeeToknames[c-4]
 		}
 	}
 	return __yyfmt__.Sprintf("tok-%v", c)
