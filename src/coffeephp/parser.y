@@ -49,7 +49,7 @@ func debug(msg string, vals ...interface{}) {
 %token T_ONELINE_COMMENT T_COMMENT
 %token T_EOF
 
-%token T_INDENT_ENTER T_INDENT_EXIT
+%token T_INDENT_ENTER T_OUTDENT
 
 %token T_NEWLINE
 
@@ -172,7 +172,7 @@ statement:
 ;
 
 unticked_statement: 
-          T_NEWLINE T_INDENT_ENTER inner_statement_list T_NEWLINE T_INDENT_EXIT { $$ = $3 }
+          T_NEWLINE T_INDENT_ENTER inner_statement_list T_NEWLINE T_OUTDENT { $$ = $3 }
         | expr { $$ = ast.CreateExprStatement($1) } 
         | assignment_statement { $$ = $1 }
         | function_decl_statement { $$ = $1 }

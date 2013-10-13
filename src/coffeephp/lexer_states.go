@@ -78,7 +78,7 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.space = 0
 		c = l.peek()
 		if c == eof {
-			l.emit(T_INDENT_EXIT)
+			l.emit(T_OUTDENT)
 		}
 		return lexStartLine
 	} else if c == '=' && l.peekMore(2) != '=' {
@@ -211,7 +211,7 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 	if l.space > l.lastSpace {
 		l.emit(T_INDENT_ENTER)
 	} else if l.space < l.lastSpace {
-		l.emit(T_INDENT_EXIT)
+		l.emit(T_OUTDENT)
 	}
 	// l.emit(T_SPACE)
 	return lexStart
