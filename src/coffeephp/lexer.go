@@ -37,10 +37,10 @@ const lexError = -99
 
 func (self *CoffeeSymType) String() string {
 	switch self.typ {
-	case T_EOF:
+	case T_EOF, eof:
 		return "EOF"
 	}
-	return fmt.Sprintf("[%d] %q", self.typ, self.val)
+	return fmt.Sprintf("Token: %s %q", GetTokenName(int(self.typ)), self.val)
 }
 
 // remember rollback position
@@ -193,6 +193,8 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	item = <-l.items
 	if item != nil {
 		*lval = *item
+
+		fmt.Println(item.String())
 		// fmt.Printf("%s %s", CoffeeTokname(int(item.typ)), item.val)
 		return int(item.typ)
 	}
@@ -211,4 +213,17 @@ func GetTokenName(typ int) string {
 
 func (l *CoffeeLex) Error(s string) {
 	fmt.Printf("syntax error: %s\n", s)
+}
+
+func dumpLexItems(items chan *CoffeeSymType) {
+	for {
+		item := <-items
+		if item == nil {
+			break
+		}
+		fmt.Printf("Got token %s: %s\n", GetTokenName(int(item.typ)), item.val)
+		if item.typ == T_EOF || item.typ == eof {
+			break
+		}
+	}
 }
