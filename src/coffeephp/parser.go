@@ -40,7 +40,7 @@ const T_STRING = 57350
 const T_ONELINE_COMMENT = 57351
 const T_COMMENT = 57352
 const T_EOF = 57353
-const T_INDENT_ENTER = 57354
+const T_INDENT = 57354
 const T_OUTDENT = 57355
 const T_NEWLINE = 57356
 const T_ASSIGN = 57357
@@ -83,7 +83,7 @@ var CoffeeToknames = []string{
 	"T_ONELINE_COMMENT",
 	"T_COMMENT",
 	"T_EOF",
-	"T_INDENT_ENTER",
+	"T_INDENT",
 	"T_OUTDENT",
 	"T_NEWLINE",
 	"T_ASSIGN",

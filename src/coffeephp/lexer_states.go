@@ -71,14 +71,34 @@ func lexStart(l *CoffeeLex) stateFn {
 		// return lexSpaces
 		return lexIgnoreSpaces
 	} else if c == '\n' || c == '\r' {
+		// if there is a new line, check the next line is indent or outdent,
+		// if there is no spaces/indent in the next line, then it should be outdent.
 		l.line++
 		l.next()
-		l.emit(T_NEWLINE)
 		l.lastSpace = l.space
 		l.space = 0
 		c = l.peek()
 		if c == eof {
 			l.emit(T_OUTDENT)
+			return nil
+		}
+		// consume the spaces and guess it's
+		// indent/outdent/newline
+		for {
+			c = l.next()
+			if c == ' ' || c == '\t' {
+				l.space++
+			} else {
+				break
+			}
+		}
+		l.backup()
+		if l.space == l.lastSpace {
+			l.emit(T_NEWLINE)
+		} else if l.space < l.lastSpace {
+			l.emit(T_OUTDENT)
+		} else if l.space > l.lastSpace {
+			l.emit(T_INDENT)
 		}
 		return lexStartLine
 	} else if c == '=' && l.peekMore(2) != '=' {
@@ -207,13 +227,14 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 	}
 	l.backup()
 	l.ignore() // simply ignore string,
-
-	if l.space > l.lastSpace {
-		l.emit(T_INDENT_ENTER)
-	} else if l.space < l.lastSpace {
-		l.emit(T_OUTDENT)
-	}
-	// l.emit(T_SPACE)
+	/*
+		if l.space > l.lastSpace {
+			l.emit(T_INDENT)
+		} else if l.space < l.lastSpace {
+			l.emit(T_OUTDENT)
+		}
+		// l.emit(T_SPACE)
+	*/
 	return lexStart
 }
 

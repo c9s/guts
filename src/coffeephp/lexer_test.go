@@ -2,6 +2,8 @@ package coffeephp
 
 import "testing"
 
+/* vim:list: */
+
 var lextests = []struct {
 	input    string
 	expected TokenType
@@ -20,11 +22,13 @@ var lextests = []struct {
 	{`a = "string content contains quote \""`, T_STRING, 1},
 	{`if a > 3
     a = 10
+    b = 20
 `, T_IF, 1},
 	{`if a > 3
     a = 10
+    b = 20
 else
-	a = 1
+    a = 1
 `, T_ELSE, 1},
 }
 
