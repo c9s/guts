@@ -24,7 +24,7 @@ func debug(msg string, vals ...interface{}) {
 
 
 //line src/gutscript/parser.y:26
-type CoffeeSymType struct{
+type GutsSymType struct{
 	yys int
     typ TokenType
     val ast.Node
@@ -74,7 +74,7 @@ const UMINUS = 57384
 const T_BOOLEAN_OR = 57385
 const T_BOOLEAN_AND = 57386
 
-var CoffeeToknames = []string{
+var GutsToknames = []string{
 	"T_DOT",
 	"T_IDENTIFIER",
 	"T_FLOATING",
@@ -126,31 +126,31 @@ var CoffeeToknames = []string{
 	"T_BOOLEAN_OR",
 	"T_BOOLEAN_AND",
 }
-var CoffeeStatenames = []string{}
+var GutsStatenames = []string{}
 
-const CoffeeEofCode = 1
-const CoffeeErrCode = 2
-const CoffeeMaxDepth = 200
+const GutsEofCode = 1
+const GutsErrCode = 2
+const GutsMaxDepth = 200
 
 //line src/gutscript/parser.y:304
       /*  start  of  programs  */
 
 //line yacctab:1
-var CoffeeExca = []int{
+var GutsExca = []int{
 	-1, 1,
 	1, -1,
 	-2, 0,
 }
 
-const CoffeeNprod = 40
-const CoffeePrivate = 57344
+const GutsNprod = 40
+const GutsPrivate = 57344
 
-var CoffeeTokenNames []string
-var CoffeeStates []string
+var GutsTokenNames []string
+var GutsStates []string
 
-const CoffeeLast = 179
+const GutsLast = 179
 
-var CoffeeAct = []int{
+var GutsAct = []int{
 
 	35, 13, 3, 13, 60, 20, 28, 29, 62, 57,
 	27, 13, 26, 21, 22, 23, 24, 25, 61, 10,
@@ -171,7 +171,7 @@ var CoffeeAct = []int{
 	0, 41, 42, 43, 44, 45, 46, 47, 48, 49,
 	50, 0, 0, 0, 0, 0, 0, 0, 55,
 }
-var CoffeePact = []int{
+var GutsPact = []int{
 
 	102, -1000, 102, -1000, -1000, -1000, 24, -1000, -1000, 8,
 	102, 78, 78, 6, -1000, -1000, -9, 78, -1000, -1000,
@@ -181,26 +181,26 @@ var CoffeePact = []int{
 	7, -1000, -1000, -1000, -1000, -10, -14, -47, -1000, -1000,
 	-1000, 102, -1000, -1000, 102,
 }
-var CoffeePgo = []int{
+var GutsPgo = []int{
 
 	0, 139, 0, 45, 44, 110, 43, 42, 41, 40,
 	96, 2, 20, 31, 30, 29, 29, 29,
 }
-var CoffeeR1 = []int{
+var GutsR1 = []int{
 
 	0, 13, 12, 12, 11, 10, 7, 7, 5, 5,
 	5, 5, 5, 9, 9, 9, 8, 8, 14, 6,
 	15, 2, 1, 1, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 4, 3, 16, 17,
 }
-var CoffeeR2 = []int{
+var GutsR2 = []int{
 
 	0, 1, 2, 1, 1, 3, 2, 1, 1, 1,
 	1, 1, 1, 3, 4, 3, 3, 4, 2, 5,
 	1, 1, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 2, 1, 1, 1, 1, 1, 2, 2,
 }
-var CoffeeChk = []int{
+var GutsChk = []int{
 
 	-1000, -13, -12, -11, -5, -10, -1, -8, -6, -9,
 	12, 54, 46, -2, -3, -4, 5, 18, 7, 6,
@@ -210,7 +210,7 @@ var CoffeeChk = []int{
 	-1, -10, 13, -5, 55, -1, -14, 54, -10, -10,
 	14, 32, 55, -15, -12,
 }
-var CoffeeDef = []int{
+var GutsDef = []int{
 
 	0, -2, 1, 3, 4, 8, 9, 10, 11, 12,
 	0, 0, 0, 33, 34, 35, 21, 0, 37, 36,
@@ -220,7 +220,7 @@ var CoffeeDef = []int{
 	0, 15, 5, 6, 22, 16, 0, 0, 13, 14,
 	17, 0, 18, 19, 20,
 }
-var CoffeeTok1 = []int{
+var GutsTok1 = []int{
 
 	1, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -236,7 +236,7 @@ var CoffeeTok1 = []int{
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 42,
 }
-var CoffeeTok2 = []int{
+var GutsTok2 = []int{
 
 	2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 	12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -244,7 +244,7 @@ var CoffeeTok2 = []int{
 	32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
 	51, 52, 53,
 }
-var CoffeeTok3 = []int{
+var GutsTok3 = []int{
 	0,
 }
 
@@ -252,85 +252,85 @@ var CoffeeTok3 = []int{
 
 /*	parser for yacc output	*/
 
-var CoffeeDebug = 40
+var GutsDebug = 40
 
-type CoffeeLexer interface {
-	Lex(lval *CoffeeSymType) int
+type GutsLexer interface {
+	Lex(lval *GutsSymType) int
 	Error(s string)
 }
 
-const CoffeeFlag = -1000
+const GutsFlag = -1000
 
-func CoffeeTokname(c int) string {
+func GutsTokname(c int) string {
 	// 4 is TOKSTART above
-	if c >= 4 && c-4 < len(CoffeeToknames) {
-		if CoffeeToknames[c-4] != "" {
-			return CoffeeToknames[c-4]
+	if c >= 4 && c-4 < len(GutsToknames) {
+		if GutsToknames[c-4] != "" {
+			return GutsToknames[c-4]
 		}
 	}
 	return __yyfmt__.Sprintf("tok-%v", c)
 }
 
-func CoffeeStatname(s int) string {
-	if s >= 0 && s < len(CoffeeStatenames) {
-		if CoffeeStatenames[s] != "" {
-			return CoffeeStatenames[s]
+func GutsStatname(s int) string {
+	if s >= 0 && s < len(GutsStatenames) {
+		if GutsStatenames[s] != "" {
+			return GutsStatenames[s]
 		}
 	}
 	return __yyfmt__.Sprintf("state-%v", s)
 }
 
-func Coffeelex1(lex CoffeeLexer, lval *CoffeeSymType) int {
+func Gutslex1(lex GutsLexer, lval *GutsSymType) int {
 	c := 0
 	char := lex.Lex(lval)
 	if char <= 0 {
-		c = CoffeeTok1[0]
+		c = GutsTok1[0]
 		goto out
 	}
-	if char < len(CoffeeTok1) {
-		c = CoffeeTok1[char]
+	if char < len(GutsTok1) {
+		c = GutsTok1[char]
 		goto out
 	}
-	if char >= CoffeePrivate {
-		if char < CoffeePrivate+len(CoffeeTok2) {
-			c = CoffeeTok2[char-CoffeePrivate]
+	if char >= GutsPrivate {
+		if char < GutsPrivate+len(GutsTok2) {
+			c = GutsTok2[char-GutsPrivate]
 			goto out
 		}
 	}
-	for i := 0; i < len(CoffeeTok3); i += 2 {
-		c = CoffeeTok3[i+0]
+	for i := 0; i < len(GutsTok3); i += 2 {
+		c = GutsTok3[i+0]
 		if c == char {
-			c = CoffeeTok3[i+1]
+			c = GutsTok3[i+1]
 			goto out
 		}
 	}
 
 out:
 	if c == 0 {
-		c = CoffeeTok2[1] /* unknown char */
+		c = GutsTok2[1] /* unknown char */
 	}
-	if CoffeeDebug >= 3 {
-		__yyfmt__.Printf("lex %s(%d)\n", CoffeeTokname(c), uint(char))
+	if GutsDebug >= 3 {
+		__yyfmt__.Printf("lex %s(%d)\n", GutsTokname(c), uint(char))
 	}
 	return c
 }
 
-type CoffeeParser struct {
-	Val CoffeeSymType
+type GutsParser struct {
+	Val GutsSymType
 }
 
-func (self *CoffeeParser) Parse(Coffeelex CoffeeLexer) int {
-	var Coffeen int
-	var Coffeelval CoffeeSymType
-	var CoffeeVAL CoffeeSymType
-	CoffeeS := make([]CoffeeSymType, CoffeeMaxDepth)
+func (self *GutsParser) Parse(Gutslex GutsLexer) int {
+	var Gutsn int
+	var Gutslval GutsSymType
+	var GutsVAL GutsSymType
+	GutsS := make([]GutsSymType, GutsMaxDepth)
 
 	Nerrs := 0   /* number of errors */
 	Errflag := 0 /* error recovery flag */
-	Coffeestate := 0
-	Coffeechar := -1
-	Coffeep := -1
-	goto Coffeestack
+	Gutsstate := 0
+	Gutschar := -1
+	Gutsp := -1
+	goto Gutsstack
 
 ret0:
 	return 0
@@ -338,80 +338,80 @@ ret0:
 ret1:
 	return 1
 
-Coffeestack:
+Gutsstack:
 	/* put a state and value onto the stack */
-	if CoffeeDebug >= 4 {
-		__yyfmt__.Printf("char %v in %v\n", CoffeeTokname(Coffeechar), CoffeeStatname(Coffeestate))
+	if GutsDebug >= 4 {
+		__yyfmt__.Printf("char %v in %v\n", GutsTokname(Gutschar), GutsStatname(Gutsstate))
 	}
 
-	Coffeep++
-	if Coffeep >= len(CoffeeS) {
-		nyys := make([]CoffeeSymType, len(CoffeeS)*2)
-		copy(nyys, CoffeeS)
-		CoffeeS = nyys
+	Gutsp++
+	if Gutsp >= len(GutsS) {
+		nyys := make([]GutsSymType, len(GutsS)*2)
+		copy(nyys, GutsS)
+		GutsS = nyys
 	}
-	CoffeeS[Coffeep] = CoffeeVAL
-	CoffeeS[Coffeep].yys = Coffeestate
+	GutsS[Gutsp] = GutsVAL
+	GutsS[Gutsp].yys = Gutsstate
 
-Coffeenewstate:
-	Coffeen = CoffeePact[Coffeestate]
-	if Coffeen <= CoffeeFlag {
-		goto Coffeedefault /* simple state */
+Gutsnewstate:
+	Gutsn = GutsPact[Gutsstate]
+	if Gutsn <= GutsFlag {
+		goto Gutsdefault /* simple state */
 	}
-	if Coffeechar < 0 {
-		Coffeechar = Coffeelex1(Coffeelex, &Coffeelval)
+	if Gutschar < 0 {
+		Gutschar = Gutslex1(Gutslex, &Gutslval)
 	}
-	Coffeen += Coffeechar
-	if Coffeen < 0 || Coffeen >= CoffeeLast {
-		goto Coffeedefault
+	Gutsn += Gutschar
+	if Gutsn < 0 || Gutsn >= GutsLast {
+		goto Gutsdefault
 	}
-	Coffeen = CoffeeAct[Coffeen]
-	if CoffeeChk[Coffeen] == Coffeechar { /* valid shift */
-		Coffeechar = -1
-		CoffeeVAL = Coffeelval
-		Coffeestate = Coffeen
+	Gutsn = GutsAct[Gutsn]
+	if GutsChk[Gutsn] == Gutschar { /* valid shift */
+		Gutschar = -1
+		GutsVAL = Gutslval
+		Gutsstate = Gutsn
 		if Errflag > 0 {
 			Errflag--
 		}
-		goto Coffeestack
+		goto Gutsstack
 	}
 
-Coffeedefault:
+Gutsdefault:
 	/* default state action */
-	Coffeen = CoffeeDef[Coffeestate]
-	if Coffeen == -2 {
-		if Coffeechar < 0 {
-			Coffeechar = Coffeelex1(Coffeelex, &Coffeelval)
+	Gutsn = GutsDef[Gutsstate]
+	if Gutsn == -2 {
+		if Gutschar < 0 {
+			Gutschar = Gutslex1(Gutslex, &Gutslval)
 		}
 
 		/* look through exception table */
 		xi := 0
 		for {
-			if CoffeeExca[xi+0] == -1 && CoffeeExca[xi+1] == Coffeestate {
+			if GutsExca[xi+0] == -1 && GutsExca[xi+1] == Gutsstate {
 				break
 			}
 			xi += 2
 		}
 		for xi += 2; ; xi += 2 {
-			Coffeen = CoffeeExca[xi+0]
-			if Coffeen < 0 || Coffeen == Coffeechar {
+			Gutsn = GutsExca[xi+0]
+			if Gutsn < 0 || Gutsn == Gutschar {
 				break
 			}
 		}
-		Coffeen = CoffeeExca[xi+1]
-		if Coffeen < 0 {
+		Gutsn = GutsExca[xi+1]
+		if Gutsn < 0 {
 			goto ret0
 		}
 	}
-	if Coffeen == 0 {
+	if Gutsn == 0 {
 		/* error ... attempt to resume parsing */
 		switch Errflag {
 		case 0: /* brand new error */
-			Coffeelex.Error("syntax error")
+			Gutslex.Error("syntax error")
 			Nerrs++
-			if CoffeeDebug >= 1 {
-				__yyfmt__.Printf("%s", CoffeeStatname(Coffeestate))
-				__yyfmt__.Printf(" saw %s\n", CoffeeTokname(Coffeechar))
+			if GutsDebug >= 1 {
+				__yyfmt__.Printf("%s", GutsStatname(Gutsstate))
+				__yyfmt__.Printf(" saw %s\n", GutsTokname(Gutschar))
 			}
 			fallthrough
 
@@ -419,156 +419,156 @@ Coffeedefault:
 			Errflag = 3
 
 			/* find a state where "error" is a legal shift action */
-			for Coffeep >= 0 {
-				Coffeen = CoffeePact[CoffeeS[Coffeep].yys] + CoffeeErrCode
-				if Coffeen >= 0 && Coffeen < CoffeeLast {
-					Coffeestate = CoffeeAct[Coffeen] /* simulate a shift of "error" */
-					if CoffeeChk[Coffeestate] == CoffeeErrCode {
-						goto Coffeestack
+			for Gutsp >= 0 {
+				Gutsn = GutsPact[GutsS[Gutsp].yys] + GutsErrCode
+				if Gutsn >= 0 && Gutsn < GutsLast {
+					Gutsstate = GutsAct[Gutsn] /* simulate a shift of "error" */
+					if GutsChk[Gutsstate] == GutsErrCode {
+						goto Gutsstack
 					}
 				}
 
 				/* the current p has no shift on "error", pop stack */
-				if CoffeeDebug >= 2 {
-					__yyfmt__.Printf("error recovery pops state %d\n", CoffeeS[Coffeep].yys)
+				if GutsDebug >= 2 {
+					__yyfmt__.Printf("error recovery pops state %d\n", GutsS[Gutsp].yys)
 				}
-				Coffeep--
+				Gutsp--
 			}
 			/* there is no state on the stack with an error shift ... abort */
 			goto ret1
 
 		case 3: /* no shift yet; clobber input char */
-			if CoffeeDebug >= 2 {
-				__yyfmt__.Printf("error recovery discards %s\n", CoffeeTokname(Coffeechar))
+			if GutsDebug >= 2 {
+				__yyfmt__.Printf("error recovery discards %s\n", GutsTokname(Gutschar))
 			}
-			if Coffeechar == CoffeeEofCode {
+			if Gutschar == GutsEofCode {
 				goto ret1
 			}
-			Coffeechar = -1
-			goto Coffeenewstate /* try again in the same state */
+			Gutschar = -1
+			goto Gutsnewstate /* try again in the same state */
 		}
 	}
 
-	/* reduction by production Coffeen */
-	if CoffeeDebug >= 2 {
-		__yyfmt__.Printf("reduce %v in:\n\t%v\n", Coffeen, CoffeeStatname(Coffeestate))
+	/* reduction by production Gutsn */
+	if GutsDebug >= 2 {
+		__yyfmt__.Printf("reduce %v in:\n\t%v\n", Gutsn, GutsStatname(Gutsstate))
 	}
 
-	Coffeent := Coffeen
-	Coffeept := Coffeep
-	_ = Coffeept // guard against "declared and not used"
+	Gutsnt := Gutsn
+	Gutspt := Gutsp
+	_ = Gutspt // guard against "declared and not used"
 
-	Coffeep -= CoffeeR2[Coffeen]
-	CoffeeVAL = CoffeeS[Coffeep+1]
+	Gutsp -= GutsR2[Gutsn]
+	GutsVAL = GutsS[Gutsp+1]
 
-	self.Val = CoffeeVAL
+	self.Val = GutsVAL
 
 	/* consult goto table to find next state */
-	Coffeen = CoffeeR1[Coffeen]
-	Coffeeg := CoffeePgo[Coffeen]
-	Coffeej := Coffeeg + CoffeeS[Coffeep].yys + 1
+	Gutsn = GutsR1[Gutsn]
+	Gutsg := GutsPgo[Gutsn]
+	Gutsj := Gutsg + GutsS[Gutsp].yys + 1
 
-	if Coffeej >= CoffeeLast {
-		Coffeestate = CoffeeAct[Coffeeg]
+	if Gutsj >= GutsLast {
+		Gutsstate = GutsAct[Gutsg]
 	} else {
-		Coffeestate = CoffeeAct[Coffeej]
-		if CoffeeChk[Coffeestate] != -Coffeen {
-			Coffeestate = CoffeeAct[Coffeeg]
+		Gutsstate = GutsAct[Gutsj]
+		if GutsChk[Gutsstate] != -Gutsn {
+			Gutsstate = GutsAct[Gutsg]
 		}
 	}
 	// dummy call; replaced with literal code
-	switch Coffeent {
+	switch Gutsnt {
 
 	case 1:
 		//line src/gutscript/parser.y:124
 		{
-	        debug("end compilation", CoffeeS[Coffeept-0].val)
-	        CoffeeVAL.val = CoffeeS[Coffeept-0].val
+	        debug("end compilation", GutsS[Gutspt-0].val)
+	        GutsVAL.val = GutsS[Gutspt-0].val
 	    }
 	case 2:
 		//line src/gutscript/parser.y:131
 		{ 
-	        if stmts, ok := CoffeeS[Coffeept-1].val.(*ast.StatementNodeList) ; ok {
-	            stmts.Append(CoffeeS[Coffeept-0].val)
-	            CoffeeVAL.val = CoffeeS[Coffeept-1].val
+	        if stmts, ok := GutsS[Gutspt-1].val.(*ast.StatementNodeList) ; ok {
+	            stmts.Append(GutsS[Gutspt-0].val)
+	            GutsVAL.val = GutsS[Gutspt-1].val
 	        }
-	        debug("top_statement_list top_statement", CoffeeS[Coffeept-1].val, CoffeeS[Coffeept-0].val)
+	        debug("top_statement_list top_statement", GutsS[Gutspt-1].val, GutsS[Gutspt-0].val)
 	    }
 	case 3:
 		//line src/gutscript/parser.y:138
 		{
-	        debug("top_statement", CoffeeS[Coffeept-0].val)
+	        debug("top_statement", GutsS[Gutspt-0].val)
 	        stmts := ast.CreateStatementList()
-	        stmts.Append(CoffeeS[Coffeept-0].val)
-	        CoffeeVAL.val = stmts
+	        stmts.Append(GutsS[Gutspt-0].val)
+	        GutsVAL.val = stmts
 	    }
 	case 4:
 		//line src/gutscript/parser.y:147
 		{
-	        debug("statement", CoffeeS[Coffeept-0].val)
-	        CoffeeVAL.val = CoffeeS[Coffeept-0].val
+	        debug("statement", GutsS[Gutspt-0].val)
+	        GutsVAL.val = GutsS[Gutspt-0].val
 	    }
 	case 5:
 		//line src/gutscript/parser.y:155
-		{ CoffeeVAL.val = CoffeeS[Coffeept-1].val }
+		{ GutsVAL.val = GutsS[Gutspt-1].val }
 	case 6:
 		//line src/gutscript/parser.y:159
 		{
-	            if stmts, ok := CoffeeS[Coffeept-1].val.(*ast.StatementNodeList) ; ok {
-	                stmts.Append(CoffeeS[Coffeept-0].val)
-	                CoffeeVAL.val = CoffeeS[Coffeept-1].val
+	            if stmts, ok := GutsS[Gutspt-1].val.(*ast.StatementNodeList) ; ok {
+	                stmts.Append(GutsS[Gutspt-0].val)
+	                GutsVAL.val = GutsS[Gutspt-1].val
 	            }
 	      }
 	case 7:
 		//line src/gutscript/parser.y:166
 		{ 
 	            stmts := ast.CreateStatementList()
-	            stmts.Append(CoffeeS[Coffeept-0].val)
-	            CoffeeVAL.val = stmts
+	            stmts.Append(GutsS[Gutspt-0].val)
+	            GutsVAL.val = stmts
 	      }
 	case 8:
 		//line src/gutscript/parser.y:174
-		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 9:
 		//line src/gutscript/parser.y:175
-		{ CoffeeVAL.val = ast.CreateExprStatement(CoffeeS[Coffeept-0].val) }
+		{ GutsVAL.val = ast.CreateExprStatement(GutsS[Gutspt-0].val) }
 	case 10:
 		//line src/gutscript/parser.y:176
-		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 11:
 		//line src/gutscript/parser.y:177
-		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 12:
 		//line src/gutscript/parser.y:178
-		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 13:
 		//line src/gutscript/parser.y:183
 		{
-	            CoffeeVAL.val = ast.CreateIfStatement(CoffeeS[Coffeept-1].val.(ast.Expr), CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
+	            GutsVAL.val = ast.CreateIfStatement(GutsS[Gutspt-1].val.(ast.Expr), GutsS[Gutspt-0].val.(*ast.StatementNodeList))
 	        }
 	case 14:
 		//line src/gutscript/parser.y:188
 		{
-	            CoffeeS[Coffeept-3].val.(*ast.IfStatement).AddElseIf(CoffeeS[Coffeept-1].val.(ast.Expr),CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
-	            CoffeeVAL.val = CoffeeS[Coffeept-3].val
+	            GutsS[Gutspt-3].val.(*ast.IfStatement).AddElseIf(GutsS[Gutspt-1].val.(ast.Expr),GutsS[Gutspt-0].val.(*ast.StatementNodeList))
+	            GutsVAL.val = GutsS[Gutspt-3].val
 	        }
 	case 15:
 		//line src/gutscript/parser.y:194
 		{
-	            CoffeeS[Coffeept-2].val.(*ast.IfStatement).SetElse(CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
-	            CoffeeVAL.val = CoffeeS[Coffeept-2].val
+	            GutsS[Gutspt-2].val.(*ast.IfStatement).SetElse(GutsS[Gutspt-0].val.(*ast.StatementNodeList))
+	            GutsVAL.val = GutsS[Gutspt-2].val
 	        }
 	case 16:
 		//line src/gutscript/parser.y:202
 		{
-	            debug("assignment_statement", CoffeeS[Coffeept-2].val , "=" , CoffeeS[Coffeept-0].val)
-	            CoffeeVAL.val = ast.CreateAssignStatement(CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            debug("assignment_statement", GutsS[Gutspt-2].val , "=" , GutsS[Gutspt-0].val)
+	            GutsVAL.val = ast.CreateAssignStatement(GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 17:
 		//line src/gutscript/parser.y:207
 		{
-	            debug("assignment_statement", CoffeeS[Coffeept-3].val , "=" , CoffeeS[Coffeept-1].val)
-	            CoffeeVAL.val = ast.CreateAssignStatement(CoffeeS[Coffeept-3].val, CoffeeS[Coffeept-1].val)
+	            debug("assignment_statement", GutsS[Gutspt-3].val , "=" , GutsS[Gutspt-1].val)
+	            GutsVAL.val = ast.CreateAssignStatement(GutsS[Gutspt-3].val, GutsS[Gutspt-1].val)
 	        }
 	case 19:
 		//line src/gutscript/parser.y:216
@@ -578,14 +578,14 @@ Coffeedefault:
 	case 21:
 		//line src/gutscript/parser.y:229
 		{ 
-	        CoffeeVAL.val = ast.CreateVariable(CoffeeS[Coffeept-0].val.(string))
+	        GutsVAL.val = ast.CreateVariable(GutsS[Gutspt-0].val.(string))
 	    }
 	case 22:
 		//line src/gutscript/parser.y:234
 		{
-	            if node, ok := CoffeeS[Coffeept-1].val.(ast.Expr) ; ok {
+	            if node, ok := GutsS[Gutspt-1].val.(ast.Expr) ; ok {
 	                node.Parenthesis = true
-	                CoffeeVAL.val = node
+	                GutsVAL.val = node
 	            } else {
 	                panic(" type casting to ast.Expr failed.")
 	            }
@@ -594,68 +594,68 @@ Coffeedefault:
 	case 23:
 		//line src/gutscript/parser.y:244
 		{ 
-	            CoffeeVAL.val = ast.CreateExpr('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('+', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 24:
 		//line src/gutscript/parser.y:248
 		{ 
-	            CoffeeVAL.val = ast.CreateExpr('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('-', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 25:
 		//line src/gutscript/parser.y:252
 		{ 
-	            CoffeeVAL.val = ast.CreateExpr('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('*', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 26:
 		//line src/gutscript/parser.y:256
 		{ 
-	            CoffeeVAL.val = ast.CreateExpr('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('/', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 27:
 		//line src/gutscript/parser.y:260
 		{ 
-	            CoffeeVAL.val = ast.CreateExpr('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('%', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 28:
 		//line src/gutscript/parser.y:264
 		{
-	            CoffeeVAL.val = ast.CreateExpr('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('&', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 29:
 		//line src/gutscript/parser.y:268
 		{
-	            CoffeeVAL.val = ast.CreateExpr('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('|', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 30:
 		//line src/gutscript/parser.y:272
 		{
-	            CoffeeVAL.val = ast.CreateExpr('>', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('>', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 31:
 		//line src/gutscript/parser.y:276
 		{
-	            CoffeeVAL.val = ast.CreateExpr('<', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
+	            GutsVAL.val = ast.CreateExpr('<', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 32:
 		//line src/gutscript/parser.y:280
 		{ 
-	            CoffeeVAL.val = ast.UnaryExpr{'-', CoffeeS[Coffeept-0].val}
+	            GutsVAL.val = ast.UnaryExpr{'-', GutsS[Gutspt-0].val}
 	        }
 	case 33:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+		GutsVAL.val = GutsS[Gutspt-0].val
 	case 34:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+		GutsVAL.val = GutsS[Gutspt-0].val
 	case 35:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+		GutsVAL.val = GutsS[Gutspt-0].val
 	case 36:
 		//line src/gutscript/parser.y:288
 		{
-	        CoffeeVAL.val = ast.CreateFloatingNumber(CoffeeS[Coffeept-0].val.(string))
+	        GutsVAL.val = ast.CreateFloatingNumber(GutsS[Gutspt-0].val.(string))
 	    }
 	case 37:
 		//line src/gutscript/parser.y:292
 		{
-	        CoffeeVAL.val = ast.CreateNumber(CoffeeS[Coffeept-0].val.(string))
+	        GutsVAL.val = ast.CreateNumber(GutsS[Gutspt-0].val.(string))
 	    }
 	case 38:
 		//line src/gutscript/parser.y:297
@@ -664,5 +664,5 @@ Coffeedefault:
 		//line src/gutscript/parser.y:301
 		{ }
 	}
-	goto Coffeestack /* stack new state and value */
+	goto Gutsstack /* stack new state and value */
 }

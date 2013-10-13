@@ -53,14 +53,14 @@ else
 func TestCodeGen(t *testing.T) {
 	for _, input := range parserInputs {
 		t.Log(input)
-		lexer := CoffeeLex{
+		lexer := GutsLex{
 			input: input,
 			start: 0,
 			pos:   0,
-			items: make(chan *CoffeeSymType, 100),
+			items: make(chan *GutsSymType, 100),
 		}
 		go lexer.run()
-		parser := CoffeeParser{}
+		parser := GutsParser{}
 		if parser.Parse(&lexer) == 1 {
 			t.Fatal("syntax error")
 		}
@@ -74,14 +74,14 @@ func TestCodeGen(t *testing.T) {
 func TestParser(t *testing.T) {
 	for _, input := range parserInputs {
 		t.Log(input)
-		lexer := CoffeeLex{
+		lexer := GutsLex{
 			input: input,
 			start: 0,
 			pos:   0,
-			items: make(chan *CoffeeSymType, 100),
+			items: make(chan *GutsSymType, 100),
 		}
 		go lexer.run()
-		parser := CoffeeParser{}
+		parser := GutsParser{}
 		if parser.Parse(&lexer) == 1 {
 			t.Fatal("syntax error")
 		}

@@ -41,16 +41,16 @@ else
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
-	lexer := CoffeeLex{
+	lexer := GutsLex{
 		input: input,
 		start: 0,
 		pos:   0,
-		items: make(chan *CoffeeSymType, 100),
+		items: make(chan *GutsSymType, 100),
 	}
 	go lexer.run()
 
 	var found int = 0
-	var item *CoffeeSymType
+	var item *GutsSymType
 	for {
 		item = <-lexer.items
 		if item == nil {
@@ -77,13 +77,13 @@ func BenchmarkLexer(b *testing.B) {
 	pi = 3.1415926
 	// oneline comment
 	`
-	var item *CoffeeSymType
+	var item *GutsSymType
 	for i := 0; i < b.N; i++ {
-		lexer := CoffeeLex{
+		lexer := GutsLex{
 			input: input,
 			start: 0,
 			pos:   0,
-			items: make(chan *CoffeeSymType, 100),
+			items: make(chan *GutsSymType, 100),
 		}
 		go lexer.run()
 		for {

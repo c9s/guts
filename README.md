@@ -1,13 +1,13 @@
 Gutscript
 ==================
 
-CoffeePHP is a language makes your life easier,
+Gutscript is a language makes your life easier,
 it let you write less code to compile a workable PHP code.
 
-CoffeePHP compiler is written in Go, Go is faster 10+ times than PHP, hence the
+Gutscript compiler is written in Go, Go is faster 10+ times than PHP, hence the
 compilation is fast, and of course you can compile sources concurrently.
 
-CoffeePHP takes the good stuffs from Haskell, Perl6, Go and CoffeeScript, you can write
+Gutscript takes the good stuffs from Haskell, Perl6, Go and GutsScript, you can write
 shorter code to generate the expected PHP code. e.g. To define a function, we use:
 
     getName :: -> "John"
@@ -18,7 +18,7 @@ Which is shorter than writing:
         return "John";
     }
 
-CoffeePHP aims to provide a simple optimizer to do optimizations like "dead
+Gutscript aims to provide a simple optimizer to do optimizations like "dead
 code elimination"..
 
 So if you have framework with development/production mode, this dead code
@@ -28,7 +28,7 @@ site.
 For more details, please check the `docs` for the language synopsis.
 
 
-CoffeePHP aims to be
+Gutscript aims to be
 ---------------------
 
 * simple to learn.

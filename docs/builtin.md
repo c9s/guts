@@ -1,10 +1,10 @@
 BuiltIn
 =======
 
-CoffeePHP builtin provides a consistent interface to solve the inconsistent PHP API,
+GutsPHP builtin provides a consistent interface to solve the inconsistent PHP API,
 for example, PHP string functions sometimes use "str_" as prefix, sometimes use "str" as prefix.
 
-By using CoffeePHP builtin package, you can use these functions with consistentcy:
+By using GutsPHP builtin package, you can use these functions with consistentcy:
 
     import "strings"
 

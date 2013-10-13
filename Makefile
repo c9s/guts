@@ -6,7 +6,7 @@ yacc:
 parser:
 	for y in src/gutscript/*.y ; \
 	do \
-		bin/yacc -o $${y%.y}.go -p Coffee $$y ; \
+		bin/yacc -o $${y%.y}.go -p Guts $$y ; \
 	done
 
 install:

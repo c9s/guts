@@ -6,9 +6,9 @@ import (
 	"unicode/utf8"
 )
 
-type stateFn func(*CoffeeLex) stateFn
+type stateFn func(*GutsLex) stateFn
 
-type CoffeeLex struct {
+type GutsLex struct {
 	// the line
 	input string
 	line  int
@@ -27,7 +27,7 @@ type CoffeeLex struct {
 
 	// XXX
 	width int
-	items chan *CoffeeSymType
+	items chan *GutsSymType
 }
 
 type TokenType int
@@ -35,7 +35,7 @@ type TokenType int
 const eof = -1
 const lexError = -99
 
-func (self *CoffeeSymType) String() string {
+func (self *GutsSymType) String() string {
 	switch self.typ {
 	case T_EOF, eof:
 		return "EOF"
@@ -44,26 +44,26 @@ func (self *CoffeeSymType) String() string {
 }
 
 // remember rollback position
-func (l *CoffeeLex) remember() int {
+func (l *GutsLex) remember() int {
 	l.rollbackPos = l.pos
 	return l.pos
 }
 
-func (l *CoffeeLex) rollback() {
+func (l *GutsLex) rollback() {
 	l.pos = l.rollbackPos
 }
 
-func (l *CoffeeLex) error(msg string) {
+func (l *GutsLex) error(msg string) {
 	fmt.Println("Syntax Error", msg)
 	fmt.Println("Line", l.line)
 	fmt.Println("Pos", l.pos)
 	fmt.Println("Input", l.input)
 }
 
-func (l *CoffeeLex) emit(t TokenType) {
+func (l *GutsLex) emit(t TokenType) {
 
 	l.lastTokenType = t
-	l.items <- &CoffeeSymType{
+	l.items <- &GutsSymType{
 		typ:  t,
 		val:  l.input[l.start:l.pos],
 		pos:  l.start,
@@ -74,13 +74,13 @@ func (l *CoffeeLex) emit(t TokenType) {
 
 // peek returns but does not consume
 // the next rune in the input.
-func (l *CoffeeLex) peek() (r rune) {
+func (l *GutsLex) peek() (r rune) {
 	r = l.next()
 	l.backup()
 	return r
 }
 
-func (l *CoffeeLex) peekMore(p int) (r rune) {
+func (l *GutsLex) peekMore(p int) (r rune) {
 	var w = 0
 	for i := p; i > 0; i-- {
 		r = l.next()
@@ -91,7 +91,7 @@ func (l *CoffeeLex) peekMore(p int) (r rune) {
 }
 
 // ignore skips over the pending input before this point.
-func (l *CoffeeLex) ignore() {
+func (l *GutsLex) ignore() {
 	l.start = l.pos
 }
 
@@ -99,7 +99,7 @@ func (l *CoffeeLex) ignore() {
 // if it's from the valid set.
 // e.g.,
 //    l.accept("1234567890")
-func (l *CoffeeLex) accept(valid string) bool {
+func (l *GutsLex) accept(valid string) bool {
 	if strings.IndexRune(valid, l.next()) >= 0 {
 		return true
 	}
@@ -109,12 +109,12 @@ func (l *CoffeeLex) accept(valid string) bool {
 
 // backup steps back one rune.
 // Can be called only once per call of next.
-func (l *CoffeeLex) backup() {
+func (l *GutsLex) backup() {
 	l.pos -= l.width
 }
 
 // next returns the next rune in the input.
-func (l *CoffeeLex) next() (r rune) {
+func (l *GutsLex) next() (r rune) {
 	if l.pos >= len(l.input) {
 		l.width = 0
 		return eof
@@ -125,13 +125,13 @@ func (l *CoffeeLex) next() (r rune) {
 }
 
 // get the last rune in the input
-func (l *CoffeeLex) last() (r rune) {
+func (l *GutsLex) last() (r rune) {
 	_, w := utf8.DecodeRuneInString(l.input[l.pos-l.width:])
 	r, _ = utf8.DecodeRuneInString(l.input[l.pos-l.width-w:])
 	return r
 }
 
-func (l *CoffeeLex) run() {
+func (l *GutsLex) run() {
 	for l.state = lexStart; l.state != nil; {
 		fn := l.state(l)
 		if fn != nil {
@@ -143,11 +143,11 @@ func (l *CoffeeLex) run() {
 	l.items <- nil
 }
 
-func (l *CoffeeLex) close() {
+func (l *GutsLex) close() {
 	close(l.items)
 }
 
-func (l *CoffeeLex) emitIfMatch(str string, typ TokenType) bool {
+func (l *GutsLex) emitIfMatch(str string, typ TokenType) bool {
 	if l.consumeIfMatch(str) {
 		l.emit(typ)
 		return true
@@ -155,7 +155,7 @@ func (l *CoffeeLex) emitIfMatch(str string, typ TokenType) bool {
 	return false
 }
 
-func (l *CoffeeLex) consumeIfMatch(str string) bool {
+func (l *GutsLex) consumeIfMatch(str string) bool {
 	var c rune
 	var width = 0
 	for _, sc := range str {
@@ -172,7 +172,7 @@ func (l *CoffeeLex) consumeIfMatch(str string) bool {
 /*
 lookahead match method
 */
-func (l *CoffeeLex) match(str string) bool {
+func (l *GutsLex) match(str string) bool {
 	var c rune
 	var width = 0
 	for _, sc := range str {
@@ -188,13 +188,13 @@ func (l *CoffeeLex) match(str string) bool {
 }
 
 // set token in lval, return the token type id
-func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
-	var item *CoffeeSymType
+func (l *GutsLex) Lex(lval *GutsSymType) int {
+	var item *GutsSymType
 	item = <-l.items
 	if item != nil {
 		*lval = *item
 		// fmt.Println("Lex", item.String())
-		// fmt.Printf("%s %s", CoffeeTokname(int(item.typ)), item.val)
+		// fmt.Printf("%s %s", GutsTokname(int(item.typ)), item.val)
 		return int(item.typ)
 	}
 	return 0
@@ -202,19 +202,19 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 
 func GetTokenName(typ int) string {
 	var c int = typ
-	if c >= CoffeePrivate {
-		if c < CoffeePrivate+len(CoffeeTok2) {
-			c = CoffeeTok2[c-CoffeePrivate]
+	if c >= GutsPrivate {
+		if c < GutsPrivate+len(GutsTok2) {
+			c = GutsTok2[c-GutsPrivate]
 		}
 	}
-	return CoffeeTokname(c)
+	return GutsTokname(c)
 }
 
-func (l *CoffeeLex) Error(s string) {
+func (l *GutsLex) Error(s string) {
 	fmt.Printf("syntax error: %s\n", s)
 }
 
-func dumpLexItems(items chan *CoffeeSymType) {
+func dumpLexItems(items chan *GutsSymType) {
 	for {
 		item := <-items
 		if item == nil {

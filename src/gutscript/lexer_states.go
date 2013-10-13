@@ -17,7 +17,7 @@ var LexKeywords = map[string]int{
 	"is":      T_IS,
 }
 
-func (l *CoffeeLex) emitIfKeywordMatches() bool {
+func (l *GutsLex) emitIfKeywordMatches() bool {
 	l.remember()
 	for keyword, typ := range LexKeywords {
 		var match bool = true
@@ -46,7 +46,7 @@ func (l *CoffeeLex) emitIfKeywordMatches() bool {
 	return false
 }
 
-func lexStartLine(l *CoffeeLex) stateFn {
+func lexStartLine(l *GutsLex) stateFn {
 	var c rune = l.peek()
 	if c == ' ' || c == '\t' {
 		return lexIndentSpaces
@@ -55,7 +55,7 @@ func lexStartLine(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexStart(l *CoffeeLex) stateFn {
+func lexStart(l *GutsLex) stateFn {
 	var c rune = l.peek()
 	if unicode.IsDigit(c) {
 		return lexNumber
@@ -131,7 +131,7 @@ func lexStart(l *CoffeeLex) stateFn {
 }
 
 // Lex double quote string
-func lexString(l *CoffeeLex) stateFn {
+func lexString(l *GutsLex) stateFn {
 	var q rune = l.next() // the quote char
 
 	l.ignore()
@@ -158,7 +158,7 @@ func lexString(l *CoffeeLex) stateFn {
 
 }
 
-func lexComment(l *CoffeeLex) stateFn {
+func lexComment(l *GutsLex) stateFn {
 	var c rune
 	for {
 		c = l.next()
@@ -175,7 +175,7 @@ func lexComment(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexOnelineComment(l *CoffeeLex) stateFn {
+func lexOnelineComment(l *GutsLex) stateFn {
 	var c rune
 	for {
 		c = l.next()
@@ -188,7 +188,7 @@ func lexOnelineComment(l *CoffeeLex) stateFn {
 	return lexStartLine
 }
 
-func lexIdentifier(l *CoffeeLex) stateFn {
+func lexIdentifier(l *GutsLex) stateFn {
 	for {
 		c := l.next()
 		if unicode.IsLetter(c) || unicode.IsDigit(c) {
@@ -201,7 +201,7 @@ func lexIdentifier(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexIgnoreSpaces(l *CoffeeLex) stateFn {
+func lexIgnoreSpaces(l *GutsLex) stateFn {
 	var c rune
 	for {
 		c = l.next()
@@ -218,7 +218,7 @@ func lexIgnoreSpaces(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexIndentSpaces(l *CoffeeLex) stateFn {
+func lexIndentSpaces(l *GutsLex) stateFn {
 	l.space = 0
 	var c rune
 	for {
@@ -242,7 +242,7 @@ func lexIndentSpaces(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexSpaces(l *CoffeeLex) stateFn {
+func lexSpaces(l *GutsLex) stateFn {
 	for c := l.next(); c == ' ' || c == '\t'; {
 	}
 	l.backup()
@@ -250,7 +250,7 @@ func lexSpaces(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexFloating(l *CoffeeLex) stateFn {
+func lexFloating(l *GutsLex) stateFn {
 	for {
 		c := l.next()
 		if !unicode.IsDigit(c) {
@@ -262,7 +262,7 @@ func lexFloating(l *CoffeeLex) stateFn {
 	return lexStart
 }
 
-func lexNumber(l *CoffeeLex) stateFn {
+func lexNumber(l *GutsLex) stateFn {
 	var c rune
 	for c = l.next(); true; c = l.next() {
 		if unicode.IsDigit(c) {
