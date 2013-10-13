@@ -44,6 +44,8 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 		if item == nil {
 			break
 		}
+		t.Logf("Got token %s: %s", GetTokenName(int(item.typ)), item.val)
+
 		if item.typ == typ {
 			found++
 		}
@@ -52,13 +54,7 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 		}
 	}
 	if found != cnt {
-		var c int = int(typ)
-		if c >= CoffeePrivate {
-			if c < CoffeePrivate+len(CoffeeTok2) {
-				c = CoffeeTok2[c-CoffeePrivate]
-			}
-		}
-		t.Fatalf("Expecting token %s x %d", CoffeeTokname(c), cnt)
+		t.Fatalf("Expecting token %s x %d", GetTokenName(int(typ)), cnt)
 	}
 	lexer.close()
 }

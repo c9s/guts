@@ -16,6 +16,9 @@ type CoffeeLex struct {
 	pos   int
 	state stateFn
 
+	// rollback position
+	rollbackPos int
+
 	// current space prefix length (used to calculate indentation level)
 	space     int
 	lastSpace int
@@ -40,6 +43,16 @@ func (self *CoffeeSymType) String() string {
 	return fmt.Sprintf("[%d] %q", self.typ, self.val)
 }
 
+// remember rollback position
+func (l *CoffeeLex) remember() int {
+	l.rollbackPos = l.pos
+	return l.pos
+}
+
+func (l *CoffeeLex) rollback() {
+	l.pos = l.rollbackPos
+}
+
 func (l *CoffeeLex) error(msg string) {
 	fmt.Println("Syntax Error", msg)
 	fmt.Println("Line", l.line)
@@ -48,6 +61,7 @@ func (l *CoffeeLex) error(msg string) {
 }
 
 func (l *CoffeeLex) emit(t TokenType) {
+
 	l.lastTokenType = t
 	l.items <- &CoffeeSymType{
 		typ:  t,
@@ -148,7 +162,6 @@ func (l *CoffeeLex) consumeIfMatch(str string) bool {
 		c = l.next()
 		width += l.width
 		if sc != c {
-			// rollback
 			l.pos -= width
 			return false
 		}
@@ -184,6 +197,16 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 		return int(item.typ)
 	}
 	return 0
+}
+
+func GetTokenName(typ int) string {
+	var c int = typ
+	if c >= CoffeePrivate {
+		if c < CoffeePrivate+len(CoffeeTok2) {
+			c = CoffeeTok2[c-CoffeePrivate]
+		}
+	}
+	return CoffeeTokname(c)
 }
 
 func (l *CoffeeLex) Error(s string) {

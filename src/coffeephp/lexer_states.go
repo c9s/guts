@@ -5,6 +5,47 @@ import (
 	"unicode"
 )
 
+var LexKeywords = map[string]int{
+	"if":      T_IF,
+	"class":   T_CLASS,
+	"for":     T_FOR,
+	"foreach": T_FOREACH,
+	"else":    T_ELSE,
+	"elseif":  T_ELSEIF,
+	"echo":    T_ECHO,
+	"does":    T_DOES,
+	"is":      T_IS,
+}
+
+func (l *CoffeeLex) emitIfKeywordMatches() bool {
+	l.remember()
+	for keyword, typ := range LexKeywords {
+		var match bool = true
+	next_keyword:
+		for _, sc := range keyword {
+			c := l.next()
+			if c == eof {
+				match = false
+				break next_keyword
+			}
+			if sc != c {
+				match = false
+				break next_keyword
+			}
+		}
+		if match {
+			c := l.next()
+			if c == '\n' || c == eof || c == ' ' || c == '\t' || unicode.IsSymbol(c) {
+				l.backup()
+				l.emit(TokenType(typ))
+				return true
+			}
+		}
+		l.rollback()
+	}
+	return false
+}
+
 func lexStartLine(l *CoffeeLex) stateFn {
 	var c rune = l.peek()
 	if c == ' ' || c == '\t' {
@@ -55,23 +96,7 @@ func lexStart(l *CoffeeLex) stateFn {
 		return lexOnelineComment
 	} else if l.consumeIfMatch("/*") {
 		return lexComment
-	} else if l.emitIfMatch("if ", T_IF) {
-		return lexStart
-	} else if l.emitIfMatch("if else ", T_ELSEIF) {
-		return lexStart
-	} else if l.emitIfMatch("else ", T_ELSE) {
-		return lexStart
-	} else if l.emitIfMatch("class ", T_CLASS) {
-		return lexStart
-	} else if l.emitIfMatch("for ", T_FOR) {
-		return lexStart
-	} else if l.emitIfMatch("foreach ", T_FOREACH) {
-		return lexStart
-	} else if l.emitIfMatch("echo ", T_ECHO) {
-		return lexStart
-	} else if l.emitIfMatch("does ", T_DOES) {
-		return lexStart
-	} else if l.emitIfMatch("is ", T_IS) {
+	} else if l.emitIfKeywordMatches() {
 		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
