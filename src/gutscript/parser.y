@@ -1,10 +1,10 @@
 %{
-package coffeephp
+package gutscript
 
 // vim:et:sw=4:ai:si:ts=4:sts=4:
 
 import "fmt"
-import "coffeephp/ast"
+import "gutscript/ast"
 
 var regs = make([]int, 26)
 var base int

@@ -4,22 +4,22 @@ yacc:
 	go install -x yacc
 
 parser:
-	for y in src/coffeephp/*.y ; \
+	for y in src/gutscript/*.y ; \
 	do \
 		bin/yacc -o $${y%.y}.go -p Coffee $$y ; \
 	done
 
 install:
-	cp -v bin/coffeephp /usr/bin/cphp
+	cp -v bin/gutscript /usr/bin/cphp
 
 build:
-	go build coffeephp
+	go build gutscript
 
 executable:
-	go build bin/coffeephp/main.go
+	go build bin/gutscript/main.go
 
 test:
-	go test coffeephp -v
+	go test gutscript -v
 
 clean:
 	rm -rfv pkg/darwin_amd64/

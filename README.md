@@ -42,8 +42,8 @@ Build
 ---------
 Simply run make to produce the parser:
 
-    git clone http://github.com/c9s/coffeephp
-    cd coffeephp
+    git clone http://github.com/c9s/gutscript
+    cd gutscript
     source goenv
     make
 
@@ -79,7 +79,7 @@ Implementation
 CoffeePHP uses Go yacc parser generator to generate a LALR(1) parser. 
 
 To add new syntax, please checkout the parser.y file, which is located in
-`src/coffeephp/parser.y`
+`src/gutscript/parser.y`
 
 The lexer uses concurrent strategy to parse tokens, the state machine runs in
 another goroutine, so the parser receives the tokens from lexer through the

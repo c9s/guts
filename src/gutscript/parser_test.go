@@ -1,9 +1,9 @@
-package coffeephp
+package gutscript
 
 // vim:list:
 
 import "testing"
-import "coffeephp/codegen/phpcodegen"
+import "gutscript/codegen/phpcodegen"
 
 var parserInputs = []string{
 	`pi = 3.1415926`,

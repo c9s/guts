@@ -1,4 +1,4 @@
-package coffeephp
+package gutscript
 
 import (
 	"fmt"

@@ -1,6 +1,6 @@
 package phpcodegen
 
-import "coffeephp/ast"
+import "gutscript/ast"
 import "strconv"
 import "strings"
 import "fmt"
