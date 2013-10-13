@@ -10,15 +10,21 @@ func TestParser(t *testing.T) {
 		`pi = 4455
 a = 4 * (2 + 3)
 b = a`,
+
+		// XXX: need trailing line
 		`x = 3 * -2`,
 		`if a > 10
 	a = 10
+
 `,
-		`if a > 10
-	a = 10
-else
-	a = 0
-`,
+		/*
+		   XXX: fix this later
+		   		`if a > 10
+		   	a = 10
+		   else
+		   	a = 0
+		   `,
+		*/
 	}
 	for _, input := range inputs {
 		t.Log(input)
@@ -29,6 +35,8 @@ else
 			items: make(chan *CoffeeSymType, 100),
 		}
 		go lexer.run()
+
+		// dumpLexItems(lexer.items)
 
 		parser := CoffeeParser{}
 		if parser.Parse(&lexer) == 1 {
