@@ -132,7 +132,7 @@ const CoffeeEofCode = 1
 const CoffeeErrCode = 2
 const CoffeeMaxDepth = 200
 
-//line src/coffeephp/parser.y:294
+//line src/coffeephp/parser.y:304
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -142,83 +142,83 @@ var CoffeeExca = []int{
 	-2, 0,
 }
 
-const CoffeeNprod = 38
+const CoffeeNprod = 40
 const CoffeePrivate = 57344
 
 var CoffeeTokenNames []string
 var CoffeeStates []string
 
-const CoffeeLast = 175
+const CoffeeLast = 179
 
 var CoffeeAct = []int{
 
-	55, 26, 57, 25, 20, 21, 22, 23, 24, 20,
-	21, 22, 23, 24, 50, 27, 28, 10, 2, 3,
-	27, 28, 19, 27, 28, 53, 30, 13, 26, 13,
-	25, 20, 21, 22, 23, 24, 56, 13, 37, 54,
-	10, 36, 27, 28, 59, 52, 4, 26, 1, 25,
-	20, 21, 22, 23, 24, 7, 32, 33, 8, 13,
-	15, 27, 28, 26, 5, 25, 20, 21, 22, 23,
-	24, 14, 22, 23, 24, 60, 0, 27, 28, 49,
-	19, 27, 28, 13, 31, 18, 17, 13, 25, 20,
-	21, 22, 23, 24, 47, 16, 18, 17, 0, 0,
-	27, 28, 10, 48, 16, 18, 17, 0, 9, 0,
-	0, 10, 0, 0, 0, 0, 0, 9, 0, 58,
-	0, 0, 0, 0, 0, 12, 0, 0, 0, 0,
-	0, 0, 0, 11, 0, 0, 12, 6, 0, 0,
-	0, 0, 0, 0, 11, 12, 0, 29, 0, 34,
-	35, 0, 0, 11, 0, 0, 0, 0, 38, 39,
-	40, 41, 42, 43, 44, 45, 46, 0, 0, 0,
-	0, 0, 0, 0, 51,
+	35, 13, 3, 13, 60, 20, 28, 29, 62, 57,
+	27, 13, 26, 21, 22, 23, 24, 25, 61, 10,
+	2, 38, 39, 54, 28, 29, 10, 30, 31, 63,
+	56, 1, 27, 13, 26, 21, 22, 23, 24, 25,
+	9, 7, 32, 8, 15, 14, 28, 29, 0, 27,
+	0, 26, 21, 22, 23, 24, 25, 0, 0, 0,
+	0, 0, 13, 28, 29, 13, 27, 20, 26, 21,
+	22, 23, 24, 25, 26, 21, 22, 23, 24, 25,
+	28, 29, 64, 36, 19, 18, 28, 29, 21, 22,
+	23, 24, 25, 23, 24, 25, 5, 0, 0, 28,
+	29, 0, 28, 29, 16, 19, 18, 16, 19, 18,
+	4, 10, 52, 0, 10, 0, 0, 17, 0, 0,
+	17, 33, 0, 0, 12, 0, 0, 0, 51, 0,
+	0, 0, 11, 0, 0, 0, 0, 58, 0, 6,
+	0, 0, 0, 53, 0, 12, 0, 59, 12, 0,
+	0, 34, 37, 11, 0, 0, 11, 40, 0, 0,
+	0, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+	50, 0, 0, 0, 0, 0, 0, 0, 55,
 }
 var CoffeePact = []int{
 
-	99, -1000, 99, -1000, -1000, -1000, 21, -1000, -1000, 79,
-	99, 79, 79, 26, -1000, -1000, 7, -1000, -1000, -1000,
-	79, 79, 79, 79, 79, 79, 79, 79, 79, 5,
-	-1000, -1000, 90, -1000, -41, -33, 79, -29, 25, 25,
-	-33, -33, -33, -36, 44, 21, 21, 19, -1000, -1000,
-	-1000, -14, 4, -53, 28, -1000, 99, -1000, -1000, -1000,
-	99,
+	102, -1000, 102, -1000, -1000, -1000, 24, -1000, -1000, 8,
+	102, 78, 78, 6, -1000, -1000, -9, 78, -1000, -1000,
+	-1000, 78, 78, 78, 78, 78, 78, 78, 78, 78,
+	78, 14, 99, -1000, -32, -1000, -1000, -50, 78, -45,
+	7, 46, 46, -50, -50, -50, 43, 30, 24, 24,
+	7, -1000, -1000, -1000, -1000, -10, -14, -47, -1000, -1000,
+	-1000, 102, -1000, -1000, 102,
 }
 var CoffeePgo = []int{
 
-	0, 137, 26, 71, 60, 46, 58, 56, 55, 64,
-	19, 18, 48, 45, 44, 44, 44,
+	0, 139, 0, 45, 44, 110, 43, 42, 41, 40,
+	96, 2, 20, 31, 30, 29, 29, 29,
 }
 var CoffeeR1 = []int{
 
-	0, 12, 11, 11, 10, 9, 7, 7, 5, 5,
-	5, 5, 5, 5, 8, 8, 13, 6, 14, 2,
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 4, 3, 15, 16,
+	0, 13, 12, 12, 11, 10, 7, 7, 5, 5,
+	5, 5, 5, 9, 9, 9, 8, 8, 14, 6,
+	15, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 4, 3, 16, 17,
 }
 var CoffeeR2 = []int{
 
 	0, 1, 2, 1, 1, 3, 2, 1, 1, 1,
-	1, 1, 5, 3, 3, 4, 2, 5, 1, 1,
-	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	2, 1, 1, 1, 1, 1, 2, 2,
+	1, 1, 1, 3, 4, 3, 3, 4, 2, 5,
+	1, 1, 3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 2, 1, 1, 1, 1, 1, 2, 2,
 }
 var CoffeeChk = []int{
 
-	-1000, -12, -11, -10, -5, -9, -1, -8, -6, 18,
-	12, 54, 46, -2, -3, -4, 5, 7, 6, -10,
-	45, 46, 47, 48, 49, 44, 42, 56, 57, -1,
-	-2, 5, -7, -5, -1, -1, 15, 31, -1, -1,
-	-1, -1, -1, -1, -1, -1, -1, -9, 13, -5,
-	55, -1, -13, 54, 20, 14, 32, 55, -9, -14,
-	-11,
+	-1000, -13, -12, -11, -5, -10, -1, -8, -6, -9,
+	12, 54, 46, -2, -3, -4, 5, 18, 7, 6,
+	-11, 45, 46, 47, 48, 49, 44, 42, 56, 57,
+	19, 20, -7, -5, -1, -2, 5, -1, 15, 31,
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	-1, -10, 13, -5, 55, -1, -14, 54, -10, -10,
+	14, 32, 55, -15, -12,
 }
 var CoffeeDef = []int{
 
-	0, -2, 1, 3, 4, 8, 9, 10, 11, 0,
-	0, 0, 0, 31, 32, 33, 19, 35, 34, 2,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	31, 19, 0, 7, 0, 30, 0, 0, 21, 22,
-	23, 24, 25, 26, 27, 28, 29, 13, 5, 6,
-	20, 14, 0, 0, 0, 15, 0, 16, 12, 17,
-	18,
+	0, -2, 1, 3, 4, 8, 9, 10, 11, 12,
+	0, 0, 0, 33, 34, 35, 21, 0, 37, 36,
+	2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 7, 0, 33, 21, 32, 0, 0,
+	0, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+	0, 15, 5, 6, 22, 16, 0, 0, 13, 14,
+	17, 0, 18, 19, 20,
 }
 var CoffeeTok1 = []int{
 
@@ -480,13 +480,13 @@ Coffeedefault:
 	switch Coffeent {
 
 	case 1:
-		//line src/coffeephp/parser.y:123
+		//line src/coffeephp/parser.y:124
 		{
 	        debug("end compilation", CoffeeS[Coffeept-0].val)
 	        CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	    }
 	case 2:
-		//line src/coffeephp/parser.y:130
+		//line src/coffeephp/parser.y:131
 		{ 
 	        if stmts, ok := CoffeeS[Coffeept-1].val.(*ast.StatementNodeList) ; ok {
 	            stmts.Append(CoffeeS[Coffeept-0].val)
@@ -495,7 +495,7 @@ Coffeedefault:
 	        debug("top_statement_list top_statement", CoffeeS[Coffeept-1].val, CoffeeS[Coffeept-0].val)
 	    }
 	case 3:
-		//line src/coffeephp/parser.y:137
+		//line src/coffeephp/parser.y:138
 		{
 	        debug("top_statement", CoffeeS[Coffeept-0].val)
 	        stmts := ast.CreateStatementList()
@@ -503,16 +503,16 @@ Coffeedefault:
 	        CoffeeVAL.val = stmts
 	    }
 	case 4:
-		//line src/coffeephp/parser.y:146
+		//line src/coffeephp/parser.y:147
 		{
 	        debug("statement", CoffeeS[Coffeept-0].val)
 	        CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	    }
 	case 5:
-		//line src/coffeephp/parser.y:154
+		//line src/coffeephp/parser.y:155
 		{ CoffeeVAL.val = CoffeeS[Coffeept-1].val }
 	case 6:
-		//line src/coffeephp/parser.y:158
+		//line src/coffeephp/parser.y:159
 		{
 	            if stmts, ok := CoffeeS[Coffeept-1].val.(*ast.StatementNodeList) ; ok {
 	                stmts.Append(CoffeeS[Coffeept-0].val)
@@ -520,60 +520,68 @@ Coffeedefault:
 	            }
 	      }
 	case 7:
-		//line src/coffeephp/parser.y:165
+		//line src/coffeephp/parser.y:166
 		{ 
 	            stmts := ast.CreateStatementList()
 	            stmts.Append(CoffeeS[Coffeept-0].val)
 	            CoffeeVAL.val = stmts
 	      }
 	case 8:
-		//line src/coffeephp/parser.y:173
+		//line src/coffeephp/parser.y:174
 		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
 	case 9:
-		//line src/coffeephp/parser.y:174
+		//line src/coffeephp/parser.y:175
 		{ CoffeeVAL.val = ast.CreateExprStatement(CoffeeS[Coffeept-0].val) }
 	case 10:
-		//line src/coffeephp/parser.y:175
+		//line src/coffeephp/parser.y:176
 		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
 	case 11:
-		//line src/coffeephp/parser.y:176
+		//line src/coffeephp/parser.y:177
 		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
 	case 12:
 		//line src/coffeephp/parser.y:178
-		{
-	                debug("if-else-statement")
-	                CoffeeVAL.val = ast.CreateIfElseStatement(CoffeeS[Coffeept-3].val.(ast.Expr), CoffeeS[Coffeept-2].val.(*ast.StatementNodeList), CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
-	          }
+		{ CoffeeVAL.val = CoffeeS[Coffeept-0].val }
 	case 13:
 		//line src/coffeephp/parser.y:183
 		{
-	                debug("if-statement")
-	                CoffeeVAL.val = ast.CreateIfStatement(CoffeeS[Coffeept-1].val.(ast.Expr), CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
-	          }
+	            CoffeeVAL.val = ast.CreateIfStatement(CoffeeS[Coffeept-1].val.(ast.Expr), CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
+	        }
 	case 14:
-		//line src/coffeephp/parser.y:192
+		//line src/coffeephp/parser.y:188
+		{
+	            CoffeeS[Coffeept-3].val.(*ast.IfStatement).AddElseIf(CoffeeS[Coffeept-1].val.(ast.Expr),CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
+	            CoffeeVAL.val = CoffeeS[Coffeept-3].val
+	        }
+	case 15:
+		//line src/coffeephp/parser.y:194
+		{
+	            CoffeeS[Coffeept-2].val.(*ast.IfStatement).SetElse(CoffeeS[Coffeept-0].val.(*ast.StatementNodeList))
+	            CoffeeVAL.val = CoffeeS[Coffeept-2].val
+	        }
+	case 16:
+		//line src/coffeephp/parser.y:202
 		{
 	            debug("assignment_statement", CoffeeS[Coffeept-2].val , "=" , CoffeeS[Coffeept-0].val)
 	            CoffeeVAL.val = ast.CreateAssignStatement(CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 15:
-		//line src/coffeephp/parser.y:197
+	case 17:
+		//line src/coffeephp/parser.y:207
 		{
 	            debug("assignment_statement", CoffeeS[Coffeept-3].val , "=" , CoffeeS[Coffeept-1].val)
 	            CoffeeVAL.val = ast.CreateAssignStatement(CoffeeS[Coffeept-3].val, CoffeeS[Coffeept-1].val)
 	        }
-	case 17:
-		//line src/coffeephp/parser.y:206
+	case 19:
+		//line src/coffeephp/parser.y:216
 		{ 
 	        // $1 ($3) $4
     }
-	case 19:
-		//line src/coffeephp/parser.y:219
+	case 21:
+		//line src/coffeephp/parser.y:229
 		{ 
 	        CoffeeVAL.val = ast.CreateVariable(CoffeeS[Coffeept-0].val.(string))
 	    }
-	case 20:
-		//line src/coffeephp/parser.y:224
+	case 22:
+		//line src/coffeephp/parser.y:234
 		{
 	            if node, ok := CoffeeS[Coffeept-1].val.(ast.Expr) ; ok {
 	                node.Parenthesis = true
@@ -583,77 +591,77 @@ Coffeedefault:
 	            }
 	            // $$ = $2
         }
-	case 21:
-		//line src/coffeephp/parser.y:234
+	case 23:
+		//line src/coffeephp/parser.y:244
 		{ 
 	            CoffeeVAL.val = ast.CreateExpr('+', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 22:
-		//line src/coffeephp/parser.y:238
+	case 24:
+		//line src/coffeephp/parser.y:248
 		{ 
 	            CoffeeVAL.val = ast.CreateExpr('-', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 23:
-		//line src/coffeephp/parser.y:242
+	case 25:
+		//line src/coffeephp/parser.y:252
 		{ 
 	            CoffeeVAL.val = ast.CreateExpr('*', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 24:
-		//line src/coffeephp/parser.y:246
+	case 26:
+		//line src/coffeephp/parser.y:256
 		{ 
 	            CoffeeVAL.val = ast.CreateExpr('/', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 25:
-		//line src/coffeephp/parser.y:250
+	case 27:
+		//line src/coffeephp/parser.y:260
 		{ 
 	            CoffeeVAL.val = ast.CreateExpr('%', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 26:
-		//line src/coffeephp/parser.y:254
+	case 28:
+		//line src/coffeephp/parser.y:264
 		{
 	            CoffeeVAL.val = ast.CreateExpr('&', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 27:
-		//line src/coffeephp/parser.y:258
+	case 29:
+		//line src/coffeephp/parser.y:268
 		{
 	            CoffeeVAL.val = ast.CreateExpr('|', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 28:
-		//line src/coffeephp/parser.y:262
+	case 30:
+		//line src/coffeephp/parser.y:272
 		{
 	            CoffeeVAL.val = ast.CreateExpr('>', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 29:
-		//line src/coffeephp/parser.y:266
+	case 31:
+		//line src/coffeephp/parser.y:276
 		{
 	            CoffeeVAL.val = ast.CreateExpr('<', CoffeeS[Coffeept-2].val, CoffeeS[Coffeept-0].val)
 	        }
-	case 30:
-		//line src/coffeephp/parser.y:270
+	case 32:
+		//line src/coffeephp/parser.y:280
 		{ 
 	            CoffeeVAL.val = ast.UnaryExpr{'-', CoffeeS[Coffeept-0].val}
 	        }
-	case 31:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
-	case 32:
-		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 33:
 		CoffeeVAL.val = CoffeeS[Coffeept-0].val
 	case 34:
-		//line src/coffeephp/parser.y:278
+		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+	case 35:
+		CoffeeVAL.val = CoffeeS[Coffeept-0].val
+	case 36:
+		//line src/coffeephp/parser.y:288
 		{
 	        CoffeeVAL.val = ast.CreateFloatingNumber(CoffeeS[Coffeept-0].val.(string))
 	    }
-	case 35:
-		//line src/coffeephp/parser.y:282
+	case 37:
+		//line src/coffeephp/parser.y:292
 		{
 	        CoffeeVAL.val = ast.CreateNumber(CoffeeS[Coffeept-0].val.(string))
 	    }
-	case 36:
-		//line src/coffeephp/parser.y:287
+	case 38:
+		//line src/coffeephp/parser.y:297
 		{ }
-	case 37:
-		//line src/coffeephp/parser.y:291
+	case 39:
+		//line src/coffeephp/parser.y:301
 		{ }
 	}
 	goto Coffeestack /* stack new state and value */

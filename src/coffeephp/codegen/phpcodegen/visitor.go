@@ -46,26 +46,36 @@ func (self *Visitor) Visit(n ast.Node) string {
 	if stmt, ok := n.(ast.AssignStatement); ok {
 		return self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
 	}
-	if stmt, ok := n.(ast.IfStatement); ok {
+	if stmt, ok := n.(*ast.IfStatement); ok {
 		var out string = ""
 		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"
 		self.indent++
 		out += self.Visit(stmt.Body)
 		self.indent--
 		out += self.IndentSpace() + "}"
+
+		if len(stmt.ElseIfList) > 0 {
+			for _, elseifStmt := range stmt.ElseIfList {
+				out += self.Visit(elseifStmt)
+			}
+		}
+		if stmt.ElseBody != nil {
+			out += " else {\n"
+			self.indent++
+			out += self.Visit(stmt.ElseBody)
+			self.indent--
+			out += "}"
+		}
+		out += "\n"
 		return out
 	}
-	if stmt, ok := n.(ast.IfElseStatement); ok {
+	if stmt, ok := n.(ast.ElseIfStatement); ok {
 		var out string = ""
-		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"
+		out += self.IndentSpace() + " elseif ( " + self.Visit(stmt.Expr) + " ) {\n"
 		self.indent++
 		out += self.Visit(stmt.Body)
 		self.indent--
-		out += self.IndentSpace() + "} else {\n"
-		self.indent++
-		out += self.Visit(stmt.ElseBody)
-		self.indent--
-		out += "\n}"
+		out += self.IndentSpace() + "}"
 		return out
 	}
 	return ""

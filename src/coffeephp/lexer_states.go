@@ -205,7 +205,11 @@ func lexIgnoreSpaces(l *CoffeeLex) stateFn {
 	var c rune
 	for {
 		c = l.next()
-		if c != ' ' || c == eof {
+		if c == eof {
+			l.ignore()
+			return nil
+		}
+		if c != ' ' {
 			break
 		}
 	}

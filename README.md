@@ -129,6 +129,8 @@ Parser
 --- | -------------------
  x  | assignment statement
  x  | if statement
+ x  | if else statement
+ x  | if elseif else statement
 
 
 Author

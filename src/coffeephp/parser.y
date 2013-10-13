@@ -38,6 +38,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> statement 
 %type <val> statement_list
 %type <val> assignment_statement 
+%type <val> if_statement
 %type <val> block 
 %type <val> top_statement 
 %type <val> top_statement_list 
@@ -174,18 +175,27 @@ statement:
         | expr { $$ = ast.CreateExprStatement($1) } 
         | assignment_statement { $$ = $1 }
         | function_decl_statement { $$ = $1 }
-        | T_IF expr block T_ELSE block
-          {
-                debug("if-else-statement")
-                $$ = ast.CreateIfElseStatement($2.(ast.Expr), $3.(*ast.StatementNodeList), $5.(*ast.StatementNodeList))
-          }
-        | T_IF expr block 
-          {
-                debug("if-statement")
-                $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementNodeList))
-          }
+        | if_statement { $$ = $1 }
     ;
 
+if_statement:
+        T_IF expr block
+        {
+            $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementNodeList))
+        }
+    |
+        if_statement T_ELSEIF expr block 
+        {
+            $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementNodeList))
+            $$ = $1
+        }
+    | 
+        if_statement T_ELSE block
+        {
+            $1.(*ast.IfStatement).SetElse($3.(*ast.StatementNodeList))
+            $$ = $1
+        }
+;
 
 assignment_statement:
     variable T_ASSIGN expr

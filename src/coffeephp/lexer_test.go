@@ -1,6 +1,6 @@
 package coffeephp
 
-/* vim:list: */
+// vim:list:
 
 import "testing"
 
@@ -30,6 +30,14 @@ var lextests = []struct {
 else
     a = 1
 `, T_ELSE, 1},
+	{`if a > 3
+    a = 10
+    b = 20
+elseif a < 10
+    b = 2
+else
+    a = 1
+`, T_ELSEIF, 1},
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {

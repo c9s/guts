@@ -193,8 +193,7 @@ func (l *CoffeeLex) Lex(lval *CoffeeSymType) int {
 	item = <-l.items
 	if item != nil {
 		*lval = *item
-
-		fmt.Println(item.String())
+		// fmt.Println("Lex", item.String())
 		// fmt.Printf("%s %s", CoffeeTokname(int(item.typ)), item.val)
 		return int(item.typ)
 	}
@@ -221,7 +220,7 @@ func dumpLexItems(items chan *CoffeeSymType) {
 		if item == nil {
 			break
 		}
-		fmt.Printf("Got token %s: %s\n", GetTokenName(int(item.typ)), item.val)
+		fmt.Printf("Got token %s: '%s'\n", GetTokenName(int(item.typ)), item.val)
 		if item.typ == T_EOF || item.typ == eof {
 			break
 		}
