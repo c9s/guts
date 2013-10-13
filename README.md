@@ -1,4 +1,4 @@
-CoffeePHP
+Gutscript
 ==================
 
 CoffeePHP is a language makes your life easier,
@@ -76,7 +76,7 @@ files into .php file.
 
 Implementation
 ---------------
-CoffeePHP uses Go yacc parser generator to generate a LALR(1) parser. 
+Gutscript uses Go yacc parser generator to generate a LALR(1) parser. 
 
 To add new syntax, please checkout the parser.y file, which is located in
 `src/gutscript/parser.y`
