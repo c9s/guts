@@ -83,7 +83,7 @@ func debug(msg string, vals ...interface{}) {
 %token T_FUNCTION_PROTOTYPE 
 
 // ->
-%token T_FUNCTION_ARROW
+%token T_FUNCTION_GLYPH
 %token T_RANGE_OPERATOR
 
 %token T_STRING
@@ -205,7 +205,7 @@ assignment_statement:
 function_parameter_list: '(' ')' ;
 
 function_decl_statement:
-    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_ARROW function_body { 
+    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH function_body { 
         // $1 ($3) $4
     }
 ;

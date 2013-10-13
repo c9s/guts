@@ -63,7 +63,7 @@ func lexStart(l *CoffeeLex) stateFn {
 		l.next()
 		l.emit(TokenType(c))
 		return lexStart
-	} else if l.emitIfMatch("->", T_FUNCTION_ARROW) {
+	} else if l.emitIfMatch("->", T_FUNCTION_GLYPH) {
 		return lexStart
 	} else if l.emitIfMatch("::", T_FUNCTION_PROTOTYPE) {
 		return lexStart
