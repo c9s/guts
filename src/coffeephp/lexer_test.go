@@ -45,11 +45,10 @@ func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 			break
 		}
 		t.Logf("Got token %s: %s", GetTokenName(int(item.typ)), item.val)
-
 		if item.typ == typ {
 			found++
 		}
-		if item.typ == T_EOF {
+		if item.typ == T_EOF || item.typ == eof {
 			break
 		}
 	}
