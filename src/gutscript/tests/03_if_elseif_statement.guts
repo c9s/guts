@@ -1,0 +1,9 @@
+a = 10
+b = 5
+if a < 10
+    a = 0
+elseif b < 10
+    b = 10
+else
+    a = 30
+    b = 10
