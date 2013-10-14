@@ -342,25 +342,26 @@ number: T_NUMBER {
     }
 
 function_call_parameter: expr {
-        $$ = ast.UnaryExpr{0, $1.(ast.Expr)}
+        $$ = ast.UnaryExpr{0, $1}
     };
 
 function_call_parameter_list:
     function_call_parameter_list ',' function_call_parameter {
-        if params, ok := $1.([]ast.Expr) ; ok {
-            params = append(params, $3.(ast.Expr))
+        if params, ok := $1.([]ast.Node) ; ok {
+            params = append(params, $3.(ast.Node))
             $$ = params
         }
     }
     | 
     function_call_parameter {
-        $$ = []ast.Expr{$1.(ast.Expr)}
+        // create the expr list
+        $$ = []ast.Node{$1}
     }
 ;
 
 function_call:
     T_IDENTIFIER '(' function_call_parameter_list ')' {
-        $$ = ast.CreateFunctionCall($1.(string), $3.([]ast.Expr))
+        $$ = ast.CreateFunctionCall($1.(string), $3.([]ast.Node))
     }
 ;
 

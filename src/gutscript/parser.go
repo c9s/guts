@@ -132,7 +132,7 @@ const GutsEofCode = 1
 const GutsErrCode = 2
 const GutsMaxDepth = 200
 
-//line src/gutscript/parser.y:367
+//line src/gutscript/parser.y:368
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -724,25 +724,26 @@ Gutsdefault:
 	case 45:
 		//line src/gutscript/parser.y:344
 		{
-	        GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val.(ast.Expr)}
+	        GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	    }
 	case 46:
 		//line src/gutscript/parser.y:349
 		{
-	        if params, ok := GutsS[Gutspt-2].val.([]ast.Expr) ; ok {
-	            params = append(params, GutsS[Gutspt-0].val.(ast.Expr))
+	        if params, ok := GutsS[Gutspt-2].val.([]ast.Node) ; ok {
+	            params = append(params, GutsS[Gutspt-0].val.(ast.Node))
 	            GutsVAL.val = params
 	        }
 	    }
 	case 47:
 		//line src/gutscript/parser.y:356
 		{
-	        GutsVAL.val = []ast.Expr{GutsS[Gutspt-0].val.(ast.Expr)}
+	        // create the expr list
+        GutsVAL.val = []ast.Node{GutsS[Gutspt-0].val}
 	    }
 	case 48:
-		//line src/gutscript/parser.y:362
+		//line src/gutscript/parser.y:363
 		{
-	        GutsVAL.val = ast.CreateFunctionCall(GutsS[Gutspt-3].val.(string), GutsS[Gutspt-1].val.([]ast.Expr))
+	        GutsVAL.val = ast.CreateFunctionCall(GutsS[Gutspt-3].val.(string), GutsS[Gutspt-1].val.([]ast.Node))
 	    }
 	}
 	goto Gutsstack /* stack new state and value */

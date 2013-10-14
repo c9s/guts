@@ -2,9 +2,9 @@ package ast
 
 type FunctionCall struct {
 	Name   string
-	Params []Expr
+	Params []Node
 }
 
-func CreateFunctionCall(name string, params []Expr) Node {
+func CreateFunctionCall(name string, params []Node) Node {
 	return FunctionCall{name, params}
 }
