@@ -80,10 +80,9 @@ func lexStart(l *GutsLex) stateFn {
 		// if there is no spaces/indent in the next line, then it should be outdent.
 		l.line++
 		l.next()
-		l.lastSpace = l.space
-		l.space = 0
 		c = l.peek()
 		if c == eof {
+			// if we're in an indent block.
 			if l.space > 0 {
 				l.emit(T_OUTDENT)
 			} else {
@@ -91,6 +90,10 @@ func lexStart(l *GutsLex) stateFn {
 			}
 			return nil
 		}
+		// reset space info
+		l.lastSpace = l.space
+		l.space = 0
+
 		// consume the spaces and guess it's
 		// indent/outdent/newline
 		for {
