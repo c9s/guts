@@ -3,7 +3,6 @@ package gutscript
 // vim:list:
 
 import "testing"
-import "fmt"
 
 var lextests = []struct {
 	input    string
@@ -48,16 +47,28 @@ else
 }
 
 // Given a token type list, check the returned token items
-func expectLexItems(items chan *GutsSymType, expectedItems []TokenType) {
+func expectLexItems(t *testing.T, items chan *GutsSymType, expectedItems []TokenType) {
+	var i = 0
+	var item *GutsSymType
 	for {
-		item := <-items
+		item = <-items
 		if item == nil {
 			break
 		}
-		fmt.Printf("Got token %s: '%s'\n", GetTokenName(int(item.typ)), item.val)
 		if item.typ == T_EOF || item.typ == eof {
 			break
 		}
+
+		if item.typ != expectedItems[i] {
+			t.Fatalf("Expecting token %s but we got %s",
+				GetTokenName(int(expectedItems[i])),
+				GetTokenName(int(item.typ)))
+		}
+		t.Logf("ok: token %s: '%s'\n", GetTokenName(int(item.typ)), item.val)
+		i++
+	}
+	if i < len(expectedItems) || i > len(expectedItems) {
+		t.Fatalf("Expecting %d tokens, but we got %d tokens", len(expectedItems), i)
 	}
 }
 
@@ -117,9 +128,40 @@ func BenchmarkLexer(b *testing.B) {
 	}
 }
 
-func TestLexer(t *testing.T) {
+type LexTestingItem struct {
+	File   string
+	Tokens []TokenType
+}
+
+var lexInputFiles []LexTestingItem = []LexTestingItem{
+	LexTestingItem{"tests/01_assignment.guts", []TokenType{T_IDENTIFIER, '=', T_FLOATING}},
+	LexTestingItem{"tests/02_assignment_expr.guts", []TokenType{
+		T_IDENTIFIER,
+		'=',
+		T_IDENTIFIER,
+		'*',
+		T_NUMBER,
+		'+',
+		T_NUMBER,
+	}},
+}
+
+func TestLexerShortSample(t *testing.T) {
 	for _, test := range lextests {
-		t.Log("Testing lex from ", test.input)
+		t.Log("Testing lex sample:", test.input)
 		expectLexInput(t, test.input, test.expected, test.cnt)
+	}
+}
+
+func TestLexerSample(t *testing.T) {
+	for _, testItem := range lexInputFiles {
+		t.Log("Testing", testItem.File)
+		items, err := LexFile(testItem.File)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if items != nil {
+			expectLexItems(t, items, testItem.Tokens)
+		}
 	}
 }
