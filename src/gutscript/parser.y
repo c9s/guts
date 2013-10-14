@@ -218,6 +218,12 @@ assignment_statement:
 
 
 function_parameter: 
+    /*
+    T_IDENTIFIER T_ASSIGN expr {
+        $$ = ast.FunctionParam{$1.(string), "", $3}
+    }
+    |
+    */
     T_IDENTIFIER T_IDENTIFIER {
         $$ = ast.FunctionParam{$2.(string), $1.(string), nil}
     }
