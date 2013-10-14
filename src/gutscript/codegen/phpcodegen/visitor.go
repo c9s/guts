@@ -90,11 +90,15 @@ func (self *Visitor) Visit(n ast.Node) string {
 		var out string = ""
 		out += self.IndentSpace() + "function " + fn.Name + "("
 		if len(fn.Params) > 0 {
-			names := []string{}
+			fields := []string{}
 			for _, param := range fn.Params {
-				names = append(names, "$"+param.Name)
+				field := "$" + param.Name
+				if param.Type != "" {
+					field = param.Type + " " + field
+				}
+				fields = append(fields, field)
 			}
-			out += strings.Join(names, ", ")
+			out += strings.Join(fields, ", ")
 		}
 		out += ") {\n"
 		self.indent++
