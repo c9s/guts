@@ -86,6 +86,17 @@ func (self *Visitor) Visit(n ast.Node) string {
 	if stmt, ok := n.(ast.ReturnStatement); ok {
 		return "return " + self.Visit(stmt.Expr) + ";\n"
 	}
+	if fnc, ok := n.(ast.FunctionCall); ok {
+		var out string
+		out = fnc.Name + "("
+		fields := []string{}
+		for _, param := range fnc.Params {
+			fields = append(fields, self.Visit(param))
+		}
+		out += strings.Join(fields, ", ")
+		out += ")"
+		return out
+	}
 	if fn, ok := n.(ast.Function); ok {
 		var out string = ""
 		out += self.IndentSpace() + "function " + fn.Name + "("

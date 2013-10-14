@@ -7,6 +7,7 @@ import "gutscript/codegen/phpcodegen"
 import "io/ioutil"
 import "errors"
 import "path/filepath"
+import "fmt"
 
 var parserInputs = []string{
 	`pi = 3.1415926`,
@@ -93,6 +94,7 @@ func CompileFile(srcFile string) (string, error) {
 	}
 	lexer.close()
 	visitor := phpcodegen.Visitor{}
+	fmt.Printf("AST: %#v\n", parser.Val.val)
 	return visitor.Visit(parser.Val.val), nil
 }
 
