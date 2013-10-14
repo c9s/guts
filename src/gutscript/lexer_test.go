@@ -3,6 +3,7 @@ package gutscript
 // vim:list:
 
 import "testing"
+import "fmt"
 
 var lextests = []struct {
 	input    string
@@ -46,19 +47,44 @@ else
 `, T_FUNCTION_PROTOTYPE, 1},
 }
 
+func DumpTokenTypeList(items []*GutsSymType) string {
+	var out string = "[]TokenType{\n"
+	for _, item := range items {
+		out += "\t" + GetTokenName(int(item.typ)) + ",\n"
+	}
+	out += "}\n"
+	return out
+}
+
 // Given a token type list, check the returned token items
-func expectLexItems(t *testing.T, items chan *GutsSymType, expectedItems []TokenType) {
+func expectLexItems(t *testing.T, itemChannel chan *GutsSymType, expectedItems []TokenType) {
 	var i = 0
 	var item *GutsSymType
+
+	if len(expectedItems) == 0 {
+		var items []*GutsSymType
+		for {
+			item = <-itemChannel
+			if item == nil {
+				break
+			}
+			if item.typ == T_EOF || item.typ == eof {
+				break
+			}
+			items = append(items, item)
+		}
+		fmt.Println(DumpTokenTypeList(items))
+		return
+	}
+
 	for {
-		item = <-items
+		item = <-itemChannel
 		if item == nil {
 			break
 		}
 		if item.typ == T_EOF || item.typ == eof {
 			break
 		}
-
 		if item.typ != expectedItems[i] {
 			t.Fatalf("Expecting token %s but we got %s",
 				GetTokenName(int(expectedItems[i])),
@@ -146,6 +172,24 @@ var lexInputFiles []LexTestingItem = []LexTestingItem{
 		T_NUMBER,
 	}},
 	LexTestingItem{"tests/05_function_call_01.guts", []TokenType{
+		T_IDENTIFIER,
+		'(',
+		T_NUMBER,
+		')',
+	}},
+	LexTestingItem{"tests/05_function_call_02.guts", []TokenType{
+		T_IDENTIFIER,
+		T_FUNCTION_PROTOTYPE,
+		'(',
+		T_IDENTIFIER,
+		')',
+		T_FUNCTION_GLYPH,
+		T_INDENT,
+		T_RETURN,
+		T_IDENTIFIER,
+		'*',
+		T_IDENTIFIER,
+		T_OUTDENT,
 		T_IDENTIFIER,
 		'(',
 		T_NUMBER,

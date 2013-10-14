@@ -9,7 +9,7 @@ import "gutscript/ast"
 var regs = make([]int, 26)
 var base int
 
-const DEBUG = true
+const DEBUG = false
 
 func debug(msg string, vals ...interface{}) {
     if DEBUG {
@@ -120,7 +120,6 @@ func debug(msg string, vals ...interface{}) {
 %token T_BOOLEAN_OR
 %left T_BOOLEAN_AND 
 %token T_BOOLEAN_AND
-
 
 %start start
 

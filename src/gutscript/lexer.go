@@ -224,7 +224,12 @@ func GetTokenName(typ int) string {
 		}
 	}
 out2:
-	return GutsTokname(c)
+	if c >= 4 && c-4 < len(GutsToknames) {
+		if GutsToknames[c-4] != "" {
+			return GutsToknames[c-4]
+		}
+	}
+	return fmt.Sprintf("'%c'", typ)
 }
 
 func (l *GutsLex) Error(s string) {
