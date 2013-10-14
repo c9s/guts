@@ -117,27 +117,6 @@ func TestCompileFile(t *testing.T) {
 	}
 }
 
-func TestCodeGen(t *testing.T) {
-	for _, input := range parserInputs {
-		t.Log(input)
-		lexer := GutsLex{
-			input: input,
-			start: 0,
-			pos:   0,
-			items: make(chan *GutsSymType, 100),
-		}
-		go lexer.run()
-		parser := GutsParser{}
-		if parser.Parse(&lexer) == 1 {
-			t.Fatal("syntax error")
-		}
-		lexer.close()
-		t.Logf("AST: %#v", parser.Val.val)
-		visitor := phpcodegen.Visitor{}
-		t.Log(visitor.Visit(parser.Val.val))
-	}
-}
-
 func TestParser(t *testing.T) {
 	for _, input := range parserInputs {
 		t.Log(input)
