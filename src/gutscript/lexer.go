@@ -202,11 +202,28 @@ func (l *GutsLex) Lex(lval *GutsSymType) int {
 
 func GetTokenName(typ int) string {
 	var c int = typ
+	if typ <= 0 {
+		c = GutsTok1[0]
+		goto out2
+	}
+	if typ < len(GutsTok1) {
+		c = GutsTok1[typ]
+		goto out2
+	}
 	if c >= GutsPrivate {
 		if c < GutsPrivate+len(GutsTok2) {
 			c = GutsTok2[c-GutsPrivate]
+			goto out2
 		}
 	}
+	for i := 0; i < len(GutsTok3); i += 2 {
+		c = GutsTok3[i+0]
+		if c == typ {
+			c = GutsTok3[i+1]
+			goto out2
+		}
+	}
+out2:
 	return GutsTokname(c)
 }
 

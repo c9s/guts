@@ -70,6 +70,7 @@ func expectLexItems(t *testing.T, items chan *GutsSymType, expectedItems []Token
 	if i < len(expectedItems) || i > len(expectedItems) {
 		t.Fatalf("Expecting %d tokens, but we got %d tokens", len(expectedItems), i)
 	}
+	t.Logf("ok: %d tokens matched.\n", len(expectedItems))
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
@@ -143,6 +144,12 @@ var lexInputFiles []LexTestingItem = []LexTestingItem{
 		T_NUMBER,
 		'+',
 		T_NUMBER,
+	}},
+	LexTestingItem{"tests/05_function_call_01.guts", []TokenType{
+		T_IDENTIFIER,
+		'(',
+		T_NUMBER,
+		')',
 	}},
 }
 
