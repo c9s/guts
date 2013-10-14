@@ -6,7 +6,7 @@ package ast
 type AssignStatement struct {
 	Variable Node
 	Expr     Node
-	StatementNode
+	Statement
 }
 
 func CreateAssignStatement(variable Node, expr Node) Node {

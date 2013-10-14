@@ -38,6 +38,10 @@ elseif a < 10
 else
     a = 1
 `, T_ELSEIF, 1},
+	{`foo :: ->
+    a = 10
+    b = 20
+`, T_FUNCTION_PROTOTYPE, 1},
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {

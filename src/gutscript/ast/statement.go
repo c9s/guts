@@ -1,12 +1,20 @@
 package ast
 
-type StatementNode struct {
+type Statement struct {
 }
 
-func CreateStatement() Node {
-	return StatementNode{}
+type ExprStatement struct {
+	Expr Node
 }
 
-func CreateExprStatement(node Node) Node {
-	return StatementNode{}
+type ReturnStatement struct {
+	Expr Node
+}
+
+func CreateExprStatement(expr Node) Node {
+	return ExprStatement{expr}
+}
+
+func CreateReturnStatement(expr Node) Node {
+	return ReturnStatement{expr}
 }

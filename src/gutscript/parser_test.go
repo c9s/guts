@@ -48,6 +48,10 @@ else
     a = 0
     b = 0
 `,
+	`foo :: ->
+    a = 10
+    return a
+`,
 }
 
 func TestCodeGen(t *testing.T) {

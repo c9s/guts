@@ -34,8 +34,13 @@ func (self *Visitor) Visit(n ast.Node) string {
 	if floating, ok := n.(ast.FloatingNumber); ok {
 		return strconv.FormatFloat(floating.Val, 'e', -1, 64)
 	}
+
 	if expr, ok := n.(ast.UnaryExpr); ok {
-		return fmt.Sprintf("%c%s", expr.Op, self.Visit(expr.Val))
+		if expr.Op != 0 {
+			return fmt.Sprintf("%c%s", expr.Op, self.Visit(expr.Val))
+		} else {
+			return self.Visit(expr.Val)
+		}
 	}
 	if expr, ok := n.(ast.Expr); ok {
 		if expr.Parenthesis {
@@ -76,6 +81,18 @@ func (self *Visitor) Visit(n ast.Node) string {
 		out += self.Visit(stmt.Body)
 		self.indent--
 		out += self.IndentSpace() + "}"
+		return out
+	}
+	if stmt, ok := n.(ast.ReturnStatement); ok {
+		return "return " + self.Visit(stmt.Expr) + ";\n"
+	}
+	if fn, ok := n.(ast.Function); ok {
+		var out string = ""
+		out += self.IndentSpace() + "function " + fn.Name + "() {\n"
+		self.indent++
+		out += self.Visit(fn.Body)
+		self.indent--
+		out += self.IndentSpace() + "}\n"
 		return out
 	}
 	return ""

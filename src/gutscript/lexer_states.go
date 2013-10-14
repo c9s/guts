@@ -15,6 +15,7 @@ var LexKeywords = map[string]int{
 	"echo":    T_ECHO,
 	"does":    T_DOES,
 	"is":      T_IS,
+	"return":  T_RETURN,
 }
 
 func (l *GutsLex) emitIfKeywordMatches() bool {
@@ -59,13 +60,17 @@ func lexStart(l *GutsLex) stateFn {
 	var c rune = l.peek()
 	if unicode.IsDigit(c) {
 		return lexNumber
-	} else if c == '-' {
-		l.next()
-		l.emit(TokenType(c))
-		return lexStart
 	} else if l.emitIfMatch("->", T_FUNCTION_GLYPH) {
 		return lexStart
 	} else if l.emitIfMatch("::", T_FUNCTION_PROTOTYPE) {
+		return lexStart
+	} else if l.consumeIfMatch("//") {
+		return lexOnelineComment
+	} else if l.consumeIfMatch("/*") {
+		return lexComment
+	} else if c == '-' {
+		l.next()
+		l.emit(TokenType(c))
 		return lexStart
 	} else if c == ' ' || c == '\t' {
 		// return lexSpaces
@@ -112,10 +117,6 @@ func lexStart(l *GutsLex) stateFn {
 		return lexStart
 	} else if c == '"' || c == '\'' {
 		return lexString
-	} else if l.consumeIfMatch("//") {
-		return lexOnelineComment
-	} else if l.consumeIfMatch("/*") {
-		return lexComment
 	} else if l.emitIfKeywordMatches() {
 		return lexStart
 	} else if unicode.IsLetter(c) {

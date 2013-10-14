@@ -35,6 +35,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> expr variable number floating_number
 %type <val> statement
 %type <val> function_decl_statement
+%type <val> function_parameter_list
 %type <val> statement 
 %type <val> statement_list
 %type <val> assignment_statement 
@@ -176,6 +177,7 @@ statement:
         | assignment_statement { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }
+        | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
     ;
 
 if_statement:
@@ -210,20 +212,20 @@ assignment_statement:
         }
 ;
 
-function_parameter_list: '(' ')' ;
+function_parameter_list: 
+    '(' ')' {
+        $$ = []ast.FunctionParam{}
+    }
+    | /* empty */ { 
+        $$ = []ast.FunctionParam{}
+    }
+    ;
 
 function_decl_statement:
-    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH function_body { 
-        // $1 ($3) $4
+    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block { 
+        $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementNodeList))
     }
 ;
-
-function_body: top_statement_list;
-
-
-
-
-
 
 
 variable: T_IDENTIFIER { 
@@ -280,9 +282,15 @@ expr:
         { 
             $$ = ast.UnaryExpr{'-', $2}
         }
-    | variable
-    | number
-    | floating_number
+    | variable { 
+            $$ = ast.UnaryExpr{0, $1}
+        }
+    | number {
+            $$ = ast.UnaryExpr{0, $1}
+        }
+    | floating_number {
+            $$ = ast.UnaryExpr{0, $1}
+        }
     ;
 
 floating_number: T_FLOATING {
