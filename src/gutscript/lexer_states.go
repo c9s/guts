@@ -82,7 +82,8 @@ func lexStart(l *GutsLex) stateFn {
 		l.next()
 		c = l.peek()
 		if c == eof {
-			// if we're in an indent block.
+			// if we're in an indent block, and it's the end of file.
+			// we should treat the newline as a block end.
 			if l.space > 0 {
 				l.emit(T_OUTDENT)
 			} else {
