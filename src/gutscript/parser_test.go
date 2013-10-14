@@ -6,6 +6,7 @@ import "testing"
 import "gutscript/codegen/phpcodegen"
 import "io/ioutil"
 import "errors"
+import "path/filepath"
 
 var parserInputs = []string{
 	`pi = 3.1415926`,
@@ -96,7 +97,10 @@ func CompileFile(srcFile string) (string, error) {
 }
 
 func TestCompileFile(t *testing.T) {
-	srcFiles := []string{"tests/01_assignment.guts"}
+	srcFiles, err := filepath.Glob("tests/*.guts")
+	if err != nil {
+		t.Fatal(err)
+	}
 	for _, srcFile := range srcFiles {
 		t.Log("Lexing", srcFile)
 		LexFile(srcFile)
