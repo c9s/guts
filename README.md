@@ -54,6 +54,9 @@ For more language details, please check the `docs` for the language synopsis.
     class Person
         say :: (name) -> "Hello #{name}, Good morning"
         getPhone :: () -> "12345678"
+
+    if str =~ /a-z/
+        say "matched!"
         
 The above code compiles to:
 
@@ -65,6 +68,9 @@ class Person {
     function getPhone() {
         return "12345678";
     }
+}
+if ( preg_match('a-z',$str) ) {
+    echo "matched!";
 }
 ```
 
