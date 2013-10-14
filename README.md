@@ -132,7 +132,7 @@ Parser
  x  | if else statement
  x  | if elseif else statement
  x  | function statement
- o  | function param list
+ x  | function param list
  o  | list structure
  o  | hash structure
  o  | foreach block
