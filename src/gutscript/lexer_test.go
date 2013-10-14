@@ -3,6 +3,7 @@ package gutscript
 // vim:list:
 
 import "testing"
+import "fmt"
 
 var lextests = []struct {
 	input    string
@@ -10,8 +11,8 @@ var lextests = []struct {
 	cnt      int
 }{
 	{"a = 102", T_IDENTIFIER, 1},
-	{"a = 102\n", T_NEWLINE, 1},
-	{"a = 102\nb = 333\n", T_NEWLINE, 2},
+	{"a = 102\n", T_NEWLINE, 0},
+	{"a = 102\nb = 333\n", T_NEWLINE, 1},
 	{"abc123 = 100", T_IDENTIFIER, 1},
 	{"af = 102", T_NUMBER, 1},
 	{"af = 102", '=', 1},
@@ -46,6 +47,7 @@ else
 `, T_FUNCTION_PROTOTYPE, 1},
 }
 
+// Given a token type list, check the returned token items
 func expectLexItems(items chan *GutsSymType, expectedItems []TokenType) {
 	for {
 		item := <-items
@@ -57,7 +59,6 @@ func expectLexItems(items chan *GutsSymType, expectedItems []TokenType) {
 			break
 		}
 	}
-
 }
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
