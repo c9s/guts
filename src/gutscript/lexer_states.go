@@ -79,32 +79,37 @@ func lexStart(l *GutsLex) stateFn {
 		// if there is a new line, check the next line is indent or outdent,
 		// if there is no spaces/indent in the next line, then it should be outdent.
 		l.line++
-		l.next()
-		c = l.peek()
+		c = l.next()
+
+		// skip multiple newline at one time
+		for c == '\n' {
+			c = l.next()
+		}
+
+		// c = l.peek()
 		if c == eof {
 			// if we're in an indent block, and it's the end of file.
 			// we should treat the newline as a block end.
 			if l.space > 0 {
 				l.emit(T_OUTDENT)
 			} else {
-				l.emit(T_NEWLINE)
+				l.ignore()
 			}
 			return nil
 		}
+
 		// reset space info
 		l.lastSpace = l.space
 		l.space = 0
 
+		// if there are one or more space in the next line
 		// consume the spaces and guess it's
 		// indent/outdent/newline
-		for {
+		for c == ' ' || c == '\t' {
+			l.space++
 			c = l.next()
-			if c == ' ' || c == '\t' {
-				l.space++
-			} else {
-				break
-			}
 		}
+
 		l.backup()
 		if l.space == l.lastSpace {
 			l.emit(T_NEWLINE)
