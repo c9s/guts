@@ -88,7 +88,15 @@ func (self *Visitor) Visit(n ast.Node) string {
 	}
 	if fn, ok := n.(ast.Function); ok {
 		var out string = ""
-		out += self.IndentSpace() + "function " + fn.Name + "() {\n"
+		out += self.IndentSpace() + "function " + fn.Name + "("
+		if len(fn.Params) > 0 {
+			names := []string{}
+			for _, param := range fn.Params {
+				names = append(names, "$"+param.Name)
+			}
+			out += strings.Join(names, ", ")
+		}
+		out += ") {\n"
 		self.indent++
 		out += self.Visit(fn.Body)
 		self.indent--

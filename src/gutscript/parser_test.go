@@ -110,6 +110,7 @@ func TestCompileFile(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Compilation of %s failed: %s", srcFile, err)
 		}
+		t.Log(out)
 		_ = out
 	}
 }
