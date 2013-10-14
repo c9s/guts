@@ -316,6 +316,8 @@ expr:
         { 
             $$ = ast.UnaryExpr{'-', $2}
         }
+    | function_call { 
+        }
     | variable { 
             $$ = ast.UnaryExpr{0, $1}
         }
@@ -335,12 +337,15 @@ number: T_NUMBER {
         $$ = ast.CreateNumber($1.(string))
     }
 
+function_call_parameter: expr { };
+
 function_call_parameter_list:
-    '(' ')' { }
+      function_call_parameter_list function_call_parameter
+    | function_call_parameter
 ;
 
 function_call:
-    T_IDENTIFIER function_call_parameter_list { }
+    T_IDENTIFIER '(' function_call_parameter_list ')' { }
 ;
 
 %%      /*  start  of  programs  */
