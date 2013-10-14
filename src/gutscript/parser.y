@@ -217,8 +217,13 @@ assignment_statement:
 ;
 
 
-function_parameter: T_IDENTIFIER { 
-    $$ = ast.FunctionParam{$1.(string), "require"}
+function_parameter: 
+    T_IDENTIFIER T_IDENTIFIER {
+        $$ = ast.FunctionParam{$2.(string), $1.(string), nil}
+    }
+    | 
+    T_IDENTIFIER { 
+        $$ = ast.FunctionParam{$1.(string), "", nil}
     }
     ;
 

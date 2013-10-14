@@ -7,8 +7,9 @@ type Function struct {
 }
 
 type FunctionParam struct {
-	Name string
-	Type string
+	Name    string
+	Type    string
+	Default Node
 }
 
 func CreateFunction(name string, params []FunctionParam, stmts *StatementNodeList) Node {

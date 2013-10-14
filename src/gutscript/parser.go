@@ -134,7 +134,7 @@ const GutsEofCode = 1
 const GutsErrCode = 2
 const GutsMaxDepth = 200
 
-//line src/gutscript/parser.y:337
+//line src/gutscript/parser.y:342
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -144,7 +144,7 @@ var GutsExca = []int{
 	-2, 0,
 }
 
-const GutsNprod = 45
+const GutsNprod = 46
 const GutsPrivate = 57344
 
 var GutsTokenNames []string
@@ -159,12 +159,12 @@ var GutsAct = []int{
 	29, 30, 63, 29, 30, 69, 4, 70, 41, 28,
 	40, 27, 22, 23, 24, 25, 26, 53, 37, 31,
 	32, 67, 11, 67, 29, 30, 28, 60, 27, 22,
-	23, 24, 25, 26, 24, 25, 26, 61, 1, 2,
-	9, 29, 30, 55, 29, 30, 7, 36, 68, 28,
-	71, 27, 22, 23, 24, 25, 26, 27, 22, 23,
-	24, 25, 26, 64, 29, 30, 17, 20, 19, 58,
-	29, 30, 65, 11, 54, 8, 17, 20, 19, 18,
-	35, 20, 19, 11, 16, 15, 0, 34, 14, 18,
+	23, 24, 25, 26, 24, 25, 26, 61, 71, 1,
+	2, 29, 30, 55, 29, 30, 9, 7, 68, 28,
+	72, 27, 22, 23, 24, 25, 26, 27, 22, 23,
+	24, 25, 26, 36, 29, 30, 17, 20, 19, 64,
+	29, 30, 65, 11, 54, 58, 17, 20, 19, 18,
+	35, 20, 19, 11, 8, 16, 15, 34, 14, 18,
 	14, 3, 0, 0, 21, 0, 10, 0, 0, 14,
 	0, 0, 0, 0, 0, 0, 10, 13, 0, 6,
 	0, 0, 0, 0, 0, 0, 12, 13, 0, 0,
@@ -181,29 +181,29 @@ var GutsPact = []int{
 	95, 95, 30, 27, -1000, -1000, 81, -1000, -39, -37,
 	95, -53, 4, 7, 7, -37, -37, -37, -34, 33,
 	27, 27, 4, -1000, -1000, -1000, -1000, -13, -10, 36,
-	-1000, -1000, -1000, 30, -29, -1000, -1000, -1000, -1000, 38,
-	-1000, -1000,
+	-1000, -1000, -1000, 30, -29, -1000, -1000, 53, -1000, 38,
+	-1000, -1000, -1000,
 }
 var GutsPgo = []int{
 
-	0, 129, 107, 105, 104, 26, 95, 89, 83, 0,
-	67, 66, 60, 4, 111, 59, 58, 58, 58,
+	0, 129, 107, 106, 105, 26, 104, 95, 89, 0,
+	83, 67, 66, 4, 111, 60, 59, 59, 59,
 }
 var GutsR1 = []int{
 
 	0, 16, 15, 15, 14, 13, 10, 10, 5, 5,
 	5, 5, 5, 5, 12, 12, 12, 11, 11, 9,
-	8, 8, 7, 7, 7, 6, 2, 1, 1, 1,
+	9, 8, 8, 7, 7, 7, 6, 2, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 4, 3, 17, 18,
+	1, 1, 4, 3, 17, 18,
 }
 var GutsR2 = []int{
 
 	0, 1, 2, 1, 1, 3, 2, 1, 1, 1,
-	1, 1, 1, 2, 3, 4, 3, 3, 4, 1,
-	3, 1, 3, 2, 0, 5, 1, 3, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 2, 1, 1,
-	1, 1, 1, 2, 2,
+	1, 1, 1, 2, 3, 4, 3, 3, 4, 2,
+	1, 3, 1, 3, 2, 0, 5, 1, 3, 3,
+	3, 3, 3, 3, 3, 3, 3, 3, 2, 1,
+	1, 1, 1, 1, 2, 2,
 }
 var GutsChk = []int{
 
@@ -214,18 +214,18 @@ var GutsChk = []int{
 	15, 31, -1, -1, -1, -1, -1, -1, -1, -1,
 	-1, -1, -1, -13, 13, -5, 56, -1, -7, 55,
 	-13, -13, 14, 32, -8, 56, -9, 5, -13, 54,
-	56, -9,
+	56, 5, -9,
 }
 var GutsDef = []int{
 
 	0, -2, 1, 3, 4, 8, 9, 10, 11, 12,
-	0, 0, 0, 0, 38, 39, 40, 26, 0, 42,
-	41, 2, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 13, 38, 26, 0, 7, 0, 37,
-	0, 24, 0, 28, 29, 30, 31, 32, 33, 34,
-	35, 36, 0, 16, 5, 6, 27, 17, 0, 0,
-	14, 15, 18, 0, 0, 23, 21, 19, 25, 0,
-	22, 20,
+	0, 0, 0, 0, 39, 40, 41, 27, 0, 43,
+	42, 2, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 13, 39, 27, 0, 7, 0, 38,
+	0, 25, 0, 29, 30, 31, 32, 33, 34, 35,
+	36, 37, 0, 16, 5, 6, 28, 17, 0, 0,
+	14, 15, 18, 0, 0, 24, 22, 20, 26, 0,
+	23, 19, 21,
 }
 var GutsTok1 = []int{
 
@@ -581,50 +581,55 @@ Gutsdefault:
 	            GutsVAL.val = ast.CreateAssignStatement(GutsS[Gutspt-3].val, GutsS[Gutspt-1].val)
 	        }
 	case 19:
-		//line src/gutscript/parser.y:220
-		{ 
-	    GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), "require"}
+		//line src/gutscript/parser.y:221
+		{
+	        GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), GutsS[Gutspt-1].val.(string), nil}
 	    }
 	case 20:
-		//line src/gutscript/parser.y:226
+		//line src/gutscript/parser.y:225
+		{ 
+	        GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), "", nil}
+	    }
+	case 21:
+		//line src/gutscript/parser.y:231
 		{
 	        if params, ok := GutsS[Gutspt-2].val.([]ast.FunctionParam) ; ok {
 	            params = append(params, GutsS[Gutspt-0].val.(ast.FunctionParam))
 	            GutsVAL.val = params
 	        }
 	      }
-	case 21:
-		//line src/gutscript/parser.y:232
+	case 22:
+		//line src/gutscript/parser.y:237
 		{
 	            GutsVAL.val = []ast.FunctionParam{GutsS[Gutspt-0].val.(ast.FunctionParam)}
 	        }
-	case 22:
-		//line src/gutscript/parser.y:238
+	case 23:
+		//line src/gutscript/parser.y:243
 		{
 	        GutsVAL.val = GutsS[Gutspt-1].val
 	    }
-	case 23:
-		//line src/gutscript/parser.y:241
+	case 24:
+		//line src/gutscript/parser.y:246
 		{
 	        GutsVAL.val = []ast.FunctionParam{}
 	    }
-	case 24:
-		//line src/gutscript/parser.y:244
+	case 25:
+		//line src/gutscript/parser.y:249
 		{ 
 	        GutsVAL.val = []ast.FunctionParam{}
 	    }
-	case 25:
-		//line src/gutscript/parser.y:250
+	case 26:
+		//line src/gutscript/parser.y:255
 		{ 
 	        GutsVAL.val = ast.CreateFunction(GutsS[Gutspt-4].val.(string), GutsS[Gutspt-2].val.([]ast.FunctionParam), GutsS[Gutspt-0].val.(*ast.StatementNodeList))
 	    }
-	case 26:
-		//line src/gutscript/parser.y:256
+	case 27:
+		//line src/gutscript/parser.y:261
 		{ 
 	        GutsVAL.val = ast.CreateVariable(GutsS[Gutspt-0].val.(string))
 	    }
-	case 27:
-		//line src/gutscript/parser.y:261
+	case 28:
+		//line src/gutscript/parser.y:266
 		{
 	            if node, ok := GutsS[Gutspt-1].val.(ast.Expr) ; ok {
 	                node.Parenthesis = true
@@ -634,86 +639,86 @@ Gutsdefault:
 	            }
 	            // $$ = $2
         }
-	case 28:
-		//line src/gutscript/parser.y:271
+	case 29:
+		//line src/gutscript/parser.y:276
 		{ 
 	            GutsVAL.val = ast.CreateExpr('+', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 29:
-		//line src/gutscript/parser.y:275
+	case 30:
+		//line src/gutscript/parser.y:280
 		{ 
 	            GutsVAL.val = ast.CreateExpr('-', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 30:
-		//line src/gutscript/parser.y:279
+	case 31:
+		//line src/gutscript/parser.y:284
 		{ 
 	            GutsVAL.val = ast.CreateExpr('*', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 31:
-		//line src/gutscript/parser.y:283
+	case 32:
+		//line src/gutscript/parser.y:288
 		{ 
 	            GutsVAL.val = ast.CreateExpr('/', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 32:
-		//line src/gutscript/parser.y:287
+	case 33:
+		//line src/gutscript/parser.y:292
 		{ 
 	            GutsVAL.val = ast.CreateExpr('%', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 33:
-		//line src/gutscript/parser.y:291
+	case 34:
+		//line src/gutscript/parser.y:296
 		{
 	            GutsVAL.val = ast.CreateExpr('&', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 34:
-		//line src/gutscript/parser.y:295
+	case 35:
+		//line src/gutscript/parser.y:300
 		{
 	            GutsVAL.val = ast.CreateExpr('|', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 35:
-		//line src/gutscript/parser.y:299
+	case 36:
+		//line src/gutscript/parser.y:304
 		{
 	            GutsVAL.val = ast.CreateExpr('>', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 36:
-		//line src/gutscript/parser.y:303
+	case 37:
+		//line src/gutscript/parser.y:308
 		{
 	            GutsVAL.val = ast.CreateExpr('<', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 37:
-		//line src/gutscript/parser.y:307
+	case 38:
+		//line src/gutscript/parser.y:312
 		{ 
 	            GutsVAL.val = ast.UnaryExpr{'-', GutsS[Gutspt-0].val}
 	        }
-	case 38:
-		//line src/gutscript/parser.y:310
+	case 39:
+		//line src/gutscript/parser.y:315
 		{ 
 	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	        }
-	case 39:
-		//line src/gutscript/parser.y:313
-		{
-	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
-	        }
 	case 40:
-		//line src/gutscript/parser.y:316
+		//line src/gutscript/parser.y:318
 		{
 	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	        }
 	case 41:
 		//line src/gutscript/parser.y:321
 		{
-	        GutsVAL.val = ast.CreateFloatingNumber(GutsS[Gutspt-0].val.(string))
-	    }
+	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
+	        }
 	case 42:
-		//line src/gutscript/parser.y:325
+		//line src/gutscript/parser.y:326
 		{
-	        GutsVAL.val = ast.CreateNumber(GutsS[Gutspt-0].val.(string))
+	        GutsVAL.val = ast.CreateFloatingNumber(GutsS[Gutspt-0].val.(string))
 	    }
 	case 43:
 		//line src/gutscript/parser.y:330
-		{ }
+		{
+	        GutsVAL.val = ast.CreateNumber(GutsS[Gutspt-0].val.(string))
+	    }
 	case 44:
-		//line src/gutscript/parser.y:334
+		//line src/gutscript/parser.y:335
+		{ }
+	case 45:
+		//line src/gutscript/parser.y:339
 		{ }
 	}
 	goto Gutsstack /* stack new state and value */
