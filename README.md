@@ -70,8 +70,8 @@ class Person {
 
 File Extension
 --------------------
-The file extension is named with "\*.cphp", the compiler compiles your .cphp
-files into .php file.
+The file extension is named with "\*.guts", the compiler compiles your .guts
+files to .php files.
 
 
 Implementation
