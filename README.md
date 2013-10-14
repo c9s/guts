@@ -53,7 +53,7 @@ For more language details, please check the `docs` for the language synopsis.
 
     class Person
         say :: (name) -> "Hello #{name}, Good morning"
-        getPhone :: () -> "12345678"
+        getPhone :: -> "12345678"
 
     if str =~ /a-z/
         say "matched!"
