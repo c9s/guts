@@ -178,7 +178,9 @@ statement_list:
 
 statement: 
           block { $$ = $1 }
+        | expr T_NEWLINE { $$ = ast.CreateExprStatement($1) } 
         | expr { $$ = ast.CreateExprStatement($1) } 
+        | assignment_statement T_NEWLINE { $$ = $1 }
         | assignment_statement { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }
@@ -206,11 +208,6 @@ if_statement:
 
 assignment_statement:
     variable '=' expr
-        {
-            debug("assignment_statement", $1 , "=" , $3)
-            $$ = ast.CreateAssignStatement($1, $3)
-        }
-    | variable '=' expr T_NEWLINE
         {
             debug("assignment_statement", $1 , "=" , $3)
             $$ = ast.CreateAssignStatement($1, $3)
