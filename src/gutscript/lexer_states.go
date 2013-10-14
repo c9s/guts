@@ -116,7 +116,7 @@ func lexStart(l *GutsLex) stateFn {
 		return lexStartLine
 	} else if c == '=' && l.peekMore(2) != '=' {
 		l.next()
-		l.emit(T_ASSIGN)
+		l.emit(TokenType(c))
 		return lexStart
 	} else if l.accept("+-*|&[]{}()<>,") {
 		l.emit(TokenType(c))

@@ -59,8 +59,6 @@ func debug(msg string, vals ...interface{}) {
 
 %token T_NEWLINE
 
-%token T_ASSIGN
-
 %token T_NEW
 %token T_CLONE
 
@@ -204,12 +202,12 @@ if_statement:
 ;
 
 assignment_statement:
-    variable T_ASSIGN expr
+    variable '=' expr
         {
             debug("assignment_statement", $1 , "=" , $3)
             $$ = ast.CreateAssignStatement($1, $3)
         }
-    | variable T_ASSIGN expr T_NEWLINE
+    | variable '=' expr T_NEWLINE
         {
             debug("assignment_statement", $1 , "=" , $3)
             $$ = ast.CreateAssignStatement($1, $3)
@@ -219,7 +217,7 @@ assignment_statement:
 
 function_parameter: 
     /*
-    T_IDENTIFIER T_ASSIGN expr {
+    T_IDENTIFIER '=' expr {
         $$ = ast.FunctionParam{$1.(string), "", $3}
     }
     |

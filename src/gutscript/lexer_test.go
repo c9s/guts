@@ -12,7 +12,7 @@ var lextests = []struct {
 	{"a = 102", T_IDENTIFIER, 1},
 	{"abc123 = 100", T_IDENTIFIER, 1},
 	{"af = 102", T_NUMBER, 1},
-	{"af = 102", T_ASSIGN, 1},
+	{"af = 102", '=', 1},
 	{"af = 3.1415926", T_FLOATING, 1},
 	{"af = bk", T_IDENTIFIER, 2},
 	{"b = 3 * -10", T_IDENTIFIER, 1},
