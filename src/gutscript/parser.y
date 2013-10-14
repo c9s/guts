@@ -9,7 +9,7 @@ import "gutscript/ast"
 var regs = make([]int, 26)
 var base int
 
-const DEBUG = false
+const DEBUG = true
 
 func debug(msg string, vals ...interface{}) {
     if DEBUG {
@@ -48,7 +48,6 @@ func debug(msg string, vals ...interface{}) {
 %type <val> assignment_statement 
 %type <val> if_statement
 %type <val> block 
-%type <val> top_statement 
 %type <val> top_statement_list 
 %type <val> start
 
@@ -133,38 +132,20 @@ start : top_statement_list {
     }
 ;
 
-top_statement_list:
-    top_statement_list top_statement { 
-        if stmts, ok := $1.(*ast.StatementNodeList) ; ok {
-            stmts.Append($2)
-            $$ = $1
-        }
-        debug("top_statement_list top_statement", $1, $2)
+top_statement_list: statement_list 
+    { 
+        $$ = $1 
     }
-    | top_statement {
-        debug("top_statement", $1)
-        stmts := ast.CreateStatementList()
-        stmts.Append($1)
-        $$ = stmts
-    }
-;
-
-top_statement:
-    statement {
-        debug("statement", $1)
-        $$ = $1
-    }
-;
-
+    ;
 
 // block is contains one or more statement
 block: T_INDENT statement_list T_OUTDENT { $$ = $2 }
 
 statement_list:
-      statement_list statement
+      statement_list T_NEWLINE statement
       {
             if stmts, ok := $1.(*ast.StatementNodeList) ; ok {
-                stmts.Append($2)
+                stmts.Append($3)
                 $$ = $1
             }
       }
@@ -178,9 +159,7 @@ statement_list:
 
 statement: 
           block { $$ = $1 }
-        | expr T_NEWLINE { $$ = ast.CreateExprStatement($1) } 
         | expr { $$ = ast.CreateExprStatement($1) } 
-        | assignment_statement T_NEWLINE { $$ = $1 }
         | assignment_statement { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }

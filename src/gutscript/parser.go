@@ -12,7 +12,7 @@ import "gutscript/ast"
 var regs = make([]int, 26)
 var base int
 
-const DEBUG = false
+const DEBUG = true
 
 func debug(msg string, vals ...interface{}) {
     if DEBUG {
@@ -132,7 +132,7 @@ const GutsEofCode = 1
 const GutsErrCode = 2
 const GutsMaxDepth = 200
 
-//line src/gutscript/parser.y:365
+//line src/gutscript/parser.y:344
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -142,92 +142,86 @@ var GutsExca = []int{
 	-2, 0,
 }
 
-const GutsNprod = 50
+const GutsNprod = 46
 const GutsPrivate = 57344
 
 var GutsTokenNames []string
 var GutsStates []string
 
-const GutsLast = 185
+const GutsLast = 157
 
 var GutsAct = []int{
 
-	6, 72, 65, 5, 29, 24, 25, 26, 27, 28,
-	77, 36, 78, 41, 42, 31, 32, 44, 31, 32,
-	46, 74, 11, 75, 63, 47, 48, 49, 50, 51,
-	52, 53, 54, 55, 45, 56, 26, 27, 28, 57,
-	73, 43, 45, 69, 61, 33, 66, 31, 32, 4,
-	67, 30, 11, 29, 24, 25, 26, 27, 28, 73,
-	68, 40, 34, 35, 79, 1, 2, 31, 32, 23,
-	9, 3, 7, 76, 22, 66, 39, 80, 30, 81,
-	29, 24, 25, 26, 27, 28, 38, 21, 20, 59,
-	14, 71, 64, 60, 31, 32, 30, 70, 29, 24,
-	25, 26, 27, 28, 30, 62, 29, 24, 25, 26,
-	27, 28, 31, 32, 24, 25, 26, 27, 28, 8,
-	31, 32, 18, 21, 20, 17, 13, 31, 32, 11,
-	58, 18, 21, 20, 19, 16, 12, 0, 11, 0,
-	0, 0, 0, 19, 37, 15, 0, 15, 0, 0,
-	0, 10, 0, 0, 0, 0, 15, 0, 0, 0,
-	10, 0, 13, 0, 0, 0, 0, 0, 0, 0,
-	0, 13, 12, 0, 0, 0, 0, 0, 0, 0,
-	0, 12, 0, 0, 15,
+	6, 69, 62, 5, 28, 23, 24, 25, 26, 27,
+	74, 34, 75, 38, 39, 30, 31, 11, 30, 31,
+	43, 36, 21, 20, 45, 46, 47, 48, 49, 50,
+	51, 52, 53, 54, 71, 70, 72, 55, 60, 41,
+	42, 58, 40, 63, 66, 4, 29, 64, 28, 23,
+	24, 25, 26, 27, 25, 26, 27, 22, 65, 32,
+	33, 13, 30, 31, 42, 30, 31, 11, 44, 70,
+	73, 12, 63, 3, 77, 29, 78, 28, 23, 24,
+	25, 26, 27, 56, 22, 37, 68, 76, 1, 2,
+	57, 30, 31, 29, 9, 28, 23, 24, 25, 26,
+	27, 23, 24, 25, 26, 27, 18, 21, 20, 30,
+	31, 35, 15, 11, 30, 31, 7, 14, 19, 61,
+	67, 59, 8, 15, 17, 16, 0, 0, 0, 0,
+	0, 0, 0, 0, 15, 10, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 13, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 12,
 }
 var GutsPact = []int{
 
-	126, -1000, 126, -1000, -1000, -1000, 55, 31, -1000, 44,
-	81, 126, 81, 81, -1000, -12, -1000, -1000, -13, 81,
-	-1000, -1000, -1000, -1000, 81, 81, 81, 81, 81, 81,
-	81, 81, 81, -1000, 81, 40, 63, -1000, -21, 117,
-	-1000, 37, -42, 81, -31, 81, 10, -10, -10, -42,
-	-42, -42, 70, -39, 63, 63, 10, -1000, -1000, -1000,
-	-1000, 63, 12, 35, -33, -1000, 63, -1000, -1000, 40,
-	-44, -1000, -1000, 59, 81, -1000, -1000, 54, -1000, -1000,
-	-1000, -1000,
+	101, -1000, -1000, 43, -1000, -1000, 52, -1000, -1000, 41,
+	16, 101, 16, 16, -1000, -11, -1000, -1000, 9, 16,
+	-1000, -1000, 101, 16, 16, 16, 16, 16, 16, 16,
+	16, 16, 16, 55, 52, -1000, -15, 70, 34, -42,
+	16, -17, 16, 5, -1000, 8, 8, -42, -42, -42,
+	57, -39, 52, 52, 5, -1000, -1000, -1000, 52, 13,
+	30, -20, -1000, 52, -1000, -1000, 55, -44, -1000, -1000,
+	82, 16, -1000, -1000, 64, -1000, -1000, -1000, -1000,
 }
 var GutsPgo = []int{
 
-	0, 0, 144, 135, 125, 49, 119, 105, 97, 1,
-	2, 92, 90, 76, 72, 70, 3, 71, 66, 65,
+	0, 0, 111, 125, 124, 45, 122, 121, 120, 1,
+	2, 119, 117, 73, 116, 94, 3, 89, 88,
 }
 var GutsR1 = []int{
 
-	0, 19, 18, 18, 17, 16, 13, 13, 5, 5,
-	5, 5, 5, 5, 5, 5, 15, 15, 15, 14,
-	9, 9, 8, 8, 7, 7, 7, 6, 2, 1,
+	0, 18, 17, 16, 13, 13, 5, 5, 5, 5,
+	5, 5, 15, 15, 15, 14, 9, 9, 8, 8,
+	7, 7, 7, 6, 2, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 4, 3, 10, 11, 11, 12,
+	4, 3, 10, 11, 11, 12,
 }
 var GutsR2 = []int{
 
-	0, 1, 2, 1, 1, 3, 2, 1, 1, 2,
-	1, 2, 1, 1, 1, 2, 3, 4, 3, 3,
-	2, 1, 3, 1, 3, 2, 0, 5, 1, 3,
-	3, 3, 3, 3, 3, 3, 3, 3, 3, 2,
-	1, 1, 1, 1, 1, 1, 1, 3, 1, 4,
+	0, 1, 1, 3, 3, 1, 1, 1, 1, 1,
+	1, 2, 3, 4, 3, 3, 2, 1, 3, 1,
+	3, 2, 0, 5, 1, 3, 3, 3, 3, 3,
+	3, 3, 3, 3, 3, 2, 1, 1, 1, 1,
+	1, 1, 1, 3, 1, 4,
 }
 var GutsChk = []int{
 
-	-1000, -19, -18, -17, -5, -16, -1, -14, -6, -15,
+	-1000, -18, -17, -13, -5, -16, -1, -14, -6, -15,
 	34, 12, 55, 45, -12, -2, -3, -4, 5, 17,
-	7, 6, -17, 14, 44, 45, 46, 47, 48, 43,
-	41, 57, 58, 14, 18, 19, -1, -2, 5, -13,
-	-5, -1, -1, 53, 30, 55, -1, -1, -1, -1,
-	-1, -1, -1, -1, -1, -1, -1, -16, 13, -5,
-	56, -1, -7, 55, -11, -10, -1, -16, -16, 31,
-	-8, 56, -9, 5, 54, 56, -16, 54, 56, 5,
-	-10, -9,
+	7, 6, 14, 44, 45, 46, 47, 48, 43, 41,
+	57, 58, 18, 19, -1, -2, 5, -13, -1, -1,
+	53, 30, 55, -1, -5, -1, -1, -1, -1, -1,
+	-1, -1, -1, -1, -1, -16, 13, 56, -1, -7,
+	55, -11, -10, -1, -16, -16, 31, -8, 56, -9,
+	5, 54, 56, -16, 54, 56, 5, -10, -9,
 }
 var GutsDef = []int{
 
-	0, -2, 1, 3, 4, 8, 10, 12, 13, 14,
-	0, 0, 0, 0, 40, 41, 42, 43, 28, 0,
-	45, 44, 2, 9, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 11, 0, 0, 15, 41, 28, 0,
-	7, 0, 39, 0, 26, 0, 0, 30, 31, 32,
-	33, 34, 35, 36, 37, 38, 0, 18, 5, 6,
-	29, 19, 0, 0, 0, 48, 46, 16, 17, 0,
-	0, 25, 23, 21, 0, 49, 27, 0, 24, 20,
-	47, 22,
+	0, -2, 1, 2, 5, 6, 7, 8, 9, 10,
+	0, 0, 0, 0, 36, 37, 38, 39, 24, 0,
+	41, 40, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 11, 37, 24, 0, 0, 35,
+	0, 22, 0, 0, 4, 26, 27, 28, 29, 30,
+	31, 32, 33, 34, 0, 14, 3, 25, 15, 0,
+	0, 0, 44, 42, 12, 13, 0, 0, 21, 19,
+	17, 0, 45, 23, 0, 20, 16, 43, 18,
 }
 var GutsTok1 = []int{
 
@@ -489,149 +483,125 @@ Gutsdefault:
 	switch Gutsnt {
 
 	case 1:
-		//line src/gutscript/parser.y:130
+		//line src/gutscript/parser.y:129
 		{
 	        debug("end compilation", GutsS[Gutspt-0].val)
 	        GutsVAL.val = GutsS[Gutspt-0].val
 	    }
 	case 2:
-		//line src/gutscript/parser.y:137
+		//line src/gutscript/parser.y:136
 		{ 
-	        if stmts, ok := GutsS[Gutspt-1].val.(*ast.StatementNodeList) ; ok {
-	            stmts.Append(GutsS[Gutspt-0].val)
-	            GutsVAL.val = GutsS[Gutspt-1].val
-	        }
-	        debug("top_statement_list top_statement", GutsS[Gutspt-1].val, GutsS[Gutspt-0].val)
+	        GutsVAL.val = GutsS[Gutspt-0].val 
 	    }
 	case 3:
-		//line src/gutscript/parser.y:144
-		{
-	        debug("top_statement", GutsS[Gutspt-0].val)
-	        stmts := ast.CreateStatementList()
-	        stmts.Append(GutsS[Gutspt-0].val)
-	        GutsVAL.val = stmts
-	    }
-	case 4:
-		//line src/gutscript/parser.y:153
-		{
-	        debug("statement", GutsS[Gutspt-0].val)
-	        GutsVAL.val = GutsS[Gutspt-0].val
-	    }
-	case 5:
-		//line src/gutscript/parser.y:161
+		//line src/gutscript/parser.y:142
 		{ GutsVAL.val = GutsS[Gutspt-1].val }
-	case 6:
-		//line src/gutscript/parser.y:165
+	case 4:
+		//line src/gutscript/parser.y:146
 		{
-	            if stmts, ok := GutsS[Gutspt-1].val.(*ast.StatementNodeList) ; ok {
+	            if stmts, ok := GutsS[Gutspt-2].val.(*ast.StatementNodeList) ; ok {
 	                stmts.Append(GutsS[Gutspt-0].val)
-	                GutsVAL.val = GutsS[Gutspt-1].val
+	                GutsVAL.val = GutsS[Gutspt-2].val
 	            }
 	      }
-	case 7:
-		//line src/gutscript/parser.y:172
+	case 5:
+		//line src/gutscript/parser.y:153
 		{ 
 	            stmts := ast.CreateStatementList()
 	            stmts.Append(GutsS[Gutspt-0].val)
 	            GutsVAL.val = stmts
 	      }
+	case 6:
+		//line src/gutscript/parser.y:161
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
+	case 7:
+		//line src/gutscript/parser.y:162
+		{ GutsVAL.val = ast.CreateExprStatement(GutsS[Gutspt-0].val) }
 	case 8:
-		//line src/gutscript/parser.y:180
+		//line src/gutscript/parser.y:163
 		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 9:
-		//line src/gutscript/parser.y:181
-		{ GutsVAL.val = ast.CreateExprStatement(GutsS[Gutspt-1].val) }
+		//line src/gutscript/parser.y:164
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 10:
-		//line src/gutscript/parser.y:182
-		{ GutsVAL.val = ast.CreateExprStatement(GutsS[Gutspt-0].val) }
+		//line src/gutscript/parser.y:165
+		{ GutsVAL.val = GutsS[Gutspt-0].val }
 	case 11:
-		//line src/gutscript/parser.y:183
-		{ GutsVAL.val = GutsS[Gutspt-1].val }
-	case 12:
-		//line src/gutscript/parser.y:184
-		{ GutsVAL.val = GutsS[Gutspt-0].val }
-	case 13:
-		//line src/gutscript/parser.y:185
-		{ GutsVAL.val = GutsS[Gutspt-0].val }
-	case 14:
-		//line src/gutscript/parser.y:186
-		{ GutsVAL.val = GutsS[Gutspt-0].val }
-	case 15:
-		//line src/gutscript/parser.y:187
+		//line src/gutscript/parser.y:166
 		{ GutsVAL.val = ast.CreateReturnStatement(GutsS[Gutspt-0].val) }
-	case 16:
-		//line src/gutscript/parser.y:192
+	case 12:
+		//line src/gutscript/parser.y:171
 		{
 	            GutsVAL.val = ast.CreateIfStatement(GutsS[Gutspt-1].val.(ast.Expr), GutsS[Gutspt-0].val.(*ast.StatementNodeList))
 	        }
-	case 17:
-		//line src/gutscript/parser.y:197
+	case 13:
+		//line src/gutscript/parser.y:176
 		{
 	            GutsS[Gutspt-3].val.(*ast.IfStatement).AddElseIf(GutsS[Gutspt-1].val.(ast.Expr),GutsS[Gutspt-0].val.(*ast.StatementNodeList))
 	            GutsVAL.val = GutsS[Gutspt-3].val
 	        }
-	case 18:
-		//line src/gutscript/parser.y:203
+	case 14:
+		//line src/gutscript/parser.y:182
 		{
 	            GutsS[Gutspt-2].val.(*ast.IfStatement).SetElse(GutsS[Gutspt-0].val.(*ast.StatementNodeList))
 	            GutsVAL.val = GutsS[Gutspt-2].val
 	        }
-	case 19:
-		//line src/gutscript/parser.y:211
+	case 15:
+		//line src/gutscript/parser.y:190
 		{
 	            debug("assignment_statement", GutsS[Gutspt-2].val , "=" , GutsS[Gutspt-0].val)
 	            GutsVAL.val = ast.CreateAssignStatement(GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 20:
-		//line src/gutscript/parser.y:225
+	case 16:
+		//line src/gutscript/parser.y:204
 		{
 	        GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), GutsS[Gutspt-1].val.(string), nil}
 	    }
-	case 21:
-		//line src/gutscript/parser.y:229
+	case 17:
+		//line src/gutscript/parser.y:208
 		{ 
 	        GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), "", nil}
 	    }
-	case 22:
-		//line src/gutscript/parser.y:235
+	case 18:
+		//line src/gutscript/parser.y:214
 		{
 	        if params, ok := GutsS[Gutspt-2].val.([]ast.FunctionParam) ; ok {
 	            params = append(params, GutsS[Gutspt-0].val.(ast.FunctionParam))
 	            GutsVAL.val = params
 	        }
 	      }
-	case 23:
-		//line src/gutscript/parser.y:241
+	case 19:
+		//line src/gutscript/parser.y:220
 		{
 	            GutsVAL.val = []ast.FunctionParam{GutsS[Gutspt-0].val.(ast.FunctionParam)}
 	        }
-	case 24:
-		//line src/gutscript/parser.y:247
+	case 20:
+		//line src/gutscript/parser.y:226
 		{
 	        GutsVAL.val = GutsS[Gutspt-1].val
 	    }
-	case 25:
-		//line src/gutscript/parser.y:250
+	case 21:
+		//line src/gutscript/parser.y:229
 		{
 	        GutsVAL.val = []ast.FunctionParam{}
 	    }
-	case 26:
-		//line src/gutscript/parser.y:253
+	case 22:
+		//line src/gutscript/parser.y:232
 		{ 
 	        GutsVAL.val = []ast.FunctionParam{}
 	    }
-	case 27:
-		//line src/gutscript/parser.y:259
+	case 23:
+		//line src/gutscript/parser.y:238
 		{ 
 	        GutsVAL.val = ast.CreateFunction(GutsS[Gutspt-4].val.(string), GutsS[Gutspt-2].val.([]ast.FunctionParam), GutsS[Gutspt-0].val.(*ast.StatementNodeList))
 	    }
-	case 28:
-		//line src/gutscript/parser.y:265
+	case 24:
+		//line src/gutscript/parser.y:244
 		{ 
 	        GutsVAL.val = ast.CreateVariable(GutsS[Gutspt-0].val.(string))
 	    }
-	case 29:
-		//line src/gutscript/parser.y:270
+	case 25:
+		//line src/gutscript/parser.y:249
 		{
 	            if node, ok := GutsS[Gutspt-1].val.(ast.Expr) ; ok {
 	                node.Parenthesis = true
@@ -641,107 +611,107 @@ Gutsdefault:
 	            }
 	            // $$ = $2
         }
-	case 30:
-		//line src/gutscript/parser.y:280
+	case 26:
+		//line src/gutscript/parser.y:259
 		{ 
 	            GutsVAL.val = ast.CreateExpr('+', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 31:
-		//line src/gutscript/parser.y:284
+	case 27:
+		//line src/gutscript/parser.y:263
 		{ 
 	            GutsVAL.val = ast.CreateExpr('-', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 32:
-		//line src/gutscript/parser.y:288
+	case 28:
+		//line src/gutscript/parser.y:267
 		{ 
 	            GutsVAL.val = ast.CreateExpr('*', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 33:
-		//line src/gutscript/parser.y:292
+	case 29:
+		//line src/gutscript/parser.y:271
 		{ 
 	            GutsVAL.val = ast.CreateExpr('/', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 34:
-		//line src/gutscript/parser.y:296
+	case 30:
+		//line src/gutscript/parser.y:275
 		{ 
 	            GutsVAL.val = ast.CreateExpr('%', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 35:
-		//line src/gutscript/parser.y:300
+	case 31:
+		//line src/gutscript/parser.y:279
 		{
 	            GutsVAL.val = ast.CreateExpr('&', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 36:
-		//line src/gutscript/parser.y:304
+	case 32:
+		//line src/gutscript/parser.y:283
 		{
 	            GutsVAL.val = ast.CreateExpr('|', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 37:
-		//line src/gutscript/parser.y:308
+	case 33:
+		//line src/gutscript/parser.y:287
 		{
 	            GutsVAL.val = ast.CreateExpr('>', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 38:
-		//line src/gutscript/parser.y:312
+	case 34:
+		//line src/gutscript/parser.y:291
 		{
 	            GutsVAL.val = ast.CreateExpr('<', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
-	case 39:
-		//line src/gutscript/parser.y:316
+	case 35:
+		//line src/gutscript/parser.y:295
 		{ 
 	            GutsVAL.val = ast.UnaryExpr{'-', GutsS[Gutspt-0].val}
 	        }
+	case 36:
+		//line src/gutscript/parser.y:298
+		{ 
+	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
+	        }
+	case 37:
+		//line src/gutscript/parser.y:301
+		{ 
+	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
+	        }
+	case 38:
+		//line src/gutscript/parser.y:304
+		{
+	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
+	        }
+	case 39:
+		//line src/gutscript/parser.y:307
+		{
+	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
+	        }
 	case 40:
-		//line src/gutscript/parser.y:319
-		{ 
-	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
-	        }
-	case 41:
-		//line src/gutscript/parser.y:322
-		{ 
-	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
-	        }
-	case 42:
-		//line src/gutscript/parser.y:325
-		{
-	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
-	        }
-	case 43:
-		//line src/gutscript/parser.y:328
-		{
-	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
-	        }
-	case 44:
-		//line src/gutscript/parser.y:333
+		//line src/gutscript/parser.y:312
 		{
 	        GutsVAL.val = ast.CreateFloatingNumber(GutsS[Gutspt-0].val.(string))
 	    }
-	case 45:
-		//line src/gutscript/parser.y:337
+	case 41:
+		//line src/gutscript/parser.y:316
 		{
 	        GutsVAL.val = ast.CreateNumber(GutsS[Gutspt-0].val.(string))
 	    }
-	case 46:
-		//line src/gutscript/parser.y:341
+	case 42:
+		//line src/gutscript/parser.y:320
 		{
 	        GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	    }
-	case 47:
-		//line src/gutscript/parser.y:346
+	case 43:
+		//line src/gutscript/parser.y:325
 		{
 	        if params, ok := GutsS[Gutspt-2].val.([]ast.Node) ; ok {
 	            params = append(params, GutsS[Gutspt-0].val.(ast.Node))
 	            GutsVAL.val = params
 	        }
 	    }
-	case 48:
-		//line src/gutscript/parser.y:353
+	case 44:
+		//line src/gutscript/parser.y:332
 		{
 	        // create the expr list
         GutsVAL.val = []ast.Node{GutsS[Gutspt-0].val}
 	    }
-	case 49:
-		//line src/gutscript/parser.y:360
+	case 45:
+		//line src/gutscript/parser.y:339
 		{
 	        GutsVAL.val = ast.CreateFunctionCall(GutsS[Gutspt-3].val.(string), GutsS[Gutspt-1].val.([]ast.Node))
 	    }
