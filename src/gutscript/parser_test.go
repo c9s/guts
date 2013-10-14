@@ -58,10 +58,10 @@ else
 `,
 }
 
-func LexFile(srcFile string) error {
+func LexFile(srcFile string) (chan *GutsSymType, error) {
 	bytes, err := ioutil.ReadFile(srcFile)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	// code := string(bytes)
 	lexer := GutsLex{
@@ -71,8 +71,7 @@ func LexFile(srcFile string) error {
 		items: make(chan *GutsSymType, 100),
 	}
 	go lexer.run()
-	dumpLexItems(lexer.items)
-	return nil
+	return lexer.items, nil
 }
 
 func CompileFile(srcFile string) (string, error) {
@@ -105,7 +104,13 @@ func TestCompileFile(t *testing.T) {
 	}
 	for _, srcFile := range srcFiles {
 		t.Log("Lexing", srcFile)
-		LexFile(srcFile)
+		items, err := LexFile(srcFile)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if items != nil {
+			dumpLexItems(items)
+		}
 
 		t.Log("Compiling", srcFile)
 		out, err := CompileFile(srcFile)
@@ -129,7 +134,7 @@ func TestParser(t *testing.T) {
 		go lexer.run()
 		parser := GutsParser{}
 		if parser.Parse(&lexer) == 1 {
-			t.Fatal("syntax error")
+			t.Fatalf("syntax error: %s", input)
 		}
 		lexer.close()
 	}
