@@ -9,14 +9,16 @@ import "gutscript/ast"
 var regs = make([]int, 26)
 var base int
 
-const DEBUG = true
+const DEBUG = false
 
 func debug(msg string, vals ...interface{}) {
-    fmt.Print(msg)
-    for _, val := range vals {
-        fmt.Printf(" %#v",val)
+    if DEBUG {
+        fmt.Print(msg)
+        for _, val := range vals {
+            fmt.Printf(" %#v",val)
+        }
+        fmt.Println("\n")
     }
-    fmt.Println("\n")
 }
 
 %}
@@ -36,6 +38,8 @@ func debug(msg string, vals ...interface{}) {
 %type <val> statement
 %type <val> function_decl_statement
 %type <val> function_parameter_list
+%type <val> function_parameters
+%type <val> function_parameter
 %type <val> statement 
 %type <val> statement_list
 %type <val> assignment_statement 
@@ -212,8 +216,29 @@ assignment_statement:
         }
 ;
 
+
+function_parameter: T_IDENTIFIER { 
+    $$ = ast.FunctionParam{$1.(string), "require"}
+    }
+    ;
+
+function_parameters: 
+      function_parameters ',' function_parameter {
+        if params, ok := $1.([]ast.FunctionParam) ; ok {
+            params = append(params, $3.(ast.FunctionParam))
+            $$ = params
+        }
+      }
+    | function_parameter {
+            $$ = []ast.FunctionParam{$1.(ast.FunctionParam)}
+        }
+    ;
+
 function_parameter_list: 
-    '(' ')' {
+    '(' function_parameters ')' {
+        $$ = $2
+    }
+    | '(' ')' {
         $$ = []ast.FunctionParam{}
     }
     | /* empty */ { 

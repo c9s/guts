@@ -84,7 +84,11 @@ func lexStart(l *GutsLex) stateFn {
 		l.space = 0
 		c = l.peek()
 		if c == eof {
-			l.emit(T_OUTDENT)
+			if l.space > 0 {
+				l.emit(T_OUTDENT)
+			} else {
+				l.emit(T_NEWLINE)
+			}
 			return nil
 		}
 		// consume the spaces and guess it's
@@ -110,7 +114,7 @@ func lexStart(l *GutsLex) stateFn {
 		l.next()
 		l.emit(T_ASSIGN)
 		return lexStart
-	} else if l.accept("+-*|&[]{}()<>") {
+	} else if l.accept("+-*|&[]{}()<>,") {
 		l.emit(TokenType(c))
 		return lexStart
 	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {
@@ -232,14 +236,6 @@ func lexIndentSpaces(l *GutsLex) stateFn {
 	}
 	l.backup()
 	l.ignore() // simply ignore string,
-	/*
-		if l.space > l.lastSpace {
-			l.emit(T_INDENT)
-		} else if l.space < l.lastSpace {
-			l.emit(T_OUTDENT)
-		}
-		// l.emit(T_SPACE)
-	*/
 	return lexStart
 }
 

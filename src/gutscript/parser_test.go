@@ -4,6 +4,8 @@ package gutscript
 
 import "testing"
 import "gutscript/codegen/phpcodegen"
+import "io/ioutil"
+import "errors"
 
 var parserInputs = []string{
 	`pi = 3.1415926`,
@@ -52,6 +54,60 @@ else
     a = 10
     return a
 `,
+}
+
+func LexFile(srcFile string) error {
+	bytes, err := ioutil.ReadFile(srcFile)
+	if err != nil {
+		return err
+	}
+	// code := string(bytes)
+	lexer := GutsLex{
+		input: string(bytes),
+		start: 0,
+		pos:   0,
+		items: make(chan *GutsSymType, 100),
+	}
+	go lexer.run()
+	dumpLexItems(lexer.items)
+	return nil
+}
+
+func CompileFile(srcFile string) (string, error) {
+	bytes, err := ioutil.ReadFile(srcFile)
+	if err != nil {
+		return "", err
+	}
+	// code := string(bytes)
+	lexer := GutsLex{
+		input: string(bytes),
+		start: 0,
+		pos:   0,
+		items: make(chan *GutsSymType, 100),
+	}
+	go lexer.run()
+	parser := GutsParser{}
+	if parser.Parse(&lexer) == 1 {
+		return "", errors.New("syntax error")
+	}
+	lexer.close()
+	visitor := phpcodegen.Visitor{}
+	return visitor.Visit(parser.Val.val), nil
+}
+
+func TestCompileFile(t *testing.T) {
+	srcFiles := []string{"tests/01_assignment.guts"}
+	for _, srcFile := range srcFiles {
+		t.Log("Lexing", srcFile)
+		LexFile(srcFile)
+
+		t.Log("Compiling", srcFile)
+		out, err := CompileFile(srcFile)
+		if err != nil {
+			t.Fatalf("Compilation of %s failed: %s", srcFile, err)
+		}
+		_ = out
+	}
 }
 
 func TestCodeGen(t *testing.T) {
