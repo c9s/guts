@@ -110,6 +110,9 @@ func (self *Visitor) Visit(n ast.Node) string {
 				if param.Type != "" {
 					field = param.Type + " " + field
 				}
+				if param.Default != nil {
+					field += " = " + self.Visit(param.Default)
+				}
 				fields = append(fields, field)
 			}
 			out += strings.Join(fields, ", ")
