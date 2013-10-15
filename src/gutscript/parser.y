@@ -161,6 +161,9 @@ statement_list:
             stmts.Append($1)
             $$ = stmts
       }
+    | T_NEWLINE { 
+
+     }
 ;
 
 statement: 
@@ -178,15 +181,15 @@ if_statement:
             $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementList))
         }
     |
-        if_statement T_ELSEIF expr block 
+        if_statement T_NEWLINE T_ELSEIF expr block 
         {
-            $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementList))
+            $1.(*ast.IfStatement).AddElseIf($4.(ast.Expr),$5.(*ast.StatementList))
             $$ = $1
         }
     | 
-        if_statement T_ELSE block
+        if_statement T_NEWLINE T_ELSE block
         {
-            $1.(*ast.IfStatement).SetElse($3.(*ast.StatementList))
+            $1.(*ast.IfStatement).SetElse($4.(*ast.StatementList))
             $$ = $1
         }
 ;

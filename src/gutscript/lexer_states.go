@@ -48,10 +48,6 @@ func (l *GutsLex) emitIfKeywordMatches() bool {
 }
 
 func lexStartLine(l *GutsLex) stateFn {
-	var c rune = l.peek()
-	if c == ' ' || c == '\t' {
-		return lexIndentSpaces
-	}
 	// default start state.
 	return lexStart
 }
@@ -79,12 +75,21 @@ func lexStart(l *GutsLex) stateFn {
 		// if there is a new line, check the next line is indent or outdent,
 		// if there is no spaces/indent in the next line, then it should be outdent.
 		l.line++
-		c = l.next()
+		c = l.next() // take the the line break char
 
 		// skip multiple newline at one time
+		// sometimes we wrote:
+		// --->a = 3$
+		// $
+		// --->b = 10$
+		// and this should be in the same block.
 		for c == '\n' {
 			c = l.next()
 		}
+		l.backup()
+
+		// emit a newline (can be the end of block)
+		// l.emit(T_NEWLINE)
 
 		// c = l.peek()
 		if c == eof {
@@ -102,23 +107,22 @@ func lexStart(l *GutsLex) stateFn {
 		l.lastSpace = l.space
 		l.space = 0
 
-		// if there are one or more space in the next line
-		// consume the spaces and guess it's
-		// indent/outdent/newline
+		// calculate spaces
+		c = l.next()
 		for c == ' ' || c == '\t' {
 			l.space++
 			c = l.next()
 		}
-
 		l.backup()
 		if l.space == l.lastSpace {
 			l.emit(T_NEWLINE)
 		} else if l.space < l.lastSpace {
 			l.emit(T_OUTDENT)
+			l.emit(T_NEWLINE)
 		} else if l.space > l.lastSpace {
 			l.emit(T_INDENT)
 		}
-		return lexStartLine
+		return lexStart
 	} else if c == '=' && l.peekMore(2) != '=' {
 		l.next()
 		l.emit(TokenType(c))
@@ -234,17 +238,23 @@ func lexIgnoreSpaces(l *GutsLex) stateFn {
 
 func lexIndentSpaces(l *GutsLex) stateFn {
 	l.space = 0
-	var c rune
-	for {
+	var c rune = l.next()
+	// if there are one or more space in the next line
+	// consume the spaces and guess it's
+	// indent/outdent/newline
+	for c == ' ' || c == '\t' {
+		l.space++
 		c = l.next()
-		if c == ' ' || c == '\t' {
-			l.space++
-		} else {
-			break
-		}
 	}
 	l.backup()
-	l.ignore() // simply ignore string,
+	if l.space == l.lastSpace {
+		l.emit(T_NEWLINE)
+	} else if l.space < l.lastSpace {
+		l.emit(T_OUTDENT)
+		l.emit(T_NEWLINE)
+	} else if l.space > l.lastSpace {
+		l.emit(T_INDENT)
+	}
 	return lexStart
 }
 
