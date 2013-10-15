@@ -1,5 +1,5 @@
-Foreach Block
-=====================
+For Block
+===========
 
 ```
 for i in [ 1..10 ]
