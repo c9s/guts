@@ -9,10 +9,8 @@ import "gutscript/ast"
 var regs = make([]int, 26)
 var base int
 
-const DEBUG = true
-
 func debug(msg string, vals ...interface{}) {
-    if DEBUG {
+    if GutsDebug > 0 {
         fmt.Print(msg)
         for _, val := range vals {
             fmt.Printf(" %#v",val)
