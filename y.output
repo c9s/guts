@@ -19,7 +19,7 @@ state 0
 	function_decl_statement  goto 8
 	function_call  goto 14
 	statement_list  goto 3
-	assignment_statement  goto 7
+	assignment  goto 7
 	if_statement  goto 9
 	block  goto 5
 	top_statement_list  goto 2
@@ -83,7 +83,7 @@ state 6
 
 
 state 7
-	statement:  assignment_statement.    (8)
+	statement:  assignment.    (8)
 
 	.  reduce 8 (src line 169)
 
@@ -139,7 +139,7 @@ state 11
 	function_decl_statement  goto 8
 	function_call  goto 14
 	statement_list  goto 35
-	assignment_statement  goto 7
+	assignment  goto 7
 	if_statement  goto 9
 	block  goto 5
 
@@ -176,11 +176,11 @@ state 13
 state 14
 	expr:  function_call.    (37)
 
-	.  reduce 37 (src line 305)
+	.  reduce 37 (src line 306)
 
 
 state 15
-	assignment_statement:  T_IDENTIFIER.= expr 
+	assignment:  T_IDENTIFIER.= expr 
 	function_decl_statement:  T_IDENTIFIER.T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block 
 	expr:  T_IDENTIFIER.    (38)
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
@@ -188,19 +188,19 @@ state 15
 	T_FUNCTION_PROTOTYPE  shift 39
 	(  shift 40
 	=  shift 38
-	.  reduce 38 (src line 308)
+	.  reduce 38 (src line 309)
 
 
 state 16
 	expr:  number.    (39)
 
-	.  reduce 39 (src line 312)
+	.  reduce 39 (src line 313)
 
 
 state 17
 	expr:  floating_number.    (40)
 
-	.  reduce 40 (src line 315)
+	.  reduce 40 (src line 316)
 
 
 state 18
@@ -221,13 +221,13 @@ state 18
 state 19
 	number:  T_NUMBER.    (42)
 
-	.  reduce 42 (src line 324)
+	.  reduce 42 (src line 325)
 
 
 state 20
 	floating_number:  T_FLOATING.    (41)
 
-	.  reduce 41 (src line 320)
+	.  reduce 41 (src line 321)
 
 
 state 21
@@ -249,7 +249,7 @@ state 21
 	statement  goto 42
 	function_decl_statement  goto 8
 	function_call  goto 14
-	assignment_statement  goto 7
+	assignment  goto 7
 	if_statement  goto 9
 	block  goto 5
 
@@ -440,7 +440,7 @@ state 34
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
 	(  shift 40
-	.  reduce 38 (src line 308)
+	.  reduce 38 (src line 309)
 
 
 state 35
@@ -493,11 +493,11 @@ state 37
 
 	>  shift 29
 	<  shift 30
-	.  reduce 36 (src line 301)
+	.  reduce 36 (src line 302)
 
 
 state 38
-	assignment_statement:  T_IDENTIFIER =.expr 
+	assignment:  T_IDENTIFIER =.expr 
 
 	T_IDENTIFIER  shift 34
 	T_FLOATING  shift 20
@@ -529,7 +529,7 @@ state 40
 	T_NUMBER  shift 19
 	(  shift 12
 	-  shift 13
-	.  reduce 46 (src line 344)
+	.  reduce 46 (src line 345)
 
 	expr  goto 61
 	number  goto 16
@@ -589,7 +589,7 @@ state 43
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 27 (src line 265)
+	.  reduce 27 (src line 266)
 
 
 44: shift/reduce conflict (shift 29(0), red'n 28(8)) on >
@@ -611,7 +611,7 @@ state 44
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 28 (src line 269)
+	.  reduce 28 (src line 270)
 
 
 45: shift/reduce conflict (shift 29(0), red'n 29(9)) on >
@@ -630,7 +630,7 @@ state 45
 
 	>  shift 29
 	<  shift 30
-	.  reduce 29 (src line 273)
+	.  reduce 29 (src line 274)
 
 
 46: shift/reduce conflict (shift 29(0), red'n 30(9)) on >
@@ -649,7 +649,7 @@ state 46
 
 	>  shift 29
 	<  shift 30
-	.  reduce 30 (src line 277)
+	.  reduce 30 (src line 278)
 
 
 47: shift/reduce conflict (shift 29(0), red'n 31(9)) on >
@@ -668,7 +668,7 @@ state 47
 
 	>  shift 29
 	<  shift 30
-	.  reduce 31 (src line 281)
+	.  reduce 31 (src line 282)
 
 
 48: shift/reduce conflict (shift 29(0), red'n 32(7)) on >
@@ -692,7 +692,7 @@ state 48
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 32 (src line 285)
+	.  reduce 32 (src line 286)
 
 
 49: shift/reduce conflict (shift 29(0), red'n 33(5)) on >
@@ -717,7 +717,7 @@ state 49
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 33 (src line 289)
+	.  reduce 33 (src line 290)
 
 
 50: shift/reduce conflict (shift 28(5), red'n 34(0)) on |
@@ -750,7 +750,7 @@ state 50
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 34 (src line 293)
+	.  reduce 34 (src line 294)
 
 
 51: shift/reduce conflict (shift 28(5), red'n 35(0)) on |
@@ -783,7 +783,7 @@ state 51
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 35 (src line 297)
+	.  reduce 35 (src line 298)
 
 
 state 52
@@ -827,11 +827,11 @@ state 54
 state 55
 	expr:  ( expr ).    (26)
 
-	.  reduce 26 (src line 255)
+	.  reduce 26 (src line 256)
 
 
 state 56
-	assignment_statement:  T_IDENTIFIER = expr.    (15)
+	assignment:  T_IDENTIFIER = expr.    (15)
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -884,7 +884,7 @@ state 59
 state 60
 	function_call_parameter_list:  function_call_parameter.    (45)
 
-	.  reduce 45 (src line 339)
+	.  reduce 45 (src line 340)
 
 
 state 61
@@ -908,7 +908,7 @@ state 61
 	%  shift 26
 	>  shift 29
 	<  shift 30
-	.  reduce 43 (src line 328)
+	.  reduce 43 (src line 329)
 
 
 state 62
@@ -979,7 +979,7 @@ state 69
 state 70
 	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (47)
 
-	.  reduce 47 (src line 350)
+	.  reduce 47 (src line 351)
 
 
 state 71
@@ -1011,7 +1011,7 @@ state 74
 state 75
 	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (44)
 
-	.  reduce 44 (src line 332)
+	.  reduce 44 (src line 333)
 
 
 state 76

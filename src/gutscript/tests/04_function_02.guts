@@ -1,0 +1,6 @@
+foo :: ->
+	a = 10
+	return a
+bar :: ->
+	a = 10
+	return a

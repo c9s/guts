@@ -45,7 +45,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call
 %type <val> statement 
 %type <val> statement_list
-%type <val> assignment_statement 
+%type <val> assignment
 %type <val> if_statement
 %type <val> block 
 %type <val> top_statement_list 
@@ -166,7 +166,7 @@ statement_list:
 statement: 
           block { $$ = $1 }
         | expr { $$ = ast.CreateExprStatement($1) } 
-        | assignment_statement { $$ = $1 }
+        | assignment { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
@@ -191,11 +191,11 @@ if_statement:
         }
 ;
 
-assignment_statement:
+assignment:
      T_IDENTIFIER '=' expr
         {
-            debug("assignment_statement", $1 , "=" , $3)
-            $$ = ast.CreateAssignStatement($1, $3)
+            debug("assignment", $1 , "=" , $3)
+            $$ = ast.CreateAssignStatement(ast.CreateVariable($1.(string)), $3)
         }
 ;
 
@@ -243,6 +243,7 @@ function_parameter_list:
 
 function_decl_statement:
     T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block { 
+        debug("function declaration", $1, $3, $5)
         $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementList))
     }
 ;
