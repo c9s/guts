@@ -114,6 +114,25 @@ Not ready for production. we're still in alpha stage. but we'd like to recevie
 comments, patches and feature requests.
 
 
+Contribution
+------------------------------
+feature-requests, pull-requests, comments are welcomed, but please discuss with
+us on GitHub issues. Just feel free to drop a line there.
+
+Development
+------------------------------
+
+First, go get a workable go compiler at <http://golang.org>
+
+Run the below command to setup GOPATH:
+
+	source goenv
+
+Run make to build and test:
+
+	make
+
+
 Lexer
 ------
 
