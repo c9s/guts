@@ -4,7 +4,7 @@ Gutscript
 Gutscript is a language makes your life easier,
 it allows you write less code to compile a workable PHP code.
 
-Gutscript compiler is written in Go, Go is faster 10+ times than PHP, hence the
+Gutscript compiler is written in Go, Go is faster 10+ times than PHP, thus the
 compilation is fast, and of course you can compile sources concurrently.
 
 Gutscript takes the good stuffs from Haskell, Perl6, Go and GutsScript, you can write
