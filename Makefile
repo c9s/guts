@@ -13,7 +13,8 @@ install: executable
 	cp -v bin/guts /usr/bin/guts
 
 build:
-	go build gutscript
+	go build -x gutscript
+	go install -x gutscript
 
 executable:
 	go install -x gutscript/guts
