@@ -161,9 +161,7 @@ statement_list:
             stmts.Append($1)
             $$ = stmts
       }
-    | T_NEWLINE { 
-
-     }
+    | T_NEWLINE { }
 ;
 
 statement: 
