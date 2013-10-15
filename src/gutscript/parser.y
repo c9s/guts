@@ -208,7 +208,6 @@ function_parameter:
     }
     |
     */
-    // Type and Parameter name
     T_IDENTIFIER T_IDENTIFIER {
         $$ = ast.FunctionParam{$2.(string), $1.(string), nil}
     }

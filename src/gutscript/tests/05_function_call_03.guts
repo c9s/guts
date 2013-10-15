@@ -1,0 +1,3 @@
+area :: (x) ->
+	return x * x
+b = area(1) * 3

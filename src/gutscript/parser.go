@@ -138,7 +138,7 @@ const GutsEofCode = 1
 const GutsErrCode = 2
 const GutsMaxDepth = 200
 
-//line src/gutscript/parser.y:358
+//line src/gutscript/parser.y:357
       /*  start  of  programs  */
 
 //line yacctab:1
@@ -564,17 +564,17 @@ Gutsdefault:
 	            GutsVAL.val = ast.CreateAssignStatement(ast.CreateVariable(GutsS[Gutspt-2].val.(string)), GutsS[Gutspt-0].val)
 	        }
 	case 17:
-		//line src/gutscript/parser.y:212
+		//line src/gutscript/parser.y:211
 		{
 	        GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), GutsS[Gutspt-1].val.(string), nil}
 	    }
 	case 18:
-		//line src/gutscript/parser.y:216
+		//line src/gutscript/parser.y:215
 		{ 
 	        GutsVAL.val = ast.FunctionParam{GutsS[Gutspt-0].val.(string), "", nil}
 	    }
 	case 19:
-		//line src/gutscript/parser.y:222
+		//line src/gutscript/parser.y:221
 		{
 	        if params, ok := GutsS[Gutspt-2].val.([]ast.FunctionParam) ; ok {
 	            params = append(params, GutsS[Gutspt-0].val.(ast.FunctionParam))
@@ -582,33 +582,33 @@ Gutsdefault:
 	        }
 	      }
 	case 20:
-		//line src/gutscript/parser.y:228
+		//line src/gutscript/parser.y:227
 		{
 	            GutsVAL.val = []ast.FunctionParam{GutsS[Gutspt-0].val.(ast.FunctionParam)}
 	        }
 	case 21:
-		//line src/gutscript/parser.y:234
+		//line src/gutscript/parser.y:233
 		{
 	        GutsVAL.val = GutsS[Gutspt-1].val
 	    }
 	case 22:
-		//line src/gutscript/parser.y:237
+		//line src/gutscript/parser.y:236
 		{
 	        GutsVAL.val = []ast.FunctionParam{}
 	    }
 	case 23:
-		//line src/gutscript/parser.y:240
+		//line src/gutscript/parser.y:239
 		{ 
 	        GutsVAL.val = []ast.FunctionParam{}
 	    }
 	case 24:
-		//line src/gutscript/parser.y:246
+		//line src/gutscript/parser.y:245
 		{ 
 	        debug("function declaration", GutsS[Gutspt-4].val, GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        GutsVAL.val = ast.CreateFunction(GutsS[Gutspt-4].val.(string), GutsS[Gutspt-2].val.([]ast.FunctionParam), GutsS[Gutspt-0].val.(*ast.StatementList))
 	    }
 	case 27:
-		//line src/gutscript/parser.y:258
+		//line src/gutscript/parser.y:257
 		{
 	            if node, ok := GutsS[Gutspt-1].val.(ast.Expr) ; ok {
 	                node.Parenthesis = true
@@ -619,93 +619,93 @@ Gutsdefault:
 	            // $$ = $2
         }
 	case 28:
-		//line src/gutscript/parser.y:268
+		//line src/gutscript/parser.y:267
 		{ 
 	            GutsVAL.val = ast.CreateExpr('+', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 29:
-		//line src/gutscript/parser.y:272
+		//line src/gutscript/parser.y:271
 		{ 
 	            GutsVAL.val = ast.CreateExpr('-', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 30:
-		//line src/gutscript/parser.y:276
+		//line src/gutscript/parser.y:275
 		{ 
 	            GutsVAL.val = ast.CreateExpr('*', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 31:
-		//line src/gutscript/parser.y:280
+		//line src/gutscript/parser.y:279
 		{ 
 	            GutsVAL.val = ast.CreateExpr('/', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 32:
-		//line src/gutscript/parser.y:284
+		//line src/gutscript/parser.y:283
 		{ 
 	            GutsVAL.val = ast.CreateExpr('%', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 33:
-		//line src/gutscript/parser.y:288
+		//line src/gutscript/parser.y:287
 		{
 	            GutsVAL.val = ast.CreateExpr('&', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 34:
-		//line src/gutscript/parser.y:292
+		//line src/gutscript/parser.y:291
 		{
 	            GutsVAL.val = ast.CreateExpr('|', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 35:
-		//line src/gutscript/parser.y:296
+		//line src/gutscript/parser.y:295
 		{
 	            GutsVAL.val = ast.CreateExpr('>', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 36:
-		//line src/gutscript/parser.y:300
+		//line src/gutscript/parser.y:299
 		{
 	            GutsVAL.val = ast.CreateExpr('<', GutsS[Gutspt-2].val, GutsS[Gutspt-0].val)
 	        }
 	case 37:
-		//line src/gutscript/parser.y:304
+		//line src/gutscript/parser.y:303
 		{ 
 	            GutsVAL.val = ast.UnaryExpr{'-', GutsS[Gutspt-0].val}
 	        }
 	case 38:
-		//line src/gutscript/parser.y:307
+		//line src/gutscript/parser.y:306
 		{ 
 	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	        }
 	case 39:
-		//line src/gutscript/parser.y:310
+		//line src/gutscript/parser.y:309
 		{ 
 	            // $$ = ast.UnaryExpr{0, $1}
             GutsVAL.val = ast.CreateVariable(GutsS[Gutspt-0].val.(string)) 
 	        }
 	case 40:
-		//line src/gutscript/parser.y:314
+		//line src/gutscript/parser.y:313
 		{
 	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	        }
 	case 41:
-		//line src/gutscript/parser.y:317
+		//line src/gutscript/parser.y:316
 		{
 	            GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	        }
 	case 42:
-		//line src/gutscript/parser.y:322
+		//line src/gutscript/parser.y:321
 		{
 	        GutsVAL.val = ast.CreateFloatingNumber(GutsS[Gutspt-0].val.(string))
 	    }
 	case 43:
-		//line src/gutscript/parser.y:326
+		//line src/gutscript/parser.y:325
 		{
 	        GutsVAL.val = ast.CreateNumber(GutsS[Gutspt-0].val.(string))
 	    }
 	case 44:
-		//line src/gutscript/parser.y:330
+		//line src/gutscript/parser.y:329
 		{
 	        GutsVAL.val = ast.UnaryExpr{0, GutsS[Gutspt-0].val}
 	    }
 	case 45:
-		//line src/gutscript/parser.y:335
+		//line src/gutscript/parser.y:334
 		{
 	        if params, ok := GutsS[Gutspt-2].val.([]ast.Node) ; ok {
 	            params = append(params, GutsS[Gutspt-0].val.(ast.Node))
@@ -713,18 +713,18 @@ Gutsdefault:
 	        }
 	    }
 	case 46:
-		//line src/gutscript/parser.y:342
+		//line src/gutscript/parser.y:341
 		{
 	        // create the expr list
         GutsVAL.val = []ast.Node{GutsS[Gutspt-0].val}
 	    }
 	case 47:
-		//line src/gutscript/parser.y:347
+		//line src/gutscript/parser.y:346
 		{
 	        GutsVAL.val = []ast.Node{}
 	    }
 	case 48:
-		//line src/gutscript/parser.y:353
+		//line src/gutscript/parser.y:352
 		{
 	        GutsVAL.val = ast.CreateFunctionCall(GutsS[Gutspt-3].val.(string), GutsS[Gutspt-1].val.([]ast.Node))
 	    }
