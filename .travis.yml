@@ -3,4 +3,5 @@ go:
  - release
 
 script:
+ - source goenv
  - make
