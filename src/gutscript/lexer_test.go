@@ -86,8 +86,9 @@ func expectLexItems(t *testing.T, itemChannel chan *GutsSymType, expectedItems [
 			break
 		}
 		if i+1 > len(expectedItems) {
-			t.Log("More tokens than expected items.")
-			break
+			t.Log("Given more tokens than expected tokens.")
+			return
+			// break
 		}
 
 		if item.typ != expectedItems[i] {
@@ -166,7 +167,7 @@ type LexTestingItem struct {
 }
 
 var lexInputFiles []LexTestingItem = []LexTestingItem{
-	LexTestingItem{"tests/01_assignment.guts", []TokenType{T_IDENTIFIER, '=', T_FLOATING, T_NEWLINE}},
+	LexTestingItem{"tests/01_assignment.guts", []TokenType{T_IDENTIFIER, '=', T_FLOATING}},
 	LexTestingItem{"tests/02_assignment_expr.guts", []TokenType{
 		T_IDENTIFIER,
 		'=',
@@ -179,7 +180,7 @@ var lexInputFiles []LexTestingItem = []LexTestingItem{
 	LexTestingItem{"tests/05_function_call_01.guts", []TokenType{
 		T_IDENTIFIER,
 		'(',
-		T_NUMBER,
+		T_FLOATING,
 		')',
 	}},
 	LexTestingItem{"tests/05_function_call_02.guts", []TokenType{
@@ -195,6 +196,7 @@ var lexInputFiles []LexTestingItem = []LexTestingItem{
 		'*',
 		T_IDENTIFIER,
 		T_OUTDENT,
+		T_NEWLINE,
 		T_IDENTIFIER,
 		'(',
 		T_NUMBER,

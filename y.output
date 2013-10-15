@@ -62,7 +62,7 @@ state 5
 state 6
 	statement:  block.    (7)
 
-	.  reduce 7 (src line 169)
+	.  reduce 7 (src line 167)
 
 
 state 7
@@ -86,19 +86,19 @@ state 7
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 8 (src line 171)
+	.  reduce 8 (src line 169)
 
 
 state 8
 	statement:  assignment.    (9)
 
-	.  reduce 9 (src line 172)
+	.  reduce 9 (src line 170)
 
 
 state 9
 	statement:  function_decl_statement.    (10)
 
-	.  reduce 10 (src line 173)
+	.  reduce 10 (src line 171)
 
 
 10: shift/reduce conflict (shift 32(0), red'n 11(0)) on T_NEWLINE
@@ -108,7 +108,7 @@ state 10
 	if_statement:  if_statement.T_NEWLINE T_ELSE block 
 
 	T_NEWLINE  shift 32
-	.  reduce 11 (src line 174)
+	.  reduce 11 (src line 172)
 
 
 state 11
@@ -184,7 +184,7 @@ state 14
 state 15
 	expr:  function_call.    (38)
 
-	.  reduce 38 (src line 309)
+	.  reduce 38 (src line 307)
 
 
 state 16
@@ -196,19 +196,19 @@ state 16
 	T_FUNCTION_PROTOTYPE  shift 39
 	(  shift 40
 	=  shift 38
-	.  reduce 39 (src line 312)
+	.  reduce 39 (src line 310)
 
 
 state 17
 	expr:  number.    (40)
 
-	.  reduce 40 (src line 316)
+	.  reduce 40 (src line 314)
 
 
 state 18
 	expr:  floating_number.    (41)
 
-	.  reduce 41 (src line 319)
+	.  reduce 41 (src line 317)
 
 
 state 19
@@ -229,13 +229,13 @@ state 19
 state 20
 	number:  T_NUMBER.    (43)
 
-	.  reduce 43 (src line 328)
+	.  reduce 43 (src line 326)
 
 
 state 21
 	floating_number:  T_FLOATING.    (42)
 
-	.  reduce 42 (src line 324)
+	.  reduce 42 (src line 322)
 
 
 state 22
@@ -426,7 +426,7 @@ state 33
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 12 (src line 175)
+	.  reduce 12 (src line 173)
 
 
 state 34
@@ -434,7 +434,7 @@ state 34
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
 	(  shift 40
-	.  reduce 39 (src line 312)
+	.  reduce 39 (src line 310)
 
 
 state 35
@@ -487,7 +487,7 @@ state 37
 
 	>  shift 30
 	<  shift 31
-	.  reduce 37 (src line 305)
+	.  reduce 37 (src line 303)
 
 
 state 38
@@ -510,7 +510,7 @@ state 39
 	function_parameter_list: .    (23)
 
 	(  shift 58
-	.  reduce 23 (src line 242)
+	.  reduce 23 (src line 240)
 
 	function_parameter_list  goto 57
 
@@ -523,7 +523,7 @@ state 40
 	T_NUMBER  shift 20
 	(  shift 13
 	-  shift 14
-	.  reduce 47 (src line 348)
+	.  reduce 47 (src line 346)
 
 	expr  goto 61
 	number  goto 17
@@ -583,7 +583,7 @@ state 43
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 28 (src line 269)
+	.  reduce 28 (src line 267)
 
 
 44: shift/reduce conflict (shift 30(0), red'n 29(8)) on >
@@ -605,7 +605,7 @@ state 44
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 29 (src line 273)
+	.  reduce 29 (src line 271)
 
 
 45: shift/reduce conflict (shift 30(0), red'n 30(9)) on >
@@ -624,7 +624,7 @@ state 45
 
 	>  shift 30
 	<  shift 31
-	.  reduce 30 (src line 277)
+	.  reduce 30 (src line 275)
 
 
 46: shift/reduce conflict (shift 30(0), red'n 31(9)) on >
@@ -643,7 +643,7 @@ state 46
 
 	>  shift 30
 	<  shift 31
-	.  reduce 31 (src line 281)
+	.  reduce 31 (src line 279)
 
 
 47: shift/reduce conflict (shift 30(0), red'n 32(9)) on >
@@ -662,7 +662,7 @@ state 47
 
 	>  shift 30
 	<  shift 31
-	.  reduce 32 (src line 285)
+	.  reduce 32 (src line 283)
 
 
 48: shift/reduce conflict (shift 30(0), red'n 33(7)) on >
@@ -686,7 +686,7 @@ state 48
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 33 (src line 289)
+	.  reduce 33 (src line 287)
 
 
 49: shift/reduce conflict (shift 30(0), red'n 34(5)) on >
@@ -711,7 +711,7 @@ state 49
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 34 (src line 293)
+	.  reduce 34 (src line 291)
 
 
 50: shift/reduce conflict (shift 29(5), red'n 35(0)) on |
@@ -744,7 +744,7 @@ state 50
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 35 (src line 297)
+	.  reduce 35 (src line 295)
 
 
 51: shift/reduce conflict (shift 29(5), red'n 36(0)) on |
@@ -777,7 +777,7 @@ state 51
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 36 (src line 301)
+	.  reduce 36 (src line 299)
 
 
 state 52
@@ -812,7 +812,7 @@ state 54
 state 55
 	expr:  ( expr ).    (27)
 
-	.  reduce 27 (src line 259)
+	.  reduce 27 (src line 257)
 
 
 state 56
@@ -836,7 +836,7 @@ state 56
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 16 (src line 197)
+	.  reduce 16 (src line 195)
 
 
 state 57
@@ -869,7 +869,7 @@ state 59
 state 60
 	function_call_parameter_list:  function_call_parameter.    (46)
 
-	.  reduce 46 (src line 343)
+	.  reduce 46 (src line 341)
 
 
 state 61
@@ -893,13 +893,13 @@ state 61
 	%  shift 27
 	>  shift 30
 	<  shift 31
-	.  reduce 44 (src line 332)
+	.  reduce 44 (src line 330)
 
 
 state 62
 	if_statement:  T_IF expr block.    (13)
 
-	.  reduce 13 (src line 178)
+	.  reduce 13 (src line 176)
 
 
 state 63
@@ -931,7 +931,7 @@ state 63
 state 64
 	if_statement:  if_statement T_NEWLINE T_ELSE block.    (15)
 
-	.  reduce 15 (src line 189)
+	.  reduce 15 (src line 187)
 
 
 state 65
@@ -954,13 +954,13 @@ state 66
 state 67
 	function_parameter_list:  ( ).    (22)
 
-	.  reduce 22 (src line 239)
+	.  reduce 22 (src line 237)
 
 
 state 68
 	function_parameters:  function_parameter.    (20)
 
-	.  reduce 20 (src line 230)
+	.  reduce 20 (src line 228)
 
 
 state 69
@@ -968,7 +968,7 @@ state 69
 	function_parameter:  T_IDENTIFIER.    (18)
 
 	T_IDENTIFIER  shift 76
-	.  reduce 18 (src line 217)
+	.  reduce 18 (src line 215)
 
 
 state 70
@@ -990,19 +990,19 @@ state 70
 state 71
 	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (48)
 
-	.  reduce 48 (src line 354)
+	.  reduce 48 (src line 352)
 
 
 state 72
 	if_statement:  if_statement T_NEWLINE T_ELSEIF expr block.    (14)
 
-	.  reduce 14 (src line 183)
+	.  reduce 14 (src line 181)
 
 
 state 73
 	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block.    (24)
 
-	.  reduce 24 (src line 247)
+	.  reduce 24 (src line 245)
 
 
 state 74
@@ -1016,25 +1016,25 @@ state 74
 state 75
 	function_parameter_list:  ( function_parameters ).    (21)
 
-	.  reduce 21 (src line 235)
+	.  reduce 21 (src line 233)
 
 
 state 76
 	function_parameter:  T_IDENTIFIER T_IDENTIFIER.    (17)
 
-	.  reduce 17 (src line 206)
+	.  reduce 17 (src line 204)
 
 
 state 77
 	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (45)
 
-	.  reduce 45 (src line 336)
+	.  reduce 45 (src line 334)
 
 
 state 78
 	function_parameters:  function_parameters , function_parameter.    (19)
 
-	.  reduce 19 (src line 223)
+	.  reduce 19 (src line 221)
 
 Rule not reduced: range_dots:  T_RANGE_OPERATOR 
 Rule not reduced: range:  [ expr range_dots expr ] 
