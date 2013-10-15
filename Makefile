@@ -10,7 +10,8 @@ parser:
 	done
 
 install:
-	cp -v bin/gutscript /usr/bin/cphp
+	go install gutscript/guts
+	cp -v bin/guts /usr/bin/guts
 
 build:
 	go build gutscript
