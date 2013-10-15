@@ -9,7 +9,7 @@ import "gutscript/ast"
 var regs = make([]int, 26)
 var base int
 
-const DEBUG = false
+const DEBUG = true
 
 func debug(msg string, vals ...interface{}) {
     if DEBUG {
@@ -34,7 +34,7 @@ func debug(msg string, vals ...interface{}) {
 
 // any non-terminal which returns a value needs a type, which is
 // really a field name in the above union struct
-%type <val> expr variable number floating_number
+%type <val> expr number floating_number
 %type <val> statement
 %type <val> function_decl_statement
 %type <val> function_parameter_list
@@ -43,7 +43,6 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call_parameter
 %type <val> function_call_parameter_list
 %type <val> function_call
-%type <val> callable
 %type <val> statement 
 %type <val> statement_list
 %type <val> assignment_statement 
@@ -193,7 +192,7 @@ if_statement:
 ;
 
 assignment_statement:
-    variable '=' expr
+     T_IDENTIFIER '=' expr
         {
             debug("assignment_statement", $1 , "=" , $3)
             $$ = ast.CreateAssignStatement($1, $3)
@@ -253,13 +252,6 @@ range_dots: T_RANGE_OPERATOR
 range: '[' expr range_dots expr ']'
      ;
 
-callable: T_IDENTIFIER { $$ = $1 };
-
-variable: T_IDENTIFIER { 
-            $$ = ast.CreateVariable($1.(string)) 
-        }
-        ;
-
 expr:
       '(' expr ')' {
             if node, ok := $2.(ast.Expr) ; ok {
@@ -313,8 +305,9 @@ expr:
     | function_call { 
             $$ = ast.UnaryExpr{0, $1}
         }
-    | variable { 
-            $$ = ast.UnaryExpr{0, $1}
+    | T_IDENTIFIER { 
+            // $$ = ast.UnaryExpr{0, $1}
+            $$ = ast.CreateVariable($1.(string)) 
         }
     | number {
             $$ = ast.UnaryExpr{0, $1}
@@ -355,7 +348,7 @@ function_call_parameter_list:
 ;
 
 function_call:
-    callable '(' function_call_parameter_list ')' {
+    T_IDENTIFIER '(' function_call_parameter_list ')' {
         $$ = ast.CreateFunctionCall($1.(string), $3.([]ast.Node))
     }
 ;
