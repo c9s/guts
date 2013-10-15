@@ -19,5 +19,5 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Print(out)
+	fmt.Print("<?php\n" + out)
 }

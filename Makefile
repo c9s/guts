@@ -21,5 +21,12 @@ executable:
 test:
 	go test gutscript -v
 
+testphp:
+	for file in src/gutscript/tests/*.guts ; \
+	do \
+		echo "Testing " $$file; \
+		go run src/gutscript/guts/main.go $$file | php ; \
+	done
+
 clean:
 	rm -rfv pkg/darwin_amd64/
