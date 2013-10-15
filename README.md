@@ -116,8 +116,10 @@ comments, patches and feature requests.
 
 Contribution
 ------------------------------
-feature-requests, pull-requests, comments are welcomed, but please discuss with
-us on GitHub issues. Just feel free to drop a line there.
+Feature requests, pull requests, comments are welcomed, but please discuss first 
+on our GitHub issue. Just feel free to drop a line there.
+
+
 
 Development
 ------------------------------
