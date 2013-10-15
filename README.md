@@ -12,14 +12,14 @@ Gutscript takes the good stuffs from Haskell, Perl6, Go and CoffeeScript, you ca
 shorter code to generate a equivalent PHP code. e.g. To define a function, we use:
 
 ```hs
-getName :: -> "John"
+hello :: (name)-> "Hello #{name}!"
 ```
 
 Which is shorter than writing:
 
 ```php
-function getName() {
-    return "John";
+function hello($name) {
+    return "Hello " . $name . "!";
 }
 ```
 
