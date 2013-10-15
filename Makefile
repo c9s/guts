@@ -9,15 +9,14 @@ parser:
 		bin/yacc -o $${y%.y}.go -p Guts $$y ; \
 	done
 
-install:
-	go install gutscript/guts
+install: executable
 	cp -v bin/guts /usr/bin/guts
 
 build:
 	go build gutscript
 
 executable:
-	go build bin/gutscript/main.go
+	go install -x gutscript/guts
 
 test:
 	go test gutscript -v
