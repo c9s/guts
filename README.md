@@ -132,6 +132,17 @@ Run make to build and test:
 
 	make
 
+If you modified the grammar, remember to update the parser:
+
+    make parser
+
+Run test cases:
+
+    make test
+
+Test the command tool with test case:
+
+    ./bin/guts src/gutscript/tests/03_if_else_statement.guts
 
 Lexer
 ------
