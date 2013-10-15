@@ -43,6 +43,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call_parameter
 %type <val> function_call_parameter_list
 %type <val> function_call
+%type <val> callable
 %type <val> statement 
 %type <val> statement_list
 %type <val> assignment_statement 
@@ -104,8 +105,15 @@ func debug(msg string, vals ...interface{}) {
 %token T_NS_SEPARATOR
 %token T_NAMESPACE
 
+%token T_CALLSTART
+%token T_CALLEND
+
 // obj.method
 %token T_OBJECT_OPERATOR
+
+// for function call
+%left '(' ')'
+%left T_CALLSTART T_CALLEND
 
 %left '|'
 %left '^'
@@ -200,6 +208,7 @@ function_parameter:
     }
     |
     */
+    // Type and Parameter name
     T_IDENTIFIER T_IDENTIFIER {
         $$ = ast.FunctionParam{$2.(string), $1.(string), nil}
     }
@@ -239,10 +248,17 @@ function_decl_statement:
     }
 ;
 
+range_dots: T_RANGE_OPERATOR
+
+range: '[' expr range_dots expr ']'
+     ;
+
+callable: T_IDENTIFIER { $$ = $1 };
 
 variable: T_IDENTIFIER { 
-        $$ = ast.CreateVariable($1.(string))
-    }
+            $$ = ast.CreateVariable($1.(string)) 
+        }
+        ;
 
 expr:
       '(' expr ')' {
@@ -332,10 +348,14 @@ function_call_parameter_list:
         // create the expr list
         $$ = []ast.Node{$1}
     }
+    |
+    /* */ {
+        $$ = []ast.Node{}
+    }
 ;
 
 function_call:
-    T_IDENTIFIER '(' function_call_parameter_list ')' {
+    callable '(' function_call_parameter_list ')' {
         $$ = ast.CreateFunctionCall($1.(string), $3.([]ast.Node))
     }
 ;

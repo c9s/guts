@@ -123,8 +123,8 @@ func TestCompileFile(t *testing.T) {
 }
 
 func TestParser(t *testing.T) {
-	for _, input := range parserInputs {
-		t.Log(input)
+	for i, input := range parserInputs {
+		t.Logf("Testing test case %d: %s", i, input)
 		lexer := GutsLex{
 			input: input,
 			start: 0,

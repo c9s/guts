@@ -3228,7 +3228,7 @@ var yaccpar string // will be processed version of yaccpartext: s/$$/prefix/g
 var yaccpartext = `
 /*	parser for yacc output	*/
 
-var $$Debug = 0
+var $$Debug = 100
 
 type $$Lexer interface {
 	Lex(lval *$$SymType) int
