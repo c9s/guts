@@ -505,7 +505,7 @@ Gutsdefault:
 	case 4:
 		//line src/gutscript/parser.y:152
 		{
-	            if stmts, ok := GutsS[Gutspt-2].val.(*ast.StatementNodeList) ; ok {
+	            if stmts, ok := GutsS[Gutspt-2].val.(*ast.StatementList) ; ok {
 	                stmts.Append(GutsS[Gutspt-0].val)
 	                GutsVAL.val = GutsS[Gutspt-2].val
 	            }
@@ -538,18 +538,18 @@ Gutsdefault:
 	case 12:
 		//line src/gutscript/parser.y:177
 		{
-	            GutsVAL.val = ast.CreateIfStatement(GutsS[Gutspt-1].val.(ast.Expr), GutsS[Gutspt-0].val.(*ast.StatementNodeList))
+	            GutsVAL.val = ast.CreateIfStatement(GutsS[Gutspt-1].val.(ast.Expr), GutsS[Gutspt-0].val.(*ast.StatementList))
 	        }
 	case 13:
 		//line src/gutscript/parser.y:182
 		{
-	            GutsS[Gutspt-3].val.(*ast.IfStatement).AddElseIf(GutsS[Gutspt-1].val.(ast.Expr),GutsS[Gutspt-0].val.(*ast.StatementNodeList))
+	            GutsS[Gutspt-3].val.(*ast.IfStatement).AddElseIf(GutsS[Gutspt-1].val.(ast.Expr),GutsS[Gutspt-0].val.(*ast.StatementList))
 	            GutsVAL.val = GutsS[Gutspt-3].val
 	        }
 	case 14:
 		//line src/gutscript/parser.y:188
 		{
-	            GutsS[Gutspt-2].val.(*ast.IfStatement).SetElse(GutsS[Gutspt-0].val.(*ast.StatementNodeList))
+	            GutsS[Gutspt-2].val.(*ast.IfStatement).SetElse(GutsS[Gutspt-0].val.(*ast.StatementList))
 	            GutsVAL.val = GutsS[Gutspt-2].val
 	        }
 	case 15:
@@ -599,7 +599,7 @@ Gutsdefault:
 	case 23:
 		//line src/gutscript/parser.y:245
 		{ 
-	        GutsVAL.val = ast.CreateFunction(GutsS[Gutspt-4].val.(string), GutsS[Gutspt-2].val.([]ast.FunctionParam), GutsS[Gutspt-0].val.(*ast.StatementNodeList))
+	        GutsVAL.val = ast.CreateFunction(GutsS[Gutspt-4].val.(string), GutsS[Gutspt-2].val.([]ast.FunctionParam), GutsS[Gutspt-0].val.(*ast.StatementList))
 	    }
 	case 26:
 		//line src/gutscript/parser.y:256

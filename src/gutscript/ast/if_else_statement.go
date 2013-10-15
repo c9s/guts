@@ -2,10 +2,10 @@ package ast
 
 type IfElseStatement struct {
 	Expr     Expr
-	Body     *StatementNodeList
-	ElseBody *StatementNodeList
+	Body     *StatementList
+	ElseBody *StatementList
 }
 
-func CreateIfElseStatement(expr Expr, body *StatementNodeList, elseBody *StatementNodeList) Node {
+func CreateIfElseStatement(expr Expr, body *StatementList, elseBody *StatementList) Node {
 	return IfElseStatement{expr, body, elseBody}
 }

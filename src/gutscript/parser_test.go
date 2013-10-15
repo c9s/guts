@@ -103,22 +103,14 @@ func TestCompileFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, srcFile := range srcFiles {
-		t.Log("Lexing", srcFile)
-		items, err := LexFile(srcFile)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if items != nil {
-			dumpLexItems(items)
-		}
-
 		t.Log("Compiling", srcFile)
 		out, err := CompileFile(srcFile)
 		if err != nil {
 			t.Fatalf("Compilation of %s failed: %s", srcFile, err)
 		}
+		t.Log("Compilation success.", srcFile)
+		t.Log("Compilation result:")
 		t.Log(out)
-		_ = out
 	}
 }
 

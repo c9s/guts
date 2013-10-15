@@ -3,7 +3,7 @@ package ast
 type Function struct {
 	Name   string
 	Params []FunctionParam
-	Body   *StatementNodeList
+	Body   *StatementList
 }
 
 type FunctionParam struct {
@@ -12,6 +12,6 @@ type FunctionParam struct {
 	Default Node
 }
 
-func CreateFunction(name string, params []FunctionParam, stmts *StatementNodeList) Node {
+func CreateFunction(name string, params []FunctionParam, stmts *StatementList) Node {
 	return Function{name, params, stmts}
 }

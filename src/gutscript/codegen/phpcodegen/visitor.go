@@ -18,7 +18,7 @@ func (self *Visitor) IndentSpace() string {
 
 func (self *Visitor) Visit(n ast.Node) string {
 	// fmt.Printf("visit %#v\n", n)
-	if stmts, ok := n.(*ast.StatementNodeList); ok {
+	if stmts, ok := n.(*ast.StatementList); ok {
 		var output string
 		for _, stmt := range *stmts {
 			output += self.IndentSpace() + self.Visit(stmt)
@@ -85,6 +85,9 @@ func (self *Visitor) Visit(n ast.Node) string {
 	}
 	if stmt, ok := n.(ast.ReturnStatement); ok {
 		return "return " + self.Visit(stmt.Expr) + ";\n"
+	}
+	if stmt, ok := n.(ast.ExprStatement); ok {
+		return self.Visit(stmt.Expr) + ";\n"
 	}
 	if fnc, ok := n.(ast.FunctionCall); ok {
 		var out string

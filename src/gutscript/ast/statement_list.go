@@ -1,13 +1,13 @@
 package ast
 
-type StatementNodeList []Node
+type StatementList []Node
 
-func (self *StatementNodeList) Append(node Node) {
+func (self *StatementList) Append(node Node) {
 	old := *self
 	newList := append(old, node)
 	*self = newList
 }
 
-func CreateStatementList() *StatementNodeList {
-	return &StatementNodeList{}
+func CreateStatementList() *StatementList {
+	return &StatementList{}
 }

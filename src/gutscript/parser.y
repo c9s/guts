@@ -150,7 +150,7 @@ block: T_INDENT statement_list T_OUTDENT { $$ = $2 }
 statement_list:
       statement_list T_NEWLINE statement
       {
-            if stmts, ok := $1.(*ast.StatementNodeList) ; ok {
+            if stmts, ok := $1.(*ast.StatementList) ; ok {
                 stmts.Append($3)
                 $$ = $1
             }
@@ -175,18 +175,18 @@ statement:
 if_statement:
         T_IF expr block
         {
-            $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementNodeList))
+            $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementList))
         }
     |
         if_statement T_ELSEIF expr block 
         {
-            $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementNodeList))
+            $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementList))
             $$ = $1
         }
     | 
         if_statement T_ELSE block
         {
-            $1.(*ast.IfStatement).SetElse($3.(*ast.StatementNodeList))
+            $1.(*ast.IfStatement).SetElse($3.(*ast.StatementList))
             $$ = $1
         }
 ;
@@ -243,7 +243,7 @@ function_parameter_list:
 
 function_decl_statement:
     T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block { 
-        $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementNodeList))
+        $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementList))
     }
 ;
 
