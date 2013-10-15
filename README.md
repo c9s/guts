@@ -1,6 +1,8 @@
 Gutscript
 ==================
 
+[![Build Status](https://secure.travis-ci.org/c9s/gutscript.png)](http://travis-ci.org/c9s/gutscript)
+
 Gutscript is a language makes your life easier,
 it allows you to write less code to produce equivalent PHP code.
 
