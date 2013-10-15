@@ -41,10 +41,10 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call_parameter
 %type <val> function_call_parameter_list
 %type <val> function_call
-%type <val> statement 
 %type <val> statement_list
 %type <val> assignment
 %type <val> if_statement
+%type <val> for_statement
 %type <val> block 
 %type <val> top_statement_list 
 %type <val> start
@@ -63,6 +63,7 @@ func debug(msg string, vals ...interface{}) {
 %token T_CLONE
 
 %token T_IF
+%token T_IN
 
 %left T_ELSEIF
 %token T_ELSEIF
@@ -168,8 +169,19 @@ statement:
         | assignment { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }
+        | for_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
     ;
+
+listop: 
+      '['  ']'
+      | '[' range ']'
+      ;
+
+for_statement:
+    T_FOR T_IDENTIFIER T_IN listop {  }
+    ;
+
 
 if_statement:
         T_IF expr block
@@ -244,10 +256,7 @@ function_decl_statement:
     }
 ;
 
-range_dots: T_RANGE_OPERATOR
-
-range: '[' expr range_dots expr ']'
-     ;
+range: expr T_RANGE_OPERATOR expr ;
 
 expr:
       '(' expr ')' {
