@@ -1,7 +1,6 @@
 #!/bin/bash
 LIBPATH=$(pwd)
-if [[ "$GOPATH" == *"$LIBPATH"* ]]; then
-else
+if [[ "$GOPATH" != *"$LIBPATH"* ]]; then
     export GOPATH=$LIBPATH:$GOPATH
 fi
 echo "Using GOPATH: $GOPATH"
