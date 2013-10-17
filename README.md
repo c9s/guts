@@ -196,6 +196,10 @@ Author
 Yo-An Lin (yoanlin93@gmail.com)
 
 
+IRC Channel
+----------------
+Join us on irc.freenode.net #gutscript
+
 
 License
 ---------------------
