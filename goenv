@@ -2,6 +2,6 @@
 LIBPATH=$(pwd)
 if [[ "$GOPATH" == *"$LIBPATH"* ]]; then
 else
-    export GOPATH=$(pwd):$GOPATH
+    export GOPATH=$LIBPATH:$GOPATH
 fi
 echo "Using GOPATH: $GOPATH"
