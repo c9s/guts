@@ -38,7 +38,7 @@ state 1
 state 2
 	start:  top_statement_list.    (1)
 
-	.  reduce 1 (src line 134)
+	.  reduce 1 (src line 138)
 
 
 state 3
@@ -46,25 +46,25 @@ state 3
 	statement_list:  statement_list.T_NEWLINE statement 
 
 	T_NEWLINE  shift 24
-	.  reduce 2 (src line 140)
+	.  reduce 2 (src line 144)
 
 
 state 4
 	statement_list:  statement.    (5)
 
-	.  reduce 5 (src line 157)
+	.  reduce 5 (src line 161)
 
 
 state 5
 	statement_list:  T_NEWLINE.    (6)
 
-	.  reduce 6 (src line 163)
+	.  reduce 6 (src line 167)
 
 
 state 6
 	statement:  block.    (7)
 
-	.  reduce 7 (src line 166)
+	.  reduce 7 (src line 170)
 
 
 state 7
@@ -78,7 +78,13 @@ state 7
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -88,48 +94,48 @@ state 7
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 8 (src line 168)
+	.  reduce 8 (src line 172)
 
 
 state 8
 	statement:  assignment.    (9)
 
-	.  reduce 9 (src line 169)
+	.  reduce 9 (src line 173)
 
 
 state 9
 	statement:  function_decl_statement.    (10)
 
-	.  reduce 10 (src line 170)
+	.  reduce 10 (src line 174)
 
 
-10: shift/reduce conflict (shift 34(0), red'n 11(0)) on T_NEWLINE
+10: shift/reduce conflict (shift 37(0), red'n 11(0)) on T_NEWLINE
 state 10
 	statement:  if_statement.    (11)
 	if_statement:  if_statement.T_NEWLINE T_ELSEIF expr block 
 	if_statement:  if_statement.T_NEWLINE T_ELSE block 
 
-	T_NEWLINE  shift 34
-	.  reduce 11 (src line 171)
+	T_NEWLINE  shift 37
+	.  reduce 11 (src line 175)
 
 
 state 11
 	statement:  for_statement.    (12)
 
-	.  reduce 12 (src line 172)
+	.  reduce 12 (src line 176)
 
 
 state 12
 	statement:  T_RETURN.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 35
+	expr  goto 38
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
@@ -155,7 +161,7 @@ state 13
 	statement  goto 4
 	function_decl_statement  goto 9
 	function_call  goto 16
-	statement_list  goto 37
+	statement_list  goto 40
 	assignment  goto 8
 	if_statement  goto 10
 	for_statement  goto 11
@@ -164,14 +170,14 @@ state 13
 state 14
 	expr:  (.expr ) 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 38
+	expr  goto 41
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
@@ -179,59 +185,59 @@ state 14
 state 15
 	expr:  -.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 39
+	expr  goto 42
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
 
 state 16
-	expr:  function_call.    (42)
+	expr:  function_call.    (45)
 
-	.  reduce 42 (src line 311)
+	.  reduce 45 (src line 327)
 
 
 state 17
 	assignment:  T_IDENTIFIER.= expr 
 	function_decl_statement:  T_IDENTIFIER.T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block 
-	expr:  T_IDENTIFIER.    (43)
+	expr:  T_IDENTIFIER.    (46)
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
-	T_FUNCTION_PROTOTYPE  shift 41
-	(  shift 42
-	=  shift 40
-	.  reduce 43 (src line 314)
+	T_FUNCTION_PROTOTYPE  shift 44
+	(  shift 45
+	=  shift 43
+	.  reduce 46 (src line 330)
 
 
 state 18
-	expr:  number.    (44)
+	expr:  number.    (47)
 
-	.  reduce 44 (src line 318)
+	.  reduce 47 (src line 334)
 
 
 state 19
-	expr:  floating_number.    (45)
+	expr:  floating_number.    (48)
 
-	.  reduce 45 (src line 321)
+	.  reduce 48 (src line 337)
 
 
 state 20
 	if_statement:  T_IF.expr block 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 43
+	expr  goto 46
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
@@ -239,20 +245,20 @@ state 20
 state 21
 	for_statement:  T_FOR.T_IDENTIFIER T_IN listop 
 
-	T_IDENTIFIER  shift 44
+	T_IDENTIFIER  shift 47
 	.  error
 
 
 state 22
-	number:  T_NUMBER.    (47)
+	number:  T_NUMBER.    (50)
 
-	.  reduce 47 (src line 330)
+	.  reduce 50 (src line 346)
 
 
 state 23
-	floating_number:  T_FLOATING.    (46)
+	floating_number:  T_FLOATING.    (49)
 
-	.  reduce 46 (src line 326)
+	.  reduce 49 (src line 342)
 
 
 state 24
@@ -272,7 +278,7 @@ state 24
 	expr  goto 7
 	number  goto 18
 	floating_number  goto 19
-	statement  goto 45
+	statement  goto 48
 	function_decl_statement  goto 9
 	function_call  goto 16
 	assignment  goto 8
@@ -283,52 +289,7 @@ state 24
 state 25
 	expr:  expr +.expr 
 
-	T_IDENTIFIER  shift 36
-	T_FLOATING  shift 23
-	T_NUMBER  shift 22
-	(  shift 14
-	-  shift 15
-	.  error
-
-	expr  goto 46
-	number  goto 18
-	floating_number  goto 19
-	function_call  goto 16
-
-state 26
-	expr:  expr -.expr 
-
-	T_IDENTIFIER  shift 36
-	T_FLOATING  shift 23
-	T_NUMBER  shift 22
-	(  shift 14
-	-  shift 15
-	.  error
-
-	expr  goto 47
-	number  goto 18
-	floating_number  goto 19
-	function_call  goto 16
-
-state 27
-	expr:  expr *.expr 
-
-	T_IDENTIFIER  shift 36
-	T_FLOATING  shift 23
-	T_NUMBER  shift 22
-	(  shift 14
-	-  shift 15
-	.  error
-
-	expr  goto 48
-	number  goto 18
-	floating_number  goto 19
-	function_call  goto 16
-
-state 28
-	expr:  expr /.expr 
-
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -340,10 +301,10 @@ state 28
 	floating_number  goto 19
 	function_call  goto 16
 
-state 29
-	expr:  expr %.expr 
+state 26
+	expr:  expr -.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -355,10 +316,10 @@ state 29
 	floating_number  goto 19
 	function_call  goto 16
 
-state 30
-	expr:  expr &.expr 
+state 27
+	expr:  expr *.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -370,10 +331,10 @@ state 30
 	floating_number  goto 19
 	function_call  goto 16
 
-state 31
-	expr:  expr |.expr 
+state 28
+	expr:  expr /.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -385,10 +346,10 @@ state 31
 	floating_number  goto 19
 	function_call  goto 16
 
-state 32
-	expr:  expr >.expr 
+state 29
+	expr:  expr %.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -400,10 +361,10 @@ state 32
 	floating_number  goto 19
 	function_call  goto 16
 
-state 33
-	expr:  expr <.expr 
+state 30
+	expr:  expr &.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -415,104 +376,70 @@ state 33
 	floating_number  goto 19
 	function_call  goto 16
 
-state 34
-	if_statement:  if_statement T_NEWLINE.T_ELSEIF expr block 
-	if_statement:  if_statement T_NEWLINE.T_ELSE block 
+state 31
+	expr:  expr |.expr 
 
-	T_ELSEIF  shift 55
-	T_ELSE  shift 56
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
 	.  error
 
+	expr  goto 55
+	number  goto 18
+	floating_number  goto 19
+	function_call  goto 16
+
+state 32
+	expr:  expr >.expr 
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	.  error
+
+	expr  goto 56
+	number  goto 18
+	floating_number  goto 19
+	function_call  goto 16
+
+state 33
+	expr:  expr <.expr 
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	.  error
+
+	expr  goto 57
+	number  goto 18
+	floating_number  goto 19
+	function_call  goto 16
+
+state 34
+	expr:  expr T_EQUAL.expr 
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	.  error
+
+	expr  goto 58
+	number  goto 18
+	floating_number  goto 19
+	function_call  goto 16
 
 state 35
-	statement:  T_RETURN expr.    (13)
-	expr:  expr.+ expr 
-	expr:  expr.- expr 
-	expr:  expr.* expr 
-	expr:  expr./ expr 
-	expr:  expr.% expr 
-	expr:  expr.& expr 
-	expr:  expr.| expr 
-	expr:  expr.> expr 
-	expr:  expr.< expr 
+	expr:  expr T_LT_EQUAL.expr 
 
-	|  shift 31
-	&  shift 30
-	+  shift 25
-	-  shift 26
-	*  shift 27
-	/  shift 28
-	%  shift 29
-	>  shift 32
-	<  shift 33
-	.  reduce 13 (src line 173)
-
-
-state 36
-	expr:  T_IDENTIFIER.    (43)
-	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
-
-	(  shift 42
-	.  reduce 43 (src line 314)
-
-
-state 37
-	block:  T_INDENT statement_list.T_OUTDENT 
-	statement_list:  statement_list.T_NEWLINE statement 
-
-	T_OUTDENT  shift 57
-	T_NEWLINE  shift 24
-	.  error
-
-
-state 38
-	expr:  ( expr.) 
-	expr:  expr.+ expr 
-	expr:  expr.- expr 
-	expr:  expr.* expr 
-	expr:  expr./ expr 
-	expr:  expr.% expr 
-	expr:  expr.& expr 
-	expr:  expr.| expr 
-	expr:  expr.> expr 
-	expr:  expr.< expr 
-
-	)  shift 58
-	|  shift 31
-	&  shift 30
-	+  shift 25
-	-  shift 26
-	*  shift 27
-	/  shift 28
-	%  shift 29
-	>  shift 32
-	<  shift 33
-	.  error
-
-
-39: shift/reduce conflict (shift 32(0), red'n 41(11)) on >
-39: shift/reduce conflict (shift 33(0), red'n 41(11)) on <
-state 39
-	expr:  expr.+ expr 
-	expr:  expr.- expr 
-	expr:  expr.* expr 
-	expr:  expr./ expr 
-	expr:  expr.% expr 
-	expr:  expr.& expr 
-	expr:  expr.| expr 
-	expr:  expr.> expr 
-	expr:  expr.< expr 
-	expr:  - expr.    (41)
-
-	>  shift 32
-	<  shift 33
-	.  reduce 41 (src line 307)
-
-
-state 40
-	assignment:  T_IDENTIFIER =.expr 
-
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
@@ -524,34 +451,179 @@ state 40
 	floating_number  goto 19
 	function_call  goto 16
 
-state 41
-	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE.function_parameter_list T_FUNCTION_GLYPH block 
-	function_parameter_list: .    (28)
+state 36
+	expr:  expr T_GT_EQUAL.expr 
 
-	(  shift 61
-	.  reduce 28 (src line 247)
-
-	function_parameter_list  goto 60
-
-state 42
-	function_call:  T_IDENTIFIER (.function_call_parameter_list ) 
-	function_call_parameter_list: .    (51)
-
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
-	.  reduce 51 (src line 350)
+	.  error
 
-	expr  goto 64
+	expr  goto 60
 	number  goto 18
 	floating_number  goto 19
-	function_call_parameter  goto 63
-	function_call_parameter_list  goto 62
 	function_call  goto 16
 
+state 37
+	if_statement:  if_statement T_NEWLINE.T_ELSEIF expr block 
+	if_statement:  if_statement T_NEWLINE.T_ELSE block 
+
+	T_ELSEIF  shift 61
+	T_ELSE  shift 62
+	.  error
+
+
+state 38
+	statement:  T_RETURN expr.    (13)
+	expr:  expr.+ expr 
+	expr:  expr.- expr 
+	expr:  expr.* expr 
+	expr:  expr./ expr 
+	expr:  expr.% expr 
+	expr:  expr.& expr 
+	expr:  expr.| expr 
+	expr:  expr.> expr 
+	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
+
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	|  shift 31
+	&  shift 30
+	+  shift 25
+	-  shift 26
+	*  shift 27
+	/  shift 28
+	%  shift 29
+	>  shift 32
+	<  shift 33
+	.  reduce 13 (src line 177)
+
+
+state 39
+	expr:  T_IDENTIFIER.    (46)
+	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
+
+	(  shift 45
+	.  reduce 46 (src line 330)
+
+
+state 40
+	block:  T_INDENT statement_list.T_OUTDENT 
+	statement_list:  statement_list.T_NEWLINE statement 
+
+	T_OUTDENT  shift 63
+	T_NEWLINE  shift 24
+	.  error
+
+
+state 41
+	expr:  ( expr.) 
+	expr:  expr.+ expr 
+	expr:  expr.- expr 
+	expr:  expr.* expr 
+	expr:  expr./ expr 
+	expr:  expr.% expr 
+	expr:  expr.& expr 
+	expr:  expr.| expr 
+	expr:  expr.> expr 
+	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
+
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	)  shift 64
+	|  shift 31
+	&  shift 30
+	+  shift 25
+	-  shift 26
+	*  shift 27
+	/  shift 28
+	%  shift 29
+	>  shift 32
+	<  shift 33
+	.  error
+
+
+42: shift/reduce conflict (shift 34(0), red'n 44(11)) on T_EQUAL
+42: shift/reduce conflict (shift 35(0), red'n 44(11)) on T_LT_EQUAL
+42: shift/reduce conflict (shift 36(0), red'n 44(11)) on T_GT_EQUAL
+42: shift/reduce conflict (shift 32(0), red'n 44(11)) on >
+42: shift/reduce conflict (shift 33(0), red'n 44(11)) on <
+state 42
+	expr:  expr.+ expr 
+	expr:  expr.- expr 
+	expr:  expr.* expr 
+	expr:  expr./ expr 
+	expr:  expr.% expr 
+	expr:  expr.& expr 
+	expr:  expr.| expr 
+	expr:  expr.> expr 
+	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
+	expr:  - expr.    (44)
+
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	>  shift 32
+	<  shift 33
+	.  reduce 44 (src line 323)
+
+
 state 43
+	assignment:  T_IDENTIFIER =.expr 
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	.  error
+
+	expr  goto 65
+	number  goto 18
+	floating_number  goto 19
+	function_call  goto 16
+
+state 44
+	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE.function_parameter_list T_FUNCTION_GLYPH block 
+	function_parameter_list: .    (28)
+
+	(  shift 67
+	.  reduce 28 (src line 251)
+
+	function_parameter_list  goto 66
+
+state 45
+	function_call:  T_IDENTIFIER (.function_call_parameter_list ) 
+	function_call_parameter_list: .    (54)
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	.  reduce 54 (src line 366)
+
+	expr  goto 70
+	number  goto 18
+	floating_number  goto 19
+	function_call_parameter  goto 69
+	function_call_parameter_list  goto 68
+	function_call  goto 16
+
+state 46
 	if_statement:  T_IF expr.block 
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
@@ -562,7 +634,13 @@ state 43
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	T_INDENT  shift 13
 	|  shift 31
 	&  shift 30
@@ -575,24 +653,27 @@ state 43
 	<  shift 33
 	.  error
 
-	block  goto 65
+	block  goto 71
 
-state 44
+state 47
 	for_statement:  T_FOR T_IDENTIFIER.T_IN listop 
 
-	T_IN  shift 66
+	T_IN  shift 72
 	.  error
 
 
-state 45
+state 48
 	statement_list:  statement_list T_NEWLINE statement.    (4)
 
-	.  reduce 4 (src line 149)
+	.  reduce 4 (src line 153)
 
 
-46: shift/reduce conflict (shift 32(0), red'n 32(8)) on >
-46: shift/reduce conflict (shift 33(0), red'n 32(8)) on <
-state 46
+49: shift/reduce conflict (shift 34(0), red'n 32(8)) on T_EQUAL
+49: shift/reduce conflict (shift 35(0), red'n 32(8)) on T_LT_EQUAL
+49: shift/reduce conflict (shift 36(0), red'n 32(8)) on T_GT_EQUAL
+49: shift/reduce conflict (shift 32(0), red'n 32(8)) on >
+49: shift/reduce conflict (shift 33(0), red'n 32(8)) on <
+state 49
 	expr:  expr.+ expr 
 	expr:  expr + expr.    (32)
 	expr:  expr.- expr 
@@ -603,18 +684,27 @@ state 46
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	*  shift 27
 	/  shift 28
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 32 (src line 271)
+	.  reduce 32 (src line 275)
 
 
-47: shift/reduce conflict (shift 32(0), red'n 33(8)) on >
-47: shift/reduce conflict (shift 33(0), red'n 33(8)) on <
-state 47
+50: shift/reduce conflict (shift 34(0), red'n 33(8)) on T_EQUAL
+50: shift/reduce conflict (shift 35(0), red'n 33(8)) on T_LT_EQUAL
+50: shift/reduce conflict (shift 36(0), red'n 33(8)) on T_GT_EQUAL
+50: shift/reduce conflict (shift 32(0), red'n 33(8)) on >
+50: shift/reduce conflict (shift 33(0), red'n 33(8)) on <
+state 50
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr - expr.    (33)
@@ -625,18 +715,27 @@ state 47
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	*  shift 27
 	/  shift 28
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 33 (src line 275)
+	.  reduce 33 (src line 279)
 
 
-48: shift/reduce conflict (shift 32(0), red'n 34(9)) on >
-48: shift/reduce conflict (shift 33(0), red'n 34(9)) on <
-state 48
+51: shift/reduce conflict (shift 34(0), red'n 34(9)) on T_EQUAL
+51: shift/reduce conflict (shift 35(0), red'n 34(9)) on T_LT_EQUAL
+51: shift/reduce conflict (shift 36(0), red'n 34(9)) on T_GT_EQUAL
+51: shift/reduce conflict (shift 32(0), red'n 34(9)) on >
+51: shift/reduce conflict (shift 33(0), red'n 34(9)) on <
+state 51
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -647,15 +746,24 @@ state 48
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	>  shift 32
 	<  shift 33
-	.  reduce 34 (src line 279)
+	.  reduce 34 (src line 283)
 
 
-49: shift/reduce conflict (shift 32(0), red'n 35(9)) on >
-49: shift/reduce conflict (shift 33(0), red'n 35(9)) on <
-state 49
+52: shift/reduce conflict (shift 34(0), red'n 35(9)) on T_EQUAL
+52: shift/reduce conflict (shift 35(0), red'n 35(9)) on T_LT_EQUAL
+52: shift/reduce conflict (shift 36(0), red'n 35(9)) on T_GT_EQUAL
+52: shift/reduce conflict (shift 32(0), red'n 35(9)) on >
+52: shift/reduce conflict (shift 33(0), red'n 35(9)) on <
+state 52
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -666,15 +774,24 @@ state 49
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	>  shift 32
 	<  shift 33
-	.  reduce 35 (src line 283)
+	.  reduce 35 (src line 287)
 
 
-50: shift/reduce conflict (shift 32(0), red'n 36(9)) on >
-50: shift/reduce conflict (shift 33(0), red'n 36(9)) on <
-state 50
+53: shift/reduce conflict (shift 34(0), red'n 36(9)) on T_EQUAL
+53: shift/reduce conflict (shift 35(0), red'n 36(9)) on T_LT_EQUAL
+53: shift/reduce conflict (shift 36(0), red'n 36(9)) on T_GT_EQUAL
+53: shift/reduce conflict (shift 32(0), red'n 36(9)) on >
+53: shift/reduce conflict (shift 33(0), red'n 36(9)) on <
+state 53
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -685,15 +802,24 @@ state 50
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	>  shift 32
 	<  shift 33
-	.  reduce 36 (src line 287)
+	.  reduce 36 (src line 291)
 
 
-51: shift/reduce conflict (shift 32(0), red'n 37(7)) on >
-51: shift/reduce conflict (shift 33(0), red'n 37(7)) on <
-state 51
+54: shift/reduce conflict (shift 34(0), red'n 37(7)) on T_EQUAL
+54: shift/reduce conflict (shift 35(0), red'n 37(7)) on T_LT_EQUAL
+54: shift/reduce conflict (shift 36(0), red'n 37(7)) on T_GT_EQUAL
+54: shift/reduce conflict (shift 32(0), red'n 37(7)) on >
+54: shift/reduce conflict (shift 33(0), red'n 37(7)) on <
+state 54
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -704,7 +830,13 @@ state 51
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	+  shift 25
 	-  shift 26
 	*  shift 27
@@ -712,12 +844,15 @@ state 51
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 37 (src line 291)
+	.  reduce 37 (src line 295)
 
 
-52: shift/reduce conflict (shift 32(0), red'n 38(5)) on >
-52: shift/reduce conflict (shift 33(0), red'n 38(5)) on <
-state 52
+55: shift/reduce conflict (shift 34(0), red'n 38(5)) on T_EQUAL
+55: shift/reduce conflict (shift 35(0), red'n 38(5)) on T_LT_EQUAL
+55: shift/reduce conflict (shift 36(0), red'n 38(5)) on T_GT_EQUAL
+55: shift/reduce conflict (shift 32(0), red'n 38(5)) on >
+55: shift/reduce conflict (shift 33(0), red'n 38(5)) on <
+state 55
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -728,7 +863,13 @@ state 52
 	expr:  expr | expr.    (38)
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	&  shift 30
 	+  shift 25
 	-  shift 26
@@ -737,19 +878,22 @@ state 52
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 38 (src line 295)
+	.  reduce 38 (src line 299)
 
 
-53: shift/reduce conflict (shift 31(5), red'n 39(0)) on |
-53: shift/reduce conflict (shift 30(7), red'n 39(0)) on &
-53: shift/reduce conflict (shift 25(8), red'n 39(0)) on +
-53: shift/reduce conflict (shift 26(8), red'n 39(0)) on -
-53: shift/reduce conflict (shift 27(9), red'n 39(0)) on *
-53: shift/reduce conflict (shift 28(9), red'n 39(0)) on /
-53: shift/reduce conflict (shift 29(9), red'n 39(0)) on %
-53: shift/reduce conflict (shift 32(0), red'n 39(0)) on >
-53: shift/reduce conflict (shift 33(0), red'n 39(0)) on <
-state 53
+56: shift/reduce conflict (shift 34(0), red'n 39(0)) on T_EQUAL
+56: shift/reduce conflict (shift 35(0), red'n 39(0)) on T_LT_EQUAL
+56: shift/reduce conflict (shift 36(0), red'n 39(0)) on T_GT_EQUAL
+56: shift/reduce conflict (shift 31(5), red'n 39(0)) on |
+56: shift/reduce conflict (shift 30(7), red'n 39(0)) on &
+56: shift/reduce conflict (shift 25(8), red'n 39(0)) on +
+56: shift/reduce conflict (shift 26(8), red'n 39(0)) on -
+56: shift/reduce conflict (shift 27(9), red'n 39(0)) on *
+56: shift/reduce conflict (shift 28(9), red'n 39(0)) on /
+56: shift/reduce conflict (shift 29(9), red'n 39(0)) on %
+56: shift/reduce conflict (shift 32(0), red'n 39(0)) on >
+56: shift/reduce conflict (shift 33(0), red'n 39(0)) on <
+state 56
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -760,7 +904,13 @@ state 53
 	expr:  expr.> expr 
 	expr:  expr > expr.    (39)
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -770,19 +920,22 @@ state 53
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 39 (src line 299)
+	.  reduce 39 (src line 303)
 
 
-54: shift/reduce conflict (shift 31(5), red'n 40(0)) on |
-54: shift/reduce conflict (shift 30(7), red'n 40(0)) on &
-54: shift/reduce conflict (shift 25(8), red'n 40(0)) on +
-54: shift/reduce conflict (shift 26(8), red'n 40(0)) on -
-54: shift/reduce conflict (shift 27(9), red'n 40(0)) on *
-54: shift/reduce conflict (shift 28(9), red'n 40(0)) on /
-54: shift/reduce conflict (shift 29(9), red'n 40(0)) on %
-54: shift/reduce conflict (shift 32(0), red'n 40(0)) on >
-54: shift/reduce conflict (shift 33(0), red'n 40(0)) on <
-state 54
+57: shift/reduce conflict (shift 34(0), red'n 40(0)) on T_EQUAL
+57: shift/reduce conflict (shift 35(0), red'n 40(0)) on T_LT_EQUAL
+57: shift/reduce conflict (shift 36(0), red'n 40(0)) on T_GT_EQUAL
+57: shift/reduce conflict (shift 31(5), red'n 40(0)) on |
+57: shift/reduce conflict (shift 30(7), red'n 40(0)) on &
+57: shift/reduce conflict (shift 25(8), red'n 40(0)) on +
+57: shift/reduce conflict (shift 26(8), red'n 40(0)) on -
+57: shift/reduce conflict (shift 27(9), red'n 40(0)) on *
+57: shift/reduce conflict (shift 28(9), red'n 40(0)) on /
+57: shift/reduce conflict (shift 29(9), red'n 40(0)) on %
+57: shift/reduce conflict (shift 32(0), red'n 40(0)) on >
+57: shift/reduce conflict (shift 33(0), red'n 40(0)) on <
+state 57
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -793,7 +946,13 @@ state 54
 	expr:  expr.> expr 
 	expr:  expr.< expr 
 	expr:  expr < expr.    (40)
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -803,45 +962,171 @@ state 54
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 40 (src line 303)
+	.  reduce 40 (src line 307)
 
 
-state 55
+58: shift/reduce conflict (shift 34(0), red'n 41(0)) on T_EQUAL
+58: shift/reduce conflict (shift 35(0), red'n 41(0)) on T_LT_EQUAL
+58: shift/reduce conflict (shift 36(0), red'n 41(0)) on T_GT_EQUAL
+58: shift/reduce conflict (shift 31(5), red'n 41(0)) on |
+58: shift/reduce conflict (shift 30(7), red'n 41(0)) on &
+58: shift/reduce conflict (shift 25(8), red'n 41(0)) on +
+58: shift/reduce conflict (shift 26(8), red'n 41(0)) on -
+58: shift/reduce conflict (shift 27(9), red'n 41(0)) on *
+58: shift/reduce conflict (shift 28(9), red'n 41(0)) on /
+58: shift/reduce conflict (shift 29(9), red'n 41(0)) on %
+58: shift/reduce conflict (shift 32(0), red'n 41(0)) on >
+58: shift/reduce conflict (shift 33(0), red'n 41(0)) on <
+state 58
+	expr:  expr.+ expr 
+	expr:  expr.- expr 
+	expr:  expr.* expr 
+	expr:  expr./ expr 
+	expr:  expr.% expr 
+	expr:  expr.& expr 
+	expr:  expr.| expr 
+	expr:  expr.> expr 
+	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr T_EQUAL expr.    (41)
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
+
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	|  shift 31
+	&  shift 30
+	+  shift 25
+	-  shift 26
+	*  shift 27
+	/  shift 28
+	%  shift 29
+	>  shift 32
+	<  shift 33
+	.  reduce 41 (src line 311)
+
+
+59: shift/reduce conflict (shift 34(0), red'n 42(0)) on T_EQUAL
+59: shift/reduce conflict (shift 35(0), red'n 42(0)) on T_LT_EQUAL
+59: shift/reduce conflict (shift 36(0), red'n 42(0)) on T_GT_EQUAL
+59: shift/reduce conflict (shift 31(5), red'n 42(0)) on |
+59: shift/reduce conflict (shift 30(7), red'n 42(0)) on &
+59: shift/reduce conflict (shift 25(8), red'n 42(0)) on +
+59: shift/reduce conflict (shift 26(8), red'n 42(0)) on -
+59: shift/reduce conflict (shift 27(9), red'n 42(0)) on *
+59: shift/reduce conflict (shift 28(9), red'n 42(0)) on /
+59: shift/reduce conflict (shift 29(9), red'n 42(0)) on %
+59: shift/reduce conflict (shift 32(0), red'n 42(0)) on >
+59: shift/reduce conflict (shift 33(0), red'n 42(0)) on <
+state 59
+	expr:  expr.+ expr 
+	expr:  expr.- expr 
+	expr:  expr.* expr 
+	expr:  expr./ expr 
+	expr:  expr.% expr 
+	expr:  expr.& expr 
+	expr:  expr.| expr 
+	expr:  expr.> expr 
+	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr T_LT_EQUAL expr.    (42)
+	expr:  expr.T_GT_EQUAL expr 
+
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	|  shift 31
+	&  shift 30
+	+  shift 25
+	-  shift 26
+	*  shift 27
+	/  shift 28
+	%  shift 29
+	>  shift 32
+	<  shift 33
+	.  reduce 42 (src line 315)
+
+
+60: shift/reduce conflict (shift 34(0), red'n 43(0)) on T_EQUAL
+60: shift/reduce conflict (shift 35(0), red'n 43(0)) on T_LT_EQUAL
+60: shift/reduce conflict (shift 36(0), red'n 43(0)) on T_GT_EQUAL
+60: shift/reduce conflict (shift 31(5), red'n 43(0)) on |
+60: shift/reduce conflict (shift 30(7), red'n 43(0)) on &
+60: shift/reduce conflict (shift 25(8), red'n 43(0)) on +
+60: shift/reduce conflict (shift 26(8), red'n 43(0)) on -
+60: shift/reduce conflict (shift 27(9), red'n 43(0)) on *
+60: shift/reduce conflict (shift 28(9), red'n 43(0)) on /
+60: shift/reduce conflict (shift 29(9), red'n 43(0)) on %
+60: shift/reduce conflict (shift 32(0), red'n 43(0)) on >
+60: shift/reduce conflict (shift 33(0), red'n 43(0)) on <
+state 60
+	expr:  expr.+ expr 
+	expr:  expr.- expr 
+	expr:  expr.* expr 
+	expr:  expr./ expr 
+	expr:  expr.% expr 
+	expr:  expr.& expr 
+	expr:  expr.| expr 
+	expr:  expr.> expr 
+	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
+	expr:  expr T_GT_EQUAL expr.    (43)
+
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	|  shift 31
+	&  shift 30
+	+  shift 25
+	-  shift 26
+	*  shift 27
+	/  shift 28
+	%  shift 29
+	>  shift 32
+	<  shift 33
+	.  reduce 43 (src line 319)
+
+
+state 61
 	if_statement:  if_statement T_NEWLINE T_ELSEIF.expr block 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 67
+	expr  goto 73
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
 
-state 56
+state 62
 	if_statement:  if_statement T_NEWLINE T_ELSE.block 
 
 	T_INDENT  shift 13
 	.  error
 
-	block  goto 68
+	block  goto 74
 
-state 57
+state 63
 	block:  T_INDENT statement_list T_OUTDENT.    (3)
 
-	.  reduce 3 (src line 147)
+	.  reduce 3 (src line 151)
 
 
-state 58
+state 64
 	expr:  ( expr ).    (31)
 
-	.  reduce 31 (src line 261)
+	.  reduce 31 (src line 265)
 
 
-state 59
+state 65
 	assignment:  T_IDENTIFIER = expr.    (20)
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
@@ -852,7 +1137,13 @@ state 59
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -862,43 +1153,43 @@ state 59
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 20 (src line 205)
+	.  reduce 20 (src line 209)
 
 
-state 60
+state 66
 	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list.T_FUNCTION_GLYPH block 
 
-	T_FUNCTION_GLYPH  shift 69
+	T_FUNCTION_GLYPH  shift 75
 	.  error
 
 
-state 61
+state 67
 	function_parameter_list:  (.function_parameters ) 
 	function_parameter_list:  (.) 
 
-	T_IDENTIFIER  shift 73
-	)  shift 71
+	T_IDENTIFIER  shift 79
+	)  shift 77
 	.  error
 
-	function_parameters  goto 70
-	function_parameter  goto 72
+	function_parameters  goto 76
+	function_parameter  goto 78
 
-state 62
+state 68
 	function_call_parameter_list:  function_call_parameter_list., function_call_parameter 
 	function_call:  T_IDENTIFIER ( function_call_parameter_list.) 
 
-	)  shift 75
-	,  shift 74
+	)  shift 81
+	,  shift 80
 	.  error
 
 
-state 63
-	function_call_parameter_list:  function_call_parameter.    (50)
+state 69
+	function_call_parameter_list:  function_call_parameter.    (53)
 
-	.  reduce 50 (src line 345)
+	.  reduce 53 (src line 361)
 
 
-state 64
+state 70
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
 	expr:  expr.* expr 
@@ -908,8 +1199,14 @@ state 64
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
-	function_call_parameter:  expr.    (48)
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
+	function_call_parameter:  expr.    (51)
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -919,24 +1216,24 @@ state 64
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 48 (src line 334)
+	.  reduce 51 (src line 350)
 
 
-state 65
+state 71
 	if_statement:  T_IF expr block.    (17)
 
-	.  reduce 17 (src line 186)
+	.  reduce 17 (src line 190)
 
 
-state 66
+state 72
 	for_statement:  T_FOR T_IDENTIFIER T_IN.listop 
 
-	[  shift 77
+	[  shift 83
 	.  error
 
-	listop  goto 76
+	listop  goto 82
 
-state 67
+state 73
 	if_statement:  if_statement T_NEWLINE T_ELSEIF expr.block 
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
@@ -947,7 +1244,13 @@ state 67
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	T_INDENT  shift 13
 	|  shift 31
 	&  shift 30
@@ -960,166 +1263,166 @@ state 67
 	<  shift 33
 	.  error
 
-	block  goto 78
+	block  goto 84
 
-state 68
+state 74
 	if_statement:  if_statement T_NEWLINE T_ELSE block.    (19)
 
-	.  reduce 19 (src line 197)
+	.  reduce 19 (src line 201)
 
 
-state 69
+state 75
 	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH.block 
 
 	T_INDENT  shift 13
 	.  error
 
-	block  goto 79
+	block  goto 85
 
-state 70
+state 76
 	function_parameters:  function_parameters., function_parameter 
 	function_parameter_list:  ( function_parameters.) 
 
-	)  shift 81
-	,  shift 80
+	)  shift 87
+	,  shift 86
 	.  error
 
 
-state 71
+state 77
 	function_parameter_list:  ( ).    (27)
 
-	.  reduce 27 (src line 244)
+	.  reduce 27 (src line 248)
 
 
-state 72
+state 78
 	function_parameters:  function_parameter.    (25)
 
-	.  reduce 25 (src line 235)
+	.  reduce 25 (src line 239)
 
 
-state 73
+state 79
 	function_parameter:  T_IDENTIFIER.= expr 
 	function_parameter:  T_IDENTIFIER.T_IDENTIFIER 
 	function_parameter:  T_IDENTIFIER.    (23)
 
-	T_IDENTIFIER  shift 83
-	=  shift 82
-	.  reduce 23 (src line 222)
-
-
-state 74
-	function_call_parameter_list:  function_call_parameter_list ,.function_call_parameter 
-
-	T_IDENTIFIER  shift 36
-	T_FLOATING  shift 23
-	T_NUMBER  shift 22
-	(  shift 14
-	-  shift 15
-	.  error
-
-	expr  goto 64
-	number  goto 18
-	floating_number  goto 19
-	function_call_parameter  goto 84
-	function_call  goto 16
-
-state 75
-	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (52)
-
-	.  reduce 52 (src line 356)
-
-
-state 76
-	for_statement:  T_FOR T_IDENTIFIER T_IN listop.    (16)
-
-	.  reduce 16 (src line 181)
-
-
-state 77
-	listop:  [.] 
-	listop:  [.range ] 
-
-	T_IDENTIFIER  shift 36
-	T_FLOATING  shift 23
-	T_NUMBER  shift 22
-	(  shift 14
-	-  shift 15
-	]  shift 85
-	.  error
-
-	expr  goto 87
-	number  goto 18
-	floating_number  goto 19
-	function_call  goto 16
-	range  goto 86
-
-state 78
-	if_statement:  if_statement T_NEWLINE T_ELSEIF expr block.    (18)
-
-	.  reduce 18 (src line 191)
-
-
-state 79
-	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block.    (29)
-
-	.  reduce 29 (src line 252)
+	T_IDENTIFIER  shift 89
+	=  shift 88
+	.  reduce 23 (src line 226)
 
 
 state 80
-	function_parameters:  function_parameters ,.function_parameter 
+	function_call_parameter_list:  function_call_parameter_list ,.function_call_parameter 
 
-	T_IDENTIFIER  shift 73
-	.  error
-
-	function_parameter  goto 88
-
-state 81
-	function_parameter_list:  ( function_parameters ).    (26)
-
-	.  reduce 26 (src line 240)
-
-
-state 82
-	function_parameter:  T_IDENTIFIER =.expr 
-
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 89
+	expr  goto 70
+	number  goto 18
+	floating_number  goto 19
+	function_call_parameter  goto 90
+	function_call  goto 16
+
+state 81
+	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (55)
+
+	.  reduce 55 (src line 372)
+
+
+state 82
+	for_statement:  T_FOR T_IDENTIFIER T_IN listop.    (16)
+
+	.  reduce 16 (src line 185)
+
+
+state 83
+	listop:  [.] 
+	listop:  [.range ] 
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	]  shift 91
+	.  error
+
+	expr  goto 93
+	number  goto 18
+	floating_number  goto 19
+	function_call  goto 16
+	range  goto 92
+
+state 84
+	if_statement:  if_statement T_NEWLINE T_ELSEIF expr block.    (18)
+
+	.  reduce 18 (src line 195)
+
+
+state 85
+	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block.    (29)
+
+	.  reduce 29 (src line 256)
+
+
+state 86
+	function_parameters:  function_parameters ,.function_parameter 
+
+	T_IDENTIFIER  shift 79
+	.  error
+
+	function_parameter  goto 94
+
+state 87
+	function_parameter_list:  ( function_parameters ).    (26)
+
+	.  reduce 26 (src line 244)
+
+
+state 88
+	function_parameter:  T_IDENTIFIER =.expr 
+
+	T_IDENTIFIER  shift 39
+	T_FLOATING  shift 23
+	T_NUMBER  shift 22
+	(  shift 14
+	-  shift 15
+	.  error
+
+	expr  goto 95
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
 
-state 83
+state 89
 	function_parameter:  T_IDENTIFIER T_IDENTIFIER.    (22)
 
-	.  reduce 22 (src line 218)
+	.  reduce 22 (src line 222)
 
 
-state 84
-	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (49)
+state 90
+	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (52)
 
-	.  reduce 49 (src line 338)
+	.  reduce 52 (src line 354)
 
 
-state 85
+state 91
 	listop:  [ ].    (14)
 
-	.  reduce 14 (src line 176)
+	.  reduce 14 (src line 180)
 
 
-state 86
+state 92
 	listop:  [ range.] 
 
-	]  shift 90
+	]  shift 96
 	.  error
 
 
-state 87
+state 93
 	range:  expr.T_RANGE_OPERATOR expr 
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
@@ -1130,8 +1433,14 @@ state 87
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
-	T_RANGE_OPERATOR  shift 91
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
+	T_RANGE_OPERATOR  shift 97
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -1144,13 +1453,13 @@ state 87
 	.  error
 
 
-state 88
+state 94
 	function_parameters:  function_parameters , function_parameter.    (24)
 
-	.  reduce 24 (src line 228)
+	.  reduce 24 (src line 232)
 
 
-state 89
+state 95
 	function_parameter:  T_IDENTIFIER = expr.    (21)
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
@@ -1161,7 +1470,13 @@ state 89
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -1171,31 +1486,31 @@ state 89
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 21 (src line 214)
+	.  reduce 21 (src line 218)
 
 
-state 90
+state 96
 	listop:  [ range ].    (15)
 
-	.  reduce 15 (src line 178)
+	.  reduce 15 (src line 182)
 
 
-state 91
+state 97
 	range:  expr T_RANGE_OPERATOR.expr 
 
-	T_IDENTIFIER  shift 36
+	T_IDENTIFIER  shift 39
 	T_FLOATING  shift 23
 	T_NUMBER  shift 22
 	(  shift 14
 	-  shift 15
 	.  error
 
-	expr  goto 92
+	expr  goto 98
 	number  goto 18
 	floating_number  goto 19
 	function_call  goto 16
 
-state 92
+state 98
 	range:  expr T_RANGE_OPERATOR expr.    (30)
 	expr:  expr.+ expr 
 	expr:  expr.- expr 
@@ -1206,7 +1521,13 @@ state 92
 	expr:  expr.| expr 
 	expr:  expr.> expr 
 	expr:  expr.< expr 
+	expr:  expr.T_EQUAL expr 
+	expr:  expr.T_LT_EQUAL expr 
+	expr:  expr.T_GT_EQUAL expr 
 
+	T_EQUAL  shift 34
+	T_LT_EQUAL  shift 35
+	T_GT_EQUAL  shift 36
 	|  shift 31
 	&  shift 30
 	+  shift 25
@@ -1216,18 +1537,18 @@ state 92
 	%  shift 29
 	>  shift 32
 	<  shift 33
-	.  reduce 30 (src line 259)
+	.  reduce 30 (src line 263)
 
 
-63 terminals, 21 nonterminals
-53 grammar rules, 93/2000 states
-35 shift/reduce, 0 reduce/reduce conflicts reported
+66 terminals, 21 nonterminals
+56 grammar rules, 99/2000 states
+101 shift/reduce, 0 reduce/reduce conflicts reported
 70 working sets used
-memory: parser 163/30000
-53 extra closures
-302 shift entries, 1 exceptions
-48 goto entries
-79 entries saved by goto default
-Optimizer space used: output 196/30000
-196 table entries, 31 zero
-maximum spread: 63, maximum offset: 91
+memory: parser 180/30000
+59 extra closures
+413 shift entries, 1 exceptions
+51 goto entries
+88 entries saved by goto default
+Optimizer space used: output 241/30000
+241 table entries, 49 zero
+maximum spread: 66, maximum offset: 97

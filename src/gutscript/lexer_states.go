@@ -123,8 +123,10 @@ func lexStart(l *GutsLex) stateFn {
 			l.emit(T_INDENT)
 		}
 		return lexStart
-	} else if l.emitIfMatch("==", T_EQUAL) {
-
+	} else if l.emitIfMatch("&&", T_BOOLEAN_AND) || l.emitIfMatch("||", T_BOOLEAN_OR) {
+		return lexStart
+	} else if l.emitIfMatch("==", T_EQUAL) || l.emitIfMatch(">=", T_GT_EQUAL) || l.emitIfMatch("<=", T_LT_EQUAL) {
+		return lexStart
 	} else if c == '=' && l.peekMore(2) != '=' {
 		l.next()
 		l.emit(TokenType(c))

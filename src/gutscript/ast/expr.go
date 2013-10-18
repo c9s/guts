@@ -1,18 +1,18 @@
 package ast
 
 type UnaryExpr struct {
-	Op  byte
+	Op  int
 	Val Node
 }
 
 type Expr struct {
-	Op          byte
+	Op          int
 	Left        Node
 	Right       Node
 	Parenthesis bool
 }
 
-func CreateExpr(op byte, left, right Node) Node {
+func CreateExpr(op int, left, right Node) Node {
 	return Expr{
 		Op:    op,
 		Left:  left,

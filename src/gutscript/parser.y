@@ -56,8 +56,8 @@ func debug(msg string, vals ...interface{}) {
 %token T_EOF
 
 %token T_EQUAL
-%token T_LT_EQUALL
-%token T_GT_EQUALL
+%token T_LT_EQUAL
+%token T_GT_EQUAL
 
 %token T_INDENT T_OUTDENT
 
@@ -307,6 +307,18 @@ expr:
     | expr '<' expr 
         {
             $$ = ast.CreateExpr('<', $1, $3)
+        }
+    | expr T_EQUAL expr 
+        {
+            $$ = ast.CreateExpr(T_EQUAL, $1, $3)
+        }
+    | expr T_LT_EQUAL expr 
+        {
+            $$ = ast.CreateExpr(T_LT_EQUAL, $1, $3)
+        }
+    | expr T_GT_EQUAL expr 
+        {
+            $$ = ast.CreateExpr(T_GT_EQUAL, $1, $3)
         }
     | '-' expr  %prec UMINUS
         { 
