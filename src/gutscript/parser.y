@@ -270,8 +270,10 @@ function_decl_statement:
 ;
 
 class_decl_statement:
-    T_CLASS T_IDENTIFIER class_decl_extends class_decl_does 
-    { 
+    // T_CLASS T_IDENTIFIER class_decl_extends class_decl_does
+    T_CLASS T_IDENTIFIER
+    {
+        // $2.(string)     $3 (extend list)   $4 (interface list)
     }
     ;
 
