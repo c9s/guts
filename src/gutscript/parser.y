@@ -42,6 +42,12 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call_parameter_list
 %type <val> function_call
 %type <val> statement_list
+
+%type <val> class_decl_extends
+%type <val> class_decl_does
+%type <val> class_decl_does_list
+
+
 %type <val> assignment
 %type <val> if_statement
 %type <val> class_decl_statement
@@ -264,24 +270,33 @@ function_decl_statement:
 ;
 
 class_decl_statement:
-    T_CLASS T_IDENTIFIER class_decl_extends class_decl_does {  }
+    T_CLASS T_IDENTIFIER class_decl_extends class_decl_does 
+    { 
+    }
     ;
 
 class_decl_extends:
-    T_EXTENDS T_IDENTIFIER {  }
-    | /* empty */
+    T_EXTENDS T_IDENTIFIER { $$ = $2 }
+    | /* empty */ { $$ = nil }
     ;
 
 class_decl_does:
-    T_DOES class_decl_does_interfaces {  }
-    | /* empty */
+    T_DOES class_decl_does_list { $$ = $2 }
+    | /* empty */ { $$ = nil }
     ;
 
-class_decl_does_interfaces:
-    | class_decl_does_interfaces ',' T_IDENTIFIER { }
-    | T_IDENTIFIER {  }
+class_decl_does_list:
+      class_decl_does_list ',' T_IDENTIFIER 
+        {
+            var interfaceList = $1.([]string)
+            interfaceList = append(interfaceList, $3.(string))
+            $$ = interfaceList
+        }
+    | T_IDENTIFIER 
+        {
+            $$ = []string{ $1.(string) }
+        }
     ;
-
 
 
 
