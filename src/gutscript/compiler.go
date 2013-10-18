@@ -24,7 +24,7 @@ func CompileFile(srcFile string) (string, error) {
 		return "", fmt.Errorf("syntax error")
 	}
 	lexer.close()
-	visitor := phpcodegen.Visitor{}
+	visitor := php.Visitor{}
 	// fmt.Printf("AST: %#v\n", parser.Val.val)
 	return visitor.Visit(parser.Val.val), nil
 }
