@@ -1,4 +1,4 @@
-package phpcodegen
+package php
 
 import "gutscript/ast"
 import "strconv"
