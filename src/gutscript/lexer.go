@@ -35,14 +35,6 @@ type TokenType int
 const eof = -1
 const lexError = -99
 
-func (self *GutsSymType) String() string {
-	switch self.typ {
-	case T_EOF, eof:
-		return "EOF"
-	}
-	return fmt.Sprintf("Token: %s %q", GetTokenName(int(self.typ)), self.val)
-}
-
 // remember rollback position
 func (l *GutsLex) remember() int {
 	l.rollbackPos = l.pos
