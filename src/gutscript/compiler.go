@@ -2,7 +2,7 @@ package gutscript
 
 import (
 	"fmt"
-	"gutscript/codegen/phpcodegen"
+	"gutscript/codegen/php"
 	"io/ioutil"
 )
 
