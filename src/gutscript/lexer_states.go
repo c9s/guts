@@ -13,9 +13,10 @@ var LexKeywords = map[string]int{
 	"else":    T_ELSE,
 	"elseif":  T_ELSEIF,
 	"echo":    T_ECHO,
-	"does":    T_DOES,
 	"is":      T_IS,
 	"return":  T_RETURN,
+	"extends": T_EXTENDS,
+	"does":    T_DOES,
 }
 
 func (l *GutsLex) emitIfKeywordMatches() bool {

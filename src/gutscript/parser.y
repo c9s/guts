@@ -44,6 +44,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> statement_list
 %type <val> assignment
 %type <val> if_statement
+%type <val> class_decl_statement
 %type <val> for_statement
 %type <val> block 
 %type <val> top_statement_list 
@@ -87,6 +88,7 @@ func debug(msg string, vals ...interface{}) {
 %token T_CLASS
 %token T_IS
 %token T_DOES
+%token T_EXTENDS
 
 // ::
 %token T_FUNCTION_PROTOTYPE 
@@ -173,6 +175,7 @@ statement:
         | assignment { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }
+        | class_decl_statement { $$ = $1 }
         | for_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
     ;
@@ -259,6 +262,28 @@ function_decl_statement:
         $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementList))
     }
 ;
+
+class_decl_statement:
+    T_CLASS T_IDENTIFIER class_decl_extends class_decl_does {  }
+    ;
+
+class_decl_extends:
+    T_EXTENDS T_IDENTIFIER {  }
+    | /* empty */
+    ;
+
+class_decl_does:
+    T_DOES class_decl_does_interfaces {  }
+    | /* empty */
+    ;
+
+class_decl_does_interfaces:
+    | class_decl_does_interfaces ',' T_IDENTIFIER { }
+    | T_IDENTIFIER {  }
+    ;
+
+
+
 
 range: expr T_RANGE_OPERATOR expr ;
 
