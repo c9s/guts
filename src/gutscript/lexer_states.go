@@ -123,6 +123,8 @@ func lexStart(l *GutsLex) stateFn {
 			l.emit(T_INDENT)
 		}
 		return lexStart
+	} else if l.emitIfMatch("==", T_EQUAL) {
+
 	} else if c == '=' && l.peekMore(2) != '=' {
 		l.next()
 		l.emit(TokenType(c))

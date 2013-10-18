@@ -55,6 +55,10 @@ func debug(msg string, vals ...interface{}) {
 %token T_ONELINE_COMMENT T_COMMENT
 %token T_EOF
 
+%token T_EQUAL
+%token T_LT_EQUALL
+%token T_GT_EQUALL
+
 %token T_INDENT T_OUTDENT
 
 %token T_NEWLINE
