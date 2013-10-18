@@ -22,9 +22,9 @@ state 0
 	function_decl_statement  goto 9
 	function_call  goto 17
 	statement_list  goto 3
+	class_decl_statement  goto 11
 	assignment  goto 8
 	if_statement  goto 10
-	class_decl_statement  goto 11
 	for_statement  goto 12
 	block  goto 6
 	top_statement_list  goto 2
@@ -40,7 +40,7 @@ state 1
 state 2
 	start:  top_statement_list.    (1)
 
-	.  reduce 1 (src line 146)
+	.  reduce 1 (src line 147)
 
 
 state 3
@@ -48,25 +48,25 @@ state 3
 	statement_list:  statement_list.T_NEWLINE statement 
 
 	T_NEWLINE  shift 26
-	.  reduce 2 (src line 152)
+	.  reduce 2 (src line 153)
 
 
 state 4
 	statement_list:  statement.    (5)
 
-	.  reduce 5 (src line 169)
+	.  reduce 5 (src line 170)
 
 
 state 5
 	statement_list:  T_NEWLINE.    (6)
 
-	.  reduce 6 (src line 175)
+	.  reduce 6 (src line 176)
 
 
 state 6
 	statement:  block.    (7)
 
-	.  reduce 7 (src line 178)
+	.  reduce 7 (src line 179)
 
 
 state 7
@@ -96,19 +96,19 @@ state 7
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 8 (src line 180)
+	.  reduce 8 (src line 181)
 
 
 state 8
 	statement:  assignment.    (9)
 
-	.  reduce 9 (src line 181)
+	.  reduce 9 (src line 182)
 
 
 state 9
 	statement:  function_decl_statement.    (10)
 
-	.  reduce 10 (src line 182)
+	.  reduce 10 (src line 183)
 
 
 10: shift/reduce conflict (shift 39(0), red'n 11(0)) on T_NEWLINE
@@ -118,19 +118,19 @@ state 10
 	if_statement:  if_statement.T_NEWLINE T_ELSE block 
 
 	T_NEWLINE  shift 39
-	.  reduce 11 (src line 183)
+	.  reduce 11 (src line 184)
 
 
 state 11
 	statement:  class_decl_statement.    (12)
 
-	.  reduce 12 (src line 184)
+	.  reduce 12 (src line 185)
 
 
 state 12
 	statement:  for_statement.    (13)
 
-	.  reduce 13 (src line 185)
+	.  reduce 13 (src line 186)
 
 
 state 13
@@ -171,9 +171,9 @@ state 14
 	function_decl_statement  goto 9
 	function_call  goto 17
 	statement_list  goto 42
+	class_decl_statement  goto 11
 	assignment  goto 8
 	if_statement  goto 10
-	class_decl_statement  goto 11
 	for_statement  goto 12
 	block  goto 6
 
@@ -210,7 +210,7 @@ state 16
 state 17
 	expr:  function_call.    (53)
 
-	.  reduce 53 (src line 369)
+	.  reduce 53 (src line 371)
 
 
 state 18
@@ -222,19 +222,19 @@ state 18
 	T_FUNCTION_PROTOTYPE  shift 46
 	(  shift 47
 	=  shift 45
-	.  reduce 54 (src line 372)
+	.  reduce 54 (src line 374)
 
 
 state 19
 	expr:  number.    (55)
 
-	.  reduce 55 (src line 376)
+	.  reduce 55 (src line 378)
 
 
 state 20
 	expr:  floating_number.    (56)
 
-	.  reduce 56 (src line 379)
+	.  reduce 56 (src line 381)
 
 
 state 21
@@ -269,13 +269,13 @@ state 23
 state 24
 	number:  T_NUMBER.    (58)
 
-	.  reduce 58 (src line 388)
+	.  reduce 58 (src line 390)
 
 
 state 25
 	floating_number:  T_FLOATING.    (57)
 
-	.  reduce 57 (src line 384)
+	.  reduce 57 (src line 386)
 
 
 state 26
@@ -299,9 +299,9 @@ state 26
 	statement  goto 51
 	function_decl_statement  goto 9
 	function_call  goto 17
+	class_decl_statement  goto 11
 	assignment  goto 8
 	if_statement  goto 10
-	class_decl_statement  goto 11
 	for_statement  goto 12
 	block  goto 6
 
@@ -521,7 +521,7 @@ state 40
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 14 (src line 186)
+	.  reduce 14 (src line 187)
 
 
 state 41
@@ -529,7 +529,7 @@ state 41
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
 	(  shift 47
-	.  reduce 54 (src line 372)
+	.  reduce 54 (src line 374)
 
 
 state 42
@@ -597,7 +597,7 @@ state 44
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 52 (src line 365)
+	.  reduce 52 (src line 367)
 
 
 state 45
@@ -620,7 +620,7 @@ state 46
 	function_parameter_list: .    (29)
 
 	(  shift 70
-	.  reduce 29 (src line 260)
+	.  reduce 29 (src line 261)
 
 	function_parameter_list  goto 69
 
@@ -633,7 +633,7 @@ state 47
 	T_NUMBER  shift 24
 	(  shift 15
 	-  shift 16
-	.  reduce 62 (src line 408)
+	.  reduce 62 (src line 410)
 
 	expr  goto 73
 	number  goto 19
@@ -677,7 +677,7 @@ state 48
 state 49
 	class_decl_statement:  T_CLASS T_IDENTIFIER.    (31)
 
-	.  reduce 31 (src line 272)
+	.  reduce 31 (src line 273)
 
 
 state 50
@@ -690,7 +690,7 @@ state 50
 state 51
 	statement_list:  statement_list T_NEWLINE statement.    (4)
 
-	.  reduce 4 (src line 161)
+	.  reduce 4 (src line 162)
 
 
 52: shift/reduce conflict (shift 36(0), red'n 40(8)) on T_EQUAL
@@ -721,7 +721,7 @@ state 52
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 40 (src line 317)
+	.  reduce 40 (src line 319)
 
 
 53: shift/reduce conflict (shift 36(0), red'n 41(8)) on T_EQUAL
@@ -752,7 +752,7 @@ state 53
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 41 (src line 321)
+	.  reduce 41 (src line 323)
 
 
 54: shift/reduce conflict (shift 36(0), red'n 42(9)) on T_EQUAL
@@ -780,7 +780,7 @@ state 54
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 42 (src line 325)
+	.  reduce 42 (src line 327)
 
 
 55: shift/reduce conflict (shift 36(0), red'n 43(9)) on T_EQUAL
@@ -808,7 +808,7 @@ state 55
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 43 (src line 329)
+	.  reduce 43 (src line 331)
 
 
 56: shift/reduce conflict (shift 36(0), red'n 44(9)) on T_EQUAL
@@ -836,7 +836,7 @@ state 56
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 44 (src line 333)
+	.  reduce 44 (src line 335)
 
 
 57: shift/reduce conflict (shift 36(0), red'n 45(7)) on T_EQUAL
@@ -869,7 +869,7 @@ state 57
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 45 (src line 337)
+	.  reduce 45 (src line 339)
 
 
 58: shift/reduce conflict (shift 36(0), red'n 46(5)) on T_EQUAL
@@ -903,7 +903,7 @@ state 58
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 46 (src line 341)
+	.  reduce 46 (src line 343)
 
 
 59: shift/reduce conflict (shift 36(0), red'n 47(0)) on T_EQUAL
@@ -945,7 +945,7 @@ state 59
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 47 (src line 345)
+	.  reduce 47 (src line 347)
 
 
 60: shift/reduce conflict (shift 36(0), red'n 48(0)) on T_EQUAL
@@ -987,7 +987,7 @@ state 60
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 48 (src line 349)
+	.  reduce 48 (src line 351)
 
 
 61: shift/reduce conflict (shift 36(0), red'n 49(0)) on T_EQUAL
@@ -1029,7 +1029,7 @@ state 61
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 49 (src line 353)
+	.  reduce 49 (src line 355)
 
 
 62: shift/reduce conflict (shift 36(0), red'n 50(0)) on T_EQUAL
@@ -1071,7 +1071,7 @@ state 62
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 50 (src line 357)
+	.  reduce 50 (src line 359)
 
 
 63: shift/reduce conflict (shift 36(0), red'n 51(0)) on T_EQUAL
@@ -1113,7 +1113,7 @@ state 63
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 51 (src line 361)
+	.  reduce 51 (src line 363)
 
 
 state 64
@@ -1142,13 +1142,13 @@ state 65
 state 66
 	block:  T_INDENT statement_list T_OUTDENT.    (3)
 
-	.  reduce 3 (src line 159)
+	.  reduce 3 (src line 160)
 
 
 state 67
 	expr:  ( expr ).    (39)
 
-	.  reduce 39 (src line 307)
+	.  reduce 39 (src line 309)
 
 
 state 68
@@ -1178,7 +1178,7 @@ state 68
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 21 (src line 218)
+	.  reduce 21 (src line 219)
 
 
 state 69
@@ -1211,7 +1211,7 @@ state 71
 state 72
 	function_call_parameter_list:  function_call_parameter.    (61)
 
-	.  reduce 61 (src line 403)
+	.  reduce 61 (src line 405)
 
 
 state 73
@@ -1241,13 +1241,13 @@ state 73
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 59 (src line 392)
+	.  reduce 59 (src line 394)
 
 
 state 74
 	if_statement:  T_IF expr block.    (18)
 
-	.  reduce 18 (src line 199)
+	.  reduce 18 (src line 200)
 
 
 state 75
@@ -1293,7 +1293,7 @@ state 76
 state 77
 	if_statement:  if_statement T_NEWLINE T_ELSE block.    (20)
 
-	.  reduce 20 (src line 210)
+	.  reduce 20 (src line 211)
 
 
 state 78
@@ -1316,13 +1316,13 @@ state 79
 state 80
 	function_parameter_list:  ( ).    (28)
 
-	.  reduce 28 (src line 257)
+	.  reduce 28 (src line 258)
 
 
 state 81
 	function_parameters:  function_parameter.    (26)
 
-	.  reduce 26 (src line 248)
+	.  reduce 26 (src line 249)
 
 
 state 82
@@ -1332,7 +1332,7 @@ state 82
 
 	T_IDENTIFIER  shift 92
 	=  shift 91
-	.  reduce 24 (src line 235)
+	.  reduce 24 (src line 236)
 
 
 state 83
@@ -1354,13 +1354,13 @@ state 83
 state 84
 	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (63)
 
-	.  reduce 63 (src line 414)
+	.  reduce 63 (src line 416)
 
 
 state 85
 	for_statement:  T_FOR T_IDENTIFIER T_IN listop.    (17)
 
-	.  reduce 17 (src line 194)
+	.  reduce 17 (src line 195)
 
 
 state 86
@@ -1384,13 +1384,13 @@ state 86
 state 87
 	if_statement:  if_statement T_NEWLINE T_ELSEIF expr block.    (19)
 
-	.  reduce 19 (src line 204)
+	.  reduce 19 (src line 205)
 
 
 state 88
 	function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block.    (30)
 
-	.  reduce 30 (src line 265)
+	.  reduce 30 (src line 266)
 
 
 state 89
@@ -1404,7 +1404,7 @@ state 89
 state 90
 	function_parameter_list:  ( function_parameters ).    (27)
 
-	.  reduce 27 (src line 253)
+	.  reduce 27 (src line 254)
 
 
 state 91
@@ -1425,19 +1425,19 @@ state 91
 state 92
 	function_parameter:  T_IDENTIFIER T_IDENTIFIER.    (23)
 
-	.  reduce 23 (src line 231)
+	.  reduce 23 (src line 232)
 
 
 state 93
 	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (60)
 
-	.  reduce 60 (src line 396)
+	.  reduce 60 (src line 398)
 
 
 state 94
 	listop:  [ ].    (15)
 
-	.  reduce 15 (src line 189)
+	.  reduce 15 (src line 190)
 
 
 state 95
@@ -1481,7 +1481,7 @@ state 96
 state 97
 	function_parameters:  function_parameters , function_parameter.    (25)
 
-	.  reduce 25 (src line 241)
+	.  reduce 25 (src line 242)
 
 
 state 98
@@ -1511,13 +1511,13 @@ state 98
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 22 (src line 227)
+	.  reduce 22 (src line 228)
 
 
 state 99
 	listop:  [ range ].    (16)
 
-	.  reduce 16 (src line 191)
+	.  reduce 16 (src line 192)
 
 
 state 100
@@ -1562,7 +1562,7 @@ state 101
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 38 (src line 305)
+	.  reduce 38 (src line 307)
 
 Rule not reduced: class_decl_extends:  T_EXTENDS T_IDENTIFIER 
 Rule not reduced: class_decl_extends:  
@@ -1575,7 +1575,7 @@ Rule not reduced: class_decl_does_list:  T_IDENTIFIER
 64 grammar rules, 102/2000 states
 101 shift/reduce, 0 reduce/reduce conflicts reported
 74 working sets used
-memory: parser 191/30000
+memory: parser 185/30000
 60 extra closures
 417 shift entries, 1 exceptions
 55 goto entries
