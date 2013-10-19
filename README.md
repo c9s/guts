@@ -146,29 +146,8 @@ Test the command tool with test case:
 
     ./bin/guts src/gutscript/tests/03_if_else_statement.guts
 
-Lexer
-------
-
-    | Token Type          | Remark
---- | ------------------- | -------------
- x  | `T_IDENTIFIER     ` | 
- x  | `T_FLOATING       ` |
- x  | `T_NUMBER         ` |
- x  | `T_NEWLINE        ` |
- x  | `T_EOF            ` |
- x  | `T_ONELINE_COMMENT` |
- x  | `T_COMMENT        ` |
- x  | `T_IF             ` |
- x  | `T_ELSEIF         ` |
- x  | `T_CLASS          ` |
- x  | `T_FOR            ` |
- x  | `T_FOREACH        ` | 
- x  | `T_STRING         ` |  "String", and 'string'
- x  | `T_ECHO           ` |  echo "output"
- x  | `T_DOES           ` |  class Gate does DoorInterface
-
-Parser
----------
+Grammar Rules
+-------------
 
     | Rule                
 --- | -------------------
@@ -178,15 +157,19 @@ Parser
  x  | if elseif else statement
  x  | function statement
  x  | function param list
+ o  | string concatenation
  o  | list structure
  o  | hash structure
  o  | foreach block
  o  | for block
  o  | dot range
- o  | class property
- o  | class method
+ x  | empty class
+ o  | class with properties
+ o  | class with methods
+ o  | static method call
  o  | function call, method call as expr.
  o  | assignment from function call, method call
+ o  | namespace design
 
 
 
