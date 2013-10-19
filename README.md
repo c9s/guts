@@ -142,9 +142,15 @@ Run test cases:
 
     make test
 
+To dump lex tokens:
+
+    go run utils/lexdump/main.go src/gutscript/tests/09_class_properties.guts
+
+
 Test the command tool with test case:
 
     ./bin/guts src/gutscript/tests/03_if_else_statement.guts
+
 
 Grammar Rules
 -------------
