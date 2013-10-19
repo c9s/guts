@@ -265,10 +265,19 @@ function_parameter_list:
     ;
 
 function_decl_statement:
-    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block { 
+    T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block
+    { 
         debug("function declaration", $1, $3, $5)
         $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementList))
     }
+
+    | T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH statement 
+    {
+        var stmts = ast.StatementList{}
+        stmts.Append($5)
+        $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), &stmts)
+    }
+
 ;
 
 class_decl_statement:
