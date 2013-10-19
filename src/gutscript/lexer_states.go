@@ -146,6 +146,12 @@ func lexStart(l *GutsLex) stateFn {
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {
+		if l.IndentLevel > 0 {
+			for i := 0; i < l.IndentLevel; i++ {
+				l.emit(T_OUTDENT)
+				l.emit(T_NEWLINE)
+			}
+		}
 		// l.emit(T_EOF)
 		return nil
 	} else {
