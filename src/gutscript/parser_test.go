@@ -62,10 +62,10 @@ func LexFile(srcFile string) (chan *GutsSymType, error) {
 	}
 	// code := string(bytes)
 	lexer := GutsLex{
-		input: string(bytes),
-		start: 0,
-		pos:   0,
-		items: make(chan *GutsSymType, 100),
+		Input: string(bytes),
+		Start: 0,
+		Pos:   0,
+		Items: make(chan *GutsSymType, 100),
 	}
 	go lexer.run()
 	return lexer.items, nil
@@ -92,10 +92,10 @@ func TestParser(t *testing.T) {
 	for i, input := range parserInputs {
 		t.Logf("Testing test case %d: %s", i, input)
 		lexer := GutsLex{
-			input: input,
-			start: 0,
-			pos:   0,
-			items: make(chan *GutsSymType, 100),
+			Input: input,
+			Start: 0,
+			Pos:   0,
+			Items: make(chan *GutsSymType, 100),
 		}
 		go lexer.run()
 		parser := GutsParser{}

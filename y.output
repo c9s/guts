@@ -210,7 +210,7 @@ state 16
 state 17
 	expr:  function_call.    (56)
 
-	.  reduce 56 (src line 388)
+	.  reduce 56 (src line 387)
 
 
 state 18
@@ -223,19 +223,19 @@ state 18
 	T_FUNCTION_PROTOTYPE  shift 46
 	(  shift 47
 	=  shift 45
-	.  reduce 57 (src line 391)
+	.  reduce 57 (src line 390)
 
 
 state 19
 	expr:  number.    (58)
 
-	.  reduce 58 (src line 395)
+	.  reduce 58 (src line 394)
 
 
 state 20
 	expr:  floating_number.    (59)
 
-	.  reduce 59 (src line 398)
+	.  reduce 59 (src line 397)
 
 
 state 21
@@ -270,13 +270,13 @@ state 23
 state 24
 	number:  T_NUMBER.    (61)
 
-	.  reduce 61 (src line 407)
+	.  reduce 61 (src line 406)
 
 
 state 25
 	floating_number:  T_FLOATING.    (60)
 
-	.  reduce 60 (src line 403)
+	.  reduce 60 (src line 402)
 
 
 state 26
@@ -530,7 +530,7 @@ state 41
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
 	(  shift 47
-	.  reduce 57 (src line 391)
+	.  reduce 57 (src line 390)
 
 
 state 42
@@ -598,7 +598,7 @@ state 44
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 55 (src line 384)
+	.  reduce 55 (src line 383)
 
 
 state 45
@@ -635,7 +635,7 @@ state 47
 	T_NUMBER  shift 24
 	(  shift 15
 	-  shift 16
-	.  reduce 65 (src line 427)
+	.  reduce 65 (src line 426)
 
 	expr  goto 73
 	number  goto 19
@@ -681,7 +681,7 @@ state 49
 	class_decl_extends: .    (36)
 
 	T_EXTENDS  shift 76
-	.  reduce 36 (src line 301)
+	.  reduce 36 (src line 300)
 
 	class_decl_extends  goto 75
 
@@ -726,7 +726,7 @@ state 52
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 43 (src line 336)
+	.  reduce 43 (src line 335)
 
 
 53: shift/reduce conflict (shift 36(0), red'n 44(8)) on T_EQUAL
@@ -757,7 +757,7 @@ state 53
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 44 (src line 340)
+	.  reduce 44 (src line 339)
 
 
 54: shift/reduce conflict (shift 36(0), red'n 45(9)) on T_EQUAL
@@ -785,7 +785,7 @@ state 54
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 45 (src line 344)
+	.  reduce 45 (src line 343)
 
 
 55: shift/reduce conflict (shift 36(0), red'n 46(9)) on T_EQUAL
@@ -813,7 +813,7 @@ state 55
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 46 (src line 348)
+	.  reduce 46 (src line 347)
 
 
 56: shift/reduce conflict (shift 36(0), red'n 47(9)) on T_EQUAL
@@ -841,7 +841,7 @@ state 56
 	T_GT_EQUAL  shift 38
 	>  shift 34
 	<  shift 35
-	.  reduce 47 (src line 352)
+	.  reduce 47 (src line 351)
 
 
 57: shift/reduce conflict (shift 36(0), red'n 48(7)) on T_EQUAL
@@ -874,7 +874,7 @@ state 57
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 48 (src line 356)
+	.  reduce 48 (src line 355)
 
 
 58: shift/reduce conflict (shift 36(0), red'n 49(5)) on T_EQUAL
@@ -908,7 +908,7 @@ state 58
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 49 (src line 360)
+	.  reduce 49 (src line 359)
 
 
 59: shift/reduce conflict (shift 36(0), red'n 50(0)) on T_EQUAL
@@ -950,7 +950,7 @@ state 59
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 50 (src line 364)
+	.  reduce 50 (src line 363)
 
 
 60: shift/reduce conflict (shift 36(0), red'n 51(0)) on T_EQUAL
@@ -992,7 +992,7 @@ state 60
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 51 (src line 368)
+	.  reduce 51 (src line 367)
 
 
 61: shift/reduce conflict (shift 36(0), red'n 52(0)) on T_EQUAL
@@ -1034,7 +1034,7 @@ state 61
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 52 (src line 372)
+	.  reduce 52 (src line 371)
 
 
 62: shift/reduce conflict (shift 36(0), red'n 53(0)) on T_EQUAL
@@ -1076,7 +1076,7 @@ state 62
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 53 (src line 376)
+	.  reduce 53 (src line 375)
 
 
 63: shift/reduce conflict (shift 36(0), red'n 54(0)) on T_EQUAL
@@ -1118,7 +1118,7 @@ state 63
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 54 (src line 380)
+	.  reduce 54 (src line 379)
 
 
 state 64
@@ -1153,7 +1153,7 @@ state 66
 state 67
 	expr:  ( expr ).    (42)
 
-	.  reduce 42 (src line 326)
+	.  reduce 42 (src line 325)
 
 
 state 68
@@ -1217,7 +1217,7 @@ state 71
 state 72
 	function_call_parameter_list:  function_call_parameter.    (64)
 
-	.  reduce 64 (src line 422)
+	.  reduce 64 (src line 421)
 
 
 state 73
@@ -1247,7 +1247,7 @@ state 73
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 62 (src line 411)
+	.  reduce 62 (src line 410)
 
 
 state 74
@@ -1261,7 +1261,7 @@ state 75
 	class_decl_does: .    (38)
 
 	T_DOES  shift 88
-	.  reduce 38 (src line 306)
+	.  reduce 38 (src line 305)
 
 	class_decl_does  goto 87
 
@@ -1396,7 +1396,7 @@ state 85
 state 86
 	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (66)
 
-	.  reduce 66 (src line 433)
+	.  reduce 66 (src line 432)
 
 
 state 87
@@ -1404,7 +1404,7 @@ state 87
 	class_decl_block: .    (34)
 
 	T_INDENT  shift 101
-	.  reduce 34 (src line 296)
+	.  reduce 34 (src line 295)
 
 	class_decl_block  goto 100
 
@@ -1419,7 +1419,7 @@ state 88
 state 89
 	class_decl_extends:  T_EXTENDS T_IDENTIFIER.    (35)
 
-	.  reduce 35 (src line 299)
+	.  reduce 35 (src line 298)
 
 
 state 90
@@ -1506,13 +1506,13 @@ state 98
 state 99
 	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (63)
 
-	.  reduce 63 (src line 415)
+	.  reduce 63 (src line 414)
 
 
 state 100
 	class_decl_statement:  T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block.    (32)
 
-	.  reduce 32 (src line 283)
+	.  reduce 32 (src line 282)
 
 
 state 101
@@ -1549,13 +1549,13 @@ state 102
 	class_decl_does_list:  class_decl_does_list., T_IDENTIFIER 
 
 	,  shift 110
-	.  reduce 37 (src line 304)
+	.  reduce 37 (src line 303)
 
 
 state 103
 	class_decl_does_list:  T_IDENTIFIER.    (40)
 
-	.  reduce 40 (src line 316)
+	.  reduce 40 (src line 315)
 
 
 state 104
@@ -1678,13 +1678,13 @@ state 112
 state 113
 	class_decl_block:  T_INDENT statement_list T_OUTDENT.    (33)
 
-	.  reduce 33 (src line 291)
+	.  reduce 33 (src line 290)
 
 
 state 114
 	class_decl_does_list:  class_decl_does_list , T_IDENTIFIER.    (39)
 
-	.  reduce 39 (src line 309)
+	.  reduce 39 (src line 308)
 
 
 state 115
@@ -1714,7 +1714,7 @@ state 115
 	%  shift 31
 	>  shift 34
 	<  shift 35
-	.  reduce 41 (src line 324)
+	.  reduce 41 (src line 323)
 
 Rule not reduced: function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block 
 

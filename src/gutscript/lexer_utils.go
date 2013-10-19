@@ -12,7 +12,7 @@ func DumpTokenTypeList(items []*GutsSymType) string {
 }
 
 // Given a token type list, check the returned token items
-func DumpTokensFromChannel(itemChannel chan *GutsSymType, expectedItems []TokenType) {
+func DumpTokensFromChannel(itemChannel chan *GutsSymType) {
 	var i = 0
 	var item *GutsSymType
 

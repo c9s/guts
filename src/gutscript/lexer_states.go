@@ -75,7 +75,7 @@ func lexStart(l *GutsLex) stateFn {
 	} else if c == '\n' || c == '\r' {
 		// if there is a new line, check the next line is indent or outdent,
 		// if there is no spaces/indent in the next line, then it should be outdent.
-		l.line++
+		l.Line++
 		c = l.next() // take the the line break char
 
 		// skip multiple newline at one time

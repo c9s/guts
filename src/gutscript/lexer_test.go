@@ -98,17 +98,17 @@ func expectLexItems(t *testing.T, itemChannel chan *GutsSymType, expectedItems [
 
 func expectLexInput(t *testing.T, input string, typ TokenType, cnt int) {
 	lexer := GutsLex{
-		input: input,
-		start: 0,
-		pos:   0,
-		items: make(chan *GutsSymType, 100),
+		Input: input,
+		Start: 0,
+		Pos:   0,
+		Items: make(chan *GutsSymType, 100),
 	}
 	go lexer.run()
 
 	var found int = 0
 	var item *GutsSymType
 	for {
-		item = <-lexer.items
+		item = <-lexer.Items
 		if item == nil {
 			break
 		}
@@ -136,14 +136,14 @@ func BenchmarkLexer(b *testing.B) {
 	var item *GutsSymType
 	for i := 0; i < b.N; i++ {
 		lexer := GutsLex{
-			input: input,
-			start: 0,
-			pos:   0,
-			items: make(chan *GutsSymType, 100),
+			Input: input,
+			Start: 0,
+			Pos:   0,
+			Items: make(chan *GutsSymType, 100),
 		}
 		go lexer.run()
 		for {
-			item = <-lexer.items
+			item = <-lexer.Items
 			if item == nil || item.typ == T_EOF {
 				break
 			}

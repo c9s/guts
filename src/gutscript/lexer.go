@@ -10,10 +10,10 @@ type stateFn func(*GutsLex) stateFn
 
 type GutsLex struct {
 	// the line
-	input string
-	line  int
-	start int
-	pos   int
+	Input string
+	Line  int
+	Start int
+	Pos   int
 	state stateFn
 
 	// rollback position
@@ -27,7 +27,7 @@ type GutsLex struct {
 
 	// XXX
 	width int
-	items chan *GutsSymType
+	Items chan *GutsSymType
 }
 
 type TokenType int
@@ -37,31 +37,31 @@ const lexError = -99
 
 // remember rollback position
 func (l *GutsLex) remember() int {
-	l.rollbackPos = l.pos
-	return l.pos
+	l.rollbackPos = l.Pos
+	return l.Pos
 }
 
 func (l *GutsLex) rollback() {
-	l.pos = l.rollbackPos
+	l.Pos = l.rollbackPos
 }
 
 func (l *GutsLex) error(msg string) {
 	fmt.Println("Syntax Error", msg)
-	fmt.Println("Line", l.line)
-	fmt.Println("Pos", l.pos)
-	fmt.Println("Input", l.input)
+	fmt.Println("Line", l.Line)
+	fmt.Println("Pos", l.Pos)
+	fmt.Println("Input", l.Input)
 }
 
 func (l *GutsLex) emit(t TokenType) {
 
 	l.lastTokenType = t
-	l.items <- &GutsSymType{
+	l.Items <- &GutsSymType{
 		typ:  t,
-		val:  l.input[l.start:l.pos],
-		pos:  l.start,
-		line: l.line,
+		val:  l.Input[l.Start:l.Pos],
+		pos:  l.Start,
+		line: l.Line,
 	}
-	l.start = l.pos
+	l.Start = l.Pos
 }
 
 // peek returns but does not consume
@@ -78,13 +78,13 @@ func (l *GutsLex) peekMore(p int) (r rune) {
 		r = l.next()
 		w += l.width
 	}
-	l.pos -= w
+	l.Pos -= w
 	return r
 }
 
 // ignore skips over the pending input before this point.
 func (l *GutsLex) ignore() {
-	l.start = l.pos
+	l.Start = l.Pos
 }
 
 // accept consumes the next rune
@@ -102,24 +102,24 @@ func (l *GutsLex) accept(valid string) bool {
 // backup steps back one rune.
 // Can be called only once per call of next.
 func (l *GutsLex) backup() {
-	l.pos -= l.width
+	l.Pos -= l.width
 }
 
 // next returns the next rune in the input.
 func (l *GutsLex) next() (r rune) {
-	if l.pos >= len(l.input) {
+	if l.Pos >= len(l.Input) {
 		l.width = 0
 		return eof
 	}
-	r, l.width = utf8.DecodeRuneInString(l.input[l.pos:])
-	l.pos += l.width
+	r, l.width = utf8.DecodeRuneInString(l.Input[l.Pos:])
+	l.Pos += l.width
 	return r
 }
 
 // get the last rune in the input
 func (l *GutsLex) last() (r rune) {
-	_, w := utf8.DecodeRuneInString(l.input[l.pos-l.width:])
-	r, _ = utf8.DecodeRuneInString(l.input[l.pos-l.width-w:])
+	_, w := utf8.DecodeRuneInString(l.Input[l.Pos-l.width:])
+	r, _ = utf8.DecodeRuneInString(l.Input[l.Pos-l.width-w:])
 	return r
 }
 
@@ -132,11 +132,11 @@ func (l *GutsLex) run() {
 			break
 		}
 	}
-	l.items <- nil
+	l.Items <- nil
 }
 
 func (l *GutsLex) close() {
-	close(l.items)
+	close(l.Items)
 }
 
 func (l *GutsLex) emitIfMatch(str string, typ TokenType) bool {
@@ -154,7 +154,7 @@ func (l *GutsLex) consumeIfMatch(str string) bool {
 		c = l.next()
 		width += l.width
 		if sc != c {
-			l.pos -= width
+			l.Pos -= width
 			return false
 		}
 	}
@@ -171,18 +171,18 @@ func (l *GutsLex) match(str string) bool {
 		c = l.next()
 		width += l.width
 		if sc != c {
-			l.pos -= width
+			l.Pos -= width
 			return false
 		}
 	}
-	l.pos -= width
+	l.Pos -= width
 	return true
 }
 
 // set token in lval, return the token type id
 func (l *GutsLex) Lex(lval *GutsSymType) int {
 	var item *GutsSymType
-	item = <-l.items
+	item = <-l.Items
 	if item != nil {
 		*lval = *item
 		// fmt.Println("Lex", item.String())
