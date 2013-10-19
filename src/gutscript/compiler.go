@@ -12,15 +12,10 @@ func CompileFile(srcFile string) (string, error) {
 		return "", err
 	}
 	// code := string(bytes)
-	lexer := GutsLex{
-		Input: string(bytes),
-		Start: 0,
-		Pos:   0,
-		Items: make(chan *GutsSymType, 100),
-	}
-	go lexer.run()
+
+	lexer := CreateLexer(string(bytes), 1000)
 	parser := GutsParser{}
-	if parser.Parse(&lexer) == 1 {
+	if parser.Parse(lexer) == 1 {
 		return "", fmt.Errorf("syntax error")
 	}
 	lexer.close()

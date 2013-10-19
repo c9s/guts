@@ -60,15 +60,9 @@ func LexFile(srcFile string) (chan *GutsSymType, error) {
 	if err != nil {
 		return nil, err
 	}
-	// code := string(bytes)
-	lexer := GutsLex{
-		Input: string(bytes),
-		Start: 0,
-		Pos:   0,
-		Items: make(chan *GutsSymType, 100),
-	}
-	go lexer.run()
-	return lexer.items, nil
+
+	lexer := CreateLexer(string(bytes), 0)
+	return lexer.Items, nil
 }
 
 func TestCompileFile(t *testing.T) {
