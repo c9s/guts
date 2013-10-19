@@ -10,11 +10,12 @@ type stateFn func(*GutsLex) stateFn
 
 type GutsLex struct {
 	// the line
-	Input string
-	Line  int
-	Start int
-	Pos   int
-	state stateFn
+	Input       string
+	Line        int
+	Start       int
+	Pos         int
+	IndentLevel int
+	state       stateFn
 
 	// rollback position
 	rollbackPos int

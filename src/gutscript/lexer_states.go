@@ -119,8 +119,10 @@ func lexStart(l *GutsLex) stateFn {
 			l.emit(T_NEWLINE)
 		} else if l.space < l.lastSpace {
 			l.emit(T_OUTDENT)
-			l.emit(T_NEWLINE)
+			l.IndentLevel--
+			l.emit(T_NEWLINE) // means end of statement
 		} else if l.space > l.lastSpace {
+			l.IndentLevel++
 			l.emit(T_INDENT)
 		}
 		return lexStart
@@ -257,8 +259,10 @@ func lexIndentSpaces(l *GutsLex) stateFn {
 	} else if l.space < l.lastSpace {
 		l.emit(T_OUTDENT)
 		l.emit(T_NEWLINE)
+		l.IndentLevel--
 	} else if l.space > l.lastSpace {
 		l.emit(T_INDENT)
+		l.IndentLevel++
 	}
 	return lexStart
 }
