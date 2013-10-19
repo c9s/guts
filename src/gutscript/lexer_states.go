@@ -98,10 +98,11 @@ func lexStart(l *GutsLex) stateFn {
 			// we should treat the newline as a block end.
 			if l.space > 0 {
 				l.emit(T_OUTDENT)
+				l.IndentLevel--
 			} else {
 				l.ignore()
 			}
-			return nil
+			return lexStart
 		}
 
 		// reset space info
@@ -238,7 +239,7 @@ func lexIgnoreSpaces(l *GutsLex) stateFn {
 		c = l.next()
 		if c == eof {
 			l.ignore()
-			return nil
+			return lexStart
 		}
 		if c != ' ' {
 			break
