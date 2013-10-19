@@ -47,6 +47,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> class_decl_extends
 %type <val> class_decl_does
 %type <val> class_decl_does_list
+%type <val> class_decl_block
 
 
 %type <val> assignment
@@ -271,13 +272,20 @@ function_decl_statement:
 ;
 
 class_decl_statement:
-    // T_CLASS T_IDENTIFIER class_decl_extends class_decl_does
-    T_CLASS T_IDENTIFIER
+    T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block
     {
         $$ = ast.CreateClassStatement($2.(string))
         // $2.(string)     $3 (extend list)   $4 (interface list)
     }
     ;
+
+class_decl_block: 
+      T_INDENT statement_list T_OUTDENT 
+        { 
+            $$ = $2
+        }
+    | /* empty */ { $$ = nil }
+
 
 class_decl_extends:
     T_EXTENDS T_IDENTIFIER { $$ = $2 }
