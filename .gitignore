@@ -1,2 +1,4 @@
 pkg
 bin/yacc
+bin/guts
+bin/
