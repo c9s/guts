@@ -85,15 +85,9 @@ func TestCompileFile(t *testing.T) {
 func TestParser(t *testing.T) {
 	for i, input := range parserInputs {
 		t.Logf("Testing test case %d: %s", i, input)
-		lexer := GutsLex{
-			Input: input,
-			Start: 0,
-			Pos:   0,
-			Items: make(chan *GutsSymType, 100),
-		}
-		go lexer.run()
+		lexer := CreateLexer(input, 100)
 		parser := GutsParser{}
-		if parser.Parse(&lexer) == 1 {
+		if parser.Parse(lexer) == 1 {
 			t.Fatalf("syntax error: %s", input)
 		}
 		lexer.close()
