@@ -277,7 +277,6 @@ function_decl_statement:
         stmts.Append($5)
         $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), &stmts)
     }
-
 ;
 
 class_decl_statement:

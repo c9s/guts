@@ -47,15 +47,6 @@ else
 `, T_FUNCTION_PROTOTYPE, 1},
 }
 
-func DumpTokenTypeList(items []*GutsSymType) string {
-	var out string = "[]TokenType{\n"
-	for _, item := range items {
-		out += "\t" + GetTokenName(int(item.typ)) + ",\n"
-	}
-	out += "}\n"
-	return out
-}
-
 // Given a token type list, check the returned token items
 func expectLexItems(t *testing.T, itemChannel chan *GutsSymType, expectedItems []TokenType) {
 	var i = 0
