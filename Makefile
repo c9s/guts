@@ -15,8 +15,9 @@ install: executable
 build:
 	go build -x gutscript
 	go install -x gutscript
+	go install -x gutscript/guts
 
-executable:
+executable: build
 	go install -x gutscript/guts
 
 test:
