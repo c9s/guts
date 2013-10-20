@@ -283,8 +283,22 @@ function_decl_statement:
 class_decl_statement:
     T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block
     {
-        $$ = ast.CreateClassStatement($2.(string))
-        // $2.(string)     $3 (extend list)   $4 (interface list)
+        $$ = ast.CreateClassStatement($2.(string)) 
+        cls := $$.(ast.ClassStatement)
+
+        // decl extends
+        if $3 != nil {
+            cls.SetSuper($3.(string))
+        }
+        // decl does
+        if $4 != nil {
+            infs := $4.([]string)
+            cls.SetInterfaces(infs)
+        }
+        // class body
+        if $5 != nil {
+
+        }
     }
     ;
 

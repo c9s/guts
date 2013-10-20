@@ -12,10 +12,14 @@ func CreateClassStatement(className string) Node {
 	return ClassStatement{className, nil, nil, nil, []string{}}
 }
 
-func (self ClassStatement) SetSuperClass(className string) {
+func (self ClassStatement) SetSuper(className string) {
 	self.Super = &className
 }
 
-func (self ClassStatement) AddInterface(intf string) {
-	self.Interfaces = append(self.Interfaces, intf)
+func (self ClassStatement) AddInterface(inf string) {
+	self.Interfaces = append(self.Interfaces, inf)
+}
+
+func (self ClassStatement) SetInterfaces(infs []string) {
+	self.Interfaces = infs
 }
