@@ -467,6 +467,17 @@ expr:
     ;
 
 
+self_method_call:
+        '@' T_IDENTIFIER '(' ')'
+        ;
+
+self_variable:
+        '@' T_IDENTIFIER
+        {
+            // $$ = ast.CreateObjectVariable("this")
+        }
+        ;
+
 variable: T_IDENTIFIER 
         { 
             // $$ = ast.UnaryExpr{0, $1}

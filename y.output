@@ -241,13 +241,13 @@ state 21
 	assignment:  T_IDENTIFIER.= expr 
 	function_decl_statement:  T_IDENTIFIER.T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block 
 	function_decl_statement:  T_IDENTIFIER.T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH statement 
-	variable:  T_IDENTIFIER.    (69)
+	variable:  T_IDENTIFIER.    (71)
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
 	T_FUNCTION_PROTOTYPE  shift 48
 	(  shift 49
 	=  shift 47
-	.  reduce 69 (src line 470)
+	.  reduce 71 (src line 481)
 
 
 state 22
@@ -281,15 +281,15 @@ state 24
 
 
 state 25
-	number:  T_NUMBER.    (71)
+	number:  T_NUMBER.    (73)
 
-	.  reduce 71 (src line 480)
+	.  reduce 73 (src line 491)
 
 
 state 26
-	floating_number:  T_FLOATING.    (70)
+	floating_number:  T_FLOATING.    (72)
 
-	.  reduce 70 (src line 476)
+	.  reduce 72 (src line 487)
 
 
 27: shift/reduce conflict (shift 13(0), red'n 5(0)) on T_NEWLINE
@@ -570,11 +570,11 @@ state 42
 
 
 state 43
-	variable:  T_IDENTIFIER.    (69)
+	variable:  T_IDENTIFIER.    (71)
 	function_call:  T_IDENTIFIER.( function_call_parameter_list ) 
 
 	(  shift 49
-	.  reduce 69 (src line 470)
+	.  reduce 71 (src line 481)
 
 
 state 44
@@ -674,14 +674,14 @@ state 48
 
 state 49
 	function_call:  T_IDENTIFIER (.function_call_parameter_list ) 
-	function_call_parameter_list: .    (75)
+	function_call_parameter_list: .    (77)
 
 	T_IDENTIFIER  shift 43
 	T_FLOATING  shift 26
 	T_NUMBER  shift 25
 	(  shift 15
 	-  shift 16
-	.  reduce 75 (src line 500)
+	.  reduce 77 (src line 511)
 
 	expr  goto 75
 	number  goto 19
@@ -1278,9 +1278,9 @@ state 73
 
 
 state 74
-	function_call_parameter_list:  function_call_parameter.    (74)
+	function_call_parameter_list:  function_call_parameter.    (76)
 
-	.  reduce 74 (src line 495)
+	.  reduce 76 (src line 506)
 
 
 state 75
@@ -1296,7 +1296,7 @@ state 75
 	expr:  expr.T_EQUAL expr 
 	expr:  expr.T_LT_EQUAL expr 
 	expr:  expr.T_GT_EQUAL expr 
-	function_call_parameter:  expr.    (72)
+	function_call_parameter:  expr.    (74)
 
 	T_EQUAL  shift 37
 	T_LT_EQUAL  shift 38
@@ -1310,7 +1310,7 @@ state 75
 	%  shift 32
 	>  shift 35
 	<  shift 36
-	.  reduce 72 (src line 484)
+	.  reduce 74 (src line 495)
 
 
 state 76
@@ -1436,9 +1436,9 @@ state 87
 	variable  goto 18
 
 state 88
-	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (76)
+	function_call:  T_IDENTIFIER ( function_call_parameter_list ).    (78)
 
-	.  reduce 76 (src line 506)
+	.  reduce 78 (src line 517)
 
 
 state 89
@@ -1554,9 +1554,9 @@ state 101
 
 
 state 102
-	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (73)
+	function_call_parameter_list:  function_call_parameter_list , function_call_parameter.    (75)
 
-	.  reduce 73 (src line 488)
+	.  reduce 75 (src line 499)
 
 
 state 103
@@ -1878,16 +1878,18 @@ state 130
 	.  reduce 47 (src line 372)
 
 Rule not reduced: function_decl_statement:  T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH block 
+Rule not reduced: self_method_call:  @ T_IDENTIFIER ( ) 
+Rule not reduced: self_variable:  @ T_IDENTIFIER 
 
-68 terminals, 31 nonterminals
-77 grammar rules, 131/2000 states
+68 terminals, 33 nonterminals
+79 grammar rules, 131/2000 states
 102 shift/reduce, 3 reduce/reduce conflicts reported
-80 working sets used
+82 working sets used
 memory: parser 291/30000
 62 extra closures
 465 shift entries, 1 exceptions
-66 goto entries
-132 entries saved by goto default
+68 goto entries
+130 entries saved by goto default
 Optimizer space used: output 267/30000
 267 table entries, 49 zero
 maximum spread: 68, maximum offset: 129
