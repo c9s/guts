@@ -48,7 +48,7 @@ func (self *Visitor) Visit(n ast.Node) string {
 		}
 		return fmt.Sprintf("%s %c %s", self.Visit(expr.Left), expr.Op, self.Visit(expr.Right))
 	}
-	if stmt, ok := n.(ast.AssignStatement); ok {
+	if stmt, ok := n.(ast.Assignment); ok {
 		return self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
 	}
 	if stmt, ok := n.(*ast.IfStatement); ok {

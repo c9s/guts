@@ -224,7 +224,7 @@ assignment:
      T_IDENTIFIER '=' expr
         {
             debug("assignment", $1 , "=" , $3)
-            $$ = ast.CreateAssignStatement(ast.CreateVariable($1.(string)), $3)
+            $$ = ast.CreateAssignment(ast.CreateVariable($1.(string)), $3)
         }
 ;
 

@@ -611,7 +611,7 @@ Gutsdefault:
 		//line src/gutscript/parser.y:225
 		{
 	            debug("assignment", GutsS[Gutspt-2].val , "=" , GutsS[Gutspt-0].val)
-	            GutsVAL.val = ast.CreateAssignStatement(ast.CreateVariable(GutsS[Gutspt-2].val.(string)), GutsS[Gutspt-0].val)
+	            GutsVAL.val = ast.CreateAssignment(ast.CreateVariable(GutsS[Gutspt-2].val.(string)), GutsS[Gutspt-0].val)
 	        }
 	case 23:
 		//line src/gutscript/parser.y:233
