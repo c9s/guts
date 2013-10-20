@@ -1,5 +1,5 @@
 class Foo extends Bar
-	a = 1
-	b = 2
+	@a = 1
+	@b = 2
 	bar :: (a) ->
 		return a * a

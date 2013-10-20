@@ -122,7 +122,7 @@ func lexStart(l *GutsLex) stateFn {
 		return lexStart
 	} else if l.emitIfKeywordMatches() {
 		return lexStart
-	} else if l.accept("+-*|&[]{}()<>,=") {
+	} else if l.accept("+-*|&[]{}()<>,=@") {
 		l.emit(TokenType(c))
 		return lexStart
 	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {

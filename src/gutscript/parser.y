@@ -331,7 +331,7 @@ class_decl_statement:
     ;
 
 class_decl_member:
-    T_IDENTIFIER '=' expr {  }
+    '@' T_IDENTIFIER '=' expr {  }
     ;
 
 class_decl_method:
