@@ -57,6 +57,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> block 
 %type <val> top_statement_list 
 %type <val> start
+%type <val> variable
 %type <val> class_decl_member
 %type <val> class_decl_method
 %type <val> class_decl_statement_list
@@ -451,17 +452,26 @@ expr:
     | function_call { 
             $$ = ast.UnaryExpr{0, $1}
         }
-    | T_IDENTIFIER { 
-            // $$ = ast.UnaryExpr{0, $1}
-            $$ = ast.CreateVariable($1.(string)) 
+    | variable 
+        { 
+            $$ = $1
         }
-    | number {
+    | number 
+        {
             $$ = ast.UnaryExpr{0, $1}
         }
-    | floating_number {
+    | floating_number 
+        {
             $$ = ast.UnaryExpr{0, $1}
         }
     ;
+
+
+variable: T_IDENTIFIER 
+        { 
+            // $$ = ast.UnaryExpr{0, $1}
+            $$ = ast.CreateVariable($1.(string)) 
+        }
 
 floating_number: T_FLOATING {
         $$ = ast.CreateFloatingNumber($1.(string))
