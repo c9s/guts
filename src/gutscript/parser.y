@@ -285,8 +285,8 @@ function_decl_statement:
 class_decl_statement:
     T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block
     {
-        $$ = ast.CreateClassStatement($2.(string)) 
-        cls := $$.(ast.ClassStatement)
+        $$ = ast.CreateClass($2.(string)) 
+        cls := $$.(ast.Class)
 
         // decl extends
         if $3 != nil {

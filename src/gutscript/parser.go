@@ -672,8 +672,8 @@ Gutsdefault:
 	case 33:
 		//line src/gutscript/parser.y:287
 		{
-	        GutsVAL.val = ast.CreateClassStatement(GutsS[Gutspt-3].val.(string)) 
-	        cls := GutsVAL.val.(ast.ClassStatement)
+	        GutsVAL.val = ast.CreateClass(GutsS[Gutspt-3].val.(string)) 
+	        cls := GutsVAL.val.(ast.Class)
 	
 	        // decl extends
         if GutsS[Gutspt-2].val != nil {
