@@ -163,19 +163,20 @@ Grammar Rules
  x  | if elseif else statement
  x  | function statement
  x  | function param list
+ x  | empty class
+ x  | class with properties
+ x  | class with methods
+ x  | function call as expr
  o  | string concatenation
  o  | list structure
  o  | hash structure
- o  | foreach block
  o  | for block
  o  | dot range
- x  | empty class
- o  | class with properties
- o  | class with methods
  o  | static method call
- o  | function call, method call as expr.
- o  | assignment from function call, method call
+ o  | method call as expr.
+ o  | assignment from method call
  o  | namespace design
+ o	| map
 
 
 

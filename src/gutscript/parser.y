@@ -466,7 +466,6 @@ expr:
         }
     ;
 
-
 self_method_call:
         '@' T_IDENTIFIER '(' ')'
         ;
