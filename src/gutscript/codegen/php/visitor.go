@@ -64,6 +64,7 @@ func (self *Visitor) Visit(n ast.Node) (out string) {
 
 		out += " {\n"
 		out += "}\n"
+		return out
 		// cls.Body
 	}
 	if stmt, ok := n.(*ast.IfStatement); ok {

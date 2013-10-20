@@ -43,7 +43,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call
 %type <val> statement_list
 
-%type <val> class_decl
+%type <val> class
 %type <val> class_decl_extends
 %type <val> class_decl_does
 %type <val> class_decl_does_list
@@ -52,7 +52,7 @@ func debug(msg string, vals ...interface{}) {
 
 
 %type <val> assignment
-%type <val> if_statement
+%type <val> if
 %type <val> for_statement
 %type <val> block 
 %type <val> top_statement_list 
@@ -184,8 +184,8 @@ statement:
         | expr { $$ = ast.CreateExprStatement($1) } 
         | assignment { $$ = $1 }
         | function_decl_statement { $$ = $1 }
-        | if_statement { $$ = $1 }
-        | class_decl { $$ = $1 }
+        | if { $$ = $1 }
+        | class { $$ = $1 }
         | for_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
         | T_NEWLINE {  }
@@ -201,19 +201,19 @@ for_statement:
     ;
 
 
-if_statement:
+if:
         T_IF expr block T_NEWLINE
         {
             $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementList))
         }
     |
-        if_statement T_ELSEIF expr block T_NEWLINE
+        if T_ELSEIF expr block T_NEWLINE
         {
             $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementList))
             $$ = $1
         }
     | 
-        if_statement T_ELSE block T_NEWLINE
+        if T_ELSE block T_NEWLINE
         {
             $1.(*ast.IfStatement).SetElse($3.(*ast.StatementList))
             $$ = $1
@@ -282,26 +282,34 @@ function_decl_statement:
     }
 ;
 
-class_decl:
+class:
     T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block
-    {
-        $$ = ast.CreateClass($2.(string)) 
-        cls := $$.(ast.Class)
+        {
+            // debug("class", $2, $3, $4)
+            var cls = ast.CreateClass($2.(string)).(ast.Class)
 
-        // decl extends
-        if $3 != nil {
-            cls.SetSuper($3.(string))
+            // decl extends
+            if $3 != nil {
+                // debug("extends", $3)
+                cls.SetSuper($3.(string))
+            }
+
+            // decl does
+            if $4 != nil {
+                if infs, ok := $4.([]string) ; ok {
+                    cls.SetInterfaces(infs)
+                } else {
+                    panic(fmt.Errorf("Can not cast interface"))
+                }
+            }
+
+            // class body
+            if $5 != nil {
+                cls.Body = $5.(*ast.StatementList)
+            }
+            $$ = cls
+            debug("class",$$)
         }
-        // decl does
-        if $4 != nil {
-            infs := $4.([]string)
-            cls.SetInterfaces(infs)
-        }
-        // class body
-        if $5 != nil {
-            cls.Body = $5.(*ast.StatementList)
-        }
-    }
     ;
 
 class_decl_block: 
