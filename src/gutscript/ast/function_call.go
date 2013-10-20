@@ -5,6 +5,6 @@ type FunctionCall struct {
 	Params []Node
 }
 
-func CreateFunctionCall(name string, params []Node) Node {
+func CreateFunctionCall(name string, params []Node) FunctionCall {
 	return FunctionCall{name, params}
 }
