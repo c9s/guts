@@ -686,7 +686,7 @@ Gutsdefault:
 	        }
 	        // class body
         if GutsS[Gutspt-0].val != nil {
-	
+	            cls.Body = GutsS[Gutspt-0].val.(*ast.StatementList)
 	        }
 	    }
 	case 34:

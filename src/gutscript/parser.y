@@ -299,7 +299,7 @@ class_decl_statement:
         }
         // class body
         if $5 != nil {
-
+            cls.Body = $5.(*ast.StatementList)
         }
     }
     ;

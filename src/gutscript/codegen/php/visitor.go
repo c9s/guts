@@ -51,6 +51,10 @@ func (self *Visitor) Visit(n ast.Node) string {
 	if stmt, ok := n.(ast.Assignment); ok {
 		return self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
 	}
+	if class, ok := n.(ast.Class); ok {
+		_ = class
+		// class.Body
+	}
 	if stmt, ok := n.(*ast.IfStatement); ok {
 		var out string = ""
 		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"

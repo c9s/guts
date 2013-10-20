@@ -1,15 +1,16 @@
 package ast
 
 type Class struct {
-	Name       string
-	Properties []Node
-	Methods    []Node
+	Name string
+	// Properties []Node
+	// Methods    []Node
 	Super      *string
 	Interfaces []string
+	Body       *StatementList
 }
 
 func CreateClass(className string) Node {
-	return Class{className, nil, nil, nil, []string{}}
+	return Class{className, nil, []string{}, nil}
 }
 
 func (self Class) SetSuper(className string) {
