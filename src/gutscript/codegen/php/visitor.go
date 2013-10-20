@@ -16,14 +16,18 @@ func (self *Visitor) IndentSpace() string {
 	return strings.Repeat("    ", self.indent)
 }
 
-func (self *Visitor) Visit(n ast.Node) string {
+func (self *Visitor) Visit(n ast.Node) (out string) {
 	// fmt.Printf("visit %#v\n", n)
 	if stmts, ok := n.(*ast.StatementList); ok {
-		var output string
-		for _, stmt := range *stmts {
-			output += self.IndentSpace() + self.Visit(stmt)
+		var stmtlen = len(*stmts)
+		for i, stmt := range *stmts {
+			if _, ok := stmt.(ast.ExprStatement); ok && i+1 == stmtlen {
+				out += self.IndentSpace() + "return " + self.Visit(stmt)
+			} else {
+				out += self.IndentSpace() + self.Visit(stmt)
+			}
 		}
-		return output
+		return out
 	}
 	if variable, ok := n.(ast.Variable); ok {
 		return "$" + variable.Identifier
@@ -48,11 +52,41 @@ func (self *Visitor) Visit(n ast.Node) string {
 		}
 		return fmt.Sprintf("%s %c %s", self.Visit(expr.Left), expr.Op, self.Visit(expr.Right))
 	}
-	if stmt, ok := n.(ast.AssignStatement); ok {
-		return self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
+
+	if stmt, ok := n.(ast.Assignment); ok {
+		return self.IndentSpace() + self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
+	}
+
+	if cls, ok := n.(ast.Class); ok {
+		out = "class " + cls.Name
+
+		if cls.Super != nil {
+			out += " extends " + *cls.Super
+		}
+
+		if len(cls.Interfaces) > 0 {
+			out += " implements "
+			out += strings.Join(cls.Interfaces, ", ")
+		}
+
+		out += " {\n"
+		if cls.Body != nil {
+			self.indent++
+			out += self.Visit(cls.Body)
+			self.indent--
+		}
+		out += "}\n"
+		return out
+	}
+	if member, ok := n.(ast.ClassMember); ok {
+		out += self.IndentSpace() + "public $" + member.Name
+		if member.Value != nil {
+			out += " = " + self.Visit(member.Value)
+		}
+		out += ";\n"
+		return out
 	}
 	if stmt, ok := n.(*ast.IfStatement); ok {
-		var out string = ""
 		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"
 		self.indent++
 		out += self.Visit(stmt.Body)
@@ -75,7 +109,6 @@ func (self *Visitor) Visit(n ast.Node) string {
 		return out
 	}
 	if stmt, ok := n.(ast.ElseIfStatement); ok {
-		var out string = ""
 		out += self.IndentSpace() + " elseif ( " + self.Visit(stmt.Expr) + " ) {\n"
 		self.indent++
 		out += self.Visit(stmt.Body)
@@ -84,13 +117,12 @@ func (self *Visitor) Visit(n ast.Node) string {
 		return out
 	}
 	if stmt, ok := n.(ast.ReturnStatement); ok {
-		return "return " + self.Visit(stmt.Expr) + ";\n"
+		return self.IndentSpace() + "return " + self.Visit(stmt.Expr) + ";\n"
 	}
 	if stmt, ok := n.(ast.ExprStatement); ok {
-		return self.Visit(stmt.Expr) + ";\n"
+		return self.IndentSpace() + self.Visit(stmt.Expr) + ";\n"
 	}
 	if fnc, ok := n.(ast.FunctionCall); ok {
-		var out string
 		out = fnc.Name + "("
 		fields := []string{}
 		for _, param := range fnc.Params {
@@ -101,7 +133,6 @@ func (self *Visitor) Visit(n ast.Node) string {
 		return out
 	}
 	if fn, ok := n.(ast.Function); ok {
-		var out string = ""
 		out += self.IndentSpace() + "function " + fn.Name + "("
 		if len(fn.Params) > 0 {
 			fields := []string{}

@@ -12,6 +12,6 @@ type FunctionParam struct {
 	Default Node
 }
 
-func CreateFunction(name string, params []FunctionParam, stmts *StatementList) Node {
+func CreateFunction(name string, params []FunctionParam, stmts *StatementList) Function {
 	return Function{name, params, stmts}
 }

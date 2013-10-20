@@ -1,21 +1,26 @@
 package ast
 
-type ClassStatement struct {
-	Name       string
-	Properties []Node
-	Methods    []Node
+type Class struct {
+	Name string
+	// Properties []Node
+	// Methods    []Node
 	Super      *string
 	Interfaces []string
+	Body       *StatementList
 }
 
-func CreateClassStatement(className string) Node {
-	return ClassStatement{className, nil, nil, nil, []string{}}
+func CreateClass(className string) Node {
+	return Class{className, nil, []string{}, nil}
 }
 
-func (self ClassStatement) SetSuperClass(className string) {
+func (self *Class) SetSuper(className string) {
 	self.Super = &className
 }
 
-func (self ClassStatement) AddInterface(intf string) {
-	self.Interfaces = append(self.Interfaces, intf)
+func (self *Class) AddInterface(inf string) {
+	self.Interfaces = append(self.Interfaces, inf)
+}
+
+func (self *Class) SetInterfaces(infs []string) {
+	self.Interfaces = infs
 }

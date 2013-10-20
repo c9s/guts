@@ -12,7 +12,11 @@ type Expr struct {
 	Parenthesis bool
 }
 
-func CreateExpr(op int, left, right Node) Node {
+func CreateUnaryExpr(op int, val Node) UnaryExpr {
+	return UnaryExpr{op, val}
+}
+
+func CreateExpr(op int, left, right Node) Expr {
 	return Expr{
 		Op:    op,
 		Left:  left,

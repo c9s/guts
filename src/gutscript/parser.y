@@ -43,20 +43,23 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call
 %type <val> statement_list
 
-%type <val> class_decl_statement
+%type <val> class
 %type <val> class_decl_extends
 %type <val> class_decl_does
 %type <val> class_decl_does_list
 %type <val> class_decl_block
+%type <val> class_decl_statement
 
 
 %type <val> assignment
-%type <val> if_statement
-%type <val> class_decl_statement
+%type <val> if
 %type <val> for_statement
 %type <val> block 
 %type <val> top_statement_list 
 %type <val> start
+%type <val> class_decl_member
+%type <val> class_decl_method
+%type <val> class_decl_statement_list
 
 // same for terminals
 %token <val> T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -71,7 +74,6 @@ func debug(msg string, vals ...interface{}) {
 %token T_INDENT T_OUTDENT
 
 %token T_NEWLINE
-
 %token T_NEW
 %token T_CLONE
 
@@ -157,7 +159,7 @@ top_statement_list: statement_list
     }
     ;
 
-// block is contains one or more statement
+// block contains one or more statement
 block: T_INDENT statement_list T_OUTDENT { $$ = $2 }
 
 statement_list:
@@ -168,13 +170,13 @@ statement_list:
                 $$ = $1
             }
       }
+    | statement_list T_NEWLINE { $$ = $1 }
     | statement
       { 
             stmts := ast.CreateStatementList()
             stmts.Append($1)
             $$ = stmts
       }
-    | T_NEWLINE { }
 ;
 
 statement: 
@@ -182,10 +184,11 @@ statement:
         | expr { $$ = ast.CreateExprStatement($1) } 
         | assignment { $$ = $1 }
         | function_decl_statement { $$ = $1 }
-        | if_statement { $$ = $1 }
-        | class_decl_statement { $$ = $1 }
+        | if { $$ = $1 }
+        | class { $$ = $1 }
         | for_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
+        | T_NEWLINE {  }
     ;
 
 listop: 
@@ -198,21 +201,21 @@ for_statement:
     ;
 
 
-if_statement:
-        T_IF expr block
+if:
+        T_IF expr block T_NEWLINE
         {
             $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementList))
         }
     |
-        if_statement T_NEWLINE T_ELSEIF expr block 
+        if T_ELSEIF expr block T_NEWLINE
         {
-            $1.(*ast.IfStatement).AddElseIf($4.(ast.Expr),$5.(*ast.StatementList))
+            $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementList))
             $$ = $1
         }
     | 
-        if_statement T_NEWLINE T_ELSE block
+        if T_ELSE block T_NEWLINE
         {
-            $1.(*ast.IfStatement).SetElse($4.(*ast.StatementList))
+            $1.(*ast.IfStatement).SetElse($3.(*ast.StatementList))
             $$ = $1
         }
 ;
@@ -221,7 +224,7 @@ assignment:
      T_IDENTIFIER '=' expr
         {
             debug("assignment", $1 , "=" , $3)
-            $$ = ast.CreateAssignStatement(ast.CreateVariable($1.(string)), $3)
+            $$ = ast.CreateAssignment(ast.CreateVariable($1.(string)), $3)
         }
 ;
 
@@ -271,7 +274,7 @@ function_decl_statement:
         $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementList))
     }
 
-    | T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH statement 
+    | T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH statement
     {
         var stmts = ast.StatementList{}
         stmts.Append($5)
@@ -279,21 +282,43 @@ function_decl_statement:
     }
 ;
 
-class_decl_statement:
+class:
     T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block
-    {
-        $$ = ast.CreateClassStatement($2.(string))
-        // $2.(string)     $3 (extend list)   $4 (interface list)
-    }
+        {
+            // debug("class", $2, $3, $4)
+            var cls = ast.CreateClass($2.(string)).(ast.Class)
+
+            // decl extends
+            if $3 != nil {
+                // debug("extends", $3)
+                cls.SetSuper($3.(string))
+            }
+
+            // decl does
+            if $4 != nil {
+                if infs, ok := $4.([]string) ; ok {
+                    cls.SetInterfaces(infs)
+                } else {
+                    panic(fmt.Errorf("Can not cast interface"))
+                }
+            }
+
+            // class body
+            if $5 != nil {
+                cls.Body = $5.(*ast.StatementList)
+            }
+            $$ = cls
+            debug("class",$$)
+        }
     ;
 
 class_decl_block: 
-      T_INDENT statement_list T_OUTDENT 
+      T_INDENT class_decl_statement_list T_OUTDENT T_NEWLINE
         { 
             $$ = $2
         }
     | /* empty */ { $$ = nil }
-
+    ;
 
 class_decl_extends:
     T_EXTENDS T_IDENTIFIER { $$ = $2 }
@@ -318,7 +343,46 @@ class_decl_does_list:
         }
     ;
 
+class_decl_statement_list:
+      class_decl_statement_list T_NEWLINE class_decl_statement_list 
+      { 
+            if stmts, ok := $1.(*ast.StatementList) ; ok {
+                stmts.Append($3)
+                $$ = $1
+            }
+      }
+    | class_decl_statement_list T_NEWLINE 
+      {  
+            $$ = $1
+      }
+    | class_decl_statement 
+      { 
+            stmts := ast.CreateStatementList()
+            stmts.Append($1)
+            $$ = stmts
+      }
+    ;
 
+class_decl_statement:
+      class_decl_member { $$ = $1 }
+    | class_decl_method { $$ = $1 }
+    ;
+
+class_decl_member:
+      '@' T_IDENTIFIER '=' expr 
+      { 
+            member := ast.CreateClassMember($2.(string))
+            member.SetValue($4)
+            $$ = member
+      }
+    | '@' T_IDENTIFIER { 
+            $$ = ast.CreateClassMember($2.(string))
+        }
+    ;
+
+class_decl_method:
+    function_decl_statement { $$ = $1 }
+    ;
 
 range: expr T_RANGE_OPERATOR expr ;
 

@@ -17,6 +17,8 @@ var LexKeywords = map[string]int{
 	"return":  T_RETURN,
 	"extends": T_EXTENDS,
 	"does":    T_DOES,
+	"new":     T_NEW,
+	"clone":   T_CLONE,
 }
 
 func (l *GutsLex) emitIfKeywordMatches() bool {
@@ -89,19 +91,9 @@ func lexStart(l *GutsLex) stateFn {
 		}
 		l.backup()
 
-		// emit a newline (can be the end of block)
-		// l.emit(T_NEWLINE)
-
 		// c = l.peek()
 		if c == eof {
-			// if we're in an indent block, and it's the end of file.
-			// we should treat the newline as a block end.
-			if l.space > 0 {
-				l.emit(T_OUTDENT)
-			} else {
-				l.ignore()
-			}
-			return nil
+			return lexStart
 		}
 
 		// reset space info
@@ -119,8 +111,10 @@ func lexStart(l *GutsLex) stateFn {
 			l.emit(T_NEWLINE)
 		} else if l.space < l.lastSpace {
 			l.emit(T_OUTDENT)
-			l.emit(T_NEWLINE)
+			l.emit(T_NEWLINE) // means end of statement
+			l.IndentLevel--
 		} else if l.space > l.lastSpace {
+			l.IndentLevel++
 			l.emit(T_INDENT)
 		}
 		return lexStart
@@ -128,23 +122,24 @@ func lexStart(l *GutsLex) stateFn {
 		return lexStart
 	} else if l.emitIfMatch("==", T_EQUAL) || l.emitIfMatch(">=", T_GT_EQUAL) || l.emitIfMatch("<=", T_LT_EQUAL) {
 		return lexStart
-	} else if c == '=' && l.peekMore(2) != '=' {
-		l.next()
-		l.emit(TokenType(c))
+	} else if l.emitIfKeywordMatches() {
 		return lexStart
-	} else if l.accept("+-*|&[]{}()<>,") {
+	} else if l.accept("+-*|&[]{}()<>,=@") {
 		l.emit(TokenType(c))
 		return lexStart
 	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {
 		return lexStart
 	} else if c == '"' || c == '\'' {
 		return lexString
-	} else if l.emitIfKeywordMatches() {
-		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {
-		// l.emit(T_EOF)
+		if l.IndentLevel > 0 {
+			for i := 0; i < l.IndentLevel; i++ {
+				l.emit(T_OUTDENT)
+				l.emit(T_NEWLINE)
+			}
+		}
 		return nil
 	} else {
 		panic(fmt.Errorf("unknown token %c\n", c))
@@ -230,7 +225,7 @@ func lexIgnoreSpaces(l *GutsLex) stateFn {
 		c = l.next()
 		if c == eof {
 			l.ignore()
-			return nil
+			return lexStart
 		}
 		if c != ' ' {
 			break
@@ -257,8 +252,10 @@ func lexIndentSpaces(l *GutsLex) stateFn {
 	} else if l.space < l.lastSpace {
 		l.emit(T_OUTDENT)
 		l.emit(T_NEWLINE)
+		l.IndentLevel--
 	} else if l.space > l.lastSpace {
 		l.emit(T_INDENT)
+		l.IndentLevel++
 	}
 	return lexStart
 }
