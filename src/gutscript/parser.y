@@ -57,6 +57,7 @@ func debug(msg string, vals ...interface{}) {
 %type <val> block 
 %type <val> top_statement_list 
 %type <val> start
+%type <val> class_decl_member
 
 // same for terminals
 %token <val> T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -345,7 +346,15 @@ class_decl_statement:
     ;
 
 class_decl_member:
-    '@' T_IDENTIFIER '=' expr {  }
+      '@' T_IDENTIFIER '=' expr 
+      { 
+            member := ast.CreateClassMember($2.(string))
+            member.SetValue($4)
+            $$ = member
+      }
+    | '@' T_IDENTIFIER { 
+            $$ = ast.CreateClassMember($2.(string))
+        }
     ;
 
 class_decl_method:
