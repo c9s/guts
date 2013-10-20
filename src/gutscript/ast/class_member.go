@@ -10,5 +10,5 @@ func CreateClassMember(name string) ClassMember {
 }
 
 func (self *ClassMember) SetValue(val Node) {
-	self.Value = &val
+	self.Value = val
 }

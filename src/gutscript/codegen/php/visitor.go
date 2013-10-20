@@ -74,7 +74,11 @@ func (self *Visitor) Visit(n ast.Node) (out string) {
 		return out
 	}
 	if member, ok := n.(ast.ClassMember); ok {
-		out += self.IndentSpace() + "public $" + member.Name + ";\n"
+		out += self.IndentSpace() + "public $" + member.Name
+		if member.Value != nil {
+			out += " = " + self.Visit(member.Value)
+		}
+		out += ";\n"
 		return out
 	}
 	if stmt, ok := n.(*ast.IfStatement); ok {
