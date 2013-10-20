@@ -15,44 +15,6 @@ b = a`,
 
 	// XXX: need trailing line
 	`x = 3 * -2`,
-	`if a > 10
-    a = 10
-`,
-	`if a > 10
-    a = 10
-else
-    a = 0
-`,
-	`if a > 10
-    a = 10
-    b = 20
-else
-    a = 0
-    b = 0
-`,
-	// test if && single else if
-	`if a > 10
-    a = 10
-    b = 20
-elseif b > 10
-    a = 1
-    b = 1
-`,
-	// test if, elseif && else
-	`if a > 10
-    a = 10
-    b = 20
-elseif b > 10
-    a = 1
-    b = 1
-else
-    a = 0
-    b = 0
-`,
-	`foo :: ->
-    a = 10
-    return a
-`,
 }
 
 func LexFile(srcFile string) (chan *GutsSymType, error) {

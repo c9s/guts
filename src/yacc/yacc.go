@@ -3388,6 +3388,7 @@ $$default:
 			if $$Debug >= 1 {
 				__yyfmt__.Printf("%s", $$Statname($$state))
 				__yyfmt__.Printf(" saw %s\n", $$Tokname($$char))
+				__yyfmt__.Printf(" Sym: %#v\n",$$VAL)
 			}
 			fallthrough
 

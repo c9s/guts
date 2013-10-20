@@ -89,19 +89,8 @@ func lexStart(l *GutsLex) stateFn {
 		}
 		l.backup()
 
-		// emit a newline (can be the end of block)
-		// l.emit(T_NEWLINE)
-
 		// c = l.peek()
 		if c == eof {
-			// if we're in an indent block, and it's the end of file.
-			// we should treat the newline as a block end.
-			if l.space > 0 {
-				l.emit(T_OUTDENT)
-				l.IndentLevel--
-			} else {
-				l.ignore()
-			}
 			return lexStart
 		}
 
@@ -120,8 +109,8 @@ func lexStart(l *GutsLex) stateFn {
 			l.emit(T_NEWLINE)
 		} else if l.space < l.lastSpace {
 			l.emit(T_OUTDENT)
-			l.IndentLevel--
 			l.emit(T_NEWLINE) // means end of statement
+			l.IndentLevel--
 		} else if l.space > l.lastSpace {
 			l.IndentLevel++
 			l.emit(T_INDENT)
@@ -131,19 +120,15 @@ func lexStart(l *GutsLex) stateFn {
 		return lexStart
 	} else if l.emitIfMatch("==", T_EQUAL) || l.emitIfMatch(">=", T_GT_EQUAL) || l.emitIfMatch("<=", T_LT_EQUAL) {
 		return lexStart
-	} else if c == '=' && l.peekMore(2) != '=' {
-		l.next()
-		l.emit(TokenType(c))
+	} else if l.emitIfKeywordMatches() {
 		return lexStart
-	} else if l.accept("+-*|&[]{}()<>,") {
+	} else if l.accept("+-*|&[]{}()<>,=") {
 		l.emit(TokenType(c))
 		return lexStart
 	} else if l.lastTokenType == T_NUMBER && l.emitIfMatch("..", T_RANGE_OPERATOR) {
 		return lexStart
 	} else if c == '"' || c == '\'' {
 		return lexString
-	} else if l.emitIfKeywordMatches() {
-		return lexStart
 	} else if unicode.IsLetter(c) {
 		return lexIdentifier
 	} else if c == eof {
@@ -153,7 +138,6 @@ func lexStart(l *GutsLex) stateFn {
 				l.emit(T_NEWLINE)
 			}
 		}
-		// l.emit(T_EOF)
 		return nil
 	} else {
 		panic(fmt.Errorf("unknown token %c\n", c))

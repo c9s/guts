@@ -157,7 +157,7 @@ top_statement_list: statement_list
     }
     ;
 
-// block is contains one or more statement
+// block contains one or more statement
 block: T_INDENT statement_list T_OUTDENT { $$ = $2 }
 
 statement_list:
@@ -168,13 +168,13 @@ statement_list:
                 $$ = $1
             }
       }
+    | statement_list T_NEWLINE { $$ = $1 }
     | statement
       { 
             stmts := ast.CreateStatementList()
             stmts.Append($1)
             $$ = stmts
       }
-    | T_NEWLINE { }
 ;
 
 statement: 
@@ -186,6 +186,7 @@ statement:
         | class_decl_statement { $$ = $1 }
         | for_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
+        | T_NEWLINE {  }
     ;
 
 listop: 
@@ -199,20 +200,20 @@ for_statement:
 
 
 if_statement:
-        T_IF expr block
+        T_IF expr block T_NEWLINE
         {
             $$ = ast.CreateIfStatement($2.(ast.Expr), $3.(*ast.StatementList))
         }
     |
-        if_statement T_NEWLINE T_ELSEIF expr block 
+        if_statement T_ELSEIF expr block T_NEWLINE
         {
-            $1.(*ast.IfStatement).AddElseIf($4.(ast.Expr),$5.(*ast.StatementList))
+            $1.(*ast.IfStatement).AddElseIf($3.(ast.Expr),$4.(*ast.StatementList))
             $$ = $1
         }
     | 
-        if_statement T_NEWLINE T_ELSE block
+        if_statement T_ELSE block T_NEWLINE
         {
-            $1.(*ast.IfStatement).SetElse($4.(*ast.StatementList))
+            $1.(*ast.IfStatement).SetElse($3.(*ast.StatementList))
             $$ = $1
         }
 ;
@@ -271,7 +272,7 @@ function_decl_statement:
         $$ = ast.CreateFunction($1.(string), $3.([]ast.FunctionParam), $5.(*ast.StatementList))
     }
 
-    | T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH statement 
+    | T_IDENTIFIER T_FUNCTION_PROTOTYPE function_parameter_list T_FUNCTION_GLYPH statement
     {
         var stmts = ast.StatementList{}
         stmts.Append($5)
@@ -288,7 +289,7 @@ class_decl_statement:
     ;
 
 class_decl_block: 
-      T_INDENT statement_list T_OUTDENT 
+      T_INDENT statement_list T_OUTDENT T_NEWLINE
         { 
             $$ = $2
         }
