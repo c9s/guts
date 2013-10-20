@@ -58,6 +58,8 @@ func debug(msg string, vals ...interface{}) {
 %type <val> top_statement_list 
 %type <val> start
 %type <val> class_decl_member
+%type <val> class_decl_method
+%type <val> class_decl_statement_list
 
 // same for terminals
 %token <val> T_DOT T_IDENTIFIER T_FLOATING T_NUMBER T_STRING
@@ -72,7 +74,6 @@ func debug(msg string, vals ...interface{}) {
 %token T_INDENT T_OUTDENT
 
 %token T_NEWLINE
-
 %token T_NEW
 %token T_CLONE
 
@@ -335,14 +336,28 @@ class_decl_does_list:
     ;
 
 class_decl_statement_list:
-      class_decl_statement_list T_NEWLINE class_decl_statement_list {  }
-    | class_decl_statement_list T_NEWLINE {  }
-    | class_decl_statement {  }
+      class_decl_statement_list T_NEWLINE class_decl_statement_list 
+      { 
+            if stmts, ok := $1.(*ast.StatementList) ; ok {
+                stmts.Append($3)
+                $$ = $1
+            }
+      }
+    | class_decl_statement_list T_NEWLINE 
+      {  
+            $$ = $1
+      }
+    | class_decl_statement 
+      { 
+            stmts := ast.CreateStatementList()
+            stmts.Append($1)
+            $$ = stmts
+      }
     ;
 
 class_decl_statement:
-      class_decl_member { }
-    | class_decl_method { }
+      class_decl_member { $$ = $1 }
+    | class_decl_method { $$ = $1 }
     ;
 
 class_decl_member:
@@ -358,9 +373,8 @@ class_decl_member:
     ;
 
 class_decl_method:
-    function_decl_statement {  }
+    function_decl_statement { $$ = $1 }
     ;
-
 
 range: expr T_RANGE_OPERATOR expr ;
 

@@ -17,6 +17,8 @@ var LexKeywords = map[string]int{
 	"return":  T_RETURN,
 	"extends": T_EXTENDS,
 	"does":    T_DOES,
+	"new":     T_NEW,
+	"clone":   T_CLONE,
 }
 
 func (l *GutsLex) emitIfKeywordMatches() bool {
