@@ -294,7 +294,7 @@ class_decl_block:
             $$ = $2
         }
     | /* empty */ { $$ = nil }
-
+    ;
 
 class_decl_extends:
     T_EXTENDS T_IDENTIFIER { $$ = $2 }
@@ -319,6 +319,24 @@ class_decl_does_list:
         }
     ;
 
+class_decl_statement_list:
+      class_decl_statement_list T_NEWLINE class_decl_statement_list {  }
+    | class_decl_statement_list T_NEWLINE {  }
+    | class_decl_statement {  }
+    ;
+
+class_decl_statement:
+      class_decl_member { }
+    | class_decl_method { }
+    ;
+
+class_decl_member:
+    T_IDENTIFIER '=' expr {  }
+    ;
+
+class_decl_method:
+    function_decl_statement {  }
+    ;
 
 
 range: expr T_RANGE_OPERATOR expr ;
