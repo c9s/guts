@@ -47,9 +47,11 @@ func (self *Visitor) Visit(n ast.Node) (out string) {
 		}
 		return fmt.Sprintf("%s %c %s", self.Visit(expr.Left), expr.Op, self.Visit(expr.Right))
 	}
+
 	if stmt, ok := n.(ast.Assignment); ok {
-		return self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
+		return self.IndentSpace() + self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
 	}
+
 	if cls, ok := n.(ast.Class); ok {
 		out = "class " + cls.Name
 
@@ -63,9 +65,17 @@ func (self *Visitor) Visit(n ast.Node) (out string) {
 		}
 
 		out += " {\n"
+		if cls.Body != nil {
+			self.indent++
+			out += self.Visit(cls.Body)
+			self.indent--
+		}
 		out += "}\n"
 		return out
-		// cls.Body
+	}
+	if member, ok := n.(ast.ClassMember); ok {
+		out += self.IndentSpace() + "public $" + member.Name + ";\n"
+		return out
 	}
 	if stmt, ok := n.(*ast.IfStatement); ok {
 		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"
@@ -98,10 +108,10 @@ func (self *Visitor) Visit(n ast.Node) (out string) {
 		return out
 	}
 	if stmt, ok := n.(ast.ReturnStatement); ok {
-		return "return " + self.Visit(stmt.Expr) + ";\n"
+		return self.IndentSpace() + "return " + self.Visit(stmt.Expr) + ";\n"
 	}
 	if stmt, ok := n.(ast.ExprStatement); ok {
-		return self.Visit(stmt.Expr) + ";\n"
+		return self.IndentSpace() + self.Visit(stmt.Expr) + ";\n"
 	}
 	if fnc, ok := n.(ast.FunctionCall); ok {
 		out = fnc.Name + "("
