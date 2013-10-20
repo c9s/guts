@@ -43,16 +43,16 @@ func debug(msg string, vals ...interface{}) {
 %type <val> function_call
 %type <val> statement_list
 
-%type <val> class_decl_statement
+%type <val> class_decl
 %type <val> class_decl_extends
 %type <val> class_decl_does
 %type <val> class_decl_does_list
 %type <val> class_decl_block
+%type <val> class_decl_statement
 
 
 %type <val> assignment
 %type <val> if_statement
-%type <val> class_decl_statement
 %type <val> for_statement
 %type <val> block 
 %type <val> top_statement_list 
@@ -185,7 +185,7 @@ statement:
         | assignment { $$ = $1 }
         | function_decl_statement { $$ = $1 }
         | if_statement { $$ = $1 }
-        | class_decl_statement { $$ = $1 }
+        | class_decl { $$ = $1 }
         | for_statement { $$ = $1 }
         | T_RETURN expr { $$ = ast.CreateReturnStatement($2) }
         | T_NEWLINE {  }
@@ -282,7 +282,7 @@ function_decl_statement:
     }
 ;
 
-class_decl_statement:
+class_decl:
     T_CLASS T_IDENTIFIER class_decl_extends class_decl_does class_decl_block
     {
         $$ = ast.CreateClass($2.(string)) 
@@ -305,7 +305,7 @@ class_decl_statement:
     ;
 
 class_decl_block: 
-      T_INDENT statement_list T_OUTDENT T_NEWLINE
+      T_INDENT class_decl_statement_list T_OUTDENT T_NEWLINE
         { 
             $$ = $2
         }

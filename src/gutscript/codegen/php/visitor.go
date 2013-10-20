@@ -16,14 +16,13 @@ func (self *Visitor) IndentSpace() string {
 	return strings.Repeat("    ", self.indent)
 }
 
-func (self *Visitor) Visit(n ast.Node) string {
+func (self *Visitor) Visit(n ast.Node) (out string) {
 	// fmt.Printf("visit %#v\n", n)
 	if stmts, ok := n.(*ast.StatementList); ok {
-		var output string
 		for _, stmt := range *stmts {
-			output += self.IndentSpace() + self.Visit(stmt)
+			out += self.IndentSpace() + self.Visit(stmt)
 		}
-		return output
+		return out
 	}
 	if variable, ok := n.(ast.Variable); ok {
 		return "$" + variable.Identifier
@@ -51,12 +50,23 @@ func (self *Visitor) Visit(n ast.Node) string {
 	if stmt, ok := n.(ast.Assignment); ok {
 		return self.Visit(stmt.Variable) + " = " + self.Visit(stmt.Expr) + ";\n"
 	}
-	if class, ok := n.(ast.Class); ok {
-		_ = class
-		// class.Body
+	if cls, ok := n.(ast.Class); ok {
+		out = "class " + cls.Name
+
+		if cls.Super != nil {
+			out += " extends " + *cls.Super
+		}
+
+		if len(cls.Interfaces) > 0 {
+			out += " implements "
+			out += strings.Join(cls.Interfaces, ", ")
+		}
+
+		out += " {\n"
+		out += "}\n"
+		// cls.Body
 	}
 	if stmt, ok := n.(*ast.IfStatement); ok {
-		var out string = ""
 		out += self.IndentSpace() + "if ( " + self.Visit(stmt.Expr) + " ) {\n"
 		self.indent++
 		out += self.Visit(stmt.Body)
@@ -79,7 +89,6 @@ func (self *Visitor) Visit(n ast.Node) string {
 		return out
 	}
 	if stmt, ok := n.(ast.ElseIfStatement); ok {
-		var out string = ""
 		out += self.IndentSpace() + " elseif ( " + self.Visit(stmt.Expr) + " ) {\n"
 		self.indent++
 		out += self.Visit(stmt.Body)
@@ -94,7 +103,6 @@ func (self *Visitor) Visit(n ast.Node) string {
 		return self.Visit(stmt.Expr) + ";\n"
 	}
 	if fnc, ok := n.(ast.FunctionCall); ok {
-		var out string
 		out = fnc.Name + "("
 		fields := []string{}
 		for _, param := range fnc.Params {
@@ -105,7 +113,6 @@ func (self *Visitor) Visit(n ast.Node) string {
 		return out
 	}
 	if fn, ok := n.(ast.Function); ok {
-		var out string = ""
 		out += self.IndentSpace() + "function " + fn.Name + "("
 		if len(fn.Params) > 0 {
 			fields := []string{}
