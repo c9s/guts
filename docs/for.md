@@ -29,6 +29,21 @@ foreach( range(1,10000) as $i ) {
 }
 ```
 
+with key values:
+
+```
+for k,v in hash
+    say k
+```
+
+compiles to:
+
+```php
+foreach ( $hash as $k => $v ) {
+    echo $k;
+}
+```
+
 
 
 
