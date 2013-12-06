@@ -58,8 +58,12 @@ For more language details, please check the `docs` for the language synopsis.
 
 ```coffee
 class Person
+    # Print the name
     say :: (name) -> "Hello #{name}, Good morning"
+
     getPhone :: -> "12345678"
+
+    setName :: (string name) -> @name = name
 
 if str =~ /[a-z]/
     say "matched!"
@@ -69,11 +73,24 @@ The above code compiles to:
 
 ```php
 class Person {
+    /**
+     * Print the name
+     * 
+     * @param mixed $name
+     */
     function say($name) {
         return "Hello " . $name . ', Good morning';
     }
+
     function getPhone() {
         return "12345678";
+    }
+
+    /**
+     * @param string $name
+     */
+    function setName($name) {
+        $this->name = $name;
     }
 }
 if ( preg_match('[a-z]',$str) ) {
