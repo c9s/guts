@@ -8,9 +8,6 @@ Declaration
 str = "Hello World"
 ```
 
-This compiles to:
-
-
 String Concatenation
 --------------------
 
