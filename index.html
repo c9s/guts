@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gutscript by c9s</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/c9s/gutscript">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/c9s/gutscript/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/c9s/gutscript/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Gutscript</h1>
+          <p>Gutscript is a language makes your life easier, it let you write less code to compile a workable PHP code.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/c9s">c9s</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="gutscript" class="anchor" href="#gutscript"><span class="octicon octicon-link"></span></a>Gutscript</h1>
+
+<p><a href="http://travis-ci.org/c9s/gutscript"><img src="https://secure.travis-ci.org/c9s/gutscript.png" alt="Build Status"></a></p>
+
+<p>Gutscript is a language makes your life easier,
+it allows you to write less code to produce equivalent PHP code.</p>
+
+<p>Gutscript compiler is written in Go, Go is faster 10+ times than PHP, thus the
+compilation is fast, and of course you can compile sources concurrently.</p>
+
+<p>Gutscript takes the good stuffs from Haskell, Perl6, Go and CoffeeScript, you can write
+shorter code to generate a equivalent PHP code. e.g. To define a function, we use:</p>
+
+<div class="highlight highlight-hs"><pre><span class="nf">hello</span> <span class="ow">::</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="ow">-&gt;</span> <span class="s">"Hello #{name}!"</span>
+</pre></div>
+
+<p>Which is shorter than writing:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">function</span> <span class="nf">hello</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"Hello "</span> <span class="o">.</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s2">"!"</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Gutscript aims to provide a simple optimizer to do optimizations like "dead
+code elimination"..</p>
+
+<p>So if you have framework with development/production mode, this dead code
+elimination could improve the overhead of mode checking for your production
+site.</p>
+
+<p>For more details, please check the <code>docs</code> for the language synopsis.</p>
+
+<h2>
+<a name="gutscript-aims-to-be" class="anchor" href="#gutscript-aims-to-be"><span class="octicon octicon-link"></span></a>Gutscript aims to be</h2>
+
+<ul>
+<li>simple to learn.</li>
+<li>easy to use.</li>
+<li>fast compilation.</li>
+<li>shorter code.</li>
+<li>phpdoc friendly.</li>
+</ul><h2>
+<a name="build" class="anchor" href="#build"><span class="octicon octicon-link"></span></a>Build</h2>
+
+<p>Simply run make to produce the parser:</p>
+
+<pre><code>git clone http://github.com/c9s/gutscript
+cd gutscript
+source goenv
+make
+</code></pre>
+
+<h2>
+<a name="synopsis" class="anchor" href="#synopsis"><span class="octicon octicon-link"></span></a>Synopsis</h2>
+
+<p>For more language details, please check the <code>docs</code> for the language synopsis.</p>
+
+<div class="highlight highlight-coffee"><pre><span class="k">class</span> <span class="nx">Person</span>
+    <span class="c1"># Print the name</span>
+    <span class="nx">say</span> <span class="o">::</span> <span class="nf">(name) -&gt;</span> <span class="s">"Hello </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s">, Good morning"</span>
+
+    <span class="nx">getPhone</span> <span class="o">::</span> <span class="nf">-&gt;</span> <span class="s">"12345678"</span>
+
+    <span class="nx">setName</span> <span class="o">::</span> <span class="nf">(string name) -&gt;</span> <span class="vi">@name = </span><span class="nx">name</span>
+
+<span class="k">if</span> <span class="nx">str</span> <span class="o">=~</span> <span class="sr">/[a-z]/</span>
+    <span class="nx">say</span> <span class="s">"matched!"</span>
+</pre></div>
+
+<p>The above code compiles to:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * Print the name</span>
+<span class="sd">     * </span>
+<span class="sd">     * @param mixed $name</span>
+<span class="sd">     */</span>
+    <span class="k">function</span> <span class="nf">say</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">"Hello "</span> <span class="o">.</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s1">', Good morning'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">getPhone</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">"12345678"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @param string $name</span>
+<span class="sd">     */</span>
+    <span class="k">function</span> <span class="nf">setName</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span> <span class="nb">preg_match</span><span class="p">(</span><span class="s1">'[a-z]'</span><span class="p">,</span><span class="nv">$str</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"matched!"</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="file-extension" class="anchor" href="#file-extension"><span class="octicon octicon-link"></span></a>File Extension</h2>
+
+<p>The file extension is named with "*.guts", the compiler compiles your .guts
+files to .php files.</p>
+
+<h2>
+<a name="implementation" class="anchor" href="#implementation"><span class="octicon octicon-link"></span></a>Implementation</h2>
+
+<p>Gutscript uses Go yacc parser generator to generate a LALR(1) parser. </p>
+
+<p>To add new syntax, please checkout the parser.y file, which is located in
+<code>src/gutscript/parser.y</code></p>
+
+<p>The lexer uses concurrent strategy to parse tokens, the state machine runs in
+another goroutine, so the parser receives the tokens from lexer through the
+channel concurrently.</p>
+
+<p>Codegen is expected to be a separated tree structure traverser, and 
+which is not implemented inside the ast node structure like the
+coffee-script codegen. So the code generator can be PHP code generator, LLVM
+bit-code generator or JavaScript generator.</p>
+
+<p>Basic optimization is on the roadmap. Optimizer uses tree-pattern matching
+strategy to traverse the IR structure. 2 basic optimizations are in the plan --
+constant folding and dead code elimination.</p>
+
+<h2>
+<a name="current-state" class="anchor" href="#current-state"><span class="octicon octicon-link"></span></a>Current State</h2>
+
+<p>Not ready for production. we're still in alpha stage. but we'd like to recevie
+comments, patches and feature requests.</p>
+
+<h2>
+<a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h2>
+
+<p>Feature requests, pull requests, comments are welcomed, but please discuss first 
+on our GitHub issue. Just feel free to drop a line there.</p>
+
+<h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<p>First, go get a workable go compiler at <a href="http://golang.org">http://golang.org</a></p>
+
+<p>Run the below command to setup GOPATH:</p>
+
+<pre><code>source goenv
+</code></pre>
+
+<p>Run make to build and test:</p>
+
+<pre><code>make
+</code></pre>
+
+<p>If you modified the grammar, remember to update the parser:</p>
+
+<pre><code>make parser
+</code></pre>
+
+<p>Run test cases:</p>
+
+<pre><code>make test
+</code></pre>
+
+<p>To dump lex tokens:</p>
+
+<pre><code>go run utils/lexdump/main.go src/gutscript/tests/09_class_properties.guts
+</code></pre>
+
+<p>Test the command tool with test case:</p>
+
+<pre><code>./bin/guts src/gutscript/tests/03_if_else_statement.guts
+</code></pre>
+
+<h2>
+<a name="grammar-rules" class="anchor" href="#grammar-rules"><span class="octicon octicon-link"></span></a>Grammar Rules</h2>
+
+<table>
+<thead><tr>
+<th></th>
+<th>Rule</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>assignment statement</td>
+</tr>
+<tr>
+<td>x</td>
+<td>if statement</td>
+</tr>
+<tr>
+<td>x</td>
+<td>if else statement</td>
+</tr>
+<tr>
+<td>x</td>
+<td>if elseif else statement</td>
+</tr>
+<tr>
+<td>x</td>
+<td>function statement</td>
+</tr>
+<tr>
+<td>x</td>
+<td>function param list</td>
+</tr>
+<tr>
+<td>x</td>
+<td>empty class</td>
+</tr>
+<tr>
+<td>x</td>
+<td>class with properties</td>
+</tr>
+<tr>
+<td>x</td>
+<td>class with methods</td>
+</tr>
+<tr>
+<td>x</td>
+<td>function call as expr</td>
+</tr>
+<tr>
+<td>o</td>
+<td>string concatenation</td>
+</tr>
+<tr>
+<td>o</td>
+<td>list structure</td>
+</tr>
+<tr>
+<td>o</td>
+<td>hash structure</td>
+</tr>
+<tr>
+<td>o</td>
+<td>for block</td>
+</tr>
+<tr>
+<td>o</td>
+<td>dot range</td>
+</tr>
+<tr>
+<td>o</td>
+<td>static method call</td>
+</tr>
+<tr>
+<td>o</td>
+<td>method call as expr.</td>
+</tr>
+<tr>
+<td>o</td>
+<td>assignment from method call</td>
+</tr>
+<tr>
+<td>o</td>
+<td>namespace design</td>
+</tr>
+<tr>
+<td>o</td>
+<td>map</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Yo-An Lin (<a href="mailto:yoanlin93@gmail.com">yoanlin93@gmail.com</a>)</p>
+
+<h2>
+<a name="irc-channel" class="anchor" href="#irc-channel"><span class="octicon octicon-link"></span></a>IRC Channel</h2>
+
+<p>Join us on irc.freenode.net #gutscript</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT License Copyright (c) 2012 Yo-An Lin</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-2196512-14");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
