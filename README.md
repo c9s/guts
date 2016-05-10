@@ -136,6 +136,16 @@ $contacts[0] = "bar"; // compilation error
 ```
 
 
+### Control Structure
+
+#### If
+
+#### Foreach
+
+#### While
+
+
+
 
 ### Function
 
@@ -204,10 +214,9 @@ When `-Wmethod-implicitly-override` option is enabled, method overriding without
 `override` keyword will throw out the warning messages:
 
 
+### Traits
 
-
-
-
+...
 
 
 
