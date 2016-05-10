@@ -1,39 +1,16 @@
-Gutscript
+Guts
 ==================
 [![Build Status](https://secure.travis-ci.org/c9s/guts.svg)](http://travis-ci.org/c9s/guts)
 
-Gutscript is a language makes your life easier,
+Guts is a language makes your life easier,
 it allows you to write less code to produce equivalent PHP code.
 
-Gutscript compiler is written in Go, Go is faster 10+ times than PHP, thus the
-compilation is fast, and of course you can compile sources concurrently.
-
-Gutscript takes the good stuffs from Haskell, Perl6, Go and CoffeeScript, you can write
-shorter code to generate a equivalent PHP code. e.g. To define a function, we use:
-
-```hs
-hello :: (name)-> "Hello #{name}!"
-```
-
-Which is shorter than writing:
-
-```php
-function hello($name) {
-    return "Hello " . $name . "!";
-}
-```
-
-Gutscript aims to provide a simple optimizer to do optimizations like "dead
-code elimination"..
-
-So if you have framework with development/production mode, this dead code
-elimination could improve the overhead of mode checking for your production
-site.
+Guts compiler is written in Go, Go is faster than PHP, thus the compilation is
+fast, and of course you can compile sources concurrently.
 
 For more details, please check the `docs` for the language synopsis.
 
-
-Gutscript aims to be
+Guts aims to be
 ---------------------
 
 * simple to learn.
@@ -41,7 +18,6 @@ Gutscript aims to be
 * fast compilation.
 * shorter code.
 * phpdoc friendly.
-
 
 Build
 ---------
@@ -100,13 +76,173 @@ if ( preg_match('[a-z]',$str) ) {
 
 File Extension
 --------------------
-The file extension is named with "\*.guts", the compiler compiles your .guts
+The file extension is named with "\*.gs", the compiler compiles your .gs
 files to .php files.
+
+
+
+
+
+Guts Language
+-------------------
+
+To make guts compiler compatible with PHP, there are some syntax 
+are simplified but the derived syntax shouldn't break the compiler.
+
+(Move to separated doc file later)
+
+### Constant
+
+Defining const can be done by the same syntax of PHP.
+
+```
+const VAR = 10;
+```
+
+### Variable Definition
+
+```
+$foo = 'string'; // explicitly defined without type
+```
+
+```
+var $foo = 'string'; // explicitly defined and  implicitly typed
+```
+
+```
+int $foo = 10; // explicitly defined and explicitly typed
+```
+
+```
+string $foo = "foo bar"; // explicitly defined and explicitly typed
+```
+
+### Array
+
+```
+string[] $list = []; // define an array of string.
+```
+
+### Array operations - map, reduce, filter
+
+...
+
+### Map
+
+```
+string[string] $contacts = []; // define a map for string -> string
+$contacts["foo"] = "bar";
+$contacts[0] = "bar"; // compilation error
+```
+
+
+
+### Function
+
+The keyword `function` is optional, not required.
+
+```
+foo(Type $foo, Type $bar) : ReturnType {
+
+}
+```
+
+### Class
+
+The code below works
+
+```
+<?php
+class Foo extends Bar implements DoorLocker {
+}
+```
+
+But you can also write:
+
+```
+<?php
+class Foo is Bar does DoorLocker {
+
+}
+```
+
+The inheritance syntax was derived from Perl6, see
+<https://doc.perl6.org/language/objects#Inheritance> for more details.
+
+### Class Property
+
+### Class Method
+
+PHP method syntax still works in guts:
+
+```
+class Buffer {
+    public function write($string) { ... }
+}
+```
+
+However you can also do:
+
+```
+class Buffer {
+    public write($string) : bool { ... }
+}
+```
+
+The `function` keyword can be ignored.
+
+To override a parent method, you can add a keyword "override" to explicitly 
+define the override method.
+
+```
+class EncodedBuffer is Buffer {
+    override public write($string) : bool { ... }
+}
+```
+
+When `-Wmethod-implicitly-override` option is enabled, method overriding without 
+`override` keyword will throw out the warning messages:
+
+
+
+
+
+
+
+
+
+### Namespace
+
+Defining namespace is as the same as PHP:
+
+```
+namespace foo\bar;
+```
+
+
+
+
+
+
+Roadmap
+-------------------
+
+- [ ] Implement a parser that parses PHP5.3
+- [ ] Getter generator
+
+
+
+
+
+
+
+
+
 
 
 Implementation
 ---------------
-Gutscript uses Go yacc parser generator to generate a LALR(1) parser. 
+Guts uses Go yacc parser generator to generate a LALR(1) parser. 
 
 To add new syntax, please checkout the parser.y file, which is located in
 `src/gutscript/parser.y`
@@ -127,15 +263,14 @@ constant folding and dead code elimination.
 
 Current State
 -------------
-Not ready for production. we're still in alpha stage. but we'd like to recevie
-comments, patches and feature requests.
+Not ready for production. this project is still in alpha stage. but I'd like
+to recevie comments, patches and feature requests.
 
 
 Contribution
 ------------------------------
 Feature requests, pull requests, comments are welcomed, but please discuss first 
 on our GitHub issue. Just feel free to drop a line there.
-
 
 
 Development
